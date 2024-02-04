@@ -1,7 +1,7 @@
-@import url("https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css");
+@import url("https://webfontworld.github.io/gmarket/GmarketSans.css");
 
 :root {
-  font-family: "NanumSquare", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "GmarketSans", system-ui, Avenir, Helvetica, Arial, sans-serif;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
