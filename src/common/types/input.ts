@@ -1,8 +1,11 @@
+import { FormEvent } from "react";
+
 export type InputProp = {
   id: string;
   title: string;
-  value: string | number;
-  onChange: () => void;
+  value: string;
+  onChange: (e: FormEvent<HTMLInputElement>) => void;
   type: "text" | "password" | "email";
-  errorMessage: string;
+  errorMessage?: string;
+  regularExpression?: RegExp;
 };

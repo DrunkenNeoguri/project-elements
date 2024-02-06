@@ -1,10 +1,19 @@
-import { isPropHasLabelText } from "../policies/Input";
-import { StInput } from "../styles/Input";
-import { InputProp } from "../types/Input";
+import {
+  isPropHasLabelText,
+  isTrueCompareWithValueAndRegExp,
+} from "../policies/input";
+import { StInput } from "../styles/input";
+import { InputProp } from "../types/input";
 
 export default function Input(props: InputProp) {
-  const { id, title, value, onChange, type, errorMessage } = props;
+  const { id, title, value, onChange, type, errorMessage, regularExpression } =
+    props;
 
+  console.log(
+    id,
+    "체크",
+    isTrueCompareWithValueAndRegExp(value, regularExpression)
+  );
   return (
     <StInput.Wrapper>
       {isPropHasLabelText(title) && <StInput.Label>{title}</StInput.Label>}
@@ -14,7 +23,9 @@ export default function Input(props: InputProp) {
         onChange={onChange}
         type={type}
       />
-      <StInput.ErrorMessage>{errorMessage}</StInput.ErrorMessage>
+      {isTrueCompareWithValueAndRegExp(value, regularExpression) && (
+        <StInput.ErrorMessage>{errorMessage}</StInput.ErrorMessage>
+      )}
     </StInput.Wrapper>
   );
 }

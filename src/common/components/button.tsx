@@ -2,6 +2,6 @@ import { StButton } from "../styles/button";
 import { ButtonProp } from "../types/button";
 
 export default function Button(props: ButtonProp) {
-  const { text } = props;
-  return <StButton.Wrapper>{text}</StButton.Wrapper>;
+  const { text, type } = props;
+  return <StButton.Wrapper type={type}>{text}</StButton.Wrapper>;
 }
