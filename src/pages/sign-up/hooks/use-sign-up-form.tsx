@@ -1,28 +1,31 @@
 import { useState } from "react";
-
-type SignUpType = {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  username: string;
-};
+import { SignUpValueType, SignUpViewErrorType } from "../types/sign-up-form";
 
 export default function useSignUpForm() {
-  const initialValue: SignUpType = {
+  const [inputValue, setInputValue] = useState<SignUpValueType>({
     email: "",
     password: "",
     confirmPassword: "",
-    username: "",
-  };
-  const [inputValue, setInputValue] = useState<SignUpType>(initialValue);
+  });
+  const [errorMsgState, setErrorMsgState] = useState<SignUpViewErrorType>({
+    email: false,
+    password: false,
+    confirmPassword: false,
+  });
 
-  const changeInputValue = (type: string, value: string) => {
+  const changeInputValue = (
+    type: "email" | "password" | "confirmPassword",
+    value: string
+  ) => {
     setInputValue({ ...inputValue, [type]: value });
+    if (!errorMsgState[type]) {
+      setErrorMsgState({ ...errorMsgState, [type]: true });
+    }
   };
 
   const submitSignUpData = () => {
     return;
   };
 
-  return { inputValue, changeInputValue, submitSignUpData };
+  return { inputValue, changeInputValue, submitSignUpData, errorMsgState };
 }

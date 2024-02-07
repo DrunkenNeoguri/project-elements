@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { fontsStyle } from "../utils/utilfonts";
+import { fontsStyle } from "../utils/util-fonts";
 
 const Wrapper = styled.button`
   background-color: #1e90ff;

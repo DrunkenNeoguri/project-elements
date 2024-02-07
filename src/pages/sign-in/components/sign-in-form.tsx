@@ -5,11 +5,17 @@ import useSignInForm from "../hooks/use-sign-in-form";
 import {
   emailRegExp,
   passwordRegExp,
-} from "../../../common/utils/utilconstants";
+} from "../../../common/utils/util-constants";
 import { StSignInForm } from "../styles/sign-in-form";
+import {
+  isTrueCompareWithValueAndCondition,
+  setEmailErrorMsgDependingOnTheCase,
+  setPasswordErrorMsgDependingOnTheCase,
+} from "../../../common/policies/input";
 
 export default function SignInForm() {
-  const { inputValue, changeInputValue, submitSignInData } = useSignInForm();
+  const { inputValue, changeInputValue, submitSignInData, errorMsgState } =
+    useSignInForm();
   return (
     <StSignInForm.Form onSubmit={() => submitSignInData()}>
       <Description
@@ -22,18 +28,30 @@ export default function SignInForm() {
         onChange={(e) => changeInputValue("email", e.currentTarget.value)}
         value={inputValue.email}
         type="email"
-        errorMessage="이메일 양식에 맞게 작성해주세요."
-        regularExpression={emailRegExp}
+        errorMessage={setEmailErrorMsgDependingOnTheCase(inputValue.email)}
+        firstInputCheck={errorMsgState.email}
+        errorCondition={isTrueCompareWithValueAndCondition(
+          inputValue.email,
+          emailRegExp
+        )}
       />
+
       <Input
         id="password"
         title="비밀번호"
         onChange={(e) => changeInputValue("password", e.currentTarget.value)}
         value={inputValue.password}
         type="password"
-        errorMessage="비밀번호 양식에 맞게 작성해주세요."
-        regularExpression={passwordRegExp}
+        errorMessage={setPasswordErrorMsgDependingOnTheCase(
+          inputValue.password
+        )}
+        firstInputCheck={errorMsgState.password}
+        errorCondition={isTrueCompareWithValueAndCondition(
+          inputValue.password,
+          passwordRegExp
+        )}
       />
+
       <StSignInForm.ButtonBox>
         <Button text="로그인" type="submit" />
       </StSignInForm.ButtonBox>

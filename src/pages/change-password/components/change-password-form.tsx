@@ -3,10 +3,20 @@ import Button from "../../../common/components/button";
 import Description from "../../../common/components/description";
 import useChangePasswordForm from "../hooks/use-change-password-form";
 import { StChangePasswordForm } from "../styles/change-password-form";
+import {
+  isTrueCompareWithValueAndCondition,
+  setConfirmPasswordErrorMsgDependingOnTheCase,
+  setPasswordErrorMsgDependingOnTheCase,
+} from "../../../common/policies/input";
+import { passwordRegExp } from "../../../common/utils/util-constants";
 
 export default function ChangePasswordForm() {
-  const { inputValue, changeInputValue, submitChangePasswordData } =
-    useChangePasswordForm();
+  const {
+    inputValue,
+    changeInputValue,
+    submitChangePasswordData,
+    errorMsgState,
+  } = useChangePasswordForm();
   return (
     <StChangePasswordForm.Form onSubmit={() => submitChangePasswordData()}>
       <Description
@@ -19,8 +29,16 @@ export default function ChangePasswordForm() {
         onChange={(e) => changeInputValue("password", e.currentTarget.value)}
         value={inputValue.password}
         type="password"
-        errorMessage="text"
+        errorMessage={setPasswordErrorMsgDependingOnTheCase(
+          inputValue.password
+        )}
+        firstInputCheck={errorMsgState.password}
+        errorCondition={isTrueCompareWithValueAndCondition(
+          inputValue.password,
+          passwordRegExp
+        )}
       />
+
       <Input
         id="confirmPassword"
         title="비밀번호 재확인"
@@ -29,7 +47,16 @@ export default function ChangePasswordForm() {
         }
         value={inputValue.confirmPassword}
         type="password"
-        errorMessage="text"
+        errorMessage={setConfirmPasswordErrorMsgDependingOnTheCase(
+          inputValue.confirmPassword,
+          inputValue.password
+        )}
+        firstInputCheck={errorMsgState.password}
+        errorCondition={isTrueCompareWithValueAndCondition(
+          inputValue.confirmPassword,
+          passwordRegExp,
+          inputValue.password
+        )}
       />
       <Button text="새 비밀번호로 변경" type="submit" />
     </StChangePasswordForm.Form>

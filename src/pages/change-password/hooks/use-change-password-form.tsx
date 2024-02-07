@@ -1,25 +1,39 @@
 import { useState } from "react";
-
-type ChangePasswordType = {
-  password: string;
-  confirmPassword: string;
-};
+import {
+  ChangePasswordValueType,
+  ChangePasswordViewErrorType,
+} from "../types/change-password-form";
 
 export default function useChangePasswordForm() {
-  const initialValue: ChangePasswordType = {
+  const [inputValue, setInputValue] = useState<ChangePasswordValueType>({
     password: "",
     confirmPassword: "",
-  };
-  const [inputValue, setInputValue] =
-    useState<ChangePasswordType>(initialValue);
+  });
 
-  const changeInputValue = (type: string, value: string) => {
+  const [errorMsgState, setErrorMsgState] =
+    useState<ChangePasswordViewErrorType>({
+      password: false,
+      confirmPassword: false,
+    });
+
+  const changeInputValue = (
+    type: "password" | "confirmPassword",
+    value: string
+  ) => {
     setInputValue({ ...inputValue, [type]: value });
+    if (!errorMsgState[type]) {
+      setErrorMsgState({ ...errorMsgState, [type]: true });
+    }
   };
 
   const submitChangePasswordData = () => {
     return;
   };
 
-  return { inputValue, changeInputValue, submitChangePasswordData };
+  return {
+    inputValue,
+    changeInputValue,
+    submitChangePasswordData,
+    errorMsgState,
+  };
 }

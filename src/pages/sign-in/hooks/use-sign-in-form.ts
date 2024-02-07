@@ -1,21 +1,26 @@
 import { useState } from "react";
-
-type SignInType = {
-  email: string;
-  password: string;
-};
+import { SignInValueType, SignInViewErrorType } from "../types/sign-in-form";
 
 export default function useSignInForm() {
-  const initialValue: SignInType = { email: "", password: "" };
-  const [inputValue, setInputValue] = useState<SignInType>(initialValue);
+  const [inputValue, setInputValue] = useState<SignInValueType>({
+    email: "",
+    password: "",
+  });
+  const [errorMsgState, setErrorMsgState] = useState<SignInViewErrorType>({
+    email: false,
+    password: false,
+  });
 
-  const changeInputValue = (type: string, value: string) => {
+  const changeInputValue = (type: "email" | "password", value: string) => {
     setInputValue({ ...inputValue, [type]: value });
+    if (!errorMsgState[type]) {
+      setErrorMsgState({ ...errorMsgState, [type]: true });
+    }
   };
 
   const submitSignInData = () => {
     return;
   };
 
-  return { inputValue, changeInputValue, submitSignInData };
+  return { inputValue, changeInputValue, submitSignInData, errorMsgState };
 }

@@ -3,9 +3,20 @@ import Description from "../../../common/components/description";
 import Button from "../../../common/components/button";
 import useSignUpForm from "../hooks/use-sign-up-form";
 import { StSignUpForm } from "../styles/sign-up-form";
+import {
+  emailRegExp,
+  passwordRegExp,
+} from "../../../common/utils/util-constants";
+import {
+  isTrueCompareWithValueAndCondition,
+  setConfirmPasswordErrorMsgDependingOnTheCase,
+  setEmailErrorMsgDependingOnTheCase,
+  setPasswordErrorMsgDependingOnTheCase,
+} from "../../../common/policies/input";
 
 export default function SignUpForm() {
-  const { inputValue, changeInputValue, submitSignUpData } = useSignUpForm();
+  const { inputValue, changeInputValue, submitSignUpData, errorMsgState } =
+    useSignUpForm();
   return (
     <StSignUpForm.Form onSubmit={() => submitSignUpData()}>
       <Description
@@ -18,16 +29,30 @@ export default function SignUpForm() {
         onChange={(e) => changeInputValue("email", e.currentTarget.value)}
         value={inputValue.email}
         type="email"
-        errorMessage="text"
+        errorMessage={setEmailErrorMsgDependingOnTheCase(inputValue.email)}
+        firstInputCheck={errorMsgState.email}
+        errorCondition={isTrueCompareWithValueAndCondition(
+          inputValue.email,
+          emailRegExp
+        )}
       />
+
       <Input
         id="password"
         title="비밀번호"
         onChange={(e) => changeInputValue("password", e.currentTarget.value)}
         value={inputValue.password}
         type="password"
-        errorMessage="text"
+        errorMessage={setPasswordErrorMsgDependingOnTheCase(
+          inputValue.password
+        )}
+        firstInputCheck={errorMsgState.password}
+        errorCondition={isTrueCompareWithValueAndCondition(
+          inputValue.password,
+          passwordRegExp
+        )}
       />
+
       <Input
         id="confirmPassword"
         title="비밀번호 재확인"
@@ -36,15 +61,16 @@ export default function SignUpForm() {
         }
         value={inputValue.confirmPassword}
         type="password"
-        errorMessage="text"
-      />
-      <Input
-        id="username"
-        title="닉네임"
-        onChange={(e) => changeInputValue("username", e.currentTarget.value)}
-        value={inputValue.username}
-        type="text"
-        errorMessage="text"
+        errorMessage={setConfirmPasswordErrorMsgDependingOnTheCase(
+          inputValue.confirmPassword,
+          inputValue.password
+        )}
+        firstInputCheck={errorMsgState.password}
+        errorCondition={isTrueCompareWithValueAndCondition(
+          inputValue.confirmPassword,
+          passwordRegExp,
+          inputValue.password
+        )}
       />
       <StSignUpForm.ButtonBox>
         <Button text="다음 단계로" type="submit" />
@@ -52,4 +78,19 @@ export default function SignUpForm() {
       </StSignUpForm.ButtonBox>
     </StSignUpForm.Form>
   );
+}
+
+{
+  /* <Input
+id="username"
+title="닉네임"
+onChange={(e) => changeInputValue("username", e.currentTarget.value)}
+value={inputValue.username}
+type="text"
+errorMessage={setUsernameErrorMsgDependingOnTheCase(
+  inputValue.username
+)}
+regularExpression={usernameRegExp}
+placeholder="영문, 숫자 포함 16자까지 가능"
+/> */
 }

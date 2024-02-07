@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import { fontsStyle } from "../utils/utilfonts";
+import { fontsStyle } from "../utils/util-fonts";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
   color: #373737;
+
   box-sizing: border-box;
   margin: 24px 0 8px 0;
 `;
