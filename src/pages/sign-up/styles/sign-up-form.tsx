@@ -11,6 +11,7 @@ const Form = styled.form`
 const ButtonBox = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 12px;
 
   margin: 14px 0;
   box-sizing: border-box;

@@ -74,7 +74,12 @@ export default function SignUpForm() {
       />
       <StSignUpForm.ButtonBox>
         <Button text="다음 단계로" type="submit" />
-        <Button text="돌아가기" type="button" />
+        <Button
+          text="돌아가기"
+          type="button"
+          bgColor="invalid"
+          onClick={() => {}}
+        />
       </StSignUpForm.ButtonBox>
     </StSignUpForm.Form>
   );

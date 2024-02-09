@@ -39,7 +39,12 @@ export default function FindPasswordForm() {
 
       <StFindPasswordForm.ButtonBox>
         <Button text="확인 이메일 보내기" type="submit" />
-        <Button text="돌아가기" type="button" />
+        <Button
+          text="돌아가기"
+          type="button"
+          bgColor="invalid"
+          onClick={() => {}}
+        />
       </StFindPasswordForm.ButtonBox>
     </StFindPasswordForm.Form>
   );

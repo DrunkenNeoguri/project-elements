@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { fontsStyle } from "../utils/util-fonts";
+import { ButtonColorProp } from "../types/button";
+import { setButtonBackgroundColor } from "../policies/button";
 
-const Wrapper = styled.button`
-  background-color: #1e90ff;
+const Wrapper = styled.button<ButtonColorProp>`
+  background-color: ${(props) => setButtonBackgroundColor(props.bgColor)};
 
   display: flex;
   justify-content: center;
