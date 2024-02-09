@@ -1,5 +1,12 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { SignUpValueType, SignUpViewErrorType } from "../types/sign-up-form";
+import { isInValidatedSignUpInputData } from "../policies/sign-up-form";
+import { firebaseAuth } from "../../../common/utils/util-firebase";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
+import { convertUnknownTypeErrorToStringMessage } from "../../../common/utils/util-convert";
 
 export default function useSignUpForm() {
   const [inputValue, setInputValue] = useState<SignUpValueType>({
@@ -23,8 +30,27 @@ export default function useSignUpForm() {
     }
   };
 
-  const submitSignUpData = () => {
-    return;
+  const submitSignUpData = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isInValidatedSignUpInputData(inputValue)) {
+      // TODO: createPortal 써서 모달 만들어보기
+      return false;
+    }
+    const auth = firebaseAuth;
+    try {
+      const createAccountResult = await createUserWithEmailAndPassword(
+        auth,
+        inputValue.email,
+        inputValue.password
+      );
+
+      if (createAccountResult.user !== null) {
+        await sendEmailVerification(createAccountResult.user);
+        // return이 void이기 때문에 별도로 받을 수 있는 값은 없음.
+      }
+    } catch (error) {
+      const errorMessage = convertUnknownTypeErrorToStringMessage(error);
+    }
   };
 
   return { inputValue, changeInputValue, submitSignUpData, errorMsgState };

@@ -18,7 +18,7 @@ export default function SignUpForm() {
   const { inputValue, changeInputValue, submitSignUpData, errorMsgState } =
     useSignUpForm();
   return (
-    <StSignUpForm.Form onSubmit={() => submitSignUpData()}>
+    <StSignUpForm.Form onSubmit={(e) => submitSignUpData(e)}>
       <Description
         title="반갑습니다!"
         context="아래의 내용을 기입하셔서 회원가입을 진행해주세요."

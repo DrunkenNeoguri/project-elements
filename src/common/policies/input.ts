@@ -21,6 +21,7 @@ export const isTrueCompareWithValueAndCondition = (
   condition?: RegExp,
   comparingValue?: string
 ) => {
+  if (value.trim() === "") return true;
   if (condition && !condition.test(value)) return true;
   if (comparingValue && value !== comparingValue) return true;
   return false;

@@ -6,5 +6,5 @@ export type ButtonProp = {
 };
 
 export type ButtonColorProp = {
-  bgColor?: "primary" | "invalid";
+  $bgColor?: "primary" | "invalid";
 };

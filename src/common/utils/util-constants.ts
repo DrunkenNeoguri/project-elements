@@ -18,3 +18,6 @@ export const passwordIncorrectErrorMsg =
   "입력하신 비밀번호와 일치하지 않습니다.";
 export const nicknameInvalidErrorMsg =
   "닉네임은 최대 8자(영문 16자)까지 입력할 수 있습니다.";
+
+export const unknownErrorMessage =
+  "The error is unknown. Please let me know under what circumstances it occurred and provide detailed information to this email(developneoguri@gmail.com).";
