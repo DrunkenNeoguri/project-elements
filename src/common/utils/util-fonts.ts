@@ -1,5 +1,7 @@
 export const fontsStyle = {
   semibold: {
+    semibold10:
+      "font-family: 'GmarketSans', sans-serif; font-weight: 700; font-size:10px; line-height: 14px; white-space: pre-wrap;",
     semibold12:
       "font-family: 'GmarketSans', sans-serif; font-weight: 700; font-size:12px; line-height: 16px; white-space: pre-wrap;",
     semibold14:
@@ -17,7 +19,7 @@ export const fontsStyle = {
   },
   medium: {
     medium10:
-      "font-family: 'GmarketSans', sans-serif; font-weight: 500; font-size:10px; line-height: 12px; white-space: pre-wrap;",
+      "font-family: 'GmarketSans', sans-serif; font-weight: 500; font-size:10px; line-height: 14px; white-space: pre-wrap;",
     medium12:
       "font-family: 'GmarketSans', sans-serif; font-weight: 500; font-size:12px; line-height: 16px; white-space: pre-wrap;",
     medium14:
@@ -34,6 +36,8 @@ export const fontsStyle = {
       "font-family: 'GmarketSans', sans-serif; font-weight: 500; font-size:24px; line-height: 32px; white-space: pre-wrap;",
   },
   regular: {
+    regular10:
+      "font-family: 'GmarketSans', sans-serif; font-weight: 300; font-size:10px; line-height: 14px; white-space: pre-wrap;",
     regular12:
       "font-family: 'GmarketSans', sans-serif; font-weight: 300; font-size:12px; line-height: 16px; white-space: pre-wrap;",
     regular14:

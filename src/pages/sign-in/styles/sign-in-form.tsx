@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { fontsStyle } from "../../../common/utils/util-fonts";
 
 const Form = styled.form`
   display: flex;
@@ -25,10 +26,12 @@ const SignUpBox = styled.div`
 `;
 
 const Text = styled.span`
+  ${fontsStyle.regular.regular10};
   color: #373737;
 `;
 
 const Link = styled.a`
+  ${fontsStyle.regular.regular10};
   color: #1e90ff;
   text-decoration: underline;
 `;
