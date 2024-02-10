@@ -18,6 +18,8 @@ const Wrapper = styled.button<ButtonColorProp>`
   border: none;
   border-radius: 4px;
   box-sizing: border-box;
+
+  cursor: pointer;
 `;
 
 export const StButton = Object.assign({}, { Wrapper });

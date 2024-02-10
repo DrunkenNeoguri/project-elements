@@ -13,12 +13,23 @@ import {
   setEmailErrorMsgDependingOnTheCase,
   setPasswordErrorMsgDependingOnTheCase,
 } from "../../../common/policies/input";
+import { Dispatch, SetStateAction } from "react";
+import { SignUpPageStateType } from "../types/sign-up-form";
 
-export default function SignUpForm() {
-  const { inputValue, changeInputValue, submitSignUpData, errorMsgState } =
-    useSignUpForm();
+export default function SignUpForm({
+  setPageState,
+}: {
+  setPageState: Dispatch<SetStateAction<SignUpPageStateType>>;
+}) {
+  const {
+    inputValue,
+    changeInputValue,
+    submitSignUpData,
+    errorMsgState,
+    goToPreviousScreen,
+  } = useSignUpForm();
   return (
-    <StSignUpForm.Form onSubmit={(e) => submitSignUpData(e)}>
+    <StSignUpForm.Form onSubmit={(e) => submitSignUpData(e, setPageState)}>
       <Description
         title="반갑습니다!"
         context="아래의 내용을 기입하셔서 회원가입을 진행해주세요."
@@ -78,24 +89,9 @@ export default function SignUpForm() {
           text="돌아가기"
           type="button"
           bgColor="invalid"
-          onClick={() => {}}
+          onClick={() => goToPreviousScreen()}
         />
       </StSignUpForm.ButtonBox>
     </StSignUpForm.Form>
   );
-}
-
-{
-  /* <Input
-id="username"
-title="닉네임"
-onChange={(e) => changeInputValue("username", e.currentTarget.value)}
-value={inputValue.username}
-type="text"
-errorMessage={setUsernameErrorMsgDependingOnTheCase(
-  inputValue.username
-)}
-regularExpression={usernameRegExp}
-placeholder="영문, 숫자 포함 16자까지 가능"
-/> */
 }

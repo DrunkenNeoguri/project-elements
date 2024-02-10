@@ -9,3 +9,8 @@ export type SignUpViewErrorType = {
   password: false;
   confirmPassword: false;
 };
+
+export type SignUpPageStateType = {
+  state: "signUp" | "verify";
+  email: string | null;
+};
