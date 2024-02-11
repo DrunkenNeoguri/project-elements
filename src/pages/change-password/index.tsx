@@ -8,7 +8,7 @@ export default function ChangePasswordPage() {
   const { pageState, setPageState } = useChangePassword();
   return (
     <>
-      <SignHeader title="회원가입" />
+      <SignHeader title="비밀번호 변경" />
       {isUserProgressedChangePassword(pageState) ? (
         <ChangePasswordForm setPageState={setPageState} />
       ) : (

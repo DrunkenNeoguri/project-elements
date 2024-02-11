@@ -15,13 +15,16 @@ const ButtonBox = styled.div`
   box-sizing: border-box;
 `;
 
-const SignUpBox = styled.div`
+const BottomBox = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #373737;
-  font-size: 10px;
-  line-height: 14px;
+  gap: 12px;
+`;
+
+const TextBox = styled.div`
+  display: flex;
   gap: 4px;
 `;
 
@@ -36,7 +39,37 @@ const Link = styled.a`
   text-decoration: underline;
 `;
 
+const LanguageBox = styled.div`
+  display: flex;
+  gap: 4px;
+  margin-top: 24px;
+`;
+
+const LanguageButton = styled.button`
+  display: inline-flex;
+  background-color: transparent;
+  outline: none;
+
+  ${fontsStyle.medium.medium10};
+  color: #1e90ff;
+  text-decoration: underline;
+
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+`;
+
 export const StSignInForm = Object.assign(
   {},
-  { Form, ButtonBox, SignUpBox, Text, Link }
+  {
+    Form,
+    ButtonBox,
+    BottomBox,
+    TextBox,
+    Text,
+    Link,
+    LanguageBox,
+    LanguageButton,
+  }
 );

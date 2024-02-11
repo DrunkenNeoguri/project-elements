@@ -5,12 +5,14 @@ import FindPasswordPage from "../pages/find-password";
 import ChangePasswordPage from "../pages/change-password";
 import MainPage from "../pages/main";
 import SignInPage from "../pages/sign-in";
+import RedirectPage from "../pages/redirect";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/redirect" element={<RedirectPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/signupcomplete" element={<SignUpCompletePage />} />

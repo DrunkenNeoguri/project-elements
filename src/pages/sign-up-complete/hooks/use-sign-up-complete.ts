@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { firebaseAuth } from "../../../common/utils/util-firebase";
 import { applyActionCode } from "firebase/auth";
@@ -14,7 +14,7 @@ export function useSignUpComplete() {
 
   useLayoutEffect(() => {
     const applyActionCodeAndVerifiedAccount = async () => {
-      const actionCode = await searchParams.get("oobCode");
+      const actionCode = await searchParams.get("actionCode");
       if (actionCode === null) {
         throw new Error("The Action Code is invalid.");
       }

@@ -55,10 +55,26 @@ export default function SignInForm() {
       <StSignInForm.ButtonBox>
         <Button text="로그인" type="submit" />
       </StSignInForm.ButtonBox>
-      <StSignInForm.SignUpBox>
-        <StSignInForm.Text>회원이 아니신가요?</StSignInForm.Text>
-        <StSignInForm.Link href="/signup">회원가입</StSignInForm.Link>
-      </StSignInForm.SignUpBox>
+      <StSignInForm.BottomBox>
+        <StSignInForm.TextBox>
+          <StSignInForm.Text>회원이 아니신가요?</StSignInForm.Text>
+          <StSignInForm.Link href="/signup">회원가입</StSignInForm.Link>
+        </StSignInForm.TextBox>
+        <StSignInForm.TextBox>
+          <StSignInForm.Text>비밀번호를 잊어버리셨나요?</StSignInForm.Text>
+          <StSignInForm.Link href="/findpassword">
+            비밀번호 찾기
+          </StSignInForm.Link>
+        </StSignInForm.TextBox>
+        <StSignInForm.LanguageBox>
+          <StSignInForm.Text>언어 - </StSignInForm.Text>
+          <StSignInForm.LanguageButton>English</StSignInForm.LanguageButton>
+          <StSignInForm.Text> | </StSignInForm.Text>
+          <StSignInForm.LanguageButton>한국어</StSignInForm.LanguageButton>
+          <StSignInForm.Text> | </StSignInForm.Text>
+          <StSignInForm.LanguageButton>日本語</StSignInForm.LanguageButton>
+        </StSignInForm.LanguageBox>
+      </StSignInForm.BottomBox>
     </StSignInForm.Form>
   );
 }

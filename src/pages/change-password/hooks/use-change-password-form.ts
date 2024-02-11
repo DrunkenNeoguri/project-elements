@@ -44,7 +44,7 @@ export default function useChangePasswordForm() {
     }
     const auth = firebaseAuth;
     try {
-      const actionCode = await searchParams.get("oobCode");
+      const actionCode = await searchParams.get("actionCode");
       if (actionCode === null) {
         throw new Error("The Action Code is invalid.");
       }
