@@ -17,7 +17,7 @@ export default function SignInForm() {
   const { inputValue, changeInputValue, submitSignInData, errorMsgState } =
     useSignInForm();
   return (
-    <StSignInForm.Form onSubmit={() => submitSignInData()}>
+    <StSignInForm.Form onSubmit={(e) => submitSignInData(e)}>
       <Description
         title="안녕하세요!"
         context="회원이신가요? 아래의 내용을 기입하고 로그인해주세요."

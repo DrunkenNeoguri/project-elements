@@ -1,4 +1,4 @@
-export const isUserProgressedSigningUp = (pageState: string) => {
+export const isUserProgressedSignUp = (pageState: string) => {
   if (pageState === "signUp") return true;
   return false;
 };

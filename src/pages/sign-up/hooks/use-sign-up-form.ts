@@ -4,7 +4,7 @@ import {
   SignUpValueType,
   SignUpViewErrorType,
 } from "../types/sign-up-form";
-import { isInValidatedSignUpInputData } from "../policies/sign-up-form";
+import { isInvalidatedSignUpInputData } from "../policies/sign-up-form";
 import { firebaseAuth } from "../../../common/utils/util-firebase";
 import {
   createUserWithEmailAndPassword,
@@ -41,7 +41,7 @@ export default function useSignUpForm() {
     setPageState: Dispatch<SetStateAction<SignUpPageStateType>>
   ) => {
     e.preventDefault();
-    if (isInValidatedSignUpInputData(inputValue)) {
+    if (isInvalidatedSignUpInputData(inputValue)) {
       // TODO: createPortal 써서 모달 만들어보기
       return false;
     }

@@ -8,16 +8,25 @@ import {
   isTrueCompareWithValueAndCondition,
   setEmailErrorMsgDependingOnTheCase,
 } from "../../../common/policies/input";
+import { Dispatch } from "react";
+import { SetStateAction } from "jotai";
 
-export default function FindPasswordForm() {
+export default function FindPasswordForm({
+  setPageState,
+}: {
+  setPageState: Dispatch<SetStateAction<string>>;
+}) {
   const {
     inputValue,
     changeInputValue,
     submitFindPasswordData,
     errorMsgState,
+    goToPreviousScreen,
   } = useFindPasswordForm();
   return (
-    <StFindPasswordForm.Form onSubmit={() => submitFindPasswordData()}>
+    <StFindPasswordForm.Form
+      onSubmit={(e) => submitFindPasswordData(e, setPageState)}
+    >
       <Description
         title="비밀번호를 잊으셨나요?"
         context={`가입하신 이메일 주소를 입력하시면,\n새로운 비밀번호를 입력할 수 있도록 링크를 보내드립니다.`}
@@ -43,7 +52,7 @@ export default function FindPasswordForm() {
           text="돌아가기"
           type="button"
           bgColor="invalid"
-          onClick={() => {}}
+          onClick={() => goToPreviousScreen()}
         />
       </StFindPasswordForm.ButtonBox>
     </StFindPasswordForm.Form>

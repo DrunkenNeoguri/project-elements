@@ -1,11 +1,19 @@
 import SignHeader from "../../common/components/sign-header";
 import ChangePasswordForm from "./components/change-password-form";
+import { CompleteChangePasswordSection } from "./components/complete-change-password-section";
+import useChangePassword from "./hooks/use-change-password";
+import { isUserProgressedChangePassword } from "./policies/change-password";
 
 export default function ChangePasswordPage() {
+  const { pageState, setPageState } = useChangePassword();
   return (
     <>
       <SignHeader title="회원가입" />
-      <ChangePasswordForm />
+      {isUserProgressedChangePassword(pageState) ? (
+        <ChangePasswordForm setPageState={setPageState} />
+      ) : (
+        <CompleteChangePasswordSection />
+      )}
     </>
   );
 }

@@ -5,7 +5,7 @@ import {
 } from "../../../common/utils/util-constants";
 import { SignUpValueType } from "../types/sign-up-form";
 
-export const isInValidatedSignUpInputData = (signUpData: SignUpValueType) => {
+export const isInvalidatedSignUpInputData = (signUpData: SignUpValueType) => {
   if (isTrueCompareWithValueAndCondition(signUpData.email, emailRegExp)) {
     return true;
   }

@@ -9,8 +9,13 @@ import {
   setPasswordErrorMsgDependingOnTheCase,
 } from "../../../common/policies/input";
 import { passwordRegExp } from "../../../common/utils/util-constants";
+import { Dispatch, SetStateAction } from "react";
 
-export default function ChangePasswordForm() {
+export default function ChangePasswordForm({
+  setPageState,
+}: {
+  setPageState: Dispatch<SetStateAction<string>>;
+}) {
   const {
     inputValue,
     changeInputValue,
@@ -18,7 +23,9 @@ export default function ChangePasswordForm() {
     errorMsgState,
   } = useChangePasswordForm();
   return (
-    <StChangePasswordForm.Form onSubmit={() => submitChangePasswordData()}>
+    <StChangePasswordForm.Form
+      onSubmit={(e) => submitChangePasswordData(e, setPageState)}
+    >
       <Description
         title="새 비밀번호를 입력해주세요."
         context="가입하신 계정에 적용할 새로운 비밀번호를 입력해주세요."
