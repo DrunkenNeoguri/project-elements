@@ -88,7 +88,7 @@ export default function SignUpForm({
         <Button
           text="돌아가기"
           type="button"
-          bgColor="invalid"
+          colorType="invalid"
           onClick={() => goToPreviousScreen()}
         />
       </StSignUpForm.ButtonBox>

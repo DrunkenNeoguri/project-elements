@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { fontsStyle } from "../utils/util-fonts";
 
-const Wrapper = styled.div`
+const Wrapper = styled.header`
   background-color: #0f4a84;
 
   display: flex;

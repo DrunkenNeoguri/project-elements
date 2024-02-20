@@ -1,17 +1,22 @@
 import styled from "styled-components";
 import { fontsStyle } from "../utils/util-fonts";
 import { ButtonColorProp } from "../types/button";
-import { setButtonBackgroundColor } from "../policies/button";
+import {
+  isButtonBgColorPrimaryOrInvalidOrSecondary,
+  isButtonTextColorPrimaryOrInvalidOrSecondary,
+} from "../policies/button";
 
 const Wrapper = styled.button<ButtonColorProp>`
-  background-color: ${(props) => setButtonBackgroundColor(props.$bgColor)};
+  background-color: ${(props) =>
+    isButtonBgColorPrimaryOrInvalidOrSecondary(props.$colorType)};
 
   display: flex;
   justify-content: center;
   align-items: center;
 
   ${fontsStyle.semibold.semibold16};
-  color: #ffffff;
+  color: ${(props) =>
+    isButtonTextColorPrimaryOrInvalidOrSecondary(props.$colorType)};
 
   width: 100%;
   height: 44px;

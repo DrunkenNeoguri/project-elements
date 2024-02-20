@@ -51,7 +51,7 @@ export default function FindPasswordForm({
         <Button
           text="돌아가기"
           type="button"
-          bgColor="invalid"
+          colorType="invalid"
           onClick={() => goToPreviousScreen()}
         />
       </StFindPasswordForm.ButtonBox>

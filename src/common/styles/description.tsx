@@ -14,11 +14,13 @@ const Wrapper = styled.div`
 
 const Title = styled.h2`
   ${fontsStyle.semibold.semibold24};
+  color: ${(props) => props.color ?? "#373737"};
   margin: 0;
 `;
 
 const Context = styled.span`
   ${fontsStyle.medium.medium12};
+  color: ${(props) => props.color ?? "#373737"};
 `;
 
 export const StDescription = Object.assign({}, { Wrapper, Title, Context });
