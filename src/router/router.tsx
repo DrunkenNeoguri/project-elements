@@ -7,6 +7,7 @@ import MainPage from "../pages/main";
 import SignInPage from "../pages/sign-in";
 import RedirectPage from "../pages/redirect";
 import WelcomePage from "../pages/welcome";
+import CreateListPage from "../pages/create-list";
 
 const Router = () => {
   return (
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/signupcomplete" element={<SignUpCompletePage />} />
         <Route path="/findpassword" element={<FindPasswordPage />} />
         <Route path="/changepassword" element={<ChangePasswordPage />} />
+        <Route path="/createlist" element={<CreateListPage />} />
       </Routes>
     </BrowserRouter>
   );
