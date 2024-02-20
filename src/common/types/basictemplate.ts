@@ -1,11 +1,3 @@
-// export type globalTemplate = {
-
-// }
-
-// export type local = {
-//   key: string
-// }
-
 export type listTemplate = {
   listName: string;
 };

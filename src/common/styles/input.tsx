@@ -1,19 +1,20 @@
 import styled from "styled-components";
-import { fontsStyle } from "../utils/utilfonts";
+import { fontsStyle } from "../utils/util-fonts";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+
   padding: 12px 0;
 `;
 
 const TextInput = styled.input`
   background-color: #f7f7f7;
-  width: 100%;
 
   ${fontsStyle.medium.medium14}
   color: #373737;
 
+  width: 100%;
   border: 1px solid #373737;
   border-radius: 4px;
   padding: 13px 0 13px 16px;
@@ -24,6 +25,7 @@ const TextInput = styled.input`
 const Label = styled.label`
   ${fontsStyle.semibold.semibold12};
   color: #373737;
+
   margin-bottom: 4px;
 `;
 

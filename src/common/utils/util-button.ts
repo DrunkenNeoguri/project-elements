@@ -1,4 +1,4 @@
-import { fontsStyle } from "./utilfonts";
+import { fontsStyle } from "./util-fonts";
 
 export const buttonStyle = (styleType: string) => {
   switch (styleType) {
