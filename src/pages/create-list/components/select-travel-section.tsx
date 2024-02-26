@@ -1,8 +1,11 @@
 import Button from "../../../common/components/button";
 import Description from "../../../common/components/description";
+import useSelectTravelSection from "../hooks/use-select-travel-section";
 import { StSelectTravelSection } from "../styles/select-travel-section";
 
 export default function SelectTravelSection() {
+  const { setTravelTypeAndMoveNextStep, backToMainPage } =
+    useSelectTravelSection();
   return (
     <StSelectTravelSection.Wrapper>
       <Description
@@ -10,9 +13,24 @@ export default function SelectTravelSection() {
         color="#ffffff"
       />
       <StSelectTravelSection.ButtonBox>
-        <Button type="button" text="해외 여행" colorType="primary-reverse" />
-        <Button type="button" text="국내 여행" colorType="secondary-reverse" />
-        <Button type="button" text="돌아가기" colorType="invalid" />
+        <Button
+          type="button"
+          text="해외 여행"
+          colorType="primary-reverse"
+          onClick={() => setTravelTypeAndMoveNextStep("foreign")}
+        />
+        <Button
+          type="button"
+          text="국내 여행"
+          colorType="secondary-reverse"
+          onClick={() => setTravelTypeAndMoveNextStep("domestic")}
+        />
+        <Button
+          type="button"
+          text="돌아가기"
+          colorType="invalid"
+          onClick={() => backToMainPage()}
+        />
       </StSelectTravelSection.ButtonBox>
     </StSelectTravelSection.Wrapper>
   );

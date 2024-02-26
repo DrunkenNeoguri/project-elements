@@ -4,8 +4,22 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0 16px;
+
+  height: 100vh;
   box-sizing: border-box;
 `;
 
-export const StSelectUseTemplateSection = Object.assign({}, { Wrapper });
+const ButtonBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  width: 100%;
+  margin: auto 0 24px;
+  box-sizing: border-box;
+`;
+
+export const StSelectUseTemplateSection = Object.assign(
+  {},
+  { Wrapper, ButtonBox }
+);
