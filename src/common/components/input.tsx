@@ -13,12 +13,15 @@ export default function Input(props: InputProp) {
     errorMessage,
     firstInputCheck,
     errorCondition,
+    colorTheme,
   } = props;
 
   return (
     <StInput.Wrapper>
       {isPropHasLabelText(title) && (
-        <StInput.Label htmlFor={id}>{title}</StInput.Label>
+        <StInput.Label htmlFor={id} $colorTheme={colorTheme}>
+          {title}
+        </StInput.Label>
       )}
       <StInput.TextInput
         id={id}
@@ -26,6 +29,7 @@ export default function Input(props: InputProp) {
         onChange={onChange}
         type={type}
         placeholder={placeholder}
+        $colorTheme={colorTheme}
       />
       {isShowErrorMessage(firstInputCheck, errorCondition) && (
         <StInput.ErrorMessage>{errorMessage}</StInput.ErrorMessage>

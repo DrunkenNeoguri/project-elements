@@ -1,3 +1,4 @@
+import { InputColorThemeType } from "../types/input";
 import {
   commonBlankErrorMsg,
   emailInvalidErrorMsg,
@@ -10,9 +11,10 @@ export const isPropHasLabelText = (text: string) => {
 };
 
 export const isShowErrorMessage = (
-  firstInputCheck: boolean,
-  errorCondition: RegExp | boolean
+  firstInputCheck?: boolean,
+  errorCondition?: RegExp | boolean
 ) => {
+  if (!firstInputCheck || !errorCondition) return false;
   return firstInputCheck && errorCondition ? true : false;
 };
 
@@ -42,4 +44,9 @@ export const setConfirmPasswordErrorMsgDependingOnTheCase = (
   if (value.trim() === "") return commonBlankErrorMsg;
   if (value.length < 8) return passwordInvalidErrorMsg;
   if (comparingValue !== value) return passwordIncorrectErrorMsg;
+};
+
+export const isColorThemeBlackOrWhite = (colorTheme?: InputColorThemeType) => {
+  if (colorTheme === "white") return "#FFFFFF";
+  return "#373737";
 };
