@@ -4,7 +4,6 @@ import { DescriptionProp } from "../types/description";
 
 export default function Description(props: DescriptionProp) {
   const { title, context, color } = props;
-  console.log(hasContextInDescription(context));
 
   return (
     <StDescription.Wrapper>
