@@ -3,7 +3,9 @@ export type ButtonColorType =
   | "secondary"
   | "invalid"
   | "primary-reverse"
-  | "secondary-reverse";
+  | "secondary-reverse"
+  | "white"
+  | "black";
 
 export type ButtonProp = {
   text: string;
