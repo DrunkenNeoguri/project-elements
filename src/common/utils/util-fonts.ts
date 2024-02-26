@@ -1,20 +1,20 @@
 export const fontsStyle = {
-  semibold: {
-    semibold10:
+  bold: {
+    bold10:
       "font-family: 'GmarketSans', sans-serif; font-weight: 700; font-size:10px; line-height: 14px; white-space: pre-wrap;",
-    semibold12:
+    bold12:
       "font-family: 'GmarketSans', sans-serif; font-weight: 700; font-size:12px; line-height: 16px; white-space: pre-wrap;",
-    semibold14:
+    bold14:
       "font-family: 'GmarketSans', sans-serif; font-weight: 700; font-size:14px; line-height: 18px; white-space: pre-wrap;",
-    semibold16:
+    bold16:
       "font-family: 'GmarketSans', sans-serif; font-weight: 700; font-size:16px; line-height: 20px; white-space: pre-wrap;",
-    semibold18:
+    bold18:
       "font-family: 'GmarketSans', sans-serif; font-weight: 700; font-size:18px; line-height: 24px; white-space: pre-wrap;",
-    semibold20:
+    bold20:
       "font-family: 'GmarketSans', sans-serif; font-weight: 700; font-size:20px; line-height: 26px; white-space: pre-wrap;",
-    semibold22:
+    bold22:
       "font-family: 'GmarketSans', sans-serif; font-weight: 700; font-size:22px; line-height: 28px; white-space: pre-wrap;",
-    semibold24:
+    bold24:
       "font-family: 'GmarketSans', sans-serif; font-weight: 700; font-size:24px; line-height: 32px; white-space: pre-wrap;",
   },
   medium: {
@@ -35,22 +35,22 @@ export const fontsStyle = {
     medium24:
       "font-family: 'GmarketSans', sans-serif; font-weight: 500; font-size:24px; line-height: 32px; white-space: pre-wrap;",
   },
-  regular: {
-    regular10:
+  light: {
+    light10:
       "font-family: 'GmarketSans', sans-serif; font-weight: 300; font-size:10px; line-height: 14px; white-space: pre-wrap;",
-    regular12:
+    light12:
       "font-family: 'GmarketSans', sans-serif; font-weight: 300; font-size:12px; line-height: 16px; white-space: pre-wrap;",
-    regular14:
+    light14:
       "font-family: 'GmarketSans', sans-serif; font-weight: 300; font-size:14px; line-height: 18px; white-space: pre-wrap;",
-    regular16:
+    light16:
       "font-family: 'GmarketSans', sans-serif; font-weight: 300; font-size:16px; line-height: 20px; white-space: pre-wrap;",
-    regular18:
+    light18:
       "font-family: 'GmarketSans', sans-serif; font-weight: 300; font-size:18px; line-height: 24px; white-space: pre-wrap;",
-    regular20:
+    light20:
       "font-family: 'GmarketSans', sans-serif; font-weight: 300; font-size:20px; line-height: 26px; white-space: pre-wrap;",
-    regular22:
+    light22:
       "font-family: 'GmarketSans', sans-serif; font-weight: 300; font-size:22px; line-height: 28px; white-space: pre-wrap;",
-    regular24:
+    light24:
       "font-family: 'GmarketSans', sans-serif; font-weight: 300; font-size:24px; line-height: 32px; white-space: pre-wrap;",
   },
 };

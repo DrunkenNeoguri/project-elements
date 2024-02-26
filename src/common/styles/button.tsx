@@ -14,7 +14,7 @@ const Wrapper = styled.button<ButtonColorProp>`
   justify-content: center;
   align-items: center;
 
-  ${fontsStyle.semibold.semibold16};
+  ${fontsStyle.bold.bold16};
   color: ${(props) =>
     isButtonTextColorPrimaryOrInvalidOrSecondary(props.$colorType)};
 

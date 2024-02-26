@@ -21,7 +21,7 @@ const StepCounter = styled.div<StepStatusProp>`
   justify-content: center;
   align-items: center;
 
-  ${fontsStyle.semibold.semibold12}
+  ${fontsStyle.bold.bold12}
   color: #0f4a84;
 
   height: 24px;

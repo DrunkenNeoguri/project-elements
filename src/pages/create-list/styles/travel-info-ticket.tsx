@@ -65,7 +65,7 @@ const TextBox = styled.div`
 `;
 
 const Title = styled.span`
-  ${fontsStyle.regular.regular10};
+  ${fontsStyle.light.light10};
   color: #373737;
 `;
 const Text = styled.span`

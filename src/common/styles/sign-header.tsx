@@ -7,7 +7,7 @@ const Wrapper = styled.header`
   display: flex;
   justify-content: space-around;
 
-  ${fontsStyle.semibold.semibold24};
+  ${fontsStyle.bold.bold24};
   color: #ffffff;
 
   width: 100%;

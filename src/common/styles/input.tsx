@@ -28,7 +28,7 @@ const TextInput = styled.input<InputColorThemeProp>`
 `;
 
 const Label = styled.label<InputColorThemeProp>`
-  ${fontsStyle.semibold.semibold12};
+  ${fontsStyle.bold.bold12};
   color: ${(props) => isColorThemeBlackOrWhite(props.$colorTheme)};
   margin-bottom: 4px;
 `;

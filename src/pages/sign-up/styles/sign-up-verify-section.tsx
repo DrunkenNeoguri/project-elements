@@ -19,7 +19,7 @@ const TextBox = styled.div`
 `;
 
 const Text = styled.div`
-  ${fontsStyle.semibold.semibold12};
+  ${fontsStyle.bold.bold12};
   color: #373737;
 `;
 

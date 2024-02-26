@@ -29,12 +29,12 @@ const TextBox = styled.div`
 `;
 
 const Text = styled.span`
-  ${fontsStyle.regular.regular10};
+  ${fontsStyle.light.light10};
   color: #373737;
 `;
 
 const Link = styled.a`
-  ${fontsStyle.regular.regular10};
+  ${fontsStyle.light.light10};
   color: #1e90ff;
   text-decoration: underline;
 `;

@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  ${fontsStyle.semibold.semibold24};
+  ${fontsStyle.bold.bold24};
   color: ${(props) => props.color ?? "#373737"};
   margin: 0;
 `;
