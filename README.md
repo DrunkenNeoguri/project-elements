@@ -52,7 +52,7 @@
 ---
 
 ## ℹ️ 프로젝트 정보
-[🔗 API 명세](https://www.notion.so/509a0f3794df4e4eb86d37d656815cd2?pvs=21)
-[🌉 브랜치 관리](https://www.notion.so/d201b2203f464c0a8f54a451de78873a?pvs=21)
-[✅ Commit, Pull Request 규칙](https://www.notion.so/Commit-Pull-Request-0dccba0c20e643829fdc1d309315100a?pvs=21)
-[✏️ Github Project & Issue 규칙](https://www.notion.so/Github-Project-Issue-c212ec456e5a4a35a434ad41a2a1160e?pvs=21)
+[🔗 API 명세](https://www.notion.so/509a0f3794df4e4eb86d37d656815cd2?pvs=21)  
+[🌉 브랜치 관리](https://www.notion.so/d201b2203f464c0a8f54a451de78873a?pvs=21)  
+[✅ Commit, Pull Request 규칙](https://www.notion.so/Commit-Pull-Request-0dccba0c20e643829fdc1d309315100a?pvs=21)  
+[✏️ Github Project & Issue 규칙](https://www.notion.so/Github-Project-Issue-c212ec456e5a4a35a434ad41a2a1160e?pvs=21)  
