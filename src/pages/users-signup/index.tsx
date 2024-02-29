@@ -4,7 +4,7 @@ import { SignUpVerifySection } from "./components/sign-up-verify-section";
 import useSignUp from "./hooks/use-sign-up";
 import { isUserProgressedSignUp } from "./policies/sign-up";
 
-export default function UserSignUp() {
+export default function UsersSignUp() {
   const { pageState, setPageState } = useSignUp();
   return (
     <>

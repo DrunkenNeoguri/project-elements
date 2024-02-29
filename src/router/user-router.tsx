@@ -1,18 +1,18 @@
 import { Route, Routes } from "react-router-dom";
-import UserFind from "../pages/user-find";
-import UserChange from "../pages/user-change";
-import UserSignIn from "../pages/user-signin";
-import UserSignUp from "../pages/user-signup";
-import UserVerified from "../pages/user-verified";
+import UsersSignIn from "../pages/users-signin";
+import UsersSignUp from "../pages/users-signup";
+import UsersVerified from "../pages/users-verified";
+import UsersFind from "../pages/users-find";
+import UsersChange from "../pages/users-change";
 
 export default function UserRouter() {
   return (
     <Routes>
-      <Route path="/signin" element={<UserSignIn />} />
-      <Route path="/signup" element={<UserSignUp />} />
-      <Route path="/verified" element={<UserVerified />} />
-      <Route path="/find" element={<UserFind />} />
-      <Route path="/change" element={<UserChange />} />
+      <Route path="/signin" element={<UsersSignIn />} />
+      <Route path="/signup" element={<UsersSignUp />} />
+      <Route path="/verified" element={<UsersVerified />} />
+      <Route path="/find" element={<UsersFind />} />
+      <Route path="/change" element={<UsersChange />} />
     </Routes>
   );
 }

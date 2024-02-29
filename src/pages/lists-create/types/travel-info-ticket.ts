@@ -1,5 +1,7 @@
-export type TravelType = "domestic" | "foreign";
-export type TravelTypeProp = { $travelType: "domestic" | "foreign" };
+import { TravelType } from "../../../common/types/template";
+
+export type TravelTypeProp = { $travelType: TravelType };
+
 export type TicketProp = {
   id?: string;
   travelType: TravelType;

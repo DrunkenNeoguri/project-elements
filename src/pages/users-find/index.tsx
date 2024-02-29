@@ -4,7 +4,7 @@ import { SendChangePasswordEmailSection } from "./components/send-change-passwor
 import useFindPassword from "./hooks/use-find-password";
 import { isUserProgressedFindPassword } from "./policies/find-password";
 
-export default function UserFind() {
+export default function UsersFind() {
   const { pageState, setPageState } = useFindPassword();
   return (
     <>

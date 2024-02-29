@@ -4,7 +4,7 @@ import { CompleteChangePasswordSection } from "./components/complete-change-pass
 import useChangePassword from "./hooks/use-change-password";
 import { isUserProgressedChangePassword } from "./policies/change-password";
 
-export default function UserChange() {
+export default function UsersChange() {
   const { pageState, setPageState } = useChangePassword();
   return (
     <>

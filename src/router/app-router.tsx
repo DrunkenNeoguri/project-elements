@@ -12,8 +12,8 @@ export default function AppRouter() {
         <Route path="/" element={<Welcome />} />
         <Route path="/main" element={<Main />} />
         <Route path="/redirect" element={<Redirect />} />
-        <Route path="/user/*" element={<UserRouter />} />
-        <Route path="/list/*" element={<ListRouter />} />
+        <Route path="/users/*" element={<UserRouter />} />
+        <Route path="/lists/*" element={<ListRouter />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
-import { TravelType } from "../types/index.type";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { TravelType } from "../../../common/types/template";
 
 export default function useSelectTravelSection() {
   const [searchParams, setSearchParams] = useSearchParams();

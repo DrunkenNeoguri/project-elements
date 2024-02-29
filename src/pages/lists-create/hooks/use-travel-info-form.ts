@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
-import { TravelInfoProp } from "../types/index.type";
 import { useAtom } from "jotai";
 import { useSearchParams } from "react-router-dom";
+import { TravelInfoProp } from "../../../common/types/template";
 
 export default function useTravelInfoForm() {
   const [searchParams, setSearchParams] = useSearchParams();

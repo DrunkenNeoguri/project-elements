@@ -7,7 +7,7 @@ import SelectUseTemplateSection from "./components/select-use-template-section.t
 import { useSearchParams } from "react-router-dom";
 import Stepper from "./components/create-stepper.tsx";
 
-export default function ListCreate() {
+export default function ListsCreate() {
   const [searchParams] = useSearchParams();
   const componentLists = [
     <SelectTravelSection />,
