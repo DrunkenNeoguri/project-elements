@@ -9,6 +9,24 @@ const Section = styled.section`
   box-sizing: border-box;
 `;
 
+const ImageBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  box-sizing: border-box;
+`;
+
+const Image = styled.img`
+  max-width: 300px;
+  border-radius: 16px;
+
+  box-sizing: border-box;
+`;
+
 const ButtonBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,5 +39,5 @@ const ButtonBox = styled.div`
 
 export const StSelectUseTemplateSection = Object.assign(
   {},
-  { Section, ButtonBox }
+  { Section, ImageBox, Image, ButtonBox }
 );
