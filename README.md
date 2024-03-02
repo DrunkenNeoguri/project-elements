@@ -55,5 +55,5 @@
 [🔗 API 명세](https://develop-neoguri.notion.site/509a0f3794df4e4eb86d37d656815cd2?v=efbf4d99414a495e81e97c28845b6817)  
 [🌉 브랜치 관리](https://develop-neoguri.notion.site/d201b2203f464c0a8f54a451de78873a)  
 [✅ Commit, Pull Request 규칙](https://develop-neoguri.notion.site/Commit-Pull-Request-0dccba0c20e643829fdc1d309315100a)  
-[✏️ Github Project & Issue 규칙](https://develop-neoguri.notion.site/Github-Project-Issue-c212ec456e5a4a35a434ad41a2a1160e)
+[✏️ Github Project & Issue 규칙](https://develop-neoguri.notion.site/Github-Project-Issue-c212ec456e5a4a35a434ad41a2a1160e)  
 [⚠️ 코드 컨벤션](https://develop-neoguri.notion.site/f4539d2ffff84eddaed3cf2994652770)  
