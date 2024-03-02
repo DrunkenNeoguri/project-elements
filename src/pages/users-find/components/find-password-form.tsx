@@ -11,12 +11,12 @@ export default function FindPasswordForm() {
   const {
     formInput,
     updateFormInput,
-    updateFindPasswordProcess,
+    postFindPasswordProcess,
     errorMsgState,
     goToPreviousScreen,
   } = useFindPasswordForm();
   return (
-    <StFindPasswordForm.Form onSubmit={(e) => updateFindPasswordProcess(e)}>
+    <StFindPasswordForm.Form onSubmit={(e) => postFindPasswordProcess(e)}>
       <Description
         title="비밀번호를 잊으셨나요?"
         context={`가입하신 이메일 주소를 입력하시면,\n새로운 비밀번호를 입력할 수 있도록 링크를 보내드립니다.`}

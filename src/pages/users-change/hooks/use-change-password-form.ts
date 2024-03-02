@@ -31,7 +31,7 @@ export default function useChangePasswordForm() {
     return;
   };
 
-  const updateChangePasswordProcess = async (e: FormEvent<HTMLFormElement>) => {
+  const postChangePasswordProcess = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isInvalidatedChangePasswordInputData(formInput)) {
       // @TODO: createPortal 써서 모달 만들어보기
@@ -56,7 +56,7 @@ export default function useChangePasswordForm() {
   return {
     formInput,
     updateFormInput,
-    updateChangePasswordProcess,
+    postChangePasswordProcess,
     errorMsgState,
   };
 }

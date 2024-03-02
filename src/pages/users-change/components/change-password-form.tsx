@@ -14,11 +14,11 @@ export default function ChangePasswordForm() {
   const {
     formInput,
     updateFormInput,
-    updateChangePasswordProcess,
+    postChangePasswordProcess,
     errorMsgState,
   } = useChangePasswordForm();
   return (
-    <StChangePasswordForm.Form onSubmit={(e) => updateChangePasswordProcess(e)}>
+    <StChangePasswordForm.Form onSubmit={(e) => postChangePasswordProcess(e)}>
       <Description
         title="새 비밀번호를 입력해주세요."
         context="가입하신 계정에 적용할 새로운 비밀번호를 입력해주세요."

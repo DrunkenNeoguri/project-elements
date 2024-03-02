@@ -8,12 +8,12 @@ export default function useConfirmTravelInfoSection() {
 
   const backToPreviousStep = () => {
     searchParams.set("step", "2");
-    setSearchParams(searchParams);
+    return setSearchParams(searchParams);
   };
 
   const moveToNextStep = () => {
     searchParams.set("step", "4");
-    setSearchParams(searchParams);
+    return setSearchParams(searchParams);
   };
 
   return { travelListData, moveToNextStep, backToPreviousStep };

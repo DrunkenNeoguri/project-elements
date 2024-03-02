@@ -1,4 +1,3 @@
-import { Provider } from "jotai";
 import { StCreateListPage } from "./styles/index.style.tsx";
 import SelectTravelSection from "./components/select-travel-section.tsx";
 import TravelInfoForm from "./components/travel-info-form.tsx";
@@ -9,6 +8,7 @@ import Stepper from "./components/create-stepper.tsx";
 
 export default function ListsCreate() {
   const [searchParams] = useSearchParams();
+  const currentStep = Number(searchParams.get("step")) - 1;
   const componentLists = [
     <SelectTravelSection />,
     <TravelInfoForm />,
@@ -17,11 +17,9 @@ export default function ListsCreate() {
   ];
 
   return (
-    <StCreateListPage.Wrapper>
+    <StCreateListPage.Section>
       <Stepper />
-      <Provider>
-        {componentLists[Number(searchParams.get("step")) - 1]}
-      </Provider>
-    </StCreateListPage.Wrapper>
+      {componentLists[currentStep]}
+    </StCreateListPage.Section>
   );
 }

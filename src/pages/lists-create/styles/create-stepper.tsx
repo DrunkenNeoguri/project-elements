@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { fontsStyle } from "../../../common/utils/util-fonts";
-import { isStepCompleted } from "../policies/create-stepper";
-import { StepStatusProp } from "../types/create-stepper";
+import { fontsStyle } from "../../../utils/util-fonts";
+import { convertBackgroundColorByCompareWithStep } from "../util/create-stepper";
+import { StStepStatusType } from "../types/create-stepper";
 
 const Wrapper = styled.header`
   display: flex;
@@ -13,9 +13,12 @@ const Wrapper = styled.header`
   box-sizing: border-box;
 `;
 
-const StepCounter = styled.div<StepStatusProp>`
+const StepCounter = styled.div<StStepStatusType>`
   background-color: ${(props) =>
-    isStepCompleted(props.$assignStep, props.$nowStep)};
+    convertBackgroundColorByCompareWithStep(
+      props.$assignStep,
+      props.$currentStep
+    )};
 
   display: flex;
   justify-content: center;
@@ -31,9 +34,12 @@ const StepCounter = styled.div<StepStatusProp>`
   box-sizing: border-box;
 `;
 
-const StepBoundaryLine = styled.div<StepStatusProp>`
+const StepBoundaryLine = styled.div<StStepStatusType>`
   background-color: ${(props) =>
-    isStepCompleted(props.$assignStep, props.$nowStep)};
+    convertBackgroundColorByCompareWithStep(
+      props.$assignStep,
+      props.$currentStep
+    )};
   display: block;
 
   width: calc((100% - 96px) / 3);

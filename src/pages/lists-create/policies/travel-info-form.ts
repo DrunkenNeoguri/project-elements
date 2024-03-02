@@ -1,10 +1,17 @@
-import { TravelInfoProp } from "../types/index.type";
+import { TravelInfoType } from "../../../common/types/template";
 
-export const isButtonVisible = (inputData: TravelInfoProp) => {
-  return inputData.title.trim() !== "" &&
-    inputData.departureAt.trim() !== "" &&
-    inputData.travelPeriod.trim() !== "" &&
-    inputData.destination.trim() !== ""
-    ? true
-    : false;
+export const isButtonVisible = (formInput: TravelInfoType) => {
+  if (formInput.title.trim() !== "") {
+    return true;
+  }
+  if (formInput.departureAt.trim() !== "") {
+    return true;
+  }
+  if (formInput.travelPeriod.trim() !== "") {
+    return true;
+  }
+  if (formInput.destination.trim() !== "") {
+    return true;
+  }
+  return false;
 };

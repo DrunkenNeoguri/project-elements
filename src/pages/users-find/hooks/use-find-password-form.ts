@@ -27,7 +27,7 @@ export default function useFindPasswordForm() {
     return;
   };
 
-  const updateFindPasswordProcess = async (e: FormEvent<HTMLFormElement>) => {
+  const postFindPasswordProcess = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isInvalidatedFindPasswordInputData(formInput)) {
       // TODO: createPortal 써서 모달 만들어보기
@@ -51,7 +51,7 @@ export default function useFindPasswordForm() {
   return {
     formInput,
     updateFormInput,
-    updateFindPasswordProcess,
+    postFindPasswordProcess,
     errorMsgState,
     goToPreviousScreen,
   };

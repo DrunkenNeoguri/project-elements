@@ -1,12 +1,12 @@
 import { StTravelInfoTicket } from "../styles/travel-info-ticket";
-import { TicketProp } from "../types/travel-info-ticket";
+import { TicketInfoType } from "../types/travel-info-ticket";
 
-export default function TravelInfoTicket(props: TicketProp) {
+export default function TravelInfoTicket(props: TicketInfoType) {
   const { id, travelType, title, departureAt, travelPeriod, destination } =
     props;
 
   return (
-    <StTravelInfoTicket.Wrapper id={id}>
+    <StTravelInfoTicket.Section id={id}>
       <StTravelInfoTicket.Cover>
         <StTravelInfoTicket.Header $travelType={travelType}>
           <span>TICKET</span>
@@ -40,6 +40,6 @@ export default function TravelInfoTicket(props: TicketProp) {
           </StTravelInfoTicket.BarcodeBox>
         </StTravelInfoTicket.Area>
       </StTravelInfoTicket.Cover>
-    </StTravelInfoTicket.Wrapper>
+    </StTravelInfoTicket.Section>
   );
 }

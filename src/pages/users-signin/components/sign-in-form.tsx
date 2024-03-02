@@ -11,10 +11,10 @@ import useSignInForm from "../hooks/use-sign-in-form";
 import { StSignInForm } from "../styles/sign-in-form";
 
 export default function SignInForm() {
-  const { formInput, updateFormInput, updateSignInProcess, errorMsgState } =
+  const { formInput, updateFormInput, postSignInProcess, errorMsgState } =
     useSignInForm();
   return (
-    <StSignInForm.Form onSubmit={(e) => updateSignInProcess(e)}>
+    <StSignInForm.Form onSubmit={(e) => postSignInProcess(e)}>
       <Description
         title="안녕하세요!"
         context="회원이신가요? 아래의 내용을 기입하고 로그인해주세요."

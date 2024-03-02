@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Wrapper = styled.section`
+const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -19,4 +19,4 @@ const ButtonBox = styled.div`
   box-sizing: border-box;
 `;
 
-export const StSelectTravelSection = Object.assign({}, { Wrapper, ButtonBox });
+export const StSelectTravelSection = Object.assign({}, { Section, ButtonBox });

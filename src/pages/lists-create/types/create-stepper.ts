@@ -1,4 +1,4 @@
-export type StepStatusProp = {
+export type StStepStatusType = {
   $assignStep: number;
-  $nowStep: number;
+  $currentStep: number;
 };

@@ -1,7 +1,7 @@
-export type TravelType = "domestic" | "foreign";
+export type TravelCaseType = "domestic" | "foreign";
 
-export type TravelInfoPropType = {
-  travelType: TravelType;
+export type TravelInfoType = {
+  travelType: TravelCaseType;
   title: string;
   departureAt: string;
   travelPeriod: string;
@@ -24,7 +24,7 @@ export type TravelElementType = {
 };
 
 export type TravelElementListType = {
-  travelInfo: TravelInfoPropType;
+  travelInfo: TravelInfoType;
   elementList: ElementCategoryType[];
 };
 

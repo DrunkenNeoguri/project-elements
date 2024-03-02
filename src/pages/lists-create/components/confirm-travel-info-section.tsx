@@ -7,18 +7,20 @@ import TravelInfoTicket from "./travel-info-ticket";
 export default function ConfirmTravelInfoSection() {
   const { travelListData, moveToNextStep, backToPreviousStep } =
     useConfirmTravelInfoSection();
+  const { travelType, title, departureAt, travelPeriod, destination } =
+    travelListData;
   return (
-    <StConfirmTravelInfoSection.Wrapper>
+    <StConfirmTravelInfoSection.Section>
       <Description
         title={`입력하신 정보가\n맞는지 확인해주세요!`}
         color="#ffffff"
       />
       <TravelInfoTicket
-        travelType={travelListData.travelType}
-        title={travelListData.title}
-        departureAt={travelListData.departureAt}
-        travelPeriod={travelListData.travelPeriod}
-        destination={travelListData.destination}
+        travelType={travelType}
+        title={title}
+        departureAt={departureAt}
+        travelPeriod={travelPeriod}
+        destination={destination}
       />
       <StConfirmTravelInfoSection.ButtonBox>
         <Button
@@ -34,6 +36,6 @@ export default function ConfirmTravelInfoSection() {
           onClick={() => backToPreviousStep()}
         />
       </StConfirmTravelInfoSection.ButtonBox>
-    </StConfirmTravelInfoSection.Wrapper>
+    </StConfirmTravelInfoSection.Section>
   );
 }

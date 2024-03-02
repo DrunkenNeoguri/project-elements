@@ -34,7 +34,7 @@ export default function useSignUpForm() {
     return;
   };
 
-  const updateSignUpProcess = async (e: FormEvent<HTMLFormElement>) => {
+  const postSignUpProcess = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isInvalidatedSignUpInputData(formInput)) {
       // TODO: createPortal 써서 모달 만들어보기
@@ -69,7 +69,7 @@ export default function useSignUpForm() {
   return {
     formInput,
     updateFormInput,
-    updateSignUpProcess,
+    postSignUpProcess,
     errorMsgState,
     goToPreviousScreen,
   };

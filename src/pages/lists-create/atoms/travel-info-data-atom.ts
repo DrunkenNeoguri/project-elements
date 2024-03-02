@@ -1,7 +1,7 @@
 import { atom } from "jotai";
-import { TravelInfoProp } from "../../../common/types/template";
+import { TravelInfoType } from "../../../common/types/template";
 
-const initialValue: TravelInfoProp = {
+const initialValue: TravelInfoType = {
   travelType: "domestic",
   title: "",
   departureAt: "",
@@ -9,4 +9,4 @@ const initialValue: TravelInfoProp = {
   destination: "",
 };
 
-export const travelInfoDataAtom = atom<TravelInfoProp>(initialValue);
+export const travelInfoDataAtom = atom<TravelInfoType>(initialValue);

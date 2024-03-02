@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { isTravelTypeDomesticOrForeign } from "../policies/travel-info-ticket";
-import { TravelTypeProp } from "../types/travel-info-ticket";
-import { fontsStyle } from "../../../common/utils/util-fonts";
+import { fontsStyle } from "../../../utils/util-fonts";
+import { StTravelCaseType } from "../types/travel-info-ticket";
+import { convertHeaderColorByTravelType } from "../util/travel-info-ticket";
 
-const Wrapper = styled.section`
+const Section = styled.section`
   background: none;
 
   border: none;
@@ -23,9 +23,9 @@ const Cover = styled.div`
   overflow: hidden;
 `;
 
-const Header = styled.div<TravelTypeProp>`
+const Header = styled.div<StTravelCaseType>`
   background-color: ${(props) =>
-    isTravelTypeDomesticOrForeign(props.$travelType)};
+    convertHeaderColorByTravelType(props.$travelType)};
 
   ${fontsStyle.medium.medium16}
 
@@ -80,7 +80,7 @@ const BarcodeImage = styled.img`
 export const StTravelInfoTicket = Object.assign(
   {},
   {
-    Wrapper,
+    Section,
     Cover,
     Header,
     Area,

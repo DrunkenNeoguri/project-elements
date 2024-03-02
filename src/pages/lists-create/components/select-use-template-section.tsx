@@ -4,9 +4,10 @@ import useSelectUseTemplateSection from "../hooks/use-select-use-template-sectio
 import { StSelectUseTemplateSection } from "../styles/select-use-template-form";
 
 export default function SelectUseTemplateSection() {
-  const { backToPreviousStep, startCreateList } = useSelectUseTemplateSection();
+  const { backToPreviousStep, postListCreateProcess } =
+    useSelectUseTemplateSection();
   return (
-    <StSelectUseTemplateSection.Wrapper>
+    <StSelectUseTemplateSection.Section>
       <Description
         title={`저희 쪽에서 제공하는\n준비물 템플릿을\n이용하시겠어요?`}
         color="#ffffff"
@@ -16,13 +17,13 @@ export default function SelectUseTemplateSection() {
           type="submit"
           text="이용할게요!"
           colorType="primary-reverse"
-          onClick={() => startCreateList()}
+          onClick={() => postListCreateProcess()}
         />
         <Button
           type="submit"
           text="직접 만들게요!"
           colorType="secondary-reverse"
-          onClick={() => startCreateList()}
+          onClick={() => postListCreateProcess()}
         />
         <Button
           type="button"
@@ -31,6 +32,6 @@ export default function SelectUseTemplateSection() {
           onClick={() => backToPreviousStep()}
         />
       </StSelectUseTemplateSection.ButtonBox>
-    </StSelectUseTemplateSection.Wrapper>
+    </StSelectUseTemplateSection.Section>
   );
 }

@@ -5,11 +5,11 @@ export default function useSelectUseTemplateSection() {
 
   const backToPreviousStep = () => {
     searchParams.set("step", "2");
-    setSearchParams(searchParams);
+    return setSearchParams(searchParams);
   };
 
-  const startCreateList = () => {
+  const postListCreateProcess = () => {
     // setStep(3);
   };
-  return { backToPreviousStep, startCreateList };
+  return { backToPreviousStep, postListCreateProcess };
 }

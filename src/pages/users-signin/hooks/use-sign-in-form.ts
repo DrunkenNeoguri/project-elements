@@ -23,7 +23,7 @@ export default function useSignInForm() {
     return;
   };
 
-  const updateSignInProcess = async (e: FormEvent<HTMLFormElement>) => {
+  const postSignInProcess = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isInvalidatedSignInFormInput(formInput)) {
       // TODO: createPortal 써서 모달 만들어보기
@@ -41,5 +41,5 @@ export default function useSignInForm() {
     }
   };
 
-  return { formInput, updateFormInput, updateSignInProcess, errorMsgState };
+  return { formInput, updateFormInput, postSignInProcess, errorMsgState };
 }

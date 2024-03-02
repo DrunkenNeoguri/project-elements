@@ -6,18 +6,18 @@ import { isButtonVisible } from "../policies/travel-info-form";
 import { StTravelInfoForm } from "../styles/travel-info-form";
 
 export default function TravelInfoForm() {
-  const { formData, setFormData, updateTravelListData, backToPreviousStep } =
+  const { formInput, setFormInput, updateTravelInfoData, backToPreviousStep } =
     useTravelInfoForm();
   return (
-    <StTravelInfoForm.Form onSubmit={() => updateTravelListData()}>
+    <StTravelInfoForm.Form onSubmit={() => updateTravelInfoData()}>
       <Description title={`여행 일정을 알려주세요!`} color="#ffffff" />
       <Input
         id="title"
         title="여행 제목"
         onChange={(e) =>
-          setFormData({ ...formData, title: e.currentTarget.value })
+          setFormInput({ ...formInput, title: e.currentTarget.value })
         }
-        value={formData.title}
+        value={formInput.title}
         type="text"
         colorTheme="white"
       />
@@ -25,9 +25,9 @@ export default function TravelInfoForm() {
         id="departureAt"
         title="출발 일자"
         onChange={(e) =>
-          setFormData({ ...formData, departureAt: e.currentTarget.value })
+          setFormInput({ ...formInput, departureAt: e.currentTarget.value })
         }
-        value={formData.departureAt}
+        value={formInput.departureAt}
         type="text"
         colorTheme="white"
       />
@@ -35,9 +35,9 @@ export default function TravelInfoForm() {
         id="travelPeriod"
         title="여행 기간"
         onChange={(e) =>
-          setFormData({ ...formData, travelPeriod: e.currentTarget.value })
+          setFormInput({ ...formInput, travelPeriod: e.currentTarget.value })
         }
-        value={formData.travelPeriod}
+        value={formInput.travelPeriod}
         type="text"
         colorTheme="white"
       />
@@ -45,14 +45,14 @@ export default function TravelInfoForm() {
         id="destination"
         title="여행지"
         onChange={(e) =>
-          setFormData({ ...formData, destination: e.currentTarget.value })
+          setFormInput({ ...formInput, destination: e.currentTarget.value })
         }
-        value={formData.destination}
+        value={formInput.destination}
         type="text"
         colorTheme="white"
       />
       <StTravelInfoForm.ButtonBox>
-        {isButtonVisible(formData) && (
+        {isButtonVisible(formInput) && (
           <Button
             type="submit"
             text="다음 단계로"

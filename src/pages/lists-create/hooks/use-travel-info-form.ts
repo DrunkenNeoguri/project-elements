@@ -2,21 +2,23 @@ import { useState } from "react";
 import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
 import { useAtom } from "jotai";
 import { useSearchParams } from "react-router-dom";
-import { TravelInfoProp } from "../../../common/types/template";
+import { TravelInfoType } from "../../../common/types/template";
 
 export default function useTravelInfoForm() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [travelListData, setTravelListData] = useAtom(travelInfoDataAtom);
-  const [formData, setFormData] = useState<TravelInfoProp>({
-    travelType: travelListData.travelType,
+  const [travelInfoData, setTraveInfoData] = useAtom(travelInfoDataAtom);
+  const currentTravelType = travelInfoData.travelType;
+
+  const [formInput, setFormInput] = useState<TravelInfoType>({
+    travelType: currentTravelType,
     title: "",
     departureAt: "",
     travelPeriod: "",
     destination: "",
   });
 
-  const updateTravelListData = () => {
-    setTravelListData({ ...travelListData, ...formData });
+  const updateTravelInfoData = () => {
+    setTraveInfoData({ ...travelInfoData, ...formInput });
     searchParams.set("step", "3");
     setSearchParams(searchParams);
   };
@@ -26,5 +28,5 @@ export default function useTravelInfoForm() {
     setSearchParams(searchParams);
   };
 
-  return { formData, setFormData, updateTravelListData, backToPreviousStep };
+  return { formInput, setFormInput, updateTravelInfoData, backToPreviousStep };
 }

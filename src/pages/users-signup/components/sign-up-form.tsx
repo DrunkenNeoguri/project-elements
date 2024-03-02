@@ -15,12 +15,12 @@ export default function SignUpForm() {
   const {
     formInput,
     updateFormInput,
-    updateSignUpProcess,
+    postSignUpProcess,
     errorMsgState,
     goToPreviousScreen,
   } = useSignUpForm();
   return (
-    <StSignUpForm.Form onSubmit={(e) => updateSignUpProcess(e)}>
+    <StSignUpForm.Form onSubmit={(e) => postSignUpProcess(e)}>
       <Description
         title="반갑습니다!"
         context="아래의 내용을 기입하셔서 회원가입을 진행해주세요."

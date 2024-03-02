@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Wrapper = styled.section`
+const Section = styled.section`
   background-color: #0f4a84;
 
   display: flex;
@@ -12,4 +12,4 @@ const Wrapper = styled.section`
   box-sizing: border-box;
 `;
 
-export const StCreateListPage = Object.assign({}, { Wrapper });
+export const StCreateListPage = Object.assign({}, { Section });

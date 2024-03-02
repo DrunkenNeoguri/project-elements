@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Wrapper = styled.section`
+const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -21,5 +21,5 @@ const ButtonBox = styled.div`
 
 export const StSelectUseTemplateSection = Object.assign(
   {},
-  { Wrapper, ButtonBox }
+  { Section, ButtonBox }
 );
