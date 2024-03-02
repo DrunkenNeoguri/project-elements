@@ -1,6 +1,6 @@
 export type TravelType = "domestic" | "foreign";
 
-export type TravelInfoProp = {
+export type TravelInfoPropType = {
   travelType: TravelType;
   title: string;
   departureAt: string;
@@ -24,7 +24,7 @@ export type TravelElementType = {
 };
 
 export type TravelElementListType = {
-  travelInfo: TravelInfoProp;
+  travelInfo: TravelInfoPropType;
   elementList: ElementCategoryType[];
 };
 

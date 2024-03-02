@@ -3,7 +3,7 @@ import { FormEvent } from "react";
 export type InputColorThemeType = "black" | "white";
 export type InputType = "text" | "password" | "email";
 
-export type InputProp = {
+export type InputPropType = {
   id: string;
   title: string;
   value: string;
@@ -16,6 +16,11 @@ export type InputProp = {
   colorTheme?: InputColorThemeType;
 };
 
-export type InputColorThemeProp = {
+export type StInputColorThemeType = {
   $colorTheme?: InputColorThemeType;
+};
+
+export type PolicyErrorMessagePropType = {
+  firstInputCheck?: boolean;
+  errorCondition?: RegExp | boolean;
 };

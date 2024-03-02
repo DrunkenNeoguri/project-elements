@@ -1,3 +1,3 @@
-export type SignHeaderProp = {
+export type SignHeaderPropType = {
   title: string;
 };

@@ -1,6 +1,6 @@
 import { ButtonColorType } from "../types/button";
 
-export const isButtonBgColorPrimaryOrInvalidOrSecondary = (
+export const convertBackgroundColorByButtonColorType = (
   colorType?: ButtonColorType
 ) => {
   switch (colorType) {
@@ -19,7 +19,7 @@ export const isButtonBgColorPrimaryOrInvalidOrSecondary = (
   }
 };
 
-export const isButtonTextColorPrimaryOrInvalidOrSecondary = (
+export const convertFontColorByButtonColorType = (
   colorType?: ButtonColorType
 ) => {
   switch (colorType) {

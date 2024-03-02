@@ -7,13 +7,13 @@ export type ButtonColorType =
   | "white"
   | "black";
 
-export type ButtonProp = {
+export type ButtonPropType = {
   text: string;
   type: "submit" | "reset" | "button";
   onClick?: () => void;
   colorType?: ButtonColorType;
 };
 
-export type ButtonColorProp = {
+export type StButtonColorType = {
   $colorType?: ButtonColorType;
 };

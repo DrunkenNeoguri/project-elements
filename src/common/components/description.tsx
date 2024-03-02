@@ -1,8 +1,8 @@
 import { hasContextInDescription } from "../policies/description";
 import { StDescription } from "../styles/description";
-import { DescriptionProp } from "../types/description";
+import { DescriptionPropType } from "../types/description";
 
-export default function Description(props: DescriptionProp) {
+export default function Description(props: DescriptionPropType) {
   const { title, context, color } = props;
 
   return (

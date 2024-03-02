@@ -1,8 +1,8 @@
-import { isPropHasLabelText, isShowErrorMessage } from "../policies/input";
+import { hasLabelTextInProps, isShowErrorMessage } from "../policies/input";
 import { StInput } from "../styles/input";
-import { InputProp } from "../types/input";
+import { InputPropType } from "../types/input";
 
-export default function Input(props: InputProp) {
+export default function Input(props: InputPropType) {
   const {
     id,
     title,
@@ -18,7 +18,7 @@ export default function Input(props: InputProp) {
 
   return (
     <StInput.Wrapper>
-      {isPropHasLabelText(title) && (
+      {hasLabelTextInProps(title) && (
         <StInput.Label htmlFor={id} $colorTheme={colorTheme}>
           {title}
         </StInput.Label>
@@ -31,7 +31,7 @@ export default function Input(props: InputProp) {
         placeholder={placeholder}
         $colorTheme={colorTheme}
       />
-      {isShowErrorMessage(firstInputCheck, errorCondition) && (
+      {isShowErrorMessage({ firstInputCheck, errorCondition }) && (
         <StInput.ErrorMessage>{errorMessage}</StInput.ErrorMessage>
       )}
     </StInput.Wrapper>
