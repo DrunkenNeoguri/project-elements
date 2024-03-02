@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { fontsStyle } from "../utils/util-fonts";
+import { fontsStyle } from "../../utils/util-fonts";
 
 const Wrapper = styled.header`
   background-color: #0f4a84;
@@ -7,7 +7,7 @@ const Wrapper = styled.header`
   display: flex;
   justify-content: space-around;
 
-  ${fontsStyle.semibold.semibold24};
+  ${fontsStyle.bold.bold24};
   color: #ffffff;
 
   width: 100%;

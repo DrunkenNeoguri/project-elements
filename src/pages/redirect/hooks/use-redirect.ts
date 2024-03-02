@@ -8,16 +8,18 @@ export default function useRedirect() {
   const actionCode = searchParams.get("oobCode");
 
   useLayoutEffect(() => {
-    if (enteredMode === "verifyEmail")
-      setTimeout(
-        () => navigate(`/signupcomplete?actionCode=${actionCode}`),
-        100
-      );
-    if (enteredMode === "resetPassword")
-      setTimeout(
-        () => navigate(`/changepassword?actionCode=${actionCode}`),
-        100
-      );
+    if (enteredMode === "verifyEmail") {
+      setTimeout(() => {
+        return navigate(`/users/verified?actionCode=${actionCode}`);
+      }, 100);
+    }
+    if (enteredMode === "resetPassword") {
+      setTimeout(() => {
+        return navigate(
+          `/users/change?step=inprogress&actionCode=${actionCode}`
+        );
+      }, 100);
+    }
   }, [actionCode, enteredMode, searchParams, navigate]);
-  return {};
+  return;
 }
