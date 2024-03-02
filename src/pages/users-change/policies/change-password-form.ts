@@ -1,5 +1,5 @@
 import { isTrueCompareWithValueAndCondition } from "../../../common/policies/input";
-import { passwordRegExp } from "../../../common/utils/util-constants";
+import { passwordRegExp } from "../../../utils/util-constants";
 import { ChangePasswordValueType } from "../types/change-password-form";
 
 export const isInvalidatedChangePasswordInputData = (

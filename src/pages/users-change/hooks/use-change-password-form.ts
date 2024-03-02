@@ -6,51 +6,47 @@ import {
 import { isInvalidatedChangePasswordInputData } from "../policies/change-password-form";
 import { confirmPasswordReset, verifyPasswordResetCode } from "firebase/auth";
 import { useSearchParams } from "react-router-dom";
-import { firebaseAuth } from "../../../common/utils/util-firebase";
-import { convertUnknownTypeErrorToStringMessage } from "../../../common/utils/util-convert";
+import { firebaseAuth } from "../../../utils/util-firebase";
+import { convertUnknownTypeErrorToStringMessage } from "../../../utils/util-convert";
 
 export default function useChangePasswordForm() {
-  const [inputValue, setInputValue] = useState<ChangePasswordValueType>({
+  const [formInput, setFormInput] = useState<ChangePasswordValueType>({
     password: "",
     confirmPassword: "",
   });
-
   const [errorMsgState, setErrorMsgState] =
     useState<ChangePasswordViewErrorType>({
       password: false,
       confirmPassword: false,
     });
-
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const changeInputValue = (
     type: "password" | "confirmPassword",
     value: string
   ) => {
-    setInputValue({ ...inputValue, [type]: value });
+    setFormInput({ ...formInput, [type]: value });
     if (!errorMsgState[type]) {
       setErrorMsgState({ ...errorMsgState, [type]: true });
     }
   };
 
-  const submitChangePasswordData = async (
-    e: FormEvent<HTMLFormElement>,
-    setPageState: Dispatch<SetStateAction<string>>
-  ) => {
+  const submitChangePasswordData = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isInvalidatedChangePasswordInputData(inputValue)) {
-      // TODO: createPortal 써서 모달 만들어보기
+    if (isInvalidatedChangePasswordInputData(formInput)) {
+      // @TODO: createPortal 써서 모달 만들어보기
       return false;
     }
-    const auth = firebaseAuth;
     try {
-      const actionCode = await searchParams.get("actionCode");
+      const auth = firebaseAuth;
+      const actionCode = searchParams.get("actionCode");
       if (actionCode === null) {
         throw new Error("The Action Code is invalid.");
       }
       await verifyPasswordResetCode(auth, actionCode);
-      await confirmPasswordReset(auth, actionCode, inputValue.password);
-      setPageState("complete");
+      await confirmPasswordReset(auth, actionCode, formInput.password);
+      await searchParams.set("step", "complete");
+      await setSearchParams(searchParams);
     } catch (error) {
       const errorMessage = convertUnknownTypeErrorToStringMessage(error);
     }
@@ -58,7 +54,7 @@ export default function useChangePasswordForm() {
   };
 
   return {
-    inputValue,
+    formInput,
     changeInputValue,
     submitChangePasswordData,
     errorMsgState,
