@@ -1,13 +1,11 @@
+import { useSearchParams } from "react-router-dom";
 import Button from "../../../common/components/button";
 import Description from "../../../common/components/description";
 import { StSignUpVerifySection } from "../styles/sign-up-verify-section";
-import { SignUpPageStateType } from "../types/sign-up-form";
 
-export function SignUpVerifySection({
-  pageState,
-}: {
-  pageState: SignUpPageStateType;
-}) {
+export function SignUpVerifySection() {
+  const [searchParams] = useSearchParams();
+  const email = searchParams.get("email");
   return (
     <StSignUpVerifySection.Section>
       <Description
@@ -18,9 +16,7 @@ export function SignUpVerifySection({
         <StSignUpVerifySection.Text>
           작성해주신 이메일 주소
         </StSignUpVerifySection.Text>
-        <StSignUpVerifySection.Email>
-          {pageState.email}
-        </StSignUpVerifySection.Email>
+        <StSignUpVerifySection.Email>{email}</StSignUpVerifySection.Email>
       </StSignUpVerifySection.TextBox>
       <Button text="창 닫기" type="button" onClick={() => window.close()} />
     </StSignUpVerifySection.Section>

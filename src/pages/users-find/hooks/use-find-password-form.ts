@@ -1,58 +1,57 @@
-import { Dispatch, FormEvent, useState } from "react";
-import {
-  FindPasswordValueType,
-  FindPasswordViewErrorType,
-} from "../types/find-password-form";
-import { SetStateAction } from "jotai";
+import { FormEvent, useState } from "react";
 import { isInvalidatedFindPasswordInputData } from "../policies/find-password-form";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { firebaseAuth } from "../../../common/utils/util-firebase";
-import { convertUnknownTypeErrorToStringMessage } from "../../../common/utils/util-convert";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { firebaseAuth } from "../../../utils/util-firebase";
+import { convertUnknownTypeErrorToStringMessage } from "../../../utils/util-convert";
+import {
+  ExposeErrorStateType,
+  FormInputType,
+} from "../types/find-password-form";
 
 export default function useFindPasswordForm() {
-  const [inputValue, setInputValue] = useState<FindPasswordValueType>({
+  const [formInput, setFormInput] = useState<FormInputType>({
     email: "",
   });
-  const [errorMsgState, setErrorMsgState] = useState<FindPasswordViewErrorType>(
-    {
-      email: false,
-    }
-  );
+  const [errorMsgState, setErrorMsgState] = useState<ExposeErrorStateType>({
+    email: false,
+  });
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const changeInputValue = (type: "email", value: string) => {
-    setInputValue({ ...inputValue, [type]: value });
+  const updateFormInput = (type: "email", value: string) => {
+    setFormInput({ ...formInput, [type]: value });
     if (!errorMsgState[type]) {
       setErrorMsgState({ ...errorMsgState, [type]: true });
     }
+    return;
   };
 
-  const submitFindPasswordData = async (
-    e: FormEvent<HTMLFormElement>,
-    setPageState: Dispatch<SetStateAction<string>>
-  ) => {
+  const updateFindPasswordProcess = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isInvalidatedFindPasswordInputData(inputValue)) {
+    if (isInvalidatedFindPasswordInputData(formInput)) {
       // TODO: createPortal 써서 모달 만들어보기
       return false;
     }
-    const auth = firebaseAuth;
     try {
-      await sendPasswordResetEmail(auth, inputValue.email);
-      await setPageState("complete");
+      const auth = firebaseAuth;
+      await sendPasswordResetEmail(auth, formInput.email);
+      await searchParams.set("step", "complete");
+      await setSearchParams(searchParams);
     } catch (error) {
       const errorMessage = convertUnknownTypeErrorToStringMessage(error);
     }
     return;
   };
 
-  const goToPreviousScreen = () => navigate("/signin");
+  const goToPreviousScreen = () => {
+    return navigate("/signin");
+  };
 
   return {
-    inputValue,
-    changeInputValue,
-    submitFindPasswordData,
+    formInput,
+    updateFormInput,
+    updateFindPasswordProcess,
     errorMsgState,
     goToPreviousScreen,
   };

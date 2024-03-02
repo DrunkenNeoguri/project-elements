@@ -1,23 +1,18 @@
 import { isTrueCompareWithValueAndCondition } from "../../../common/policies/input";
 import { passwordRegExp } from "../../../utils/util-constants";
-import { ChangePasswordValueType } from "../types/change-password-form";
+import { FormInputType } from "../types/change-password-form";
 
 export const isInvalidatedChangePasswordInputData = (
-  ChangePasswordData: ChangePasswordValueType
+  formInput: FormInputType
 ) => {
-  if (
-    isTrueCompareWithValueAndCondition(
-      ChangePasswordData.password,
-      passwordRegExp
-    )
-  ) {
+  if (isTrueCompareWithValueAndCondition(formInput.password, passwordRegExp)) {
     return true;
   }
   if (
     isTrueCompareWithValueAndCondition(
-      ChangePasswordData.confirmPassword,
+      formInput.confirmPassword,
       passwordRegExp,
-      ChangePasswordData.password
+      formInput.password
     )
   ) {
     return true;

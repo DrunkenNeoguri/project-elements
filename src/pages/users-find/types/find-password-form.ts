@@ -1,7 +1,7 @@
-export type FindPasswordValueType = {
+export type FormInputType = {
   email: string;
 };
 
-export type FindPasswordViewErrorType = {
+export type ExposeErrorStateType = {
   email: boolean;
 };

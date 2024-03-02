@@ -13,7 +13,7 @@ export default function SignUpCompleteSection() {
       />
       <StSignUpCompleteSection.ImageBox>
         <StSignUpCompleteSection.Image
-          src="images/img-sign-up-complete-section.webp"
+          src="/images/img-sign-up-complete-section.webp"
           alt=""
         />
       </StSignUpCompleteSection.ImageBox>

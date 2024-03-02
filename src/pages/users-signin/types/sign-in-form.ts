@@ -1,9 +1,9 @@
-export type SignInValueType = {
+export type FormInputType = {
   email: string;
   password: string;
 };
 
-export type SignInViewErrorType = {
-  email: false;
-  password: false;
+export type ExposeErrorStateType = {
+  email: boolean;
+  password: boolean;
 };

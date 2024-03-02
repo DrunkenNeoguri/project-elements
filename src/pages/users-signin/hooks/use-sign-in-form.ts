@@ -1,30 +1,31 @@
 import { FormEvent, useState } from "react";
-import { SignInValueType, SignInViewErrorType } from "../types/sign-in-form";
-import { isInvalidatedSignInInputData } from "../policies/sign-in-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { firebaseAuth } from "../../../common/utils/util-firebase";
-import { convertUnknownTypeErrorToStringMessage } from "../../../common/utils/util-convert";
+import { firebaseAuth } from "../../../utils/util-firebase";
+import { convertUnknownTypeErrorToStringMessage } from "../../../utils/util-convert";
+import { isInvalidatedSignInFormInput } from "../policies/sign-in-form";
+import { ExposeErrorStateType, FormInputType } from "../types/sign-in-form";
 
 export default function useSignInForm() {
-  const [inputValue, setInputValue] = useState<SignInValueType>({
+  const [formInput, setFormInput] = useState<FormInputType>({
     email: "",
     password: "",
   });
-  const [errorMsgState, setErrorMsgState] = useState<SignInViewErrorType>({
+  const [errorMsgState, setErrorMsgState] = useState<ExposeErrorStateType>({
     email: false,
     password: false,
   });
 
-  const changeInputValue = (type: "email" | "password", value: string) => {
-    setInputValue({ ...inputValue, [type]: value });
+  const updateFormInput = (type: "email" | "password", value: string) => {
+    setFormInput({ ...formInput, [type]: value });
     if (!errorMsgState[type]) {
       setErrorMsgState({ ...errorMsgState, [type]: true });
     }
+    return;
   };
 
-  const submitSignInData = async (e: FormEvent<HTMLFormElement>) => {
+  const updateSignInProcess = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isInvalidatedSignInInputData(inputValue)) {
+    if (isInvalidatedSignInFormInput(formInput)) {
       // TODO: createPortal 써서 모달 만들어보기
       return false;
     }
@@ -32,13 +33,13 @@ export default function useSignInForm() {
     try {
       const signInResult = await signInWithEmailAndPassword(
         auth,
-        inputValue.email,
-        inputValue.password
+        formInput.email,
+        formInput.password
       );
     } catch (error) {
       const errorMessage = convertUnknownTypeErrorToStringMessage(error);
     }
   };
 
-  return { inputValue, changeInputValue, submitSignInData, errorMsgState };
+  return { formInput, updateFormInput, updateSignInProcess, errorMsgState };
 }

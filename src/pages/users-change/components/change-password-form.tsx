@@ -13,12 +13,12 @@ import {
 export default function ChangePasswordForm() {
   const {
     formInput,
-    changeInputValue,
-    submitChangePasswordData,
+    updateFormInput,
+    updateChangePasswordProcess,
     errorMsgState,
   } = useChangePasswordForm();
   return (
-    <StChangePasswordForm.Form onSubmit={(e) => submitChangePasswordData(e)}>
+    <StChangePasswordForm.Form onSubmit={(e) => updateChangePasswordProcess(e)}>
       <Description
         title="새 비밀번호를 입력해주세요."
         context="가입하신 계정에 적용할 새로운 비밀번호를 입력해주세요."
@@ -26,7 +26,7 @@ export default function ChangePasswordForm() {
       <Input
         id="password"
         title="비밀번호"
-        onChange={(e) => changeInputValue("password", e.currentTarget.value)}
+        onChange={(e) => updateFormInput("password", e.currentTarget.value)}
         value={formInput.password}
         type="password"
         errorMessage={convertPasswordErrorMessageByValue(formInput.password)}
@@ -41,7 +41,7 @@ export default function ChangePasswordForm() {
         id="confirmPassword"
         title="비밀번호 재확인"
         onChange={(e) =>
-          changeInputValue("confirmPassword", e.currentTarget.value)
+          updateFormInput("confirmPassword", e.currentTarget.value)
         }
         value={formInput.confirmPassword}
         type="password"

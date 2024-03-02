@@ -1,22 +1,19 @@
 import { isTrueCompareWithValueAndCondition } from "../../../common/policies/input";
-import {
-  emailRegExp,
-  passwordRegExp,
-} from "../../../common/utils/util-constants";
-import { SignUpValueType } from "../types/sign-up-form";
+import { emailRegExp, passwordRegExp } from "../../../utils/util-constants";
+import { FormInputType } from "../types/sign-up-form";
 
-export const isInvalidatedSignUpInputData = (signUpData: SignUpValueType) => {
-  if (isTrueCompareWithValueAndCondition(signUpData.email, emailRegExp)) {
+export const isInvalidatedSignUpInputData = (formInput: FormInputType) => {
+  if (isTrueCompareWithValueAndCondition(formInput.email, emailRegExp)) {
     return true;
   }
-  if (isTrueCompareWithValueAndCondition(signUpData.password, passwordRegExp)) {
+  if (isTrueCompareWithValueAndCondition(formInput.password, passwordRegExp)) {
     return true;
   }
   if (
     isTrueCompareWithValueAndCondition(
-      signUpData.confirmPassword,
+      formInput.confirmPassword,
       passwordRegExp,
-      signUpData.password
+      formInput.password
     )
   ) {
     return true;

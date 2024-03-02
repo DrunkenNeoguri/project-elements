@@ -1,77 +1,75 @@
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
-import {
-  SignUpPageStateType,
-  SignUpValueType,
-  SignUpViewErrorType,
-} from "../types/sign-up-form";
+import { FormEvent, useState } from "react";
+import { FormInputType, ExposeErrorStateType } from "../types/sign-up-form";
 import { isInvalidatedSignUpInputData } from "../policies/sign-up-form";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { firebaseAuth } from "../../../common/utils/util-firebase";
-import { convertUnknownTypeErrorToStringMessage } from "../../../common/utils/util-convert";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { firebaseAuth } from "../../../utils/util-firebase";
+import { convertUnknownTypeErrorToStringMessage } from "../../../utils/util-convert";
 
 export default function useSignUpForm() {
-  const [inputValue, setInputValue] = useState<SignUpValueType>({
+  const [formInput, setFormInput] = useState<FormInputType>({
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const [errorMsgState, setErrorMsgState] = useState<SignUpViewErrorType>({
+  const [errorMsgState, setErrorMsgState] = useState<ExposeErrorStateType>({
     email: false,
     password: false,
     confirmPassword: false,
   });
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const changeInputValue = (
+  const updateFormInput = (
     type: "email" | "password" | "confirmPassword",
     value: string
   ) => {
-    setInputValue({ ...inputValue, [type]: value });
+    setFormInput({ ...formInput, [type]: value });
     if (!errorMsgState[type]) {
       setErrorMsgState({ ...errorMsgState, [type]: true });
     }
+    return;
   };
 
-  const submitSignUpData = async (
-    e: FormEvent<HTMLFormElement>,
-    setPageState: Dispatch<SetStateAction<SignUpPageStateType>>
-  ) => {
+  const updateSignUpProcess = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isInvalidatedSignUpInputData(inputValue)) {
+    if (isInvalidatedSignUpInputData(formInput)) {
       // TODO: createPortal 써서 모달 만들어보기
       return false;
     }
-    const auth = firebaseAuth;
     try {
+      const auth = firebaseAuth;
       const createAccountResult = await createUserWithEmailAndPassword(
         auth,
-        inputValue.email,
-        inputValue.password
+        formInput.email,
+        formInput.password
       );
-
-      if (createAccountResult.user !== null) {
-        await sendEmailVerification(createAccountResult.user);
+      const userData = await createAccountResult.user;
+      if (userData !== null) {
+        const userEmail = userData.email;
+        await sendEmailVerification(userData);
         // return이 void이기 때문에 별도로 받을 수 있는 값은 없음.
-        setPageState({
-          state: "verify",
-          email: createAccountResult.user.email,
-        });
+        await searchParams.set("step", "complete");
+        await searchParams.set("email", userEmail!);
+        await setSearchParams(searchParams);
       }
     } catch (error) {
       const errorMessage = convertUnknownTypeErrorToStringMessage(error);
     }
+    return;
   };
 
-  const goToPreviousScreen = () => navigate("/signin");
+  const goToPreviousScreen = () => {
+    return navigate("/signin");
+  };
 
   return {
-    inputValue,
-    changeInputValue,
-    submitSignUpData,
+    formInput,
+    updateFormInput,
+    updateSignUpProcess,
     errorMsgState,
     goToPreviousScreen,
   };

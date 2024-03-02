@@ -1,9 +1,9 @@
-export type ChangePasswordValueType = {
+export type FormInputType = {
   password: string;
   confirmPassword: string;
 };
 
-export type ChangePasswordViewErrorType = {
+export type ExposeErrorStateType = {
   password: boolean;
   confirmPassword: boolean;
 };

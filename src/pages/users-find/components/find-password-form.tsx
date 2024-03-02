@@ -1,32 +1,22 @@
-import { SetStateAction } from "jotai";
-import { Dispatch } from "react";
 import useFindPasswordForm from "../hooks/use-find-password-form";
 import { StFindPasswordForm } from "../styles/find-password-form";
 import Description from "../../../common/components/description";
 import Input from "../../../common/components/input";
-import {
-  isTrueCompareWithValueAndCondition,
-  setEmailErrorMsgDependingOnTheCase,
-} from "../../../common/policies/input";
-import { emailRegExp } from "../../../common/utils/util-constants";
+import { isTrueCompareWithValueAndCondition } from "../../../common/policies/input";
+import { emailRegExp } from "../../../utils/util-constants";
 import Button from "../../../common/components/button";
+import { convertEmailErrorMessageByValue } from "../../../common/utils/input";
 
-export default function FindPasswordForm({
-  setPageState,
-}: {
-  setPageState: Dispatch<SetStateAction<string>>;
-}) {
+export default function FindPasswordForm() {
   const {
-    inputValue,
-    changeInputValue,
-    submitFindPasswordData,
+    formInput,
+    updateFormInput,
+    updateFindPasswordProcess,
     errorMsgState,
     goToPreviousScreen,
   } = useFindPasswordForm();
   return (
-    <StFindPasswordForm.Form
-      onSubmit={(e) => submitFindPasswordData(e, setPageState)}
-    >
+    <StFindPasswordForm.Form onSubmit={(e) => updateFindPasswordProcess(e)}>
       <Description
         title="비밀번호를 잊으셨나요?"
         context={`가입하신 이메일 주소를 입력하시면,\n새로운 비밀번호를 입력할 수 있도록 링크를 보내드립니다.`}
@@ -35,13 +25,13 @@ export default function FindPasswordForm({
       <Input
         id="email"
         title="이메일 주소"
-        onChange={(e) => changeInputValue("email", e.currentTarget.value)}
-        value={inputValue.email}
+        onChange={(e) => updateFormInput("email", e.currentTarget.value)}
+        value={formInput.email}
         type="email"
-        errorMessage={setEmailErrorMsgDependingOnTheCase(inputValue.email)}
+        errorMessage={convertEmailErrorMessageByValue(formInput.email)}
         firstInputCheck={errorMsgState.email}
         errorCondition={isTrueCompareWithValueAndCondition(
-          inputValue.email,
+          formInput.email,
           emailRegExp
         )}
       />

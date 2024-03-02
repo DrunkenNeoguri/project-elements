@@ -1,19 +1,20 @@
+import { useSearchParams } from "react-router-dom";
 import SignHeader from "../../common/components/sign-header";
 import FindPasswordForm from "./components/find-password-form";
 import { SendChangePasswordEmailSection } from "./components/send-change-password-email-section";
-import useFindPassword from "./hooks/use-find-password";
-import { isUserProgressedFindPassword } from "./policies/find-password";
+import { convertIndexNumberByStepParams } from "./util/users-find";
 
 export default function UsersFind() {
-  const { pageState, setPageState } = useFindPassword();
+  const [searchParams] = useSearchParams();
+  const currentStep = searchParams.get("step");
+  const componentLists = [
+    <FindPasswordForm />,
+    <SendChangePasswordEmailSection />,
+  ];
   return (
     <>
       <SignHeader title="비밀번호 찾기" />
-      {isUserProgressedFindPassword(pageState) ? (
-        <FindPasswordForm setPageState={setPageState} />
-      ) : (
-        <SendChangePasswordEmailSection />
-      )}
+      {componentLists[convertIndexNumberByStepParams(currentStep)]}
     </>
   );
 }

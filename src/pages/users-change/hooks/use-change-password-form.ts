@@ -1,27 +1,26 @@
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
-import {
-  ChangePasswordValueType,
-  ChangePasswordViewErrorType,
-} from "../types/change-password-form";
+import { FormEvent, useState } from "react";
 import { isInvalidatedChangePasswordInputData } from "../policies/change-password-form";
 import { confirmPasswordReset, verifyPasswordResetCode } from "firebase/auth";
 import { useSearchParams } from "react-router-dom";
 import { firebaseAuth } from "../../../utils/util-firebase";
 import { convertUnknownTypeErrorToStringMessage } from "../../../utils/util-convert";
+import {
+  ExposeErrorStateType,
+  FormInputType,
+} from "../types/change-password-form";
 
 export default function useChangePasswordForm() {
-  const [formInput, setFormInput] = useState<ChangePasswordValueType>({
+  const [formInput, setFormInput] = useState<FormInputType>({
     password: "",
     confirmPassword: "",
   });
-  const [errorMsgState, setErrorMsgState] =
-    useState<ChangePasswordViewErrorType>({
-      password: false,
-      confirmPassword: false,
-    });
+  const [errorMsgState, setErrorMsgState] = useState<ExposeErrorStateType>({
+    password: false,
+    confirmPassword: false,
+  });
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const changeInputValue = (
+  const updateFormInput = (
     type: "password" | "confirmPassword",
     value: string
   ) => {
@@ -29,9 +28,10 @@ export default function useChangePasswordForm() {
     if (!errorMsgState[type]) {
       setErrorMsgState({ ...errorMsgState, [type]: true });
     }
+    return;
   };
 
-  const submitChangePasswordData = async (e: FormEvent<HTMLFormElement>) => {
+  const updateChangePasswordProcess = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isInvalidatedChangePasswordInputData(formInput)) {
       // @TODO: createPortal 써서 모달 만들어보기
@@ -55,8 +55,8 @@ export default function useChangePasswordForm() {
 
   return {
     formInput,
-    changeInputValue,
-    submitChangePasswordData,
+    updateFormInput,
+    updateChangePasswordProcess,
     errorMsgState,
   };
 }
