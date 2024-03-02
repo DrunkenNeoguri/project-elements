@@ -17,13 +17,13 @@ export default function SelectUseTemplateSection() {
           type="submit"
           text="이용할게요!"
           colorType="primary-reverse"
-          onClick={() => postListCreateProcess()}
+          onClick={() => postListCreateProcess(true)}
         />
         <Button
           type="submit"
           text="직접 만들게요!"
           colorType="secondary-reverse"
-          onClick={() => postListCreateProcess()}
+          onClick={() => postListCreateProcess(false)}
         />
         <Button
           type="button"

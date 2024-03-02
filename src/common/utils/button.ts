@@ -7,6 +7,7 @@ export const convertBackgroundColorByButtonColorType = (
     case "white":
     case "primary-reverse":
     case "secondary-reverse":
+    case "invalid-reverse":
       return "#FFFFFF";
     case "invalid":
       return "#909090";
@@ -27,6 +28,8 @@ export const convertFontColorByButtonColorType = (
       return "#1E90FF";
     case "secondary-reverse":
       return "#008D18";
+    case "invalid-reverse":
+      return "#909090";
     case "white":
       return "#373737";
     default:

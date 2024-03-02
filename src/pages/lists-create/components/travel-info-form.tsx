@@ -2,8 +2,12 @@ import Button from "../../../common/components/button";
 import Description from "../../../common/components/description";
 import Input from "../../../common/components/input";
 import useTravelInfoForm from "../hooks/use-travel-info-form";
-import { isButtonVisible } from "../policies/travel-info-form";
+import { isNotFullInputedInForm } from "../policies/travel-info-form";
 import { StTravelInfoForm } from "../styles/travel-info-form";
+import {
+  convertColorTypeByFormInputState,
+  convertTextByFormInputState,
+} from "../util/travel-info-form";
 
 export default function TravelInfoForm() {
   const { formInput, setFormInput, updateTravelInfoData, backToPreviousStep } =
@@ -52,13 +56,12 @@ export default function TravelInfoForm() {
         colorTheme="white"
       />
       <StTravelInfoForm.ButtonBox>
-        {isButtonVisible(formInput) && (
-          <Button
-            type="submit"
-            text="다음 단계로"
-            colorType="primary-reverse"
-          />
-        )}
+        <Button
+          disabled={isNotFullInputedInForm(formInput)}
+          type="submit"
+          text={convertTextByFormInputState(formInput)}
+          colorType={convertColorTypeByFormInputState(formInput)}
+        />
         <Button
           type="button"
           text="돌아가기"
