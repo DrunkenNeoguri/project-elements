@@ -5,15 +5,15 @@ import { TravelCaseType } from "../../../common/types/template";
 
 export default function useSelectTravelSection() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [travelListData, setTravelListData] = useAtom(travelInfoDataAtom);
+  const [travelInfoData, setTravelInfoData] = useAtom(travelInfoDataAtom);
   const navigate = useNavigate();
 
   const updateTravelTypeAndMoveToNextStep = (travelCase: TravelCaseType) => {
     if (travelCase === "domestic") {
-      setTravelListData({ ...travelListData, travelType: "domestic" });
+      setTravelInfoData({ ...travelInfoData, travelType: "domestic" });
     }
     if (travelCase === "foreign") {
-      setTravelListData({ ...travelListData, travelType: "foreign" });
+      setTravelInfoData({ ...travelInfoData, travelType: "foreign" });
     }
     searchParams.set("step", "2");
     return setSearchParams(searchParams);
