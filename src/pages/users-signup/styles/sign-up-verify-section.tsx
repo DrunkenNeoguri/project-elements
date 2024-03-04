@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { fontsStyle } from "../../../utils/util-fonts";
+import { colors } from "../../../utils/util-color";
 
 const Section = styled.section`
   display: flex;
@@ -20,12 +21,12 @@ const TextBox = styled.div`
 
 const Text = styled.div`
   ${fontsStyle.bold.bold12};
-  color: #373737;
+  color: ${colors.black};
 `;
 
 const Email = styled.div`
   ${fontsStyle.medium.medium16};
-  color: #373737;
+  color: ${colors.black};
 `;
 
 export const StSignUpVerifySection = Object.assign(

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { fontsStyle } from "../../../utils/util-fonts";
 import { convertBackgroundColorByCompareWithStep } from "../util/create-stepper";
 import { StStepStatusType } from "../types/create-stepper";
+import { colors } from "../../../utils/util-color";
 
 const Wrapper = styled.header`
   display: flex;
@@ -25,7 +26,7 @@ const StepCounter = styled.div<StStepStatusType>`
   align-items: center;
 
   ${fontsStyle.bold.bold12}
-  color: #0f4a84;
+  color: ${colors.primaryLight};
 
   height: 24px;
   width: 24px;

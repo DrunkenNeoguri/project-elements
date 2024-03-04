@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { colors } from "../../../utils/util-color";
 
 const Section = styled.section`
-  background-color: #0f4a84;
+  background-color: ${colors.primaryLight};
 
   display: flex;
   flex-direction: column;

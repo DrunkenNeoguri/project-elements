@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { fontsStyle } from "../../utils/util-fonts";
 import { StInputColorThemeType } from "../types/input";
 import { convertColorThemeByInputColorThemeType } from "../utils/input";
+import { colors } from "../../utils/util-color";
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,10 +13,10 @@ const Wrapper = styled.div`
 `;
 
 const TextInput = styled.input<StInputColorThemeType>`
-  background-color: #f7f7f7;
+  background-color: ${colors.invalidLight};
 
   ${fontsStyle.medium.medium16}
-  color: #373737;
+  color: ${colors.black};
 
   width: 100%;
   border: 1px solid
@@ -37,7 +38,7 @@ const Label = styled.label<StInputColorThemeType>`
 
 const ErrorMessage = styled.span`
   ${fontsStyle.medium.medium10};
-  color: #d80000;
+  color: ${colors.error};
   margin-top: 1px;
 `;
 

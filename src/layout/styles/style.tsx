@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { colors } from "../../utils/util-color";
 
 export const Container = styled.section`
-  background-color: #ffffff;
+  background-color: ${colors.white};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,5 +16,5 @@ export const Header = styled.header`
   position: fixed;
   z-index: 5;
   top: 0;
-  color: #ffffff;
+  color: ${colors.white};
 `;

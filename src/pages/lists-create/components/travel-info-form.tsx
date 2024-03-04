@@ -1,6 +1,7 @@
 import Button from "../../../common/components/button";
 import Description from "../../../common/components/description";
 import Input from "../../../common/components/input";
+import { colors } from "../../../utils/util-color";
 import useTravelInfoForm from "../hooks/use-travel-info-form";
 import { isNotFullInputedInForm } from "../policies/travel-info-form";
 import { StTravelInfoForm } from "../styles/travel-info-form";
@@ -14,7 +15,7 @@ export default function TravelInfoForm() {
     useTravelInfoForm();
   return (
     <StTravelInfoForm.Form onSubmit={() => updateTravelInfoData()}>
-      <Description title={`여행 일정을 알려주세요!`} color="#ffffff" />
+      <Description title={`여행 일정을 알려주세요!`} color={colors.white} />
       <Input
         id="title"
         title="여행 제목"
