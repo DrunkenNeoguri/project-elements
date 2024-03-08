@@ -1,7 +1,7 @@
 export const colors: UtilColorsType = {
   primary: "#1E90FF",
-  primaryDeep: "#4E95FF",
-  primarySemiLight: "#0F4A84",
+  primaryDeep: "#0F4A84",
+  primarySemiLight: "#4E95FF",
   primaryLight: "#A6CAFF",
   secondary: "#008D18",
   white: "#FFFFFF",
@@ -14,9 +14,9 @@ export const colors: UtilColorsType = {
 
 export type UtilColorsType = {
   primary: "#1E90FF";
-  primaryDeep: "#4E95FF";
+  primaryDeep: "#0F4A84";
+  primarySemiLight: "#4E95FF";
   primaryLight: "#A6CAFF";
-  primarySemiLight: "#0F4A84";
   secondary: "#008D18";
   white: "#FFFFFF";
   black: "#373737";

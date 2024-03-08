@@ -3,7 +3,7 @@ import { fontsStyle } from "../../utils/util-fonts";
 import { colors } from "../../utils/util-color";
 
 const Wrapper = styled.header`
-  background-color: ${colors.primaryLight};
+  background-color: ${colors.primaryDeep};
 
   display: flex;
   justify-content: space-around;

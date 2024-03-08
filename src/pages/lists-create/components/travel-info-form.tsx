@@ -8,13 +8,13 @@ import { StTravelInfoForm } from "../styles/travel-info-form";
 import {
   convertColorTypeByFormInputState,
   convertTextByFormInputState,
-} from "../util/travel-info-form";
+} from "../utils/travel-info-form";
 
 export default function TravelInfoForm() {
   const { formInput, setFormInput, updateTravelInfoData, backToPreviousStep } =
     useTravelInfoForm();
   return (
-    <StTravelInfoForm.Form onSubmit={() => updateTravelInfoData()}>
+    <StTravelInfoForm.Form onSubmit={(e) => updateTravelInfoData(e)}>
       <Description title={`여행 일정을 알려주세요!`} color={colors.white} />
       <Input
         id="title"

@@ -8,6 +8,10 @@ export type TravelInfoType = {
   destination: string;
 };
 
+export type TravelListType = TravelInfoType & {
+  id: string;
+};
+
 export type ElementCategoryColorType = "red" | "blue" | "green";
 
 export type ElementCategoryType = {

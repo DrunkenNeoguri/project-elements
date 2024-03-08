@@ -1,29 +1,24 @@
 import styled from "styled-components";
 import { fontsStyle } from "../../../utils/util-fonts";
-import { StTravelCaseType } from "../types/travel-info-ticket";
-import { convertHeaderColorByTravelType } from "../utils/travel-info-ticket";
 import { colors } from "../../../utils/util-color";
+import { convertHeaderColorByTravelType } from "../utils/travel-pass-card";
+import { StTravelCaseType } from "../types/travel-pass-card";
 
-const Section = styled.section`
-  background: none;
+const Button = styled.button`
+  background: ${colors.white};
 
+  outline: none;
   border: none;
+  border-radius: 4px;
+  padding: 0;
+  margin: 0;
   width: 100%;
-  height: 100%;
-  padding: 14px 44px 0;
+
   box-sizing: border-box;
-
-  filter: drop-shadow(0px 4px 4px ${colors.shadow});
-`;
-
-const Cover = styled.div`
-  background-color: ${colors.white};
-
-  display: flex;
-  flex-direction: column;
-
-  border-radius: 0 16px 16px 0;
   overflow: hidden;
+  cursor: pointer;
+
+  filter: drop-shadow(0 4px 4px ${colors.shadow});
 `;
 
 const Header = styled.div<StTravelCaseType>`
@@ -35,6 +30,7 @@ const Header = styled.div<StTravelCaseType>`
   display: flex;
   align-items: center;
 
+  width: 100%;
   height: 40px;
   padding: 4px 16px 0 16px;
   box-sizing: border-box;
@@ -46,25 +42,29 @@ const Area = styled.div`
 
   text-align: left;
 
-  padding: 24px 16px 36px 16px;
+  padding: 18px 12px 18px 12px;
 `;
 
 const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 11px;
+
+  width: 100%;
 `;
 
-const BarcodeBox = styled.div`
+const ContentSubBox = styled.div`
   display: flex;
+  flex-direction: row;
+  gap: 9px;
 
-  padding: 24px 16px 0 auto;
+  width: 100%;
 `;
 
 const TextBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 `;
 
 const Title = styled.span`
@@ -77,18 +77,18 @@ const Text = styled.span`
 `;
 
 const BarcodeImage = styled.img`
-  width: 36px;
+  width: 24px;
+  height: 80px;
 `;
 
-export const StTravelInfoTicket = Object.assign(
+export const StTravelPassCard = Object.assign(
   {},
   {
-    Section,
-    Cover,
+    Button,
     Header,
     Area,
     ContentBox,
-    BarcodeBox,
+    ContentSubBox,
     TextBox,
     Title,
     Text,
