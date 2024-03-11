@@ -23,6 +23,7 @@ export default function TravelInfoForm() {
           setFormInput({ ...formInput, title: e.currentTarget.value })
         }
         value={formInput.title}
+        placeholder="띄어쓰기 포함 20글자 이내"
         type="text"
         colorTheme="white"
       />
@@ -33,7 +34,7 @@ export default function TravelInfoForm() {
           setFormInput({ ...formInput, departureAt: e.currentTarget.value })
         }
         value={formInput.departureAt}
-        type="text"
+        type="date"
         colorTheme="white"
       />
       <Input
@@ -42,8 +43,9 @@ export default function TravelInfoForm() {
         onChange={(e) =>
           setFormInput({ ...formInput, travelPeriod: e.currentTarget.value })
         }
+        placeholder="1~30까지 입력 가능"
         value={formInput.travelPeriod}
-        type="text"
+        type="number"
         colorTheme="white"
       />
       <Input
