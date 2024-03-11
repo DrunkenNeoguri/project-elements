@@ -27,6 +27,19 @@ const TextInput = styled.input<StInputColorThemeType>`
   outline: none;
 
   box-sizing: border-box;
+
+  &::placeholder {
+    color: ${colors.invalid};
+    ${fontsStyle.medium.medium14}
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(0.79);
+    padding: 0 13px 0 0;
+    margin: 0;
+    font-size: 22px;
+    cursor: pointer;
+  }
 `;
 
 const Label = styled.label<StInputColorThemeType>`
