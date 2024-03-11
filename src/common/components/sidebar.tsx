@@ -1,15 +1,19 @@
 import { StSidebar } from "../styles/sidebar";
 import { SideBarPropType } from "../types/sidebar";
 import SideBarIcon from "../../assets/icons/svg-header-sidebar-icon.svg?react";
+import SearchIcon from "../../assets/icons/svg-sidebar-search-icon.svg?react";
 import ListManagementIcon from "../../assets/icons/svg-sidebar-list-management-icon.svg?react";
 import ExchangeIcon from "../../assets/icons/svg-sidebar-exchange-icon.svg?react";
 import SettingIcon from "../../assets/icons/svg-sidebar-setting-icon.svg?react";
-import { useNavigate } from "react-router-dom";
-import { firebaseAuth } from "../../utils/util-firebase";
-import { signOut } from "firebase/auth";
+import useSidebar from "../hooks/use-sidebar";
 
 export default function SideBar(props: SideBarPropType) {
-  const navigate = useNavigate();
+  const {
+    formInput,
+    setFormInput,
+    setQueryStringForSearchTravelData,
+    signOutAndMoveToSignIn,
+  } = useSidebar();
   const { onClose } = props;
   return (
     <StSidebar.Wrapper>
@@ -19,7 +23,20 @@ export default function SideBar(props: SideBarPropType) {
           <SideBarIcon />
         </StSidebar.HamburgerButton>
       </StSidebar.TitleBox>
-      <StSidebar.SearchBox placeholder="등록했던 여행을 찾으시나요?" />
+      <StSidebar.SearchBox
+        onSubmit={(e) => {
+          setQueryStringForSearchTravelData(e, onClose);
+        }}
+      >
+        <StSidebar.SearchIcon type="submit">
+          <SearchIcon />
+        </StSidebar.SearchIcon>
+        <StSidebar.SearchInput
+          placeholder="등록했던 여행을 찾으시나요?"
+          value={formInput}
+          onChange={(e) => setFormInput(e.currentTarget.value)}
+        />
+      </StSidebar.SearchBox>
       <StSidebar.AreaBorder />
       <StSidebar.ButtonBox>
         <StSidebar.Button>
@@ -37,10 +54,7 @@ export default function SideBar(props: SideBarPropType) {
       </StSidebar.ButtonBox>
       <StSidebar.LogOutText
         type="button"
-        onClick={() => {
-          signOut(firebaseAuth);
-          return navigate("/users/signin");
-        }}
+        onClick={() => signOutAndMoveToSignIn()}
       >
         로그아웃
       </StSidebar.LogOutText>

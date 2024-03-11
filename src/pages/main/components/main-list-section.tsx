@@ -5,17 +5,25 @@ import { setUpcomingTravelByTravelLists } from "../utils/travel-card-list";
 import TravelCardList from "./travel-card-list";
 
 export default function MainListSection() {
-  const { traveLists } = useMainListSection();
+  const { traveLists, searchQueryString } = useMainListSection();
 
   return (
     <StMainListSection.Section>
       <Suspense fallback={<>loading...</>}>
         {/* <TravelCardList listType="recent" /> */}
-        <TravelCardList
-          listType="upcoming"
-          travelLists={setUpcomingTravelByTravelLists(traveLists)}
-        />
-        <TravelCardList listType="all" travelLists={traveLists} />
+        {searchQueryString !== null ? (
+          <StMainListSection.SearchArea>
+            <TravelCardList listType="search" travelLists={traveLists} />
+          </StMainListSection.SearchArea>
+        ) : (
+          <>
+            <TravelCardList
+              listType="upcoming"
+              travelLists={setUpcomingTravelByTravelLists(traveLists)}
+            />
+            <TravelCardList listType="all" travelLists={traveLists} />
+          </>
+        )}
       </Suspense>
     </StMainListSection.Section>
   );

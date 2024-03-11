@@ -2,9 +2,12 @@ import { collection, getDocs } from "firebase/firestore";
 import { useLayoutEffect, useState } from "react";
 import { firebaseAuth, firestore } from "../../../utils/util-firebase";
 import { TravelListType } from "../../../common/types/template";
+import { useSearchParams } from "react-router-dom";
 
 export default function useMainListSection() {
   const [traveLists, setTraveLists] = useState<TravelListType[]>([]);
+  const [searchParams] = useSearchParams();
+  const searchQueryString = searchParams.get("search");
 
   useLayoutEffect(() => {
     const getUserTravelLists = async () => {
@@ -15,7 +18,6 @@ export default function useMainListSection() {
           collection(firestore, `travels`, userUid!, "docs")
         );
 
-        // 타입에 맞게 파일화해서 배열에 넣기
         docsState.forEach((doc) => {
           const {
             travelType,
@@ -44,5 +46,5 @@ export default function useMainListSection() {
     getUserTravelLists();
   }, []);
 
-  return { traveLists };
+  return { traveLists, searchQueryString };
 }

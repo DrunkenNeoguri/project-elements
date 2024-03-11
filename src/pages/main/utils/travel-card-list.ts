@@ -1,12 +1,17 @@
 import { TravelListType } from "../../../common/types/template";
 import { CardListType } from "../types/travel-card-list";
 
-export const convertCardListNameByCardListType = (listType?: CardListType) => {
+export const convertCardListNameByCardListType = (
+  listType?: CardListType,
+  searchValue?: string | null
+) => {
   switch (listType) {
     case "recent":
       return "최근 확인했던 여행";
     case "upcoming":
       return "다가오는 여행";
+    case "search":
+      return `'${searchValue}'로 검색된 여행 리스트`;
     case "all":
       return "생성된 여행 리스트";
     default:
@@ -29,14 +34,8 @@ export const setUpcomingTravelByTravelLists = (
 };
 
 export const convertDateByTravelDepartureAt = (departureAt: string) => {
-  const convertTime = new Date(Number(departureAt));
-  const [year, month, date] = [
-    convertTime.getFullYear(),
-    convertTime.getMonth() - 1,
-    convertTime.getDate(),
-  ];
+  const convertTime = departureAt.split("-");
+  const [year, month, date] = [convertTime[0], convertTime[1], convertTime[2]];
 
-  return `${year}. ${month < 10 ? "0" + month : month}. ${
-    date < 10 ? "0" + date : date
-  }.`;
+  return `${year}. ${month}. ${date}.`;
 };

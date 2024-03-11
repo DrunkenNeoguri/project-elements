@@ -6,12 +6,13 @@ const Wrapper = styled.nav`
   background-color: ${colors.primary};
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
 
   border-radius: 12px 0 0 12px;
   padding: 14px 16px 20px 16px;
   width: 294px;
   height: 100vh;
+  bottom: 0;
 
   z-index: 3;
   right: 0;
@@ -60,7 +61,11 @@ const AreaBorder = styled.div`
   margin: 24px 0 32px;
 `;
 
-const SearchBox = styled.input`
+const SearchBox = styled.form`
+  position: relative;
+`;
+
+const SearchInput = styled.input`
   background-color: ${colors.invalidLight};
   display: block;
 
@@ -69,7 +74,7 @@ const SearchBox = styled.input`
 
   border: 1px solid ${colors.invalid};
   border-radius: 4px;
-  padding: 8px;
+  padding: 8px 36px 8px 8px;
   margin: 0;
   width: 100%;
   height: 36px;
@@ -78,12 +83,29 @@ const SearchBox = styled.input`
   filter: drop-shadow(0 2px 4px ${colors.shadow});
 
   ::placeholder {
-    ${fontsStyle.light.light16};
+    ${fontsStyle.medium.medium14};
     color: ${colors.invalid};
   }
 `;
 
-const SearchIcon = styled.img``;
+const SearchIcon = styled.button`
+  background-color: transparent;
+  position: absolute;
+
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 8px 8px 8px auto;
+  width: 20px;
+  height: 20px;
+  right: 0;
+
+  z-index: 1;
+
+  box-sizing: border-box;
+
+  cursor: pointer;
+`;
 
 const ButtonBox = styled.menu`
   display: flex;
@@ -156,6 +178,7 @@ export const StSidebar = Object.assign(
     HamburgerButton,
     AreaBorder,
     SearchBox,
+    SearchInput,
     SearchIcon,
     ButtonBox,
     Button,

@@ -2,7 +2,6 @@ import { StHeader } from "../styles/header";
 import CreateListIcon from "../../assets/icons/svg-header-create-list-icon.svg?react";
 import SideBarIcon from "../../assets/icons/svg-header-sidebar-icon.svg?react";
 import SideBar from "./sidebar";
-import Portal from "./portal";
 import useHeader from "../hooks/use-header";
 
 export default function Header() {
@@ -19,12 +18,7 @@ export default function Header() {
           <SideBarIcon />
         </StHeader.Button>
       </StHeader.Header>
-      {openState && (
-        <Portal
-          children={<SideBar onClose={() => closeSideBar()} />}
-          container={document.body}
-        />
-      )}
+      {openState && <SideBar onClose={() => closeSideBar()} />}
     </>
   );
 }
