@@ -18,9 +18,15 @@ export type InputPropType = {
 
 export type StInputColorThemeType = {
   $colorTheme?: InputColorThemeType;
+  checkErrorMessage?: boolean;
 };
 
 export type PolicyErrorMessagePropType = {
   firstInputCheck?: boolean;
   errorCondition?: RegExp | boolean;
+};
+
+export type PolicyValidationIconPropType = {
+  firstInputCheck?: boolean;
+  errorMessage?: string;
 };

@@ -12,6 +12,10 @@ const Wrapper = styled.div`
   padding: 12px 0;
 `;
 
+const TextInputBox = styled.div`
+  position: relative;
+`;
+
 const TextInput = styled.input<StInputColorThemeType>`
   background-color: ${colors.invalidLight};
 
@@ -22,7 +26,8 @@ const TextInput = styled.input<StInputColorThemeType>`
   border: 1px solid
     ${(props) => convertColorThemeByInputColorThemeType(props.$colorTheme)};
   border-radius: 4px;
-  padding: 13px 0 13px 16px;
+  padding: ${(props) =>
+    props.checkErrorMessage ? "12px 44px 12px 16px" : "12px 0px 12px 12px;"};
   margin: 0;
   outline: none;
 
@@ -42,6 +47,19 @@ const TextInput = styled.input<StInputColorThemeType>`
   }
 `;
 
+const ValidIcon = styled.div`
+  position: absolute;
+
+  padding: 12px 12px 12px 0;
+  margin: 0;
+  top: 0;
+  right: 0;
+
+  z-index: 1;
+
+  box-sizing: border-box;
+`;
+
 const Label = styled.label<StInputColorThemeType>`
   ${fontsStyle.bold.bold12};
   color: ${(props) =>
@@ -57,5 +75,5 @@ const ErrorMessage = styled.span`
 
 export const StInput = Object.assign(
   {},
-  { Wrapper, TextInput, Label, ErrorMessage }
+  { Wrapper, TextInputBox, TextInput, ValidIcon, Label, ErrorMessage }
 );
