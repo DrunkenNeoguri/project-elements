@@ -3,6 +3,7 @@ import useMainListSection from "../hooks/use-main-list-section";
 import { StMainListSection } from "../styles/main-list-section";
 import { setUpcomingTravelByTravelLists } from "../utils/travel-card-list";
 import TravelCardList from "./travel-card-list";
+import MainEmptySection from "./main-empty-section";
 
 export default function MainListSection() {
   const { traveLists, searchQueryString } = useMainListSection();
@@ -11,7 +12,9 @@ export default function MainListSection() {
     <StMainListSection.Section>
       <Suspense fallback={<>loading...</>}>
         {/* <TravelCardList listType="recent" /> */}
-        {searchQueryString !== null ? (
+        {traveLists.length === 0 ? (
+          <MainEmptySection />
+        ) : searchQueryString !== null ? (
           <StMainListSection.SearchArea>
             <TravelCardList listType="search" travelLists={traveLists} />
           </StMainListSection.SearchArea>
