@@ -14,9 +14,9 @@ export default function SideBar(props: SideBarPropType) {
     setQueryStringForSearchTravelData,
     signOutAndMoveToSignIn,
   } = useSidebar();
-  const { onClose } = props;
+  const { onClose, openState } = props;
   return (
-    <StSidebar.Wrapper>
+    <StSidebar.Wrapper id="sidebar" $openState={openState}>
       <StSidebar.TitleBox>
         <StSidebar.Title>준비물 챙겼어?</StSidebar.Title>
         <StSidebar.HamburgerButton onClick={onClose}>

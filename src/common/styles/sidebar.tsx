@@ -1,23 +1,27 @@
 import styled from "styled-components";
 import { colors } from "../../utils/util-color";
 import { fontsStyle } from "../../utils/util-fonts";
+import { StSideBarPropType } from "../types/sidebar";
 
-const Wrapper = styled.nav`
+const Wrapper = styled.nav<StSideBarPropType>`
   background-color: ${colors.primary};
   display: flex;
   flex-direction: column;
-  position: fixed;
+  position: absolute;
 
   border-radius: 12px 0 0 12px;
   padding: 14px 16px 20px 16px;
   width: 294px;
   height: 100vh;
-  bottom: 0;
 
   z-index: 3;
+  bottom: 0;
   right: 0;
 
   box-sizing: border-box;
+  transform: ${(props) =>
+    props.$openState ? "translateX(0%)" : "translateX(100%)"};
+  transition: transform 0.3s ease-in-out;
 
   filter: drop-shadow(-8px 0 4px ${colors.shadow});
 `;

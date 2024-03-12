@@ -18,7 +18,7 @@ export default function Header() {
           <SideBarIcon />
         </StHeader.Button>
       </StHeader.Header>
-      {openState && <SideBar onClose={() => closeSideBar()} />}
+      <SideBar openState={openState} onClose={() => closeSideBar()} />
     </>
   );
 }
