@@ -1,5 +1,6 @@
 import Button from "../../../common/components/button";
 import Description from "../../../common/components/description";
+import { colors } from "../../../utils/util-color";
 import useSelectUseTemplateSection from "../hooks/use-select-use-template-section";
 import { StSelectUseTemplateSection } from "../styles/select-use-template-form";
 
@@ -10,7 +11,7 @@ export default function SelectUseTemplateSection() {
     <StSelectUseTemplateSection.Section>
       <Description
         title={`저희 쪽에서 제공하는\n준비물 템플릿을\n이용하시겠어요?`}
-        color="#ffffff"
+        color={colors.white}
       />
       <StSelectUseTemplateSection.ImageBox>
         <StSelectUseTemplateSection.Image

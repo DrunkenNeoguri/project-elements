@@ -1,5 +1,6 @@
 import Button from "../../../common/components/button";
 import Description from "../../../common/components/description";
+import { colors } from "../../../utils/util-color";
 import useConfirmTravelInfoSection from "../hooks/use-confirm-travel-info-section";
 import { StConfirmTravelInfoSection } from "../styles/confirm-travel-info-section";
 import TravelInfoTicket from "./travel-info-ticket";
@@ -13,7 +14,7 @@ export default function ConfirmTravelInfoSection() {
     <StConfirmTravelInfoSection.Section>
       <Description
         title={`입력하신 정보가\n맞는지 확인해주세요!`}
-        color="#ffffff"
+        color={colors.white}
       />
       <TravelInfoTicket
         travelType={travelType}

@@ -26,6 +26,7 @@ export default function ChangePasswordForm() {
       <Input
         id="password"
         title="비밀번호"
+        placeholder="영문, 숫자, 특수 문자 포함 8~20자 이내"
         onChange={(e) => updateFormInput("password", e.currentTarget.value)}
         value={formInput.password}
         type="password"
@@ -40,6 +41,7 @@ export default function ChangePasswordForm() {
       <Input
         id="confirmPassword"
         title="비밀번호 재확인"
+        placeholder="영문, 숫자, 특수 문자 포함 8~20자 이내"
         onChange={(e) =>
           updateFormInput("confirmPassword", e.currentTarget.value)
         }

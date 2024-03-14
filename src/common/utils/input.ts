@@ -1,3 +1,4 @@
+import { colors } from "../../utils/util-color";
 import {
   commonBlankErrorMsg,
   emailInvalidErrorMsg,
@@ -33,8 +34,8 @@ export const convertColorThemeByInputColorThemeType = (
   colorTheme?: InputColorThemeType
 ) => {
   if (colorTheme === "white") {
-    return "#FFFFFF";
+    return colors.white;
   } else {
-    return "#373737";
+    return colors.black;
   }
 };

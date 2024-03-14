@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { fontsStyle } from "../../utils/util-fonts";
+import { colors } from "../../utils/util-color";
 
 const Wrapper = styled.header`
-  background-color: #0f4a84;
+  background-color: ${colors.primaryDeep};
 
   display: flex;
   justify-content: space-around;
@@ -16,7 +17,7 @@ const Wrapper = styled.header`
   padding: 26px 16px 0 16px;
   box-sizing: border-box;
 
-  filter: drop-shadow(0 4px 4px #00000064);
+  filter: drop-shadow(0 4px 4px ${colors.shadow});
 `;
 
 export const StSignHeader = Object.assign({}, { Wrapper });

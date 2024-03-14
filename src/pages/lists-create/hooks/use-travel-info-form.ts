@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
 import { useAtom } from "jotai";
 import { useSearchParams } from "react-router-dom";
@@ -19,13 +19,14 @@ export default function useTravelInfoForm() {
     destination: destination,
   });
 
-  const updateTravelInfoData = () => {
+  const updateTravelInfoData = (e: FormEvent) => {
     if (isNotFullInputedInForm(formInput)) {
       return;
     } else {
       setTraveInfoData({ ...travelInfoData, ...formInput });
       searchParams.set("step", "3");
-      return setSearchParams(searchParams);
+      setSearchParams(searchParams);
+      return e.preventDefault();
     }
   };
 

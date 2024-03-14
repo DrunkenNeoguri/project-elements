@@ -45,6 +45,7 @@ export default function SignUpForm() {
         onChange={(e) => updateFormInput("password", e.currentTarget.value)}
         value={formInput.password}
         type="password"
+        placeholder="영문, 숫자, 특수 문자 포함 8~20자 이내"
         errorMessage={convertPasswordErrorMessageByValue(formInput.password)}
         firstInputCheck={errorMsgState.password}
         errorCondition={isTrueCompareWithValueAndCondition(
@@ -61,6 +62,7 @@ export default function SignUpForm() {
         }
         value={formInput.confirmPassword}
         type="password"
+        placeholder="영문, 숫자, 특수 문자 포함 8~20자 이내"
         errorMessage={convertConfirmPasswordErrorMessageByValues(
           formInput.confirmPassword,
           formInput.password

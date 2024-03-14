@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { fontsStyle } from "../../../utils/util-fonts";
+import { colors } from "../../../utils/util-color";
 
 const Form = styled.form`
   display: flex;
@@ -30,12 +31,12 @@ const TextBox = styled.div`
 
 const Text = styled.span`
   ${fontsStyle.light.light10};
-  color: #373737;
+  color: ${colors.black};
 `;
 
 const Link = styled.a`
   ${fontsStyle.light.light10};
-  color: #1e90ff;
+  color: ${colors.primary};
   text-decoration: underline;
 `;
 
@@ -51,7 +52,7 @@ const LanguageButton = styled.button`
   outline: none;
 
   ${fontsStyle.medium.medium10};
-  color: #1e90ff;
+  color: ${colors.primary};
   text-decoration: underline;
 
   border: none;

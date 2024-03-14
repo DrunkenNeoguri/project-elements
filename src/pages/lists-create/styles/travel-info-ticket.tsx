@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { fontsStyle } from "../../../utils/util-fonts";
 import { StTravelCaseType } from "../types/travel-info-ticket";
-import { convertHeaderColorByTravelType } from "../util/travel-info-ticket";
+import { convertHeaderColorByTravelType } from "../utils/travel-info-ticket";
+import { colors } from "../../../utils/util-color";
 
 const Section = styled.section`
   background: none;
@@ -11,10 +12,12 @@ const Section = styled.section`
   height: 100%;
   padding: 14px 44px 0;
   box-sizing: border-box;
+
+  filter: drop-shadow(0px 4px 4px ${colors.shadow});
 `;
 
 const Cover = styled.div`
-  background-color: #ffffff;
+  background-color: ${colors.white};
 
   display: flex;
   flex-direction: column;
@@ -66,11 +69,11 @@ const TextBox = styled.div`
 
 const Title = styled.span`
   ${fontsStyle.light.light10};
-  color: #373737;
+  color: ${colors.black};
 `;
 const Text = styled.span`
   ${fontsStyle.medium.medium14};
-  color: #373737;
+  color: ${colors.black};
 `;
 
 const BarcodeImage = styled.img`

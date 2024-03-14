@@ -1,4 +1,7 @@
-import { PolicyErrorMessagePropType } from "../types/input";
+import {
+  PolicyErrorMessagePropType,
+  PolicyValidationIconPropType,
+} from "../types/input";
 
 export const hasLabelTextInProps = (text: string) => {
   return text ? true : false;
@@ -12,6 +15,26 @@ export const isShowErrorMessage = ({
     return false;
   }
   return firstInputCheck && errorCondition ? true : false;
+};
+
+export const isShowValidationIcon = ({
+  firstInputCheck,
+  errorMessage,
+}: PolicyValidationIconPropType) => {
+  if (!errorMessage) {
+    return false;
+  }
+  if (errorMessage && !firstInputCheck) {
+    return false;
+  }
+  return true;
+};
+
+export const hasErrorMessage = (errorMessage?: string) => {
+  if (errorMessage) {
+    return true;
+  }
+  return false;
 };
 
 export const isTrueCompareWithValueAndCondition = (

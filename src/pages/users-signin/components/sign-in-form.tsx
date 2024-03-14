@@ -53,11 +53,11 @@ export default function SignInForm() {
       <StSignInForm.BottomBox>
         <StSignInForm.TextBox>
           <StSignInForm.Text>회원이 아니신가요?</StSignInForm.Text>
-          <StSignInForm.Link href="/signup">회원가입</StSignInForm.Link>
+          <StSignInForm.Link href="/users/signup">회원가입</StSignInForm.Link>
         </StSignInForm.TextBox>
         <StSignInForm.TextBox>
           <StSignInForm.Text>비밀번호를 잊어버리셨나요?</StSignInForm.Text>
-          <StSignInForm.Link href="/findpassword?step=inprogress">
+          <StSignInForm.Link href="/users/find">
             비밀번호 찾기
           </StSignInForm.Link>
         </StSignInForm.TextBox>

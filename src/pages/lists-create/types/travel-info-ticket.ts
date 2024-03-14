@@ -1,12 +1,7 @@
-import { TravelCaseType } from "../../../common/types/template";
+import { TravelCaseType, TravelInfoType } from "../../../common/types/template";
 
 export type StTravelCaseType = { $travelType: TravelCaseType };
 
-export type TicketInfoType = {
+export type TicketInfoType = TravelInfoType & {
   id?: string;
-  travelType: TravelCaseType;
-  title: string;
-  departureAt: string;
-  travelPeriod: string;
-  destination: string;
 };

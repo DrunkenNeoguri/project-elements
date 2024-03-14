@@ -1,9 +1,14 @@
 import { FormEvent, useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  browserLocalPersistence,
+  setPersistence,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { firebaseAuth } from "../../../utils/util-firebase";
 import { convertUnknownTypeErrorToStringMessage } from "../../../utils/util-convert";
 import { isInvalidatedSignInFormInput } from "../policies/sign-in-form";
 import { ExposeErrorStateType, FormInputType } from "../types/sign-in-form";
+import { useNavigate } from "react-router-dom";
 
 export default function useSignInForm() {
   const [formInput, setFormInput] = useState<FormInputType>({
@@ -14,6 +19,7 @@ export default function useSignInForm() {
     email: false,
     password: false,
   });
+  const navigate = useNavigate();
 
   const updateFormInput = (type: "email" | "password", value: string) => {
     setFormInput({ ...formInput, [type]: value });
@@ -29,13 +35,19 @@ export default function useSignInForm() {
       // TODO: createPortal 써서 모달 만들어보기
       return false;
     }
-    const auth = firebaseAuth;
+
     try {
+      const auth = firebaseAuth;
+      // 지속성 - 자동 로그인하면 로컬 저장, 아니면 none
+      // setPersistence(auth, browserLocalPersistence)
       const signInResult = await signInWithEmailAndPassword(
         auth,
         formInput.email,
         formInput.password
       );
+      if (signInResult !== undefined) {
+        navigate("/main");
+      }
     } catch (error) {
       const errorMessage = convertUnknownTypeErrorToStringMessage(error);
     }

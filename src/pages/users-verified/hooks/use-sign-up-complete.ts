@@ -8,7 +8,7 @@ export function useSignUpComplete() {
   const [searchParams] = useSearchParams();
 
   const moveToSignInPage = () => {
-    return navigate("/signin");
+    return navigate("/users/signin");
   };
 
   useLayoutEffect(() => {

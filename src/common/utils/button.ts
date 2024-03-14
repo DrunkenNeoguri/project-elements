@@ -1,3 +1,4 @@
+import { colors } from "../../utils/util-color";
 import { ButtonColorType } from "../types/button";
 
 export const convertBackgroundColorByButtonColorType = (
@@ -8,15 +9,15 @@ export const convertBackgroundColorByButtonColorType = (
     case "primary-reverse":
     case "secondary-reverse":
     case "invalid-reverse":
-      return "#FFFFFF";
+      return colors.white;
     case "invalid":
-      return "#909090";
+      return colors.invalid;
     case "black":
-      return "#373737";
+      return colors.black;
     case "secondary":
-      return "#008D18";
+      return colors.secondary;
     default:
-      return "#1E90FF";
+      return colors.primary;
   }
 };
 
@@ -25,14 +26,14 @@ export const convertFontColorByButtonColorType = (
 ) => {
   switch (colorType) {
     case "primary-reverse":
-      return "#1E90FF";
+      return colors.primary;
     case "secondary-reverse":
-      return "#008D18";
+      return colors.secondary;
     case "invalid-reverse":
-      return "#909090";
+      return colors.invalid;
     case "white":
-      return "#373737";
+      return colors.black;
     default:
-      return "#FFFFFF";
+      return colors.white;
   }
 };
