@@ -1,14 +1,14 @@
 import { FormEvent, useState } from "react";
-import {
-  browserLocalPersistence,
-  setPersistence,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { setPersistence, signInWithEmailAndPassword } from "firebase/auth";
 import { firebaseAuth } from "../../../utils/util-firebase";
 import { convertUnknownTypeErrorToStringMessage } from "../../../utils/util-convert";
-import { isInvalidatedSignInFormInput } from "../policies/sign-in-form";
+import {
+  hasAutoSignInStateInLocalStorage,
+  isInvalidatedSignInFormInput,
+} from "../policies/sign-in-form";
 import { ExposeErrorStateType, FormInputType } from "../types/sign-in-form";
 import { useNavigate } from "react-router-dom";
+import { convertPersistenceByAutoSignInState } from "../utils/sign-in-form";
 
 export default function useSignInForm() {
   const [formInput, setFormInput] = useState<FormInputType>({
@@ -19,6 +19,9 @@ export default function useSignInForm() {
     email: false,
     password: false,
   });
+  const [autoSignInState, setAutoSignInState] = useState(
+    hasAutoSignInStateInLocalStorage()
+  );
   const navigate = useNavigate();
 
   const updateFormInput = (type: "email" | "password", value: string) => {
@@ -27,6 +30,11 @@ export default function useSignInForm() {
       setErrorMsgState({ ...errorMsgState, [type]: true });
     }
     return;
+  };
+
+  const toggleAutoSignInState = () => {
+    localStorage.setItem("autoSignIn", String(!autoSignInState));
+    return setAutoSignInState(!autoSignInState);
   };
 
   const postSignInProcess = async (e: FormEvent<HTMLFormElement>) => {
@@ -38,8 +46,16 @@ export default function useSignInForm() {
 
     try {
       const auth = firebaseAuth;
-      // 지속성 - 자동 로그인하면 로컬 저장, 아니면 none
-      // setPersistence(auth, browserLocalPersistence)
+
+      const persistenceSetting =
+        convertPersistenceByAutoSignInState(autoSignInState);
+      const persistanceState = await setPersistence(auth, persistenceSetting);
+      if (persistanceState !== undefined) {
+        throw new Error(
+          "Persistance Setting Error. Please inquire used e-mail to administrator."
+        );
+      }
+
       const signInResult = await signInWithEmailAndPassword(
         auth,
         formInput.email,
@@ -53,5 +69,12 @@ export default function useSignInForm() {
     }
   };
 
-  return { formInput, updateFormInput, postSignInProcess, errorMsgState };
+  return {
+    formInput,
+    updateFormInput,
+    autoSignInState,
+    toggleAutoSignInState,
+    postSignInProcess,
+    errorMsgState,
+  };
 }

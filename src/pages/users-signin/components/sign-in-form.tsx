@@ -9,10 +9,19 @@ import {
 import { emailRegExp, passwordRegExp } from "../../../utils/util-constants";
 import useSignInForm from "../hooks/use-sign-in-form";
 import { StSignInForm } from "../styles/sign-in-form";
+import UnCheckedIcon from "../../../assets/icons/svg-sign-in-form-unchecked-icon.svg?react";
+import CheckedIcon from "../../../assets/icons/svg-sign-in-form-checked-icon.svg?react";
+import { isClickedAutoSignInButton } from "../policies/sign-in-form";
 
 export default function SignInForm() {
-  const { formInput, updateFormInput, postSignInProcess, errorMsgState } =
-    useSignInForm();
+  const {
+    formInput,
+    updateFormInput,
+    autoSignInState,
+    toggleAutoSignInState,
+    postSignInProcess,
+    errorMsgState,
+  } = useSignInForm();
   return (
     <StSignInForm.Form onSubmit={(e) => postSignInProcess(e)}>
       <Description
@@ -46,7 +55,17 @@ export default function SignInForm() {
           passwordRegExp
         )}
       />
-
+      <StSignInForm.AutoSignInButton
+        type="button"
+        onClick={() => toggleAutoSignInState()}
+      >
+        {isClickedAutoSignInButton(autoSignInState) ? (
+          <CheckedIcon />
+        ) : (
+          <UnCheckedIcon />
+        )}
+        <StSignInForm.AutoSignInText>자동 로그인</StSignInForm.AutoSignInText>
+      </StSignInForm.AutoSignInButton>
       <StSignInForm.ButtonBox>
         <Button text="로그인" type="submit" />
       </StSignInForm.ButtonBox>
