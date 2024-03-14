@@ -1,18 +1,28 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { HeaderType } from "../types/header";
 
 export default function useHeader() {
   const [openState, setOpenState] = useState(false);
   const navigate = useNavigate();
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  const moveToCreateList = () => {
-    return navigate("/lists/create?step=1");
+  const activeLeftButton = (headerType: HeaderType) => {
+    switch (headerType) {
+      case "error":
+        return navigate(-1);
+      default:
+        return navigate("/lists/create?step=1");
+    }
   };
 
-  const openSideBar = () => {
-    document.getElementById("root")!.style.overflow = "hidden";
-    return setOpenState(true);
+  const activeRightButton = (headerType: HeaderType) => {
+    switch (headerType) {
+      case "error":
+        return;
+      default:
+        document.getElementById("root")!.style.overflow = "hidden";
+        return setOpenState(true);
+    }
   };
 
   const closeSideBar = () => {
@@ -22,9 +32,8 @@ export default function useHeader() {
 
   return {
     openState,
-    openSideBar,
+    activeLeftButton,
+    activeRightButton,
     closeSideBar,
-    moveToCreateList,
-    containerRef,
   };
 }

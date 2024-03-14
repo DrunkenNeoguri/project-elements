@@ -18,7 +18,7 @@ export type InputPropType = {
 
 export type StInputColorThemeType = {
   $colorTheme?: InputColorThemeType;
-  checkErrorMessage?: boolean;
+  $checkErrorMessage?: boolean;
 };
 
 export type PolicyErrorMessagePropType = {

@@ -27,7 +27,7 @@ const TextInput = styled.input<StInputColorThemeType>`
     ${(props) => convertColorThemeByInputColorThemeType(props.$colorTheme)};
   border-radius: 4px;
   padding: ${(props) =>
-    props.checkErrorMessage ? "12px 44px 12px 16px" : "12px 0px 12px 12px;"};
+    props.$checkErrorMessage ? "12px 44px 12px 16px" : "12px 0px 12px 12px;"};
   margin: 0;
   outline: none;
 
