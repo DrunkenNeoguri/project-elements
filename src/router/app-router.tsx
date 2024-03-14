@@ -4,6 +4,7 @@ import Welcome from "../pages/welcome";
 import Main from "../pages/main";
 import UserRouter from "./user-router";
 import ListRouter from "./list-router";
+import NotFound from "../pages/not-found";
 
 export default function AppRouter() {
   return (
@@ -14,6 +15,7 @@ export default function AppRouter() {
         <Route path="/redirect" element={<Redirect />} />
         <Route path="/users/*" element={<UserRouter />} />
         <Route path="/lists/*" element={<ListRouter />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

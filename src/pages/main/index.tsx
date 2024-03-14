@@ -8,7 +8,7 @@ export default function Main() {
   const searchValue = searchParams.get("search");
   return (
     <>
-      <Header />
+      <Header headerType="basic" />
       {!searchValue && <MainHeader />}
       <MainListSection />
     </>

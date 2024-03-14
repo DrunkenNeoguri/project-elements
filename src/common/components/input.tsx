@@ -38,7 +38,7 @@ export default function Input(props: InputPropType) {
           type={type}
           placeholder={placeholder}
           $colorTheme={colorTheme}
-          checkErrorMessage={hasErrorMessage(errorMessage)}
+          $checkErrorMessage={hasErrorMessage(errorMessage)}
         />
         {isShowValidationIcon({ firstInputCheck, errorMessage }) && (
           <StInput.ValidIcon>
