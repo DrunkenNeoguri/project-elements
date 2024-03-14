@@ -1,9 +1,12 @@
 import { useSearchParams } from "react-router-dom";
 import { TravelListType } from "../../../common/types/template";
+import { useAtom } from "jotai";
+import { sidebarSearchValueAtom } from "../../../common/atoms/sidebar";
 
 export default function useTravelCardList() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const searchQueryString = searchParams.get("search");
+  const [, setFormInput] = useAtom(sidebarSearchValueAtom);
 
   const filterTravelListBySearchValue = (travelLists: TravelListType[]) => {
     if (searchQueryString !== null) {
@@ -21,5 +24,16 @@ export default function useTravelCardList() {
     }
     return travelLists;
   };
-  return { searchQueryString, filterTravelListBySearchValue };
+
+  const initializeSearchResult = () => {
+    setFormInput("");
+    searchParams.delete("search");
+    return setSearchParams(searchParams);
+  };
+
+  return {
+    searchQueryString,
+    filterTravelListBySearchValue,
+    initializeSearchResult,
+  };
 }

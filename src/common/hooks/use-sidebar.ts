@@ -1,12 +1,14 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { firebaseAuth } from "../../utils/util-firebase";
 import { signOut } from "firebase/auth";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
+import { useAtom } from "jotai";
+import { sidebarSearchValueAtom } from "../atoms/sidebar";
 
 export default function useSidebar() {
   const navigate = useNavigate();
-  const [formInput, setFormInput] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const [formInput, setFormInput] = useAtom(sidebarSearchValueAtom);
 
   const setQueryStringForSearchTravelData = (
     e: FormEvent,

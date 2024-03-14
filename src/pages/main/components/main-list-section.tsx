@@ -16,15 +16,15 @@ export default function MainListSection() {
           <MainEmptySection />
         ) : searchQueryString !== null ? (
           <StMainListSection.SearchArea>
-            <TravelCardList listType="search" travelLists={traveLists} />
+            <TravelCardList cardListType="search" travelLists={traveLists} />
           </StMainListSection.SearchArea>
         ) : (
           <>
             <TravelCardList
-              listType="upcoming"
+              cardListType="upcoming"
               travelLists={setUpcomingTravelByTravelLists(traveLists)}
             />
-            <TravelCardList listType="all" travelLists={traveLists} />
+            <TravelCardList cardListType="all" travelLists={traveLists} />
           </>
         )}
       </Suspense>
