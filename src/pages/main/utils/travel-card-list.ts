@@ -1,6 +1,18 @@
 import { TravelListType } from "../../../common/types/template";
 import { CardListType } from "../types/travel-card-list";
 
+const convertSearchValueInSearchTypeCardList = (
+  searchValue?: string | null
+) => {
+  if (!searchValue) {
+    return;
+  }
+  if (searchValue.length > 8) {
+    return searchValue.substring(0, 7) + "...";
+  }
+  return searchValue;
+};
+
 export const convertCardListNameByCardListType = (
   listType?: CardListType,
   searchValue?: string | null
@@ -11,7 +23,9 @@ export const convertCardListNameByCardListType = (
     case "upcoming":
       return "다가오는 여행";
     case "search":
-      return `'${searchValue}'로 검색된 여행 리스트`;
+      return `'${convertSearchValueInSearchTypeCardList(
+        searchValue
+      )}'로 찾은 여행들`;
     case "all":
       return "생성된 여행 리스트";
     default:
