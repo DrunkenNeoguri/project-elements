@@ -10,6 +10,7 @@ export type InputPropType = {
   placeholder?: string;
   onChange: (e: FormEvent<HTMLInputElement>) => void;
   type: InputType;
+  maxLength?: number;
   errorMessage?: string;
   firstInputCheck?: boolean;
   errorCondition?: RegExp | boolean;

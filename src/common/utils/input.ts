@@ -4,6 +4,7 @@ import {
   emailInvalidErrorMsg,
   passwordIncorrectErrorMsg,
   passwordInvalidErrorMsg,
+  usernameInvalidErrorMsg,
 } from "../../utils/util-constants";
 import { InputColorThemeType } from "../types/input";
 
@@ -28,6 +29,10 @@ export const convertConfirmPasswordErrorMessageByValues = (
   if (comparingValue !== value) {
     return passwordIncorrectErrorMsg;
   }
+};
+
+export const convertUsernameErrorMessageByValue = (value: string) => {
+  return value.trim() === "" ? commonBlankErrorMsg : usernameInvalidErrorMsg;
 };
 
 export const convertColorThemeByInputColorThemeType = (

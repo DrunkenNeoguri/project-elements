@@ -14,17 +14,19 @@ export default function useSignUpForm() {
     email: "",
     password: "",
     confirmPassword: "",
+    username: "",
   });
   const [errorMsgState, setErrorMsgState] = useState<ExposeErrorStateType>({
     email: false,
     password: false,
     confirmPassword: false,
+    username: false,
   });
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const updateFormInput = (
-    type: "email" | "password" | "confirmPassword",
+    type: "email" | "password" | "confirmPassword" | "username",
     value: string
   ) => {
     setFormInput({ ...formInput, [type]: value });
@@ -63,7 +65,7 @@ export default function useSignUpForm() {
   };
 
   const goToPreviousScreen = () => {
-    return navigate("/signin");
+    return navigate("/users/signin");
   };
 
   return {
