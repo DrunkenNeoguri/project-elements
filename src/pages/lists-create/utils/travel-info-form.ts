@@ -15,7 +15,6 @@ export const convertColorTypeByFormInputState = (formInput: TravelInfoType) => {
 
 export const convertTextByFormInputState = (formInput: TravelInfoType) => {
   const { title, departureAt, travelPeriod, destination } = formInput;
-  console.log(title.trim() === "", departureAt.trim() === "");
   if (
     title.trim() === "" ||
     departureAt.trim() === "" ||

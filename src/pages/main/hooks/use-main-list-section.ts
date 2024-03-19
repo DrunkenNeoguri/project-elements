@@ -3,6 +3,7 @@ import { useLayoutEffect, useState } from "react";
 import { firebaseAuth, firestore } from "../../../utils/util-firebase";
 import { TravelListType } from "../../../common/types/template";
 import { useSearchParams } from "react-router-dom";
+import { convertUnknownTypeErrorToStringMessage } from "../../../utils/util-convert";
 
 export default function useMainListSection() {
   const [traveLists, setTraveLists] = useState<TravelListType[]>([]);
@@ -39,7 +40,7 @@ export default function useMainListSection() {
 
         setTraveLists([...listsArray]);
       } catch (error) {
-        console.log(error);
+        const errorMessage = convertUnknownTypeErrorToStringMessage(error);
       }
     };
 

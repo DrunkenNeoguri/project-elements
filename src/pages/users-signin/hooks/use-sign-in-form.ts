@@ -49,7 +49,9 @@ export default function useSignInForm() {
 
       const persistenceSetting =
         convertPersistenceByAutoSignInState(autoSignInState);
+
       const persistanceState = await setPersistence(auth, persistenceSetting);
+
       if (persistanceState !== undefined) {
         throw new Error(
           "Persistance Setting Error. Please inquire used e-mail to administrator."
@@ -61,6 +63,7 @@ export default function useSignInForm() {
         formInput.email,
         formInput.password
       );
+
       if (signInResult !== undefined) {
         navigate("/main");
       }

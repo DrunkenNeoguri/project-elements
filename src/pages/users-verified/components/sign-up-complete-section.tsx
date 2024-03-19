@@ -18,7 +18,7 @@ export default function SignUpCompleteSection() {
         />
       </StSignUpCompleteSection.ImageBox>
       <Button
-        text="로그인 화면으로 이동"
+        text="메인 화면으로 이동"
         type="button"
         onClick={() => moveToSignInPage()}
       />
