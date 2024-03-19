@@ -35,5 +35,34 @@ export default function useTravelInfoForm() {
     return setSearchParams(searchParams);
   };
 
-  return { formInput, setFormInput, updateTravelInfoData, backToPreviousStep };
+  const increaseTravelPeriod = (maxCount: number) => {
+    const currentCount = formInput.travelPeriod;
+    if (currentCount >= maxCount) {
+      return;
+    }
+    return setFormInput({
+      ...formInput,
+      travelPeriod: currentCount + 1,
+    });
+  };
+
+  const decreaseTravelPeriod = (minCount: number) => {
+    const currentCount = formInput.travelPeriod;
+    if (currentCount <= minCount) {
+      return;
+    }
+    return setFormInput({
+      ...formInput,
+      travelPeriod: currentCount - 1,
+    });
+  };
+
+  return {
+    formInput,
+    setFormInput,
+    updateTravelInfoData,
+    backToPreviousStep,
+    increaseTravelPeriod,
+    decreaseTravelPeriod,
+  };
 }

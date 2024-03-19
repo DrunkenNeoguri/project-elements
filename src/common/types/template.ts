@@ -4,7 +4,7 @@ export type TravelInfoType = {
   travelType: TravelCaseType;
   title: string;
   departureAt: string;
-  travelPeriod: string;
+  travelPeriod: number;
   destination: string;
 };
 
