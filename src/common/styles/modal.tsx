@@ -61,14 +61,14 @@ const Context = styled.span`
   ${fontsStyle.medium.medium12};
   color: ${colors.black};
 
-  padding: 0;
+  padding: 0 10px;
   margin: 0;
 `;
 
 const IconBox = styled.div`
-  width: 62px;
-  height: 62px;
-  margin: 28px 0 22px;
+  width: 48px;
+  height: 48px;
+  margin: 35px 0 29px;
 `;
 
 const PrimaryButton = styled.button<StModalPrimaryButtonType>`
