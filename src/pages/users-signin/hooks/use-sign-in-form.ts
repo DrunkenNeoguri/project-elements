@@ -22,6 +22,7 @@ export default function useSignInForm() {
   const [autoSignInState, setAutoSignInState] = useState(
     hasAutoSignInStateInLocalStorage()
   );
+  const [openState, setOpenState] = useState({ state: false, message: "" });
   const navigate = useNavigate();
 
   const updateFormInput = (type: "email" | "password", value: string) => {
@@ -40,8 +41,7 @@ export default function useSignInForm() {
   const postSignInProcess = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isInvalidatedSignInFormInput(formInput)) {
-      // TODO: createPortal 써서 모달 만들어보기
-      return false;
+      return;
     }
 
     try {
@@ -53,6 +53,10 @@ export default function useSignInForm() {
       const persistanceState = await setPersistence(auth, persistenceSetting);
 
       if (persistanceState !== undefined) {
+        setOpenState({
+          state: true,
+          message: `문제가 발생했습니다.\n잠시 후, 다시 시도해주세요.`,
+        });
         throw new Error(
           "Persistance Setting Error. Please inquire used e-mail to administrator."
         );
@@ -69,10 +73,13 @@ export default function useSignInForm() {
       }
     } catch (error) {
       const errorMessage = convertUnknownTypeErrorToStringMessage(error);
+      return setOpenState({ state: true, message: errorMessage });
     }
   };
 
   return {
+    openState,
+    setOpenState,
     formInput,
     updateFormInput,
     autoSignInState,

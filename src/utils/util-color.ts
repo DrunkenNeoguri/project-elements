@@ -10,6 +10,8 @@ export const colors: UtilColorsType = {
   invalid: "#909090",
   invalidLight: "#F7F7F7",
   shadow: "#00000064",
+  shadowLight: "#0000004D",
+  shadowModal: "#37373773",
 };
 
 export type UtilColorsType = {
@@ -24,4 +26,6 @@ export type UtilColorsType = {
   invalid: "#909090";
   invalidLight: "#F7F7F7";
   shadow: "#00000064";
+  shadowLight: "#0000004D";
+  shadowModal: "#37373773";
 };

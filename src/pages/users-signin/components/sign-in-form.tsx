@@ -12,9 +12,13 @@ import { StSignInForm } from "../styles/sign-in-form";
 import UnCheckedIcon from "../../../assets/icons/svg-sign-in-form-unchecked-icon.svg?react";
 import CheckedIcon from "../../../assets/icons/svg-sign-in-form-checked-icon.svg?react";
 import { isClickedAutoSignInButton } from "../policies/sign-in-form";
+import Portal from "../../../common/components/portal";
+import Modal from "../../../common/components/modal";
 
 export default function SignInForm() {
   const {
+    openState,
+    setOpenState,
     formInput,
     updateFormInput,
     autoSignInState,
@@ -89,6 +93,22 @@ export default function SignInForm() {
           <StSignInForm.LanguageButton>日本語</StSignInForm.LanguageButton>
         </StSignInForm.LanguageBox>
       </StSignInForm.BottomBox>
+      {openState.state && (
+        <Portal
+          children={
+            <Modal
+              title="로그인 문제가 발생했습니다."
+              context={openState.message}
+              modalType="alert"
+              primary={{
+                text: "알겠습니다.",
+                func: () => setOpenState({ state: false, message: "" }),
+              }}
+            />
+          }
+          container={document.body}
+        />
+      )}
     </StSignInForm.Form>
   );
 }
