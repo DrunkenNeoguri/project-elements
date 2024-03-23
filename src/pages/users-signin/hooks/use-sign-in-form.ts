@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { setPersistence, signInWithEmailAndPassword } from "firebase/auth";
-import { firebaseAuth } from "../../../utils/util-firebase";
+import { firebaseAuth, firestore } from "../../../utils/util-firebase";
 import { convertUnknownTypeErrorToStringMessage } from "../../../utils/util-convert";
 import {
   hasAutoSignInStateInLocalStorage,
@@ -9,6 +9,7 @@ import {
 import { ExposeErrorStateType, FormInputType } from "../types/sign-in-form";
 import { useNavigate } from "react-router-dom";
 import { convertPersistenceByAutoSignInState } from "../utils/sign-in-form";
+import { doc, getDoc } from "firebase/firestore";
 
 export default function useSignInForm() {
   const [formInput, setFormInput] = useState<FormInputType>({
@@ -41,7 +42,7 @@ export default function useSignInForm() {
   const postSignInProcess = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isInvalidatedSignInFormInput(formInput)) {
-      return;
+      return setErrorMsgState({ email: true, password: true });
     }
 
     try {
@@ -69,6 +70,10 @@ export default function useSignInForm() {
       );
 
       if (signInResult !== undefined) {
+        const userInfo = await getDoc(
+          doc(firestore, `users`, signInResult.user.uid)
+        );
+        localStorage.setItem("userInfo", String(userInfo.data()));
         navigate("/main");
       }
     } catch (error) {

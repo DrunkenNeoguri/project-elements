@@ -32,7 +32,7 @@ export function useSignUpComplete() {
             email: user.email,
             username: user.displayName,
             createdAt: new Date().getTime(),
-            resentTravel: "",
+            recentTravel: "",
           });
         }
       );

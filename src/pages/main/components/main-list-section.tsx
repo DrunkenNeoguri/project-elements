@@ -11,7 +11,10 @@ export default function MainListSection() {
   return (
     <StMainListSection.Section>
       <Suspense fallback={<>loading...</>}>
-        {/* <TravelCardList listType="recent" /> */}
+        <TravelCardList
+          cardListType="recent"
+          travelLists={setUpcomingTravelByTravelLists(traveLists)}
+        />
         {traveLists.length === 0 ? (
           <MainEmptySection />
         ) : searchQueryString !== null ? (
