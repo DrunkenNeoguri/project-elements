@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HeaderType } from "../types/header";
+import { throttle } from "lodash-es";
+import { isHeaderScrollOverArea } from "../policies/header";
 
 export default function useHeader() {
   const [openState, setOpenState] = useState(false);
+  const [activeShadowState, setActiveShadowState] = useState(false);
   const navigate = useNavigate();
 
   const activeLeftButton = (headerType: HeaderType) => {
@@ -30,7 +33,25 @@ export default function useHeader() {
     return setOpenState(false);
   };
 
+  useEffect(() => {
+    const toggleActivateHeaderShadow = () => {
+      return setActiveShadowState(isHeaderScrollOverArea(window.scrollY));
+    };
+
+    window.addEventListener(
+      "scroll",
+      throttle(toggleActivateHeaderShadow, 500)
+    );
+    return () =>
+      window.removeEventListener(
+        "scroll",
+        throttle(toggleActivateHeaderShadow, 500)
+      );
+  }, []);
+
   return {
+    activeShadowState,
+    setActiveShadowState,
     openState,
     activeLeftButton,
     activeRightButton,

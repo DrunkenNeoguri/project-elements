@@ -9,14 +9,19 @@ import { placeSVGIconByHeaderType } from "../utils/header";
 
 export default function Header(props: HeaderPropType) {
   const { headerType } = props;
-  const { openState, activeLeftButton, activeRightButton, closeSideBar } =
-    useHeader();
+  const {
+    activeShadowState,
+    openState,
+    activeLeftButton,
+    activeRightButton,
+    closeSideBar,
+  } = useHeader();
   const leftIconList = [<CreateListIcon />, <BackArrowIcon />];
   const rightIconList = [<SideBarIcon />, <></>];
 
   return (
     <>
-      <StHeader.Header>
+      <StHeader.Header $activeShadow={activeShadowState}>
         <StHeader.Button onClick={() => activeLeftButton(headerType)}>
           {leftIconList[placeSVGIconByHeaderType(headerType)]}
         </StHeader.Button>
