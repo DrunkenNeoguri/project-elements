@@ -1,10 +1,12 @@
 import Button from "../../../common/components/button";
 import Description from "../../../common/components/description";
+import Modal from "../../../common/components/modal";
+import Portal from "../../../common/components/portal";
 import { useSignUpComplete } from "../hooks/use-sign-up-complete";
 import { StSignUpCompleteSection } from "../styles/sign-up-complete-section";
 
 export default function SignUpCompleteSection() {
-  const { moveToSignInPage } = useSignUpComplete();
+  const { openState, moveToMainPage, moveToSignInPage } = useSignUpComplete();
   return (
     <StSignUpCompleteSection.Section>
       <Description
@@ -20,8 +22,26 @@ export default function SignUpCompleteSection() {
       <Button
         text="메인 화면으로 이동"
         type="button"
-        onClick={() => moveToSignInPage()}
+        onClick={() => moveToMainPage()}
       />
+      {openState.state && (
+        <Portal
+          children={
+            <Modal
+              title="본인 인증 중 에러 발생"
+              context={openState.message}
+              modalType="alert"
+              primary={{
+                text: "로그인 페이지로 돌아가기",
+                func: () => {
+                  return moveToSignInPage();
+                },
+              }}
+            />
+          }
+          container={document.body}
+        />
+      )}
     </StSignUpCompleteSection.Section>
   );
 }

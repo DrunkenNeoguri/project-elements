@@ -6,9 +6,13 @@ import { isTrueCompareWithValueAndCondition } from "../../../common/policies/inp
 import { emailRegExp } from "../../../utils/util-constants";
 import Button from "../../../common/components/button";
 import { convertEmailErrorMessageByValue } from "../../../common/utils/input";
+import Portal from "../../../common/components/portal";
+import Modal from "../../../common/components/modal";
 
 export default function FindPasswordForm() {
   const {
+    openState,
+    setOpenState,
     formInput,
     updateFormInput,
     postFindPasswordProcess,
@@ -45,6 +49,24 @@ export default function FindPasswordForm() {
           onClick={() => goToPreviousScreen()}
         />
       </StFindPasswordForm.ButtonBox>
+      {openState.state && (
+        <Portal
+          children={
+            <Modal
+              title="이메일 전송 중 에러 발생"
+              context={openState.message}
+              modalType="alert"
+              primary={{
+                text: "알겠습니다.",
+                func: () => {
+                  return setOpenState({ state: false, message: "" });
+                },
+              }}
+            />
+          }
+          container={document.body}
+        />
+      )}
     </StFindPasswordForm.Form>
   );
 }

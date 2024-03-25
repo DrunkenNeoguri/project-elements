@@ -11,8 +11,7 @@ export default function useSelectTravelSection() {
   const updateTravelTypeAndMoveToNextStep = (travelCase: TravelCaseType) => {
     if (travelCase === "domestic") {
       setTravelInfoData({ ...travelInfoData, travelType: "domestic" });
-    }
-    if (travelCase === "foreign") {
+    } else if (travelCase === "foreign") {
       setTravelInfoData({ ...travelInfoData, travelType: "foreign" });
     }
     searchParams.set("step", "2");

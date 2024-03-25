@@ -1,11 +1,13 @@
 import Button from "../../../common/components/button";
 import Description from "../../../common/components/description";
+import Modal from "../../../common/components/modal";
+import Portal from "../../../common/components/portal";
 import { colors } from "../../../utils/util-color";
 import useSelectUseTemplateSection from "../hooks/use-select-use-template-section";
 import { StSelectUseTemplateSection } from "../styles/select-use-template-form";
 
 export default function SelectUseTemplateSection() {
-  const { backToPreviousStep, postListCreateProcess } =
+  const { backToPreviousStep, postListCreateProcess, openState, setOpenState } =
     useSelectUseTemplateSection();
   return (
     <StSelectUseTemplateSection.Section>
@@ -39,6 +41,22 @@ export default function SelectUseTemplateSection() {
           onClick={() => backToPreviousStep()}
         />
       </StSelectUseTemplateSection.ButtonBox>
+      {openState.state && (
+        <Portal
+          children={
+            <Modal
+              title="여행 정보 등록 불가"
+              context={openState.message}
+              modalType="alert"
+              primary={{
+                text: "알겠습니다.",
+                func: () => setOpenState({ state: false, message: "" }),
+              }}
+            />
+          }
+          container={document.body}
+        />
+      )}
     </StSelectUseTemplateSection.Section>
   );
 }

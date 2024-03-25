@@ -23,6 +23,7 @@ export default function useSignUpForm() {
     confirmPassword: false,
     username: false,
   });
+  const [openState, setOpenState] = useState({ state: false, message: "" });
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -40,8 +41,12 @@ export default function useSignUpForm() {
   const postSignUpProcess = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isInvalidatedSignUpInputData(formInput)) {
-      // TODO: createPortal 써서 모달 만들어보기
-      return false;
+      return setErrorMsgState({
+        email: true,
+        password: true,
+        confirmPassword: true,
+        username: true,
+      });
     }
     try {
       const auth = firebaseAuth;
@@ -52,26 +57,32 @@ export default function useSignUpForm() {
       );
       const userData = await createAccountResult.user;
       if (userData === null) {
-        throw new Error("계정 생성에 에러가 발생했습니다.");
+        return setOpenState({
+          state: true,
+          message: `계정 생성이 진행되지 않았습니다.\n잠시 후, 다시 시도해주세요.`,
+        });
       }
 
       const profileUpdateResult = await updateProfile(userData, {
         displayName: formInput.username,
       });
+
       if (profileUpdateResult !== undefined) {
-        throw new Error("프로필 저장이 되지 않았습니다.");
+        return setOpenState({
+          state: true,
+          message: `문제로 인해 닉네임이 저장되지 않았습니다.\n로그인 후, 닉네임을 변경해주세요.`,
+        });
       }
 
       const userEmail = userData.email;
-      const sendEmailResult = await sendEmailVerification(userData);
-      // return이 void이기 때문에 별도로 받을 수 있는 값은 없음.
-      await searchParams.set("step", "complete");
-      await searchParams.set("email", userEmail!);
-      await setSearchParams(searchParams);
+      await sendEmailVerification(userData);
+      searchParams.set("step", "complete");
+      searchParams.set("email", userEmail!);
+      return setSearchParams(searchParams);
     } catch (error) {
       const errorMessage = convertUnknownTypeErrorToStringMessage(error);
+      return setOpenState({ state: true, message: errorMessage });
     }
-    return;
   };
 
   const goToPreviousScreen = () => {
@@ -79,6 +90,8 @@ export default function useSignUpForm() {
   };
 
   return {
+    openState,
+    setOpenState,
     formInput,
     updateFormInput,
     postSignUpProcess,

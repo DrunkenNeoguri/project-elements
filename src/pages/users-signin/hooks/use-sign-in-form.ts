@@ -47,22 +47,9 @@ export default function useSignInForm() {
 
     try {
       const auth = firebaseAuth;
-
       const persistenceSetting =
         convertPersistenceByAutoSignInState(autoSignInState);
-
-      const persistanceState = await setPersistence(auth, persistenceSetting);
-
-      if (persistanceState !== undefined) {
-        setOpenState({
-          state: true,
-          message: `문제가 발생했습니다.\n잠시 후, 다시 시도해주세요.`,
-        });
-        throw new Error(
-          "Persistance Setting Error. Please inquire used e-mail to administrator."
-        );
-      }
-
+      await setPersistence(auth, persistenceSetting);
       const signInResult = await signInWithEmailAndPassword(
         auth,
         formInput.email,
@@ -74,7 +61,7 @@ export default function useSignInForm() {
           doc(firestore, `users`, signInResult.user.uid)
         );
         localStorage.setItem("userInfo", String(userInfo.data()));
-        navigate("/main");
+        return navigate("/main");
       }
     } catch (error) {
       const errorMessage = convertUnknownTypeErrorToStringMessage(error);

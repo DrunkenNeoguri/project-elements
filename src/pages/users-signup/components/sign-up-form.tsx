@@ -15,9 +15,13 @@ import {
   convertPasswordErrorMessageByValue,
   convertUsernameErrorMessageByValue,
 } from "../../../common/utils/input";
+import Portal from "../../../common/components/portal";
+import Modal from "../../../common/components/modal";
 
 export default function SignUpForm() {
   const {
+    openState,
+    setOpenState,
     formInput,
     updateFormInput,
     postSignUpProcess,
@@ -106,6 +110,22 @@ export default function SignUpForm() {
           onClick={() => goToPreviousScreen()}
         />
       </StSignUpForm.ButtonBox>
+      {openState.state && (
+        <Portal
+          children={
+            <Modal
+              title="회원가입 중 에러 발생"
+              context={openState.message}
+              modalType="alert"
+              primary={{
+                text: "알겠습니다.",
+                func: () => setOpenState({ state: false, message: "" }),
+              }}
+            />
+          }
+          container={document.body}
+        />
+      )}
     </StSignUpForm.Form>
   );
 }

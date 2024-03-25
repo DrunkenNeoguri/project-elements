@@ -16,6 +16,7 @@ export default function useFindPasswordForm() {
   const [errorMsgState, setErrorMsgState] = useState<ExposeErrorStateType>({
     email: false,
   });
+  const [openState, setOpenState] = useState({ state: false, message: "" });
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -30,18 +31,18 @@ export default function useFindPasswordForm() {
   const postFindPasswordProcess = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isInvalidatedFindPasswordInputData(formInput)) {
-      // TODO: createPortal 써서 모달 만들어보기
-      return false;
+      return setErrorMsgState({ email: true });
     }
+
     try {
       const auth = firebaseAuth;
       await sendPasswordResetEmail(auth, formInput.email);
-      await searchParams.set("step", "complete");
-      await setSearchParams(searchParams);
+      searchParams.set("step", "complete");
+      return setSearchParams(searchParams);
     } catch (error) {
       const errorMessage = convertUnknownTypeErrorToStringMessage(error);
+      return setOpenState({ state: true, message: errorMessage });
     }
-    return;
   };
 
   const goToPreviousScreen = () => {
@@ -49,6 +50,8 @@ export default function useFindPasswordForm() {
   };
 
   return {
+    openState,
+    setOpenState,
     formInput,
     updateFormInput,
     postFindPasswordProcess,

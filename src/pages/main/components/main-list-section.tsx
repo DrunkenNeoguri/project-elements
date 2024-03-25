@@ -8,8 +8,7 @@ import Portal from "../../../common/components/portal";
 import Modal from "../../../common/components/modal";
 
 export default function MainListSection() {
-  const { traveLists, searchQueryString, loginState, moveToSignInPage } =
-    useMainListSection();
+  const { traveLists, searchQueryString, modalState } = useMainListSection();
 
   return (
     <StMainListSection.Section>
@@ -34,16 +33,16 @@ export default function MainListSection() {
           </>
         )}
       </Suspense>
-      {!loginState && (
+      {modalState.state && (
         <Portal
           children={
             <Modal
-              title="로그인 세션 만료"
+              title={modalState.title}
               modalType="alert"
-              context={`장시간 사이트 내에 활동이 없어\n로그인 상태가 해제되었습니다.`}
+              context={modalState.context}
               primary={{
                 text: "로그인 화면으로 돌아가기",
-                func: () => moveToSignInPage(),
+                func: () => modalState.closeFunc(),
               }}
             />
           }

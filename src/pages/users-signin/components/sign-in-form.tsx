@@ -97,7 +97,7 @@ export default function SignInForm() {
         <Portal
           children={
             <Modal
-              title="로그인 문제가 발생했습니다."
+              title="로그인 중 에러 발생"
               context={openState.message}
               modalType="alert"
               primary={{
