@@ -26,17 +26,20 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
 
-  height: 100vh;
   width: 100%;
+  height: 100vh;
   padding: 0 16px;
   box-sizing: border-box;
 `;
 
 const FadeContainer = styled.div<StFadeContainerPropType>`
+  display: flex;
+  flex-direction: column;
+
   width: 100%;
+  height: 100%;
 
   opacity: ${(props) => (props.$isStepMove ? 0 : 1)};
-
   animation: ${(props) => (props.$isStepMove ? fadeOut : fadeIn)} 1s;
 `;
 
