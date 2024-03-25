@@ -1,19 +1,26 @@
-import { useSearchParams } from "react-router-dom";
-import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
 import { useAtom } from "jotai";
+import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
+import { moveStepStateAtom } from "../atoms/move-step-state-atom";
+import { moveToStepAndActiveDelay1s } from "../utils/index.util";
+import { currentStepAtom } from "../atoms/current-step-atom";
 
 export default function useConfirmTravelInfoSection() {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [travelListData] = useAtom(travelInfoDataAtom);
+  const [currentStep, setCurrentStep] = useAtom(currentStepAtom);
+  const [, setMoveState] = useAtom(moveStepStateAtom);
 
   const backToPreviousStep = () => {
-    searchParams.set("step", "2");
-    return setSearchParams(searchParams);
+    setMoveState(true);
+    return moveToStepAndActiveDelay1s(() => {
+      setCurrentStep(currentStep - 1);
+    });
   };
 
   const moveToNextStep = () => {
-    searchParams.set("step", "4");
-    return setSearchParams(searchParams);
+    setMoveState(true);
+    return moveToStepAndActiveDelay1s(() => {
+      setCurrentStep(currentStep + 1);
+    });
   };
 
   return { travelListData, moveToNextStep, backToPreviousStep };

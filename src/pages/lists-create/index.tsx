@@ -1,14 +1,13 @@
-import { StCreateListPage } from "./styles/index.style.tsx";
+import { StListsCreatePage } from "./styles/index.style.tsx";
+import useListsCreate from "./hooks/index.hook.ts";
 import SelectTravelSection from "./components/select-travel-section.tsx";
 import TravelInfoForm from "./components/travel-info-form.tsx";
 import ConfirmTravelInfoSection from "./components/confirm-travel-info-section.tsx";
 import SelectUseTemplateSection from "./components/select-use-template-section.tsx";
-import { useSearchParams } from "react-router-dom";
-import Stepper from "./components/create-stepper.tsx";
+import CreateStepper from "./components/create-stepper.tsx";
 
 export default function ListsCreate() {
-  const [searchParams] = useSearchParams();
-  const currentStep = Number(searchParams.get("step")) - 1;
+  const { moveState, currentStep } = useListsCreate();
   const componentLists = [
     <SelectTravelSection />,
     <TravelInfoForm />,
@@ -17,9 +16,11 @@ export default function ListsCreate() {
   ];
 
   return (
-    <StCreateListPage.Section>
-      <Stepper />
-      {componentLists[currentStep]}
-    </StCreateListPage.Section>
+    <StListsCreatePage.Section>
+      <CreateStepper />
+      <StListsCreatePage.FadeContainer $isStepMove={moveState}>
+        {componentLists[currentStep]}
+      </StListsCreatePage.FadeContainer>
+    </StListsCreatePage.Section>
   );
 }

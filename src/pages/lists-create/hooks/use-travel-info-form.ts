@@ -1,16 +1,16 @@
 import { FormEvent, useState } from "react";
-import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
 import { useAtom } from "jotai";
-import { useSearchParams } from "react-router-dom";
 import { TravelInfoType } from "../../../common/types/template";
 import { isNotFullInputedInForm } from "../policies/travel-info-form";
+import { moveToStepAndActiveDelay1s } from "../utils/index.util";
+import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
+import { moveStepStateAtom } from "../atoms/move-step-state-atom";
+import { currentStepAtom } from "../atoms/current-step-atom";
 
 export default function useTravelInfoForm() {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [travelInfoData, setTraveInfoData] = useAtom(travelInfoDataAtom);
   const { travelType, title, departureAt, travelPeriod, destination } =
     travelInfoData;
-
   const [formInput, setFormInput] = useState<TravelInfoType>({
     travelType: travelType,
     title: title,
@@ -18,21 +18,27 @@ export default function useTravelInfoForm() {
     travelPeriod: travelPeriod,
     destination: destination,
   });
+  const [, setMoveState] = useAtom(moveStepStateAtom);
+  const [currentStep, setCurrentStep] = useAtom(currentStepAtom);
 
   const updateTravelInfoData = (e: FormEvent) => {
+    e.preventDefault();
     if (isNotFullInputedInForm(formInput)) {
       return;
     } else {
-      setTraveInfoData({ ...travelInfoData, ...formInput });
-      searchParams.set("step", "3");
-      setSearchParams(searchParams);
-      return e.preventDefault();
+      setMoveState(true);
+      return moveToStepAndActiveDelay1s(() => {
+        setTraveInfoData({ ...travelInfoData, ...formInput });
+        setCurrentStep(currentStep + 1);
+      });
     }
   };
 
   const backToPreviousStep = () => {
-    searchParams.set("step", "1");
-    return setSearchParams(searchParams);
+    setMoveState(true);
+    return moveToStepAndActiveDelay1s(() => {
+      setCurrentStep(currentStep - 1);
+    });
   };
 
   const increaseTravelPeriod = (maxCount: number) => {

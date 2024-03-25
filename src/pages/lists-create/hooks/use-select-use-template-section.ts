@@ -1,23 +1,29 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { firebaseAuth, firestore } from "../../../utils/util-firebase";
 import { collection, doc, writeBatch } from "firebase/firestore";
-import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
 import { useAtom } from "jotai";
 // import { convertUnknownTypeErrorToStringMessage } from "../../../utils/util-convert";
 import { isFullInputedInTravelInfoData } from "../policies/select-use-template-section";
 import { setTravelTemplateByTravelTypeAndUserWanted } from "../utils/select-use-template-section";
 import { useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
+import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
+import { moveStepStateAtom } from "../atoms/move-step-state-atom";
+import { currentStepAtom } from "../atoms/current-step-atom";
+import { moveToStepAndActiveDelay1s } from "../utils/index.util";
 
 export default function useSelectUseTemplateSection() {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [travelInfoData] = useAtom(travelInfoDataAtom);
   const [openState, setOpenState] = useState({ state: false, message: "" });
+  const [, setMoveState] = useAtom(moveStepStateAtom);
+  const [currentStep, setCurrentStep] = useAtom(currentStepAtom);
   const navigate = useNavigate();
 
   const backToPreviousStep = () => {
-    searchParams.set("step", "3");
-    return setSearchParams(searchParams);
+    setMoveState(true);
+    return moveToStepAndActiveDelay1s(() => {
+      return setCurrentStep(currentStep - 1);
+    });
   };
 
   const postListCreateProcess = async (useTemplate: boolean) => {

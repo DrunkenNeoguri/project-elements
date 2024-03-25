@@ -1,5 +1,24 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { colors } from "../../../utils/util-color";
+import { StFadeContainerPropType } from "../types/index.type";
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+`;
 
 const Section = styled.section`
   background-color: ${colors.primaryDeep};
@@ -13,4 +32,12 @@ const Section = styled.section`
   box-sizing: border-box;
 `;
 
-export const StCreateListPage = Object.assign({}, { Section });
+const FadeContainer = styled.div<StFadeContainerPropType>`
+  width: 100%;
+
+  opacity: ${(props) => (props.$isStepMove ? 0 : 1)};
+
+  animation: ${(props) => (props.$isStepMove ? fadeOut : fadeIn)} 1s;
+`;
+
+export const StListsCreatePage = Object.assign({}, { Section, FadeContainer });
