@@ -56,13 +56,20 @@ export default function useSelectUseTemplateSection() {
           currentTime
         );
 
+        const userReferecnce = doc(firestore, `users`, userUid);
+
         await batch.set(travelsReference, {
           ...travelInfoData,
           id: `${userUid}${currentTime}`,
         });
+
         await batch.set(ListsReference, {
           ...template,
           id: `${userUid}${currentTime}`,
+        });
+
+        await batch.set(userReferecnce, {
+          recentTravel: `${userUid}${currentTime}`,
         });
 
         const commitState = await batch.commit();
