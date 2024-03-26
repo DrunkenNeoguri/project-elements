@@ -7,4 +7,11 @@ const Form = styled.form`
   box-sizing: border-box;
 `;
 
-export const StChangePasswordForm = Object.assign({}, { Form });
+const ButtonBox = styled.div`
+  display: flex;
+
+  margin: 12px 0;
+  box-sizing: border-box;
+`;
+
+export const StChangePasswordForm = Object.assign({}, { Form, ButtonBox });
