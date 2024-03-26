@@ -2,7 +2,7 @@ import { useAtom } from "jotai";
 import { moveStepStateAtom } from "../atoms/move-step-state-atom";
 import { useNavigate } from "react-router-dom";
 import { TravelCaseType } from "../../../common/types/template";
-import { moveToStepAndActiveDelay1s } from "../utils/index.util";
+import { moveToStepAndActiveDelay } from "../utils/index.util";
 import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
 import { currentStepAtom } from "../atoms/current-step-atom";
 
@@ -20,9 +20,9 @@ export default function useSelectTravelSection() {
     }
 
     setMoveState(true);
-    return moveToStepAndActiveDelay1s(() => {
+    return moveToStepAndActiveDelay(() => {
       return setCurrentStep(currentStep + 1);
-    });
+    }, 500);
   };
 
   const backToMainPage = () => {

@@ -10,7 +10,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
 import { moveStepStateAtom } from "../atoms/move-step-state-atom";
 import { currentStepAtom } from "../atoms/current-step-atom";
-import { moveToStepAndActiveDelay1s } from "../utils/index.util";
+import { moveToStepAndActiveDelay } from "../utils/index.util";
 
 export default function useSelectUseTemplateSection() {
   const [travelInfoData] = useAtom(travelInfoDataAtom);
@@ -21,9 +21,9 @@ export default function useSelectUseTemplateSection() {
 
   const backToPreviousStep = () => {
     setMoveState(true);
-    return moveToStepAndActiveDelay1s(() => {
+    return moveToStepAndActiveDelay(() => {
       return setCurrentStep(currentStep - 1);
-    });
+    }, 500);
   };
 
   const postListCreateProcess = async (useTemplate: boolean) => {

@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import { useAtom } from "jotai";
 import { TravelInfoType } from "../../../common/types/template";
 import { isNotFullInputedInForm } from "../policies/travel-info-form";
-import { moveToStepAndActiveDelay1s } from "../utils/index.util";
+import { moveToStepAndActiveDelay } from "../utils/index.util";
 import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
 import { moveStepStateAtom } from "../atoms/move-step-state-atom";
 import { currentStepAtom } from "../atoms/current-step-atom";
@@ -27,18 +27,18 @@ export default function useTravelInfoForm() {
       return;
     } else {
       setMoveState(true);
-      return moveToStepAndActiveDelay1s(() => {
+      return moveToStepAndActiveDelay(() => {
         setTraveInfoData({ ...travelInfoData, ...formInput });
         setCurrentStep(currentStep + 1);
-      });
+      }, 500);
     }
   };
 
   const backToPreviousStep = () => {
     setMoveState(true);
-    return moveToStepAndActiveDelay1s(() => {
+    return moveToStepAndActiveDelay(() => {
       setCurrentStep(currentStep - 1);
-    });
+    }, 500);
   };
 
   const increaseTravelPeriod = (maxCount: number) => {

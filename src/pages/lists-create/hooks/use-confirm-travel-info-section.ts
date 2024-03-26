@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
 import { moveStepStateAtom } from "../atoms/move-step-state-atom";
-import { moveToStepAndActiveDelay1s } from "../utils/index.util";
+import { moveToStepAndActiveDelay } from "../utils/index.util";
 import { currentStepAtom } from "../atoms/current-step-atom";
 
 export default function useConfirmTravelInfoSection() {
@@ -11,16 +11,16 @@ export default function useConfirmTravelInfoSection() {
 
   const backToPreviousStep = () => {
     setMoveState(true);
-    return moveToStepAndActiveDelay1s(() => {
+    return moveToStepAndActiveDelay(() => {
       setCurrentStep(currentStep - 1);
-    });
+    }, 500);
   };
 
   const moveToNextStep = () => {
     setMoveState(true);
-    return moveToStepAndActiveDelay1s(() => {
+    return moveToStepAndActiveDelay(() => {
       setCurrentStep(currentStep + 1);
-    });
+    }, 500);
   };
 
   return { travelListData, moveToNextStep, backToPreviousStep };
