@@ -14,9 +14,23 @@ export default function useSelectTravelSection() {
 
   const updateTravelTypeAndMoveToNextStep = (travelCase: TravelCaseType) => {
     if (travelCase === "domestic") {
-      setTravelInfoData({ ...travelInfoData, travelType: "domestic" });
+      setTravelInfoData({
+        ...travelInfoData,
+        travelType: "domestic",
+        title: "",
+        departureAt: "",
+        travelPeriod: 1,
+        destination: "",
+      });
     } else if (travelCase === "foreign") {
-      setTravelInfoData({ ...travelInfoData, travelType: "foreign" });
+      setTravelInfoData({
+        ...travelInfoData,
+        travelType: "foreign",
+        title: "",
+        departureAt: "",
+        travelPeriod: 1,
+        destination: "",
+      });
     }
 
     setMoveState(true);
