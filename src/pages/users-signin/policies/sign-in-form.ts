@@ -11,3 +11,15 @@ export const isInvalidatedSignInFormInput = (formInput: FormInputType) => {
   }
   return false;
 };
+
+export const isClickedAutoSignInButton = (autoSignInState: boolean) => {
+  return autoSignInState ? true : false;
+};
+
+export const hasAutoSignInStateInLocalStorage = () => {
+  const localStorageState = localStorage.getItem("autoSignIn");
+  if (localStorageState === "true") {
+    return true;
+  }
+  return false;
+};

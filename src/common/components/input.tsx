@@ -17,6 +17,7 @@ export default function Input(props: InputPropType) {
     placeholder,
     onChange,
     type,
+    maxLength,
     errorMessage,
     firstInputCheck,
     errorCondition,
@@ -39,6 +40,7 @@ export default function Input(props: InputPropType) {
           placeholder={placeholder}
           $colorTheme={colorTheme}
           $checkErrorMessage={hasErrorMessage(errorMessage)}
+          maxLength={maxLength}
         />
         {isShowValidationIcon({ firstInputCheck, errorMessage }) && (
           <StInput.ValidIcon>

@@ -1,22 +1,28 @@
 import { useAtom } from "jotai";
-import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { moveStepStateAtom } from "../atoms/move-step-state-atom";
+import { useNavigate } from "react-router-dom";
 import { TravelCaseType } from "../../../common/types/template";
+import { moveToStepAndActiveDelay1s } from "../utils/index.util";
+import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
+import { currentStepAtom } from "../atoms/current-step-atom";
 
 export default function useSelectTravelSection() {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [travelInfoData, setTravelInfoData] = useAtom(travelInfoDataAtom);
+  const [, setMoveState] = useAtom(moveStepStateAtom);
+  const [currentStep, setCurrentStep] = useAtom(currentStepAtom);
   const navigate = useNavigate();
 
   const updateTravelTypeAndMoveToNextStep = (travelCase: TravelCaseType) => {
     if (travelCase === "domestic") {
       setTravelInfoData({ ...travelInfoData, travelType: "domestic" });
-    }
-    if (travelCase === "foreign") {
+    } else if (travelCase === "foreign") {
       setTravelInfoData({ ...travelInfoData, travelType: "foreign" });
     }
-    searchParams.set("step", "2");
-    return setSearchParams(searchParams);
+
+    setMoveState(true);
+    return moveToStepAndActiveDelay1s(() => {
+      return setCurrentStep(currentStep + 1);
+    });
   };
 
   const backToMainPage = () => {

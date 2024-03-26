@@ -9,9 +9,13 @@ import {
   convertConfirmPasswordErrorMessageByValues,
   convertPasswordErrorMessageByValue,
 } from "../../../common/utils/input";
+import Portal from "../../../common/components/portal";
+import Modal from "../../../common/components/modal";
 
 export default function ChangePasswordForm() {
   const {
+    openState,
+    moveToFindPasswordPage,
     formInput,
     updateFormInput,
     postChangePasswordProcess,
@@ -59,6 +63,22 @@ export default function ChangePasswordForm() {
         )}
       />
       <Button text="새 비밀번호로 변경" type="submit" />
+      {openState.state && (
+        <Portal
+          children={
+            <Modal
+              title="비밀번호 변경 중 에러 발생"
+              context={openState.message}
+              modalType="alert"
+              primary={{
+                text: "비밀번호 찾기 페이지로 돌아가기",
+                func: () => moveToFindPasswordPage(),
+              }}
+            />
+          }
+          container={document.body}
+        />
+      )}
     </StChangePasswordForm.Form>
   );
 }

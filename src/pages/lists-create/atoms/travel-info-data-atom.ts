@@ -5,7 +5,7 @@ const initialValue: TravelInfoType = {
   travelType: "domestic",
   title: "",
   departureAt: "",
-  travelPeriod: "",
+  travelPeriod: 1,
   destination: "",
 };
 

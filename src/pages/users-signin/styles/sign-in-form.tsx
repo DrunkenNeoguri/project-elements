@@ -12,7 +12,7 @@ const Form = styled.form`
 const ButtonBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 14px 0;
+  margin: 24px 0 14px;
   box-sizing: border-box;
 `;
 
@@ -27,6 +27,27 @@ const BottomBox = styled.div`
 const TextBox = styled.div`
   display: flex;
   gap: 4px;
+`;
+
+const AutoSignInButton = styled.button`
+  background-color: transparent;
+  display: flex;
+  gap: 4px;
+
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+
+  width: 100%;
+
+  cursor: pointer;
+`;
+
+const AutoSignInText = styled.span`
+  ${fontsStyle.medium.medium10};
+  color: ${colors.black};
+  width: auto;
 `;
 
 const Text = styled.span`
@@ -68,6 +89,8 @@ export const StSignInForm = Object.assign(
     ButtonBox,
     BottomBox,
     TextBox,
+    AutoSignInButton,
+    AutoSignInText,
     Text,
     Link,
     LanguageBox,

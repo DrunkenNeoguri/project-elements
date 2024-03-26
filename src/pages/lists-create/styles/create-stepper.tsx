@@ -28,10 +28,11 @@ const StepCounter = styled.div<StStepStatusType>`
   ${fontsStyle.bold.bold12}
   color: ${colors.primaryDeep};
 
-  height: 24px;
-  width: 24px;
   padding-top: 2px;
   border-radius: 50%;
+
+  height: 24px;
+  width: 24px;
   box-sizing: border-box;
 `;
 

@@ -9,10 +9,23 @@ import {
 import { emailRegExp, passwordRegExp } from "../../../utils/util-constants";
 import useSignInForm from "../hooks/use-sign-in-form";
 import { StSignInForm } from "../styles/sign-in-form";
+import UnCheckedIcon from "../../../assets/icons/svg-sign-in-form-unchecked-icon.svg?react";
+import CheckedIcon from "../../../assets/icons/svg-sign-in-form-checked-icon.svg?react";
+import { isClickedAutoSignInButton } from "../policies/sign-in-form";
+import Portal from "../../../common/components/portal";
+import Modal from "../../../common/components/modal";
 
 export default function SignInForm() {
-  const { formInput, updateFormInput, postSignInProcess, errorMsgState } =
-    useSignInForm();
+  const {
+    openState,
+    setOpenState,
+    formInput,
+    updateFormInput,
+    autoSignInState,
+    toggleAutoSignInState,
+    postSignInProcess,
+    errorMsgState,
+  } = useSignInForm();
   return (
     <StSignInForm.Form onSubmit={(e) => postSignInProcess(e)}>
       <Description
@@ -46,7 +59,17 @@ export default function SignInForm() {
           passwordRegExp
         )}
       />
-
+      <StSignInForm.AutoSignInButton
+        type="button"
+        onClick={() => toggleAutoSignInState()}
+      >
+        {isClickedAutoSignInButton(autoSignInState) ? (
+          <CheckedIcon />
+        ) : (
+          <UnCheckedIcon />
+        )}
+        <StSignInForm.AutoSignInText>자동 로그인</StSignInForm.AutoSignInText>
+      </StSignInForm.AutoSignInButton>
       <StSignInForm.ButtonBox>
         <Button text="로그인" type="submit" />
       </StSignInForm.ButtonBox>
@@ -70,6 +93,22 @@ export default function SignInForm() {
           <StSignInForm.LanguageButton>日本語</StSignInForm.LanguageButton>
         </StSignInForm.LanguageBox>
       </StSignInForm.BottomBox>
+      {openState.state && (
+        <Portal
+          children={
+            <Modal
+              title="로그인 중 에러 발생"
+              context={openState.message}
+              modalType="alert"
+              primary={{
+                text: "알겠습니다.",
+                func: () => setOpenState({ state: false, message: "" }),
+              }}
+            />
+          }
+          container={document.body}
+        />
+      )}
     </StSignInForm.Form>
   );
 }

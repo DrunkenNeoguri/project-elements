@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { colors } from "../../utils/util-color";
 import { fontsStyle } from "../../utils/util-fonts";
+import { StHeaderPropType } from "../types/header";
 
-const Header = styled.header`
+const Header = styled.header<StHeaderPropType>`
   background-color: ${colors.primaryDeep};
   display: flex;
   justify-content: space-between;
@@ -18,7 +19,10 @@ const Header = styled.header`
 
   z-index: 2;
 
-  /* filter: drop-shadow(0px 4px 4px ${colors.shadow}); */
+  transition: ease-in-out 0.2s;
+
+  filter: ${(props) =>
+    props.$activeShadow ? `drop-shadow(0px 4px 4px ${colors.shadow})` : "none"};
 `;
 
 const Button = styled.button`

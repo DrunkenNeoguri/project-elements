@@ -5,7 +5,7 @@ export const isNotFullInputedInForm = (formInput: TravelInfoType) => {
   if (
     title.trim() === "" ||
     departureAt.trim() === "" ||
-    travelPeriod.trim() === "" ||
+    (travelPeriod < 1 && travelPeriod > 30) ||
     destination.trim() === ""
   ) {
     return true;

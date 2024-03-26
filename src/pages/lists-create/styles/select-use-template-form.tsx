@@ -5,7 +5,8 @@ const Section = styled.section`
   flex-direction: column;
   align-items: flex-start;
 
-  height: 100vh;
+  height: 100%;
+
   box-sizing: border-box;
 `;
 
@@ -21,9 +22,9 @@ const ImageBox = styled.div`
 `;
 
 const Image = styled.img`
-  max-width: 300px;
   border-radius: 16px;
 
+  max-width: 300px;
   box-sizing: border-box;
 `;
 
@@ -32,8 +33,9 @@ const ButtonBox = styled.div`
   flex-direction: column;
   gap: 12px;
 
-  width: 100%;
   margin: auto 0 24px;
+
+  width: 100%;
   box-sizing: border-box;
 `;
 

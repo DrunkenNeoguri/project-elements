@@ -1,14 +1,15 @@
 import { FormEvent, useState } from "react";
-import {
-  browserLocalPersistence,
-  setPersistence,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { firebaseAuth } from "../../../utils/util-firebase";
+import { setPersistence, signInWithEmailAndPassword } from "firebase/auth";
+import { firebaseAuth, firestore } from "../../../utils/util-firebase";
 import { convertUnknownTypeErrorToStringMessage } from "../../../utils/util-convert";
-import { isInvalidatedSignInFormInput } from "../policies/sign-in-form";
+import {
+  hasAutoSignInStateInLocalStorage,
+  isInvalidatedSignInFormInput,
+} from "../policies/sign-in-form";
 import { ExposeErrorStateType, FormInputType } from "../types/sign-in-form";
 import { useNavigate } from "react-router-dom";
+import { convertPersistenceByAutoSignInState } from "../utils/sign-in-form";
+import { doc, getDoc } from "firebase/firestore";
 
 export default function useSignInForm() {
   const [formInput, setFormInput] = useState<FormInputType>({
@@ -19,6 +20,10 @@ export default function useSignInForm() {
     email: false,
     password: false,
   });
+  const [autoSignInState, setAutoSignInState] = useState(
+    hasAutoSignInStateInLocalStorage()
+  );
+  const [openState, setOpenState] = useState({ state: false, message: "" });
   const navigate = useNavigate();
 
   const updateFormInput = (type: "email" | "password", value: string) => {
@@ -29,29 +34,49 @@ export default function useSignInForm() {
     return;
   };
 
+  const toggleAutoSignInState = () => {
+    localStorage.setItem("autoSignIn", String(!autoSignInState));
+    return setAutoSignInState(!autoSignInState);
+  };
+
   const postSignInProcess = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isInvalidatedSignInFormInput(formInput)) {
-      // TODO: createPortal 써서 모달 만들어보기
-      return false;
+      return setErrorMsgState({ email: true, password: true });
     }
 
     try {
       const auth = firebaseAuth;
-      // 지속성 - 자동 로그인하면 로컬 저장, 아니면 none
-      // setPersistence(auth, browserLocalPersistence)
+      const persistenceSetting =
+        convertPersistenceByAutoSignInState(autoSignInState);
+      await setPersistence(auth, persistenceSetting);
       const signInResult = await signInWithEmailAndPassword(
         auth,
         formInput.email,
         formInput.password
       );
+
       if (signInResult !== undefined) {
-        navigate("/main");
+        const userInfo = await getDoc(
+          doc(firestore, `users`, signInResult.user.uid)
+        );
+        localStorage.setItem("userInfo", String(userInfo.data()));
+        return navigate("/main");
       }
     } catch (error) {
       const errorMessage = convertUnknownTypeErrorToStringMessage(error);
+      return setOpenState({ state: true, message: errorMessage });
     }
   };
 
-  return { formInput, updateFormInput, postSignInProcess, errorMsgState };
+  return {
+    openState,
+    setOpenState,
+    formInput,
+    updateFormInput,
+    autoSignInState,
+    toggleAutoSignInState,
+    postSignInProcess,
+    errorMsgState,
+  };
 }

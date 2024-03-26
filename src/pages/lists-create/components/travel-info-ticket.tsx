@@ -34,7 +34,7 @@ export default function TravelInfoTicket(props: TicketInfoType) {
           </StTravelInfoTicket.ContentBox>
           <StTravelInfoTicket.BarcodeBox>
             <StTravelInfoTicket.BarcodeImage
-              src="images/img-confirm-travel-info-section-barcode.webp"
+              src="/images/img-confirm-travel-info-section-barcode.webp"
               alt=""
             />
           </StTravelInfoTicket.BarcodeBox>

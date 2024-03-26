@@ -1,4 +1,5 @@
 import { TravelListType } from "../../../common/types/template";
+import { userInfoType } from "../../../common/types/user";
 import { CardListType } from "../types/travel-card-list";
 
 const convertSearchValueInSearchTypeCardList = (
@@ -31,6 +32,17 @@ export const convertCardListNameByCardListType = (
     default:
       return;
   }
+};
+
+export const setResentTravelByTravelLists = (
+  travelLists: TravelListType[],
+  userInfo: userInfoType
+) => {
+  const resentTravelId = userInfo.recentTravel;
+  const resentTravelData = travelLists.filter(
+    (travelInfo) => travelInfo.id === resentTravelId
+  )[0];
+  return !resentTravelData ? [] : resentTravelData;
 };
 
 export const setUpcomingTravelByTravelLists = (

@@ -5,7 +5,7 @@ export const convertColorTypeByFormInputState = (formInput: TravelInfoType) => {
   if (
     title.trim() === "" ||
     departureAt.trim() === "" ||
-    travelPeriod.trim() === "" ||
+    (travelPeriod < 1 && travelPeriod > 30) ||
     destination.trim() === ""
   ) {
     return "invalid-reverse";
@@ -18,7 +18,7 @@ export const convertTextByFormInputState = (formInput: TravelInfoType) => {
   if (
     title.trim() === "" ||
     departureAt.trim() === "" ||
-    travelPeriod.trim() === "" ||
+    (travelPeriod < 1 && travelPeriod > 30) ||
     destination.trim() === ""
   ) {
     return "내용을 전부 입력해 주세요.";

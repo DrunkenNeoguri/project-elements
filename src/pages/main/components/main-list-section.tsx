@@ -4,14 +4,19 @@ import { StMainListSection } from "../styles/main-list-section";
 import { setUpcomingTravelByTravelLists } from "../utils/travel-card-list";
 import TravelCardList from "./travel-card-list";
 import MainEmptySection from "./main-empty-section";
+import Portal from "../../../common/components/portal";
+import Modal from "../../../common/components/modal";
 
 export default function MainListSection() {
-  const { traveLists, searchQueryString } = useMainListSection();
+  const { traveLists, searchQueryString, modalState } = useMainListSection();
 
   return (
     <StMainListSection.Section>
       <Suspense fallback={<>loading...</>}>
-        {/* <TravelCardList listType="recent" /> */}
+        <TravelCardList
+          cardListType="recent"
+          travelLists={setUpcomingTravelByTravelLists(traveLists)}
+        />
         {traveLists.length === 0 ? (
           <MainEmptySection />
         ) : searchQueryString !== null ? (
@@ -28,6 +33,22 @@ export default function MainListSection() {
           </>
         )}
       </Suspense>
+      {modalState.state && (
+        <Portal
+          children={
+            <Modal
+              title={modalState.title}
+              modalType="alert"
+              context={modalState.context}
+              primary={{
+                text: "로그인 화면으로 돌아가기",
+                func: () => modalState.closeFunc(),
+              }}
+            />
+          }
+          container={document.body}
+        />
+      )}
     </StMainListSection.Section>
   );
 }

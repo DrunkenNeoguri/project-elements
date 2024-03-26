@@ -1,4 +1,5 @@
 import Button from "../../../common/components/button";
+import Counter from "../../../common/components/counter";
 import Description from "../../../common/components/description";
 import Input from "../../../common/components/input";
 import { colors } from "../../../utils/util-color";
@@ -11,8 +12,14 @@ import {
 } from "../utils/travel-info-form";
 
 export default function TravelInfoForm() {
-  const { formInput, setFormInput, updateTravelInfoData, backToPreviousStep } =
-    useTravelInfoForm();
+  const {
+    formInput,
+    setFormInput,
+    updateTravelInfoData,
+    backToPreviousStep,
+    increaseTravelPeriod,
+    decreaseTravelPeriod,
+  } = useTravelInfoForm();
   return (
     <StTravelInfoForm.Form onSubmit={(e) => updateTravelInfoData(e)}>
       <Description title={`여행 일정을 알려주세요!`} color={colors.white} />
@@ -37,16 +44,14 @@ export default function TravelInfoForm() {
         type="date"
         colorTheme="white"
       />
-      <Input
+      <Counter
         id="travelPeriod"
         title="여행 기간"
-        onChange={(e) =>
-          setFormInput({ ...formInput, travelPeriod: e.currentTarget.value })
-        }
-        placeholder="1~30까지 입력 가능"
         value={formInput.travelPeriod}
-        type="number"
+        measure="일"
         colorTheme="white"
+        increaseFunc={() => increaseTravelPeriod(30)}
+        decreaseFunc={() => decreaseTravelPeriod(1)}
       />
       <Input
         id="destination"
