@@ -14,7 +14,7 @@ export default function MainEmptySection() {
       <StMainEmptySection.Text>{`아직 여행을 등록한 적이 없으시네요!\n\n아래 버튼을 눌러\n여행 일정을 등록해볼까요?`}</StMainEmptySection.Text>
       <Button
         type="button"
-        onClick={() => navigate("/lists/create?step=1")}
+        onClick={() => navigate("/lists/create")}
         text="새 여행 등록하기"
       />
     </StMainEmptySection.Section>

@@ -14,7 +14,7 @@ export default function useHeader() {
       case "error":
         return navigate(-1);
       default:
-        return navigate("/lists/create?step=1");
+        return navigate("/lists/create");
     }
   };
 
