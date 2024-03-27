@@ -17,8 +17,7 @@ import Modal from "../../../common/components/modal";
 
 export default function SignInForm() {
   const {
-    openState,
-    setOpenState,
+    modalState,
     formInput,
     updateFormInput,
     autoSignInState,
@@ -93,16 +92,16 @@ export default function SignInForm() {
           <StSignInForm.LanguageButton>日本語</StSignInForm.LanguageButton>
         </StSignInForm.LanguageBox>
       </StSignInForm.BottomBox>
-      {openState.state && (
+      {modalState.isOpen && (
         <Portal
           children={
             <Modal
               title="로그인 중 에러 발생"
-              context={openState.message}
+              context={modalState.message}
               modalType="alert"
               primary={{
-                text: "알겠습니다.",
-                func: () => setOpenState({ state: false, message: "" }),
+                text: modalState.buttonText,
+                func: modalState.closeFunc,
               }}
             />
           }
