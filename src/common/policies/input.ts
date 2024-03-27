@@ -20,7 +20,11 @@ export const isShowErrorMessage = ({
 export const isShowValidationIcon = ({
   firstInputCheck,
   errorMessage,
+  isViewMark,
 }: PolicyValidationIconPropType) => {
+  if (!isViewMark) {
+    return false;
+  }
   if (!errorMessage) {
     return false;
   }

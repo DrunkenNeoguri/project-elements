@@ -40,6 +40,7 @@ export default function ChangePasswordForm() {
           formInput.password,
           passwordRegExp
         )}
+        isViewMark={true}
       />
 
       <Input
@@ -61,6 +62,7 @@ export default function ChangePasswordForm() {
           passwordRegExp,
           formInput.password
         )}
+        isViewMark={true}
       />
       <StChangePasswordForm.ButtonBox>
         <Button text="새 비밀번호로 변경" type="submit" />

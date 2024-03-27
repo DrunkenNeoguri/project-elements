@@ -22,6 +22,7 @@ export default function Input(props: InputPropType) {
     firstInputCheck,
     errorCondition,
     colorTheme,
+    isViewMark,
   } = props;
 
   return (
@@ -42,7 +43,11 @@ export default function Input(props: InputPropType) {
           $checkErrorMessage={hasErrorMessage(errorMessage)}
           maxLength={maxLength}
         />
-        {isShowValidationIcon({ firstInputCheck, errorMessage }) && (
+        {isShowValidationIcon({
+          firstInputCheck,
+          errorMessage,
+          isViewMark,
+        }) && (
           <StInput.ValidIcon>
             {isShowErrorMessage({ firstInputCheck, errorCondition }) ? (
               <IncorrectIcon />

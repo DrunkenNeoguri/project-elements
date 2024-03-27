@@ -15,6 +15,7 @@ export type InputPropType = {
   firstInputCheck?: boolean;
   errorCondition?: RegExp | boolean;
   colorTheme?: InputColorThemeType;
+  isViewMark?: boolean;
 };
 
 export type StInputColorThemeType = {
@@ -30,4 +31,5 @@ export type PolicyErrorMessagePropType = {
 export type PolicyValidationIconPropType = {
   firstInputCheck?: boolean;
   errorMessage?: string;
+  isViewMark?: boolean;
 };
