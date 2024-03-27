@@ -65,6 +65,7 @@ export default function useSignInForm() {
 
     try {
       const auth = firebaseAuth;
+      auth.languageCode = "ko";
       const persistenceSetting =
         convertPersistenceByAutoSignInState(autoSignInState);
       await setPersistence(auth, persistenceSetting);

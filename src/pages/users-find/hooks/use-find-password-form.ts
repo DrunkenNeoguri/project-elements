@@ -36,6 +36,7 @@ export default function useFindPasswordForm() {
 
     try {
       const auth = firebaseAuth;
+      auth.languageCode = "ko";
       await sendPasswordResetEmail(auth, formInput.email);
       searchParams.set("step", "complete");
       return setSearchParams(searchParams);

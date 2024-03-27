@@ -50,6 +50,7 @@ export default function useSignUpForm() {
     }
     try {
       const auth = firebaseAuth;
+      auth.languageCode = "ko";
       const createAccountResult = await createUserWithEmailAndPassword(
         auth,
         formInput.email,
