@@ -23,13 +23,17 @@ export default function useHeader() {
       case "error":
         return;
       default:
-        document.getElementById("root")!.style.overflow = "hidden";
+        document.body.style.paddingRight = `${
+          window.innerWidth - document.body.offsetWidth
+        }px`;
+        document.body.style.overflowY = "hidden";
         return setOpenState(true);
     }
   };
 
   const closeSideBar = () => {
-    document.getElementById("root")!.style.overflow = "scroll";
+    document.body.style.paddingRight = "0px";
+    document.body.style.overflowY = "auto";
     return setOpenState(false);
   };
 

@@ -7,13 +7,13 @@ const Wrapper = styled.nav<StSideBarPropType>`
   background-color: ${colors.primary};
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
 
   border-radius: 12px 0 0 12px;
   padding: 14px 16px 20px 16px;
+
   width: 294px;
   height: 100vh;
-
   z-index: 3;
   bottom: 0;
   right: 0;
