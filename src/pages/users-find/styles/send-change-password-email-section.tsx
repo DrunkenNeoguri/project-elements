@@ -9,4 +9,17 @@ const Section = styled.section`
   box-sizing: border-box;
 `;
 
-export const StSendChangePasswordEmailSection = Object.assign({}, { Section });
+const ButtonBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  width: 100%;
+  margin: auto 0 24px;
+  box-sizing: border-box;
+`;
+
+export const StSendChangePasswordEmailSection = Object.assign(
+  {},
+  { Section, ButtonBox }
+);
