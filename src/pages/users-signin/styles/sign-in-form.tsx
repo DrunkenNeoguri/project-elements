@@ -37,9 +37,9 @@ const AutoSignInButton = styled.button`
   border: none;
   outline: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto 0 0;
 
-  width: 100%;
+  width: auto;
 
   cursor: pointer;
 `;
