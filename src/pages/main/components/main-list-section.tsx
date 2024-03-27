@@ -13,10 +13,6 @@ export default function MainListSection() {
   return (
     <StMainListSection.Section>
       <Suspense fallback={<>loading...</>}>
-        <TravelCardList
-          cardListType="recent"
-          travelLists={setUpcomingTravelByTravelLists(traveLists)}
-        />
         {traveLists.length === 0 ? (
           <MainEmptySection />
         ) : searchQueryString !== null ? (
@@ -25,6 +21,10 @@ export default function MainListSection() {
           </StMainListSection.SearchArea>
         ) : (
           <>
+            <TravelCardList
+              cardListType="recent"
+              travelLists={setUpcomingTravelByTravelLists(traveLists)}
+            />
             <TravelCardList
               cardListType="upcoming"
               travelLists={setUpcomingTravelByTravelLists(traveLists)}
