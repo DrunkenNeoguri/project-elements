@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { firebaseAuth } from "../../../utils/util-firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -7,7 +7,7 @@ export default function useMainHeader() {
     firebaseAuth.currentUser?.displayName ?? ""
   );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!username) {
       onAuthStateChanged(firebaseAuth, (user) => {
         if (user) {

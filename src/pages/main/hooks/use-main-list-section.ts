@@ -1,5 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { firebaseAuth, firestore } from "../../../utils/util-firebase";
 import { TravelListType } from "../../../common/types/template";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -7,7 +7,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 
 export default function useMainListSection() {
-  const [traveLists, setTraveLists] = useState<TravelListType[]>([]);
+  const [traveLists, setTraveLists] = useState<TravelListType[] | undefined>();
   const [modalState, setModalState] = useState({
     state: false,
     title: "",
@@ -19,7 +19,7 @@ export default function useMainListSection() {
   const [searchParams] = useSearchParams();
   const searchQueryString = searchParams.get("search");
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const getUserTravelLists = async () => {
       const clearModalState = () => {
         return setModalState({

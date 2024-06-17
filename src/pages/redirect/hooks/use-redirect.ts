@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function useRedirect() {
@@ -7,7 +7,7 @@ export default function useRedirect() {
   const enteredMode = searchParams.get("mode");
   const actionCode = searchParams.get("oobCode");
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (enteredMode === "verifyEmail") {
       setTimeout(() => {
         return navigate(`/users/verified?actionCode=${actionCode}`);

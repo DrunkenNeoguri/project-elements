@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { moveStepStateAtom } from "../atoms/move-step-state-atom";
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { currentStepAtom } from "../atoms/current-step-atom";
 import { moveToStepAndActiveDelay } from "../utils/index.util";
 
@@ -14,7 +14,7 @@ export default function useListsCreate() {
     }
   }, [moveState, setMoveState]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setCurrentStep(0);
   }, [setCurrentStep]);
 

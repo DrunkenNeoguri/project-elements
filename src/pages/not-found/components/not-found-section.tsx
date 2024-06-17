@@ -6,7 +6,11 @@ export default function NotFoundSection() {
   const { moveToPreviousPage } = useNotFoundSection();
   return (
     <StNotFoundSection.Section>
-      <StNotFoundSection.Image src="/images/img-not-found.webp" alt="" />
+      <StNotFoundSection.Image
+        src="/images/img-not-found.webp"
+        alt=""
+        loading="lazy"
+      />
       <StNotFoundSection.Title>
         이런! 페이지를 찾을 수 없어요.
       </StNotFoundSection.Title>
