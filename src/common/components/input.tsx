@@ -13,15 +13,11 @@ export default function Input(props: InputPropType) {
   const {
     id,
     title,
-    value,
-    placeholder,
-    onChange,
-    type,
-    maxLength,
     errorMessage,
     firstInputCheck,
     errorCondition,
     colorTheme,
+    isViewMark,
   } = props;
 
   return (
@@ -34,15 +30,15 @@ export default function Input(props: InputPropType) {
       <StInput.TextInputBox>
         <StInput.TextInput
           id={id}
-          value={value}
-          onChange={onChange}
-          type={type}
-          placeholder={placeholder}
           $colorTheme={colorTheme}
           $checkErrorMessage={hasErrorMessage(errorMessage)}
-          maxLength={maxLength}
+          {...props}
         />
-        {isShowValidationIcon({ firstInputCheck, errorMessage }) && (
+        {isShowValidationIcon({
+          firstInputCheck,
+          errorMessage,
+          isViewMark,
+        }) && (
           <StInput.ValidIcon>
             {isShowErrorMessage({ firstInputCheck, errorCondition }) ? (
               <IncorrectIcon />

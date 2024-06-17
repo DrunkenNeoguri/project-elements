@@ -1,5 +1,5 @@
-export const moveToStepAndActiveDelay1s = (func: () => void) => {
+export const moveToStepAndActiveDelay = (func: () => void, time: number) => {
   setTimeout(() => {
     func();
-  }, 1000);
+  }, time);
 };

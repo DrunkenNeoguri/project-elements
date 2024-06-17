@@ -29,6 +29,7 @@ export const convertConfirmPasswordErrorMessageByValues = (
   if (comparingValue !== value) {
     return passwordIncorrectErrorMsg;
   }
+  return "　";
 };
 
 export const convertUsernameErrorMessageByValue = (value: string) => {

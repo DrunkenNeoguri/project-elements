@@ -24,7 +24,9 @@ export default function TravelInfoTicket(props: TicketInfoType) {
 
             <StTravelInfoTicket.TextBox>
               <StTravelInfoTicket.Title>여행 기간</StTravelInfoTicket.Title>
-              <StTravelInfoTicket.Text>{travelPeriod}</StTravelInfoTicket.Text>
+              <StTravelInfoTicket.Text>
+                {travelPeriod}일
+              </StTravelInfoTicket.Text>
             </StTravelInfoTicket.TextBox>
 
             <StTravelInfoTicket.TextBox>

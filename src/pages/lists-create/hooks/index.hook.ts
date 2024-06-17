@@ -2,17 +2,21 @@ import { useAtom } from "jotai";
 import { moveStepStateAtom } from "../atoms/move-step-state-atom";
 import { useEffect } from "react";
 import { currentStepAtom } from "../atoms/current-step-atom";
-import { moveToStepAndActiveDelay1s } from "../utils/index.util";
+import { moveToStepAndActiveDelay } from "../utils/index.util";
 
 export default function useListsCreate() {
   const [moveState, setMoveState] = useAtom(moveStepStateAtom);
-  const [currentStep] = useAtom(currentStepAtom);
+  const [currentStep, setCurrentStep] = useAtom(currentStepAtom);
 
   useEffect(() => {
     if (moveState) {
-      moveToStepAndActiveDelay1s(() => setMoveState(false));
+      moveToStepAndActiveDelay(() => setMoveState(false), 500);
     }
   }, [moveState, setMoveState]);
+
+  useEffect(() => {
+    setCurrentStep(0);
+  }, [setCurrentStep]);
 
   return { moveState, currentStep };
 }

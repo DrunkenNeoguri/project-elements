@@ -1,38 +1,46 @@
-import { Suspense } from "react";
 import useMainListSection from "../hooks/use-main-list-section";
 import { StMainListSection } from "../styles/main-list-section";
 import { setUpcomingTravelByTravelLists } from "../utils/travel-card-list";
-import TravelCardList from "./travel-card-list";
 import MainEmptySection from "./main-empty-section";
 import Portal from "../../../common/components/portal";
 import Modal from "../../../common/components/modal";
+import TravelCardList from "./travel-card-list";
+import { TransparentLoader } from "../../../common/components/loader";
 
 export default function MainListSection() {
   const { traveLists, searchQueryString, modalState } = useMainListSection();
 
+  if (!traveLists) {
+    return <TransparentLoader />;
+  }
+
+  if (traveLists.length === 0) {
+    return (
+      <StMainListSection.Section>
+        <MainEmptySection />
+      </StMainListSection.Section>
+    );
+  }
+
   return (
     <StMainListSection.Section>
-      <Suspense fallback={<>loading...</>}>
-        <TravelCardList
-          cardListType="recent"
-          travelLists={setUpcomingTravelByTravelLists(traveLists)}
-        />
-        {traveLists.length === 0 ? (
-          <MainEmptySection />
-        ) : searchQueryString !== null ? (
-          <StMainListSection.SearchArea>
-            <TravelCardList cardListType="search" travelLists={traveLists} />
-          </StMainListSection.SearchArea>
-        ) : (
-          <>
-            <TravelCardList
-              cardListType="upcoming"
-              travelLists={setUpcomingTravelByTravelLists(traveLists)}
-            />
-            <TravelCardList cardListType="all" travelLists={traveLists} />
-          </>
-        )}
-      </Suspense>
+      {searchQueryString !== null ? (
+        <StMainListSection.SearchArea>
+          <TravelCardList cardListType="search" travelLists={traveLists} />
+        </StMainListSection.SearchArea>
+      ) : (
+        <>
+          <TravelCardList
+            cardListType="recent"
+            travelLists={setUpcomingTravelByTravelLists(traveLists)}
+          />
+          <TravelCardList
+            cardListType="upcoming"
+            travelLists={setUpcomingTravelByTravelLists(traveLists)}
+          />
+          <TravelCardList cardListType="all" travelLists={traveLists} />
+        </>
+      )}
       {modalState.state && (
         <Portal
           children={

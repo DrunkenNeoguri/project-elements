@@ -26,12 +26,19 @@ export const convertCardListNameByCardListType = (
     case "search":
       return `'${convertSearchValueInSearchTypeCardList(
         searchValue
-      )}'로 찾은 여행들`;
+      )}' 검색 결과`;
     case "all":
       return "생성된 여행 리스트";
     default:
       return;
   }
+};
+
+export const hasSearchKeywordInList = (
+  listType: CardListType,
+  amount: number
+) => {
+  return listType === "search" && amount === 0 ? true : false;
 };
 
 export const setResentTravelByTravelLists = (

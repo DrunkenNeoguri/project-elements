@@ -1,15 +1,15 @@
 import Description from "../../../common/components/description";
 import { colors } from "../../../utils/util-color";
-import { firebaseAuth } from "../../../utils/util-firebase";
 import { StMainHeader } from "../styles/main-header";
+import useMainHeader from "../hooks/use-main-header";
 
 export default function MainHeader() {
-  const currentUser = firebaseAuth.currentUser;
+  const { username } = useMainHeader();
 
   return (
     <StMainHeader.Header>
       <Description
-        title={`안녕하세요,\n${currentUser?.displayName}!\n\n어떤 여행을 준비중이신가요?`}
+        title={`안녕하세요,\n${username}!\n\n어떤 여행을 준비중이신가요?`}
         color={colors.white}
       />
     </StMainHeader.Header>

@@ -1,20 +1,16 @@
-import { FormEvent } from "react";
+import { InputHTMLAttributes } from "react";
 
 export type InputColorThemeType = "black" | "white";
 export type InputType = "text" | "password" | "email" | "date" | "number";
 
-export type InputPropType = {
-  id: string;
+export type InputPropType = InputHTMLAttributes<HTMLInputElement> & {
   title: string;
   value: string | number;
-  placeholder?: string;
-  onChange: (e: FormEvent<HTMLInputElement>) => void;
-  type: InputType;
-  maxLength?: number;
   errorMessage?: string;
   firstInputCheck?: boolean;
   errorCondition?: RegExp | boolean;
   colorTheme?: InputColorThemeType;
+  isViewMark?: boolean;
 };
 
 export type StInputColorThemeType = {
@@ -30,4 +26,5 @@ export type PolicyErrorMessagePropType = {
 export type PolicyValidationIconPropType = {
   firstInputCheck?: boolean;
   errorMessage?: string;
+  isViewMark?: boolean;
 };

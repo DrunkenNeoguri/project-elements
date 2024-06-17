@@ -46,6 +46,7 @@ export default function SignUpForm() {
           formInput.email,
           emailRegExp
         )}
+        isViewMark={true}
       />
 
       <Input
@@ -62,6 +63,7 @@ export default function SignUpForm() {
           formInput.password,
           passwordRegExp
         )}
+        isViewMark={true}
       />
 
       <Input
@@ -84,6 +86,7 @@ export default function SignUpForm() {
           passwordRegExp,
           formInput.password
         )}
+        isViewMark={true}
       />
 
       <Input
@@ -100,6 +103,7 @@ export default function SignUpForm() {
           formInput.username,
           usernameRegExp
         )}
+        isViewMark={true}
       />
       <StSignUpForm.ButtonBox>
         <Button text="다음 단계로" type="submit" />

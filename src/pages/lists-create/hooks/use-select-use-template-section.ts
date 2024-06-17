@@ -10,7 +10,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";
 import { moveStepStateAtom } from "../atoms/move-step-state-atom";
 import { currentStepAtom } from "../atoms/current-step-atom";
-import { moveToStepAndActiveDelay1s } from "../utils/index.util";
+import { moveToStepAndActiveDelay } from "../utils/index.util";
 
 export default function useSelectUseTemplateSection() {
   const [travelInfoData] = useAtom(travelInfoDataAtom);
@@ -21,9 +21,9 @@ export default function useSelectUseTemplateSection() {
 
   const backToPreviousStep = () => {
     setMoveState(true);
-    return moveToStepAndActiveDelay1s(() => {
+    return moveToStepAndActiveDelay(() => {
       return setCurrentStep(currentStep - 1);
-    });
+    }, 500);
   };
 
   const postListCreateProcess = async (useTemplate: boolean) => {
@@ -56,13 +56,20 @@ export default function useSelectUseTemplateSection() {
           currentTime
         );
 
+        const userReferecnce = doc(firestore, `users`, userUid);
+
         await batch.set(travelsReference, {
           ...travelInfoData,
           id: `${userUid}${currentTime}`,
         });
+
         await batch.set(ListsReference, {
           ...template,
           id: `${userUid}${currentTime}`,
+        });
+
+        await batch.set(userReferecnce, {
+          recentTravel: `${userUid}${currentTime}`,
         });
 
         const commitState = await batch.commit();

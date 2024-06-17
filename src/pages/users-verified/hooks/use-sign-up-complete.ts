@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { applyActionCode, onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth, firestore } from "../../../utils/util-firebase";
@@ -19,7 +19,7 @@ export function useSignUpComplete() {
     return navigate("/users/signin");
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const updateAccountVerificationState = async () => {
       const actionCode = await searchParams.get("actionCode");
 

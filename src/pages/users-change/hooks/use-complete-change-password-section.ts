@@ -4,7 +4,7 @@ export default function useCompleteChangePasswordSection() {
   const navigate = useNavigate();
 
   const moveToSignInPage = () => {
-    navigate("/signin");
+    return navigate("/users/signin");
   };
 
   return { moveToSignInPage };

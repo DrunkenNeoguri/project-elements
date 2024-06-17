@@ -1,5 +1,9 @@
 import { FormEvent, useState } from "react";
-import { setPersistence, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  sendEmailVerification,
+  setPersistence,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { firebaseAuth, firestore } from "../../../utils/util-firebase";
 import { convertUnknownTypeErrorToStringMessage } from "../../../utils/util-convert";
 import {
@@ -23,8 +27,22 @@ export default function useSignInForm() {
   const [autoSignInState, setAutoSignInState] = useState(
     hasAutoSignInStateInLocalStorage()
   );
-  const [openState, setOpenState] = useState({ state: false, message: "" });
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    message: "",
+    buttonText: "",
+    closeFunc: () => {},
+  });
   const navigate = useNavigate();
+
+  const clearModalState = () => {
+    return setModalState({
+      isOpen: false,
+      message: "",
+      buttonText: "",
+      closeFunc: () => {},
+    });
+  };
 
   const updateFormInput = (type: "email" | "password", value: string) => {
     setFormInput({ ...formInput, [type]: value });
@@ -47,6 +65,7 @@ export default function useSignInForm() {
 
     try {
       const auth = firebaseAuth;
+      auth.languageCode = "ko";
       const persistenceSetting =
         convertPersistenceByAutoSignInState(autoSignInState);
       await setPersistence(auth, persistenceSetting);
@@ -57,6 +76,21 @@ export default function useSignInForm() {
       );
 
       if (signInResult !== undefined) {
+        if (!signInResult.user.emailVerified) {
+          return setModalState({
+            isOpen: true,
+            message: `본 계정은 아직 본인 인증이 완료되지 않았습니다.\n아래 버튼을 눌러 본인 인증을 진행해주세요.`,
+            buttonText: "본인 인증 이메일 보내기",
+            closeFunc: async () => {
+              clearModalState();
+              await sendEmailVerification(signInResult.user);
+              return navigate(
+                `/users/signup?step=complete&email=${signInResult.user.email}`
+              );
+            },
+          });
+        }
+
         const userInfo = await getDoc(
           doc(firestore, `users`, signInResult.user.uid)
         );
@@ -65,13 +99,18 @@ export default function useSignInForm() {
       }
     } catch (error) {
       const errorMessage = convertUnknownTypeErrorToStringMessage(error);
-      return setOpenState({ state: true, message: errorMessage });
+      return setModalState({
+        isOpen: true,
+        message: errorMessage,
+        buttonText: "알겠습니다.",
+        closeFunc: () => clearModalState(),
+      });
     }
   };
 
   return {
-    openState,
-    setOpenState,
+    modalState,
+    setModalState,
     formInput,
     updateFormInput,
     autoSignInState,
