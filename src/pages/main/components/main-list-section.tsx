@@ -14,11 +14,17 @@ export default function MainListSection() {
     return <TransparentLoader />;
   }
 
+  if (traveLists.length === 0) {
+    return (
+      <StMainListSection.Section>
+        <MainEmptySection />
+      </StMainListSection.Section>
+    );
+  }
+
   return (
     <StMainListSection.Section>
-      {traveLists.length === 0 ? (
-        <MainEmptySection />
-      ) : searchQueryString !== null ? (
+      {searchQueryString !== null ? (
         <StMainListSection.SearchArea>
           <TravelCardList cardListType="search" travelLists={traveLists} />
         </StMainListSection.SearchArea>

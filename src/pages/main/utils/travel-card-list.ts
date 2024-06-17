@@ -34,6 +34,13 @@ export const convertCardListNameByCardListType = (
   }
 };
 
+export const hasSearchKeywordInList = (
+  listType: CardListType,
+  amount: number
+) => {
+  return listType === "search" && amount === 0 ? true : false;
+};
+
 export const setResentTravelByTravelLists = (
   travelLists: TravelListType[],
   userInfo: userInfoType

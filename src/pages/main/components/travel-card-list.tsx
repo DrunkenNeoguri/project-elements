@@ -4,10 +4,12 @@ import { TravelCardListPropType } from "../types/travel-card-list";
 import {
   convertCardListNameByCardListType,
   convertDateByTravelDepartureAt,
+  hasSearchKeywordInList,
 } from "../utils/travel-card-list";
 import ResetIcon from "../../../assets/icons/svg-travel-card-list-reset-icon.svg?react";
 import TravelPassCard from "./travel-pass-card";
 import { isCardListTypeSearch } from "../policies/index.policy";
+import MainSearchEmptySection from "./main-search-empty-section";
 
 //@TODO: 당장은 이용자도, 데이터도 적으니까 서버에서는 데이터 한번만 받아오고
 // 거기서 무한 스크롤과 서칭 모두 적용하는 식으로 함.
@@ -38,6 +40,10 @@ export default function TravelCardList(props: TravelCardListPropType) {
         )}
       </StTravelListCard.TitleBox>
       <StTravelListCard.ListBox>
+        {hasSearchKeywordInList(
+          cardListType,
+          filterTravelListBySearchValue(travelLists).length
+        ) && <MainSearchEmptySection />}
         {filterTravelListBySearchValue(travelLists)?.map((doc) => {
           return (
             <TravelPassCard
