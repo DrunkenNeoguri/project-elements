@@ -32,8 +32,8 @@ export default function RootLayout({
             boxSizing: "border-box",
             overflow: "scroll",
           }}
-          className="font-gmarketSans"
           id="root"
+          className="font-gmarketSans"
         >
           {children}
         </main>

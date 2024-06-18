@@ -4,101 +4,75 @@
 
 @layer utilities {
   .font-bold10 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-bold whitespace-pre-wrap text-2xs;
   }
   .font-bold12 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-bold whitespace-pre-wrap text-1xs;
   }
   .font-bold14 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-bold whitespace-pre-wrap text-xs;
   }
   .font-bold16 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-bold whitespace-pre-wrap text-sm;
   }
   .font-bold18 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-bold whitespace-pre-wrap text-base;
   }
   .font-bold20 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-bold whitespace-pre-wrap text-lg;
   }
   .font-bold22 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-bold whitespace-pre-wrap text-xl;
   }
   .font-bold24 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-bold whitespace-pre-wrap text-1xl;
   }
   .font-medium10 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-medium whitespace-pre-wrap text-2xs;
   }
   .font-medium12 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-medium whitespace-pre-wrap text-1xs;
   }
   .font-medium14 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-medium whitespace-pre-wrap text-xs;
   }
   .font-medium16 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-medium whitespace-pre-wrap text-sm;
   }
   .font-medium18 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-medium whitespace-pre-wrap text-base;
   }
   .font-medium20 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-medium whitespace-pre-wrap text-lg;
   }
   .font-medium22 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-medium whitespace-pre-wrap text-xl;
   }
   .font-medium24 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-medium whitespace-pre-wrap text-1xl;
   }
   .font-light10 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-light whitespace-pre-wrap text-2xs;
   }
   .font-light12 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-light whitespace-pre-wrap text-1xs;
   }
   .font-light14 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-light whitespace-pre-wrap text-xs;
   }
   .font-light16 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-light whitespace-pre-wrap text-sm;
   }
   .font-light18 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-light whitespace-pre-wrap text-base;
   }
   .font-light20 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-light whitespace-pre-wrap text-lg;
   }
   .font-light22 {
-    font-family: "GmarketSans", sans-serif;
     @apply font-light whitespace-pre-wrap text-xl;
   }
   .font-light24 {
-    font-family: "GmarketSans", sans-serif;
-    font-size: 24px;
-    line-height: 32px;
     @apply font-light whitespace-pre-wrap text-1xl;
   }
 }
