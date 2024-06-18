@@ -13,27 +13,10 @@ export default function RootLayout({
         <title>준비물 챙겼어?</title>
         <meta name="description" content="My App is a..." />
       </head>
-      <body
-        style={{
-          backgroundColor: "#222222",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          margin: 0,
-        }}
-      >
+      <body className="bg-[#222222] flex flex-col items-center m-0">
         <main
-          style={{
-            backgroundColor: "#ffffff",
-            position: "relative",
-            width: "100%",
-            minHeight: "100vh",
-            maxWidth: "379px",
-            boxSizing: "border-box",
-            overflow: "scroll",
-          }}
+          className="w-full relative bg-white overflow-scroll box-border max-w-[379px] min-h-[100vh] font-gmarketSans"
           id="root"
-          className="font-gmarketSans"
         >
           {children}
         </main>
