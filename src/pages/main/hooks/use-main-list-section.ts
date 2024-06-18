@@ -1,7 +1,7 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { firebaseAuth, firestore } from "../../../utils/util-firebase";
-import { TravelListType } from "../../../common/types/template";
+import { TravelListType } from "../../../types/template.types";
 import { useNavigate, useSearchParams } from "react-router-dom";
 // import { convertUnknownTypeErrorToStringMessage } from "../../../utils/util-convert";
 import { onAuthStateChanged } from "firebase/auth";

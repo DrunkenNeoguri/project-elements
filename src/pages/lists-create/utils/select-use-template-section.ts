@@ -1,4 +1,4 @@
-import { TravelCaseType } from "../../../common/types/template";
+import { TravelCaseType } from "../../../types/template.types";
 import {
   basicTemplate,
   domesticTemplate,

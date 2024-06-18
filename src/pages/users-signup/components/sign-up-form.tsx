@@ -7,14 +7,14 @@ import {
   passwordRegExp,
   usernameRegExp,
 } from "../../../utils/util-constants";
-import { isTrueCompareWithValueAndCondition } from "../../../common/policies/input";
+import { isTrueCompareWithValueAndCondition } from "../../../components/input/input.rules";
 import Button from "../../../common/components/button";
 import {
   convertConfirmPasswordErrorMessageByValues,
   convertEmailErrorMessageByValue,
   convertPasswordErrorMessageByValue,
   convertUsernameErrorMessageByValue,
-} from "../../../common/utils/input";
+} from "../../../components/input/input.utils";
 import Portal from "../../../common/components/portal";
 import Modal from "../../../common/components/modal";
 

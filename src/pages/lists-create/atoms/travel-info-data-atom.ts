@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { TravelInfoType } from "../../../common/types/template";
+import { TravelInfoType } from "../../../types/template.types";
 
 const initialValue: TravelInfoType = {
   travelType: "domestic",

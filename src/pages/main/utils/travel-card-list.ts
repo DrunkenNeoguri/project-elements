@@ -1,5 +1,5 @@
-import { TravelListType } from "../../../common/types/template";
-import { userInfoType } from "../../../common/types/user";
+import { TravelListType } from "../../../types/template.types";
+import { userInfoType } from "../../../types/user.types";
 import { CardListType } from "../types/travel-card-list";
 
 const convertSearchValueInSearchTypeCardList = (

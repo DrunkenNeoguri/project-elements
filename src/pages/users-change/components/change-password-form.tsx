@@ -2,13 +2,13 @@ import useChangePasswordForm from "../hooks/use-change-password-form";
 import { StChangePasswordForm } from "../styles/change-password-form";
 import Description from "../../../common/components/description";
 import Input from "../../../common/components/input";
-import { isTrueCompareWithValueAndCondition } from "../../../common/policies/input";
+import { isTrueCompareWithValueAndCondition } from "../../../components/input/input.rules";
 import { passwordRegExp } from "../../../utils/util-constants";
 import Button from "../../../common/components/button";
 import {
   convertConfirmPasswordErrorMessageByValues,
   convertPasswordErrorMessageByValue,
-} from "../../../common/utils/input";
+} from "../../../components/input/input.utils";
 import Portal from "../../../common/components/portal";
 import Modal from "../../../common/components/modal";
 

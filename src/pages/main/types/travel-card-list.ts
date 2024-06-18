@@ -1,4 +1,4 @@
-import { TravelListType } from "../../../common/types/template";
+import { TravelListType } from "../../../types/template.types";
 
 export type CardListType = "recent" | "upcoming" | "search" | "all";
 

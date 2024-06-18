@@ -1,4 +1,4 @@
-import { TravelInfoType } from "../../../common/types/template";
+import { TravelInfoType } from "../../../types/template.types";
 
 export const isNotFullInputedInForm = (formInput: TravelInfoType) => {
   const { title, departureAt, travelPeriod, destination } = formInput;

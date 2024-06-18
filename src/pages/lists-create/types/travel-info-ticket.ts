@@ -1,4 +1,4 @@
-import { TravelCaseType, TravelInfoType } from "../../../common/types/template";
+import { TravelCaseType, TravelInfoType } from "../../../types/template.types";
 
 export type StTravelCaseType = { $travelType: TravelCaseType };
 

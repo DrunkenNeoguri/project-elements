@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
-import { TravelListType } from "../../../common/types/template";
+import { TravelListType } from "../../../types/template.types";
 import { useAtom } from "jotai";
-import { sidebarSearchValueAtom } from "../../../common/atoms/sidebar";
+import { sidebarSearchValueAtom } from "../../../components/sidebar/sidebar";
 
 export default function useTravelCardList() {
   const [searchParams, setSearchParams] = useSearchParams();

@@ -5,6 +5,7 @@ import Portal from "../../../common/components/portal";
 import { colors } from "../../../utils/util-color";
 import useSelectUseTemplateSection from "../hooks/use-select-use-template-section";
 import { StSelectUseTemplateSection } from "../styles/select-use-template-form";
+import images from "../../../../public/images/img-use-select-use-template-section.webp";
 
 export default function SelectUseTemplateSection() {
   const { backToPreviousStep, postListCreateProcess, openState, setOpenState } =
@@ -16,10 +17,7 @@ export default function SelectUseTemplateSection() {
         color={colors.white}
       />
       <StSelectUseTemplateSection.ImageBox>
-        <StSelectUseTemplateSection.Image
-          src="/images/img-use-select-use-template-section.webp"
-          alt=""
-        />
+        <StSelectUseTemplateSection.Image src={images} alt="" />
       </StSelectUseTemplateSection.ImageBox>
       <StSelectUseTemplateSection.ButtonBox>
         <Button

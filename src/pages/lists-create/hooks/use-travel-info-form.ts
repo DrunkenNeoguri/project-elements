@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { useAtom } from "jotai";
-import { TravelInfoType } from "../../../common/types/template";
+import { TravelInfoType } from "../../../types/template.types";
 import { isNotFullInputedInForm } from "../policies/travel-info-form";
 import { moveToStepAndActiveDelay } from "../utils/index.util";
 import { travelInfoDataAtom } from "../atoms/travel-info-data-atom";

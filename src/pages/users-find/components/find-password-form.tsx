@@ -2,10 +2,10 @@ import useFindPasswordForm from "../hooks/use-find-password-form";
 import { StFindPasswordForm } from "../styles/find-password-form";
 import Description from "../../../common/components/description";
 import Input from "../../../common/components/input";
-import { isTrueCompareWithValueAndCondition } from "../../../common/policies/input";
+import { isTrueCompareWithValueAndCondition } from "../../../components/input/input.rules";
 import { emailRegExp } from "../../../utils/util-constants";
 import Button from "../../../common/components/button";
-import { convertEmailErrorMessageByValue } from "../../../common/utils/input";
+import { convertEmailErrorMessageByValue } from "../../../components/input/input.utils";
 import Portal from "../../../common/components/portal";
 import Modal from "../../../common/components/modal";
 

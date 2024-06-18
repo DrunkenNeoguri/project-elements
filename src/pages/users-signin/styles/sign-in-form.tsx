@@ -2,21 +2,21 @@ import styled from "styled-components";
 import { fontsStyle } from "../../../utils/util-fonts";
 import { colors } from "../../../utils/util-color";
 
-const Form = styled.form`
+export const Container = styled.form`
   display: flex;
   flex-direction: column;
   padding: 0 16px;
   box-sizing: border-box;
 `;
 
-const ButtonBox = styled.div`
+export const ButtonBox = styled.div`
   display: flex;
   flex-direction: column;
   margin: 24px 0 14px;
   box-sizing: border-box;
 `;
 
-const BottomBox = styled.div`
+export const BottomBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,12 +24,12 @@ const BottomBox = styled.div`
   gap: 12px;
 `;
 
-const TextBox = styled.div`
+export const TextBox = styled.div`
   display: flex;
   gap: 4px;
 `;
 
-const AutoSignInButton = styled.button`
+export const AutoSignInButton = styled.button`
   background-color: transparent;
   display: flex;
   gap: 4px;
@@ -44,30 +44,30 @@ const AutoSignInButton = styled.button`
   cursor: pointer;
 `;
 
-const AutoSignInText = styled.span`
+export const AutoSignInText = styled.span`
   ${fontsStyle.medium.medium10};
   color: ${colors.black};
   width: auto;
 `;
 
-const Text = styled.span`
+export const Text = styled.span`
   ${fontsStyle.light.light10};
   color: ${colors.black};
 `;
 
-const Link = styled.a`
+export const Link = styled.a`
   ${fontsStyle.light.light10};
   color: ${colors.primary};
   text-decoration: underline;
 `;
 
-const LanguageBox = styled.div`
+export const LanguageBox = styled.div`
   display: flex;
   gap: 4px;
   margin-top: 24px;
 `;
 
-const LanguageButton = styled.button`
+export const LanguageButton = styled.button`
   display: inline-flex;
   background-color: transparent;
   outline: none;
@@ -81,19 +81,3 @@ const LanguageButton = styled.button`
   margin: 0;
   cursor: pointer;
 `;
-
-export const StSignInForm = Object.assign(
-  {},
-  {
-    Form,
-    ButtonBox,
-    BottomBox,
-    TextBox,
-    AutoSignInButton,
-    AutoSignInText,
-    Text,
-    Link,
-    LanguageBox,
-    LanguageButton,
-  }
-);

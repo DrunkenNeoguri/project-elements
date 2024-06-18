@@ -1,11 +1,11 @@
 import Button from "../../../common/components/button";
 import Description from "../../../common/components/description";
 import Input from "../../../common/components/input";
-import { isTrueCompareWithValueAndCondition } from "../../../common/policies/input";
+import { isTrueCompareWithValueAndCondition } from "../../../components/input/input.rules";
 import {
   convertEmailErrorMessageByValue,
   convertPasswordErrorMessageByValue,
-} from "../../../common/utils/input";
+} from "../../../components/input/input.utils";
 import { emailRegExp, passwordRegExp } from "../../../utils/util-constants";
 import useSignInForm from "../hooks/use-sign-in-form";
 import { StSignInForm } from "../styles/sign-in-form";
