@@ -4,21 +4,21 @@ export default function LoginLangBox() {
       <span className="font-light10 text-black">언어 - </span>
       <button
         type="button"
-        className="bg-transparent outline-none inline-flex font-bold10 text-primary"
+        className="bg-transparent outline-none inline-flex font-medium10 text-primary"
       >
         English
       </button>
       <span className="font-light10 text-black"> | </span>
       <button
         type="button"
-        className="bg-transparent outline-none inline-flex font-bold10 text-primary"
+        className="bg-transparent outline-none inline-flex font-medium10 text-primary"
       >
         한국어
       </button>
       <span className="font-light10 text-black"> | </span>
       <button
         type="button"
-        className="bg-transparent outline-none inline-flex font-bold10 text-primary"
+        className="bg-transparent outline-none inline-flex font-medium10 text-primary"
       >
         日本語
       </button>

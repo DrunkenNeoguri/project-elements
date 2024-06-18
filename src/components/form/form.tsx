@@ -46,7 +46,7 @@ function Form(props: FormProp) {
   return (
     <FormContext.Provider value={{ formData, handleFormData }}>
       <form
-        className="flex flex-col px-4 box-border gap-6"
+        className="flex flex-col w-full px-4 box-border gap-6"
         onSubmit={handleSubmit}
       >
         {children}
