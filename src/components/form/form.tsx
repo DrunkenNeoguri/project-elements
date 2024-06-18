@@ -46,7 +46,7 @@ function Form(props: FormProp) {
   return (
     <FormContext.Provider value={{ formData, handleFormData }}>
       <form
-        className="flex flex-col w-full px-4 box-border gap-6"
+        className="flex flex-col w-full px-4 box-border"
         onSubmit={handleSubmit}
       >
         {children}
@@ -61,7 +61,7 @@ function Input(props: InputHTMLAttributes<HTMLInputElement>) {
   const formContext = useContext(FormContext);
 
   if (!formContext) {
-    throw new Error("Form.Input must be used within a Form");
+    return;
   }
 
   const { formData, handleFormData } = formContext;
@@ -72,7 +72,7 @@ function Input(props: InputHTMLAttributes<HTMLInputElement>) {
 
   return (
     <input
-      className="bg-invalidLight w-full font-medium16 text-black border border-black rounded m-0 outline-none box-border p-3"
+      className="bg-invalidLight w-full font-medium16 text-black border border-black rounded m-0 outline-none box-border p-3 mt-1 mb-3"
       {...props}
       value={formData[id!] || ""}
       onChange={handleChange}
@@ -104,7 +104,7 @@ function Button(props: ButtonProp) {
   const { children } = props;
   return (
     <button
-      className="bg-primary flex justify-center items-center w-full h-11 border-none rounded border-box font-bold16 text-white cursor-pointer"
+      className="bg-primary flex justify-center items-center w-full h-11 border-none rounded border-box font-bold16 text-white cursor-pointer my-3"
       {...props}
     >
       {children}

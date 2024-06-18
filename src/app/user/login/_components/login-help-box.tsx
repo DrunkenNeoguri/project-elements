@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function LoginHelpBox() {
   return (
-    <div className="flex flex-col gap-3 my-3 w-full justify-center items-center">
+    <div className="flex flex-col gap-3 mb-3 w-full justify-center items-center">
       <div className="flex gap-1">
         <span className="font-light10 text-black">회원이 아니신가요?</span>
         <Link
