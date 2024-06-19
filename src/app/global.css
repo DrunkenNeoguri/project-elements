@@ -21,10 +21,10 @@
   .font-bold20 {
     @apply font-bold whitespace-pre-wrap text-lg;
   }
-  .font-bold22 {
+  .font-bold24 {
     @apply font-bold whitespace-pre-wrap text-xl;
   }
-  .font-bold24 {
+  .font-bold28 {
     @apply font-bold whitespace-pre-wrap text-1xl;
   }
   .font-medium10 {
@@ -45,10 +45,10 @@
   .font-medium20 {
     @apply font-medium whitespace-pre-wrap text-lg;
   }
-  .font-medium22 {
+  .font-medium24 {
     @apply font-medium whitespace-pre-wrap text-xl;
   }
-  .font-medium24 {
+  .font-medium28 {
     @apply font-medium whitespace-pre-wrap text-1xl;
   }
   .font-light10 {
@@ -69,10 +69,10 @@
   .font-light20 {
     @apply font-light whitespace-pre-wrap text-lg;
   }
-  .font-light22 {
-    @apply font-light whitespace-pre-wrap text-xl;
-  }
   .font-light24 {
-    @apply font-light whitespace-pre-wrap text-1xl;
+    @apply font-light whitespace-pre-wrap text-lg;
+  }
+  .font-light28 {
+    @apply font-light whitespace-pre-wrap text-xl;
   }
 }
