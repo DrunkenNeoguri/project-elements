@@ -17,6 +17,7 @@ import {
   MinusIcon,
   PlusIcon,
 } from "../../assets/icons/icons";
+import Button from "../button/button";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -89,31 +90,22 @@ function Input(props: InputHTMLAttributes<HTMLInputElement>) {
 // Label
 type LabelProp = LabelHTMLAttributes<HTMLLabelElement> & {
   children: ReactNode;
+  colorTheme: "black" | "white";
 };
 
 function Label(props: LabelProp) {
-  const { children } = props;
+  const { children, colorTheme, ...rest } = props;
+
+  const labelTheme = {
+    black: "text-black",
+    white: "text-white",
+  };
+
+  const labelStyle = "font-bold12 mb-1 " + labelTheme[colorTheme];
   return (
-    <label className="font-bold12 mb-1 text-black" {...props}>
+    <label className={labelStyle} {...rest}>
       {children}
     </label>
-  );
-}
-
-// Button
-type ButtonProp = ButtonHTMLAttributes<HTMLButtonElement> & {
-  children: ReactNode;
-};
-
-function Button(props: ButtonProp) {
-  const { children } = props;
-  return (
-    <button
-      className="bg-primary flex justify-center items-center w-full h-11 border-none rounded border-box font-bold16 text-white cursor-pointer my-3"
-      {...props}
-    >
-      {children}
-    </button>
   );
 }
 
@@ -123,9 +115,9 @@ type ErrorMessageProp = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 function ErrorMessage(props: ErrorMessageProp) {
-  const { text } = props;
+  const { text, ...rest } = props;
   return (
-    <span className="font-medium10 text-error mt-[1px]" {...props}>
+    <span className="font-medium10 text-error mt-[1px]" {...rest}>
       {text}
     </span>
   );
