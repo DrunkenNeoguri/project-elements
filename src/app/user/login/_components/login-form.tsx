@@ -1,62 +1,70 @@
 "use client";
 
-import { useState } from "react";
+import { CheckedIcon, UnCheckedIcon } from "../../../../assets/icons/icons";
 import Form from "../../../../components/form/form";
+import Modal from "../../../../components/modal/modal";
+import useLoginForm from "../_hooks/use-login-form";
 
 export default function LoginForm() {
-  // const {
-  //   modalState,
-  //   formInput,
-  //   updateFormInput,
-  //   autoSignInState,
-  //   toggleAutoSignInState,
-  //   postSignInProcess,
-  //   errorMsgState,
-  // } = useSignInForm();
-
-  const [loginData, setLoginData] = useState<Record<string, string>>({});
+  const { loginData, setLoginData, rememberLogin, setRememberLogin } =
+    useLoginForm();
 
   const handleSubmit = () => {};
 
   return (
-    <Form
-      onSubmit={handleSubmit}
-      formData={loginData}
-      setFormData={setLoginData}
-    >
-      <div>
-        <Form.Label htmlFor="email">이메일 주소</Form.Label>
-        <Form.Input id="email" type="email" />
-        <Form.ErrorMessage></Form.ErrorMessage>
-      </div>
+    <>
+      <Form
+        onSubmit={handleSubmit}
+        formData={loginData}
+        setFormData={setLoginData}
+      >
+        <div>
+          <Form.Label colorTheme="black" htmlFor="email">
+            이메일 주소
+          </Form.Label>
+          <Form.Input id="email" type="email" />
+          <Form.ErrorMessage></Form.ErrorMessage>
+        </div>
 
-      <div>
-        <Form.Label htmlFor="password">비밀번호</Form.Label>
-        <Form.Input id="password" type="password" />
-        <Form.ErrorMessage></Form.ErrorMessage>
-      </div>
+        <div>
+          <Form.Label colorTheme="black" htmlFor="password">
+            비밀번호
+          </Form.Label>
+          <Form.Input id="password" type="password" />
+          <Form.ErrorMessage></Form.ErrorMessage>
+        </div>
 
-      <Form.Button type="submit">로그인</Form.Button>
-    </Form>
+        <button
+          type="button"
+          className="bg-transparent flex gap-1 border-none outline-none p-0 m-0 mr-auto w-auto cursor-pointer mb-6"
+          onClick={() => setRememberLogin(!rememberLogin)}
+        >
+          {rememberLogin ? <CheckedIcon /> : <UnCheckedIcon />}
+          <span className="font-medium10 text-black w-auto">
+            로그인 상태 유지
+          </span>
+        </button>
+        <Form.Button colorType="primary" type="submit">
+          로그인
+        </Form.Button>
+      </Form>
+
+      <Modal isOpen={rememberLogin} setIsOpen={() => setRememberLogin(false)}>
+        <Modal.Content
+          title="로그인 중 에러 발생"
+          desc="내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"
+        />
+        <Modal.Icon iconType="alert" />
+        <Modal.Button
+          colorTheme="confirm"
+          onClick={() => setRememberLogin(!rememberLogin)}
+        >
+          알겠습니다.
+        </Modal.Button>
+      </Modal>
+    </>
   );
 }
-
-// <Form.AutoSignInButton
-//   type="button"
-//   onClick={() => toggleAutoSignInState()}
-// >
-//   {isClickedAutoSignInButton(autoSignInState) ? (
-//     <CheckedIcon />
-//   ) : (
-//     <UnCheckedIcon />
-//   )}
-//   <Form.AutoSignInText>자동 로그인</Form.AutoSignInText>
-// </Form.AutoSignInButton>
-// <Form.ButtonBox>
-//   <Button text="로그인" type="submit" />
-// </Form.ButtonBox>
-// <Form.BottomBox>
-// </Form.BottomBox>
 
 // {modalState.isOpen && (
 //   <Portal
