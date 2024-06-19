@@ -29,10 +29,12 @@ function Modal(props: ModalProp) {
 
   return (
     <ModalContext.Provider value={{ isOpen, setIsOpen }}>
-      {isOpen ?? (
+      {isOpen && (
         <Portal container={document.body}>
-          <div className="bg-white flex flex-col justify-center items-center text-center border-none rounded-lg h-auto w-[calc(100%-98px)] pt-8 pb-3 px-7">
-            {children}
+          <div className="w-full h-[100vh] bg-shadowModal flex justify-center items-center absolute z-10 top-0 font-gmarketSans">
+            <div className="bg-white flex flex-col justify-center items-center text-center border-none rounded-lg h-auto w-[calc(100%-98px)] max-w-[262px] pt-8 pb-3 px-7 absolute z-20 font-gmarketSans">
+              {children}
+            </div>
           </div>
         </Portal>
       )}
@@ -58,16 +60,13 @@ function Content(props: ContentType) {
   );
 }
 
-// dimd background
 // !TODO - keyframe animation 추가 - ${fadeIn} 0.2s;
-function Dimd() {
-  return (
-    <div className="w-full h-[100vh] bg-shadowModal flex justify-center items-center absolute z-10" />
-  );
-}
-
 // icon
-function Icon(iconType: "alert" | "info" | "confirm" | "checked") {
+function Icon({
+  iconType,
+}: {
+  iconType: "alert" | "info" | "confirm" | "checked";
+}) {
   const iconList = {
     alert: <ModalAlert />,
     info: <ModalInfo />,
@@ -79,30 +78,31 @@ function Icon(iconType: "alert" | "info" | "confirm" | "checked") {
 
 // modal button
 type ButtonType = ButtonHTMLAttributes<HTMLButtonElement> & {
-  text: string;
+  children: ReactNode;
+  colorTheme: "confirm" | "cancel";
 };
 
-function ConfirmButton(props: ButtonType) {
-  const { text } = props;
+function Button(props: ButtonType) {
+  const { children, colorTheme, ...rest } = props;
+
+  const buttonTheme = {
+    confirm: "bg-primary text-white",
+    cancel: "bg-white text-primary",
+  };
+
+  const buttonStyle =
+    "flex justify-center items-center w-full h-9 border-none rounded border-box font-bold12 cursor-pointer mb-3 " +
+    buttonTheme[colorTheme];
+
   return (
-    <button
-      className="bg-primary flex justify-center items-center w-full h-11 border-none rounded border-box font-bold16 text-white cursor-pointer"
-      {...props}
-    >
-      {text}
+    <button className={buttonStyle} type="button" {...rest}>
+      {children}
     </button>
   );
 }
 
-function SubButton(props: ButtonType) {
-  const { text } = props;
-  return <button {...props}>{text}</button>;
-}
-
 Modal.Content = Content;
-Modal.Dimd = Dimd;
-Modal.ConfirmButton = ConfirmButton;
-Modal.SubButton = SubButton;
+Modal.Button = Button;
 Modal.Icon = Icon;
 Modal.Loader = Bar;
 
