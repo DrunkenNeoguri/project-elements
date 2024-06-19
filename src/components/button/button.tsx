@@ -1,9 +1,8 @@
-import { ButtonHTMLAttributes, MouseEvent } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
 export type ButtonPropType = ButtonHTMLAttributes<HTMLButtonElement> & {
-  text: string;
+  children: ReactNode;
   colorType: ButtonColorType;
-  onClick: () => void;
 };
 
 export type ButtonColorType =
@@ -17,7 +16,7 @@ export type ButtonColorType =
   | "black";
 
 export default function Button(props: ButtonPropType) {
-  const { text, colorType, onClick } = props;
+  const { children, colorType, ...rest } = props;
 
   const buttonType = {
     primary: "bg-primary text-white",
@@ -34,14 +33,9 @@ export default function Button(props: ButtonPropType) {
     "flex justify-center items-center w-full h-11 border-none rounded border-box font-bold16 cursor-pointer " +
     buttonType[colorType];
 
-  const activeOnClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    onClick();
-  };
-
   return (
-    <button className={style} {...props} onClick={activeOnClick}>
-      {text}
+    <button className={style} {...rest}>
+      {children}
     </button>
   );
 }
