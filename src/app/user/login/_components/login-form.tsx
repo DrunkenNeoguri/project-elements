@@ -1,5 +1,4 @@
 "use client";
-
 import { CheckedIcon, UnCheckedIcon } from "../../../../assets/icons/icons";
 import Form from "../../../../components/form/form";
 import Modal from "../../../../components/modal/modal";

@@ -4,7 +4,7 @@ import LoginLangBox from "./_components/login-lang-box";
 
 export default function Login() {
   return (
-    <section className="flex flex-col w-full justify-center items-center">
+    <>
       {/* <SignHeader title="로그인" /> */}
       <div className="flex flex-col gap-[10px] box-border mt-6 mb-4 w-full px-4">
         <h2 className="font-bold24 text-black">안녕하세요!</h2>
@@ -15,6 +15,6 @@ export default function Login() {
       <LoginForm />
       <LoginHelpBox />
       <LoginLangBox />
-    </section>
+    </>
   );
 }
