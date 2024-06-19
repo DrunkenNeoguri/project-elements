@@ -14,11 +14,6 @@
 
 //   return (
 //     <StInput.Wrapper>
-//       {hasLabelTextInProps(title) && (
-//         <StInput.Label htmlFor={id} $colorTheme={colorTheme}>
-//           {title}
-//         </StInput.Label>
-//       )}
 //       <StInput.TextInputBox>
 //         <StInput.TextInput
 //           id={id}
@@ -26,23 +21,7 @@
 //           $checkErrorMessage={hasErrorMessage(errorMessage)}
 //           {...props}
 //         />
-//         {isShowValidationIcon({
-//           firstInputCheck,
-//           errorMessage,
-//           isViewMark,
-//         }) && (
-//           <StInput.ValidIcon>
-//             {isShowErrorMessage({ firstInputCheck, errorCondition }) ? (
-//               <IncorrectIcon />
-//             ) : (
-//               <CorrectIcon />
-//             )}
-//           </StInput.ValidIcon>
-//         )}
 //       </StInput.TextInputBox>
-//       {isShowErrorMessage({ firstInputCheck, errorCondition }) && (
-//         <StInput.ErrorMessage>{errorMessage}</StInput.ErrorMessage>
-//       )}
 //     </StInput.Wrapper>
 //   );
 // }
