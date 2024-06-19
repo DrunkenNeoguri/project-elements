@@ -11,7 +11,12 @@ import {
   createContext,
   useContext,
 } from "react";
-import { CorrectIcon, IncorrectIcon } from "../../assets/icons/icons";
+import {
+  CorrectIcon,
+  IncorrectIcon,
+  MinusIcon,
+  PlusIcon,
+} from "../../assets/icons/icons";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -135,8 +140,59 @@ function ValidIcon(validState: boolean) {
   );
 }
 
+type CounterPropType = {
+  id: string;
+  value: number;
+  colorTheme: "black" | "white";
+  increaseFunc: () => void;
+  decreaseFunc: () => void;
+  measure?: string;
+};
+
+function Counter(props: CounterPropType) {
+  const { id, value, colorTheme, measure, increaseFunc, decreaseFunc } = props;
+
+  const spanTheme = {
+    black: "border-black",
+    white: "border-white",
+  };
+
+  const viewStyle =
+    "bg-invalidLight flex justify-center items-center font-medium16 text-black w-full m-0 outline-none box-border border " +
+    spanTheme[colorTheme];
+
+  const handleIncrease = () => {
+    increaseFunc();
+  };
+
+  const handleDecrease = () => {
+    decreaseFunc();
+  };
+
+  return (
+    <div className="flex">
+      <button
+        onClick={handleDecrease}
+        className="bg-primary flex justify-center items-center font-medium12 text-primary border-none outline-none p-0 m-0 w-full max-w-[60px] h-11 rounded-l cursor-pointer drop-shadow-[1px_0_1px_#00000064]"
+      >
+        <MinusIcon />
+      </button>
+      <span id={id} className={viewStyle}>
+        {`${value}${measure ?? ""}`}
+      </span>
+      <button
+        onClick={handleIncrease}
+        className="bg-primary flex justify-center items-center font-medium12 text-primary border-none outline-none p-0 m-0 w-full max-w-[60px] h-11 rounded-r cursor-pointer drop-shadow-[-1px_0_1px_#00000064]"
+      >
+        <PlusIcon />
+      </button>
+    </div>
+  );
+}
+
 Form.Label = Label;
 Form.Input = Input;
+Form.Counter = Counter;
 Form.Button = Button;
 Form.ErrorMessage = ErrorMessage;
 Form.VaildIcon = ValidIcon;
