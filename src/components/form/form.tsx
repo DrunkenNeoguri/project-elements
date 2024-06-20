@@ -61,9 +61,13 @@ function Form(props: FormProp) {
   );
 }
 
+type InputProp = InputHTMLAttributes<HTMLInputElement> & {
+  colorTheme: "black" | "white";
+};
+
 // Input
-function Input(props: InputHTMLAttributes<HTMLInputElement>) {
-  const { id } = props;
+function Input(props: InputProp) {
+  const { id, colorTheme, ...rest } = props;
   const formContext = useContext(FormContext);
 
   if (!formContext) {
@@ -76,10 +80,20 @@ function Input(props: InputHTMLAttributes<HTMLInputElement>) {
     handleFormData(id!, e.currentTarget.value);
   };
 
+  const inputTheme = {
+    black: "border-black",
+    white: "border-white",
+  };
+
+  const colorStyle =
+    "bg-invalidLight w-full font-medium16 text-black border rounded m-0 outline-none box-border p-3 mt-1 mb-3 " +
+    inputTheme[colorTheme];
+
   return (
     <input
-      className="bg-invalidLight w-full font-medium16 text-black border border-black rounded m-0 outline-none box-border p-3 mt-1 mb-3"
-      {...props}
+      id={id}
+      className={colorStyle}
+      {...rest}
       value={formData[id!] || ""}
       onChange={handleChange}
       style={{ color: "#373737" }}
