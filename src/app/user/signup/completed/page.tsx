@@ -1,7 +1,7 @@
 "use client";
 import Button from "../../../../components/button/button";
 
-export default function SignUpVerifySection() {
+export default function SignUpCompleted() {
   return (
     <div className="flex flex-col py-0 box-border">
       <div className="flex flex-col gap-[10px] box-border mt-6 mb-4 w-full px-4">

@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import Button from "../../../../components/button/button";
 
-export default function SignUpVerifySection() {
+export default function ResetCompleted() {
   const router = useRouter();
 
   const handleMoveToLogin = () => {
