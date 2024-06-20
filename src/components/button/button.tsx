@@ -2,10 +2,10 @@ import { ButtonHTMLAttributes, ReactNode } from "react";
 
 export type ButtonPropType = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
-  colorType: ButtonColorType;
+  colorTheme: ButtoncolorTheme;
 };
 
-export type ButtonColorType =
+export type ButtoncolorTheme =
   | "primary"
   | "secondary"
   | "invalid"
@@ -16,7 +16,7 @@ export type ButtonColorType =
   | "black";
 
 export default function Button(props: ButtonPropType) {
-  const { children, colorType, ...rest } = props;
+  const { children, colorTheme, ...rest } = props;
 
   const buttonType = {
     primary: "bg-primary text-white",
@@ -31,7 +31,7 @@ export default function Button(props: ButtonPropType) {
 
   const style =
     "flex justify-center items-center w-full h-11 border-none rounded border-box font-bold16 cursor-pointer " +
-    buttonType[colorType];
+    buttonType[colorTheme];
 
   return (
     <button className={style} {...rest}>
