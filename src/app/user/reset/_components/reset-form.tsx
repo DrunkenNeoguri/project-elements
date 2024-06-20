@@ -25,7 +25,7 @@ export default function ResetForm() {
         <Form.ErrorMessage></Form.ErrorMessage>
       </div>
 
-      <Form.Button colorType="primary" type="submit">
+      <Form.Button colorTheme="primary" type="submit">
         새 비밀번호로 변경
       </Form.Button>
     </Form>

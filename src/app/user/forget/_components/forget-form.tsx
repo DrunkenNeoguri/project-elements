@@ -22,11 +22,11 @@ export default function ForgetForm() {
       </div>
 
       <div className="flex flex-col gap-3">
-        <Form.Button colorType="primary" type="submit">
+        <Form.Button colorTheme="primary" type="submit">
           확인 이메일 보내기
         </Form.Button>
 
-        <Form.Button colorType="invalid" type="button">
+        <Form.Button colorTheme="invalid" type="button">
           돌아가기
         </Form.Button>
       </div>

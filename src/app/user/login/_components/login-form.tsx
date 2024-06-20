@@ -43,7 +43,7 @@ export default function LoginForm() {
             로그인 상태 유지
           </span>
         </button>
-        <Form.Button colorType="primary" type="submit">
+        <Form.Button colorTheme="primary" type="submit">
           로그인
         </Form.Button>
       </Form>
