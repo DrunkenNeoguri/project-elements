@@ -4,7 +4,7 @@
   "version": "0.4.0",
   "type": "module",
   "scripts": {
-    "dev": "set PORT=3001 && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
