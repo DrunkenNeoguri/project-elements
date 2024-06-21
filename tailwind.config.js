@@ -10,6 +10,14 @@ module.exports = {
   ],
   theme: {
     keyframes: {
+      fadeIn: {
+        from: {
+          opacity: "0%",
+        },
+        to: {
+          opacity: "100%",
+        },
+      },
       bar: {
         "0%, 80%, 100%": {
           "box-shadow": "0 0",
@@ -56,6 +64,7 @@ module.exports = {
       },
     },
     animation: {
+      fadeIn: "fadeIn 0.2s",
       roundSpin: "roundSpin 1.1s infinite ease",
       bar: "bar 1s infinite ease-in-out",
     },
@@ -74,6 +83,7 @@ module.exports = {
       fontFamily: {
         gmarketSans: ["var(--font-gmarket-sans)"],
       },
+
       colors: {
         primary: "#1E90FF",
         primaryDeep: "#0F4A84",
