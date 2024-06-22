@@ -6,7 +6,7 @@ import {
   FormHTMLAttributes,
   InputHTMLAttributes,
   LabelHTMLAttributes,
-  ReactNode,
+  PropsWithChildren,
   SetStateAction,
   createContext,
   useContext,
@@ -30,12 +30,12 @@ type FormContextType = {
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
 // Form
-type FormProp = FormHTMLAttributes<HTMLFormElement> & {
-  children: ReactNode;
-  onSubmit: (formData: Record<string, any>) => void;
-  formData: Record<string, any>;
-  setFormData: Dispatch<SetStateAction<Record<string, any>>>;
-};
+type FormProp = FormHTMLAttributes<HTMLFormElement> &
+  PropsWithChildren & {
+    onSubmit: (formData: Record<string, any>) => void;
+    formData: Record<string, any>;
+    setFormData: Dispatch<SetStateAction<Record<string, any>>>;
+  };
 
 function Form(props: FormProp) {
   const { onSubmit, children, formData, setFormData } = props;
@@ -102,10 +102,10 @@ function Input(props: InputProp) {
 }
 
 // Label
-type LabelProp = LabelHTMLAttributes<HTMLLabelElement> & {
-  children: ReactNode;
-  colorTheme: "black" | "white";
-};
+type LabelProp = LabelHTMLAttributes<HTMLLabelElement> &
+  PropsWithChildren & {
+    colorTheme: "black" | "white";
+  };
 
 function Label(props: LabelProp) {
   const { children, colorTheme, ...rest } = props;

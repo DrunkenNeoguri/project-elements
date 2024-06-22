@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode, createContext } from "react";
+import { ButtonHTMLAttributes, PropsWithChildren, createContext } from "react";
 import Portal from "./portal";
 import {
   ModalAlert,
@@ -17,8 +17,7 @@ type ModalContextType = {
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 // Modal
-type ModalProp = {
-  children: ReactNode;
+type ModalProp = PropsWithChildren & {
   isOpen: boolean;
   setIsOpen: () => void;
 };
@@ -84,10 +83,10 @@ function Icon({
 }
 
 // modal button
-type ButtonType = ButtonHTMLAttributes<HTMLButtonElement> & {
-  children: ReactNode;
-  colorTheme: "confirm" | "cancel";
-};
+type ButtonType = ButtonHTMLAttributes<HTMLButtonElement> &
+  PropsWithChildren & {
+    colorTheme: "confirm" | "cancel";
+  };
 
 function Button(props: ButtonType) {
   const { children, colorTheme, ...rest } = props;
