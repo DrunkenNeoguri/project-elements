@@ -17,11 +17,11 @@ export default function ForgetForm() {
         <Form.Label colorTheme="black" htmlFor="email">
           이메일 주소
         </Form.Label>
-        <Form.Input id="email" type="email" />
+        <Form.Input colorTheme="black" id="email" type="email" />
         <Form.ErrorMessage></Form.ErrorMessage>
       </div>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 mt-3">
         <Form.Button colorTheme="primary" type="submit">
           확인 이메일 보내기
         </Form.Button>

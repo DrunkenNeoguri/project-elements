@@ -17,7 +17,7 @@ export default function SignUpForm() {
         <Form.Label colorTheme="black" htmlFor="email">
           이메일 주소
         </Form.Label>
-        <Form.Input id="email" type="email" />
+        <Form.Input colorTheme="black" id="email" type="email" />
         <Form.ErrorMessage></Form.ErrorMessage>
       </div>
 
@@ -25,7 +25,7 @@ export default function SignUpForm() {
         <Form.Label colorTheme="black" htmlFor="password">
           비밀번호
         </Form.Label>
-        <Form.Input id="password" type="password" />
+        <Form.Input colorTheme="black" id="password" type="password" />
         <Form.ErrorMessage></Form.ErrorMessage>
       </div>
 
@@ -33,7 +33,7 @@ export default function SignUpForm() {
         <Form.Label colorTheme="black" htmlFor="confirmPassword">
           비밀번호 재확인
         </Form.Label>
-        <Form.Input id="confirmPassword" type="password" />
+        <Form.Input colorTheme="black" id="confirmPassword" type="password" />
         <Form.ErrorMessage></Form.ErrorMessage>
       </div>
 
@@ -41,7 +41,8 @@ export default function SignUpForm() {
         <Form.Label colorTheme="black" htmlFor="username">
           닉네임
         </Form.Label>
-        <Form.Input id="username" type="text" />
+        <Form.Input colorTheme="black" id="username" type="text" />
+
         <Form.ErrorMessage></Form.ErrorMessage>
       </div>
 

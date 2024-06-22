@@ -18,7 +18,7 @@ export default function Verified() {
 
   return (
     <div className="flex flex-col py-0 box-border">
-      <div className="flex flex-col gap-[10px] box-border mt-6 mb-4 w-full px-4">
+      <div className="flex flex-col gap-[10px] box-border mt-6 mb-4 w-full px-4 break-keep">
         <h2 className="font-bold24 text-black">가입이 완료되었습니다!</h2>
         <span className="font-medium12 text-black">
           {`가입해주셔서 감사합니다!\n\n이제 가입하신 계정으로 로그인한 후,\n여행 준비물을 작성해볼까요?`}
@@ -44,7 +44,11 @@ export default function Verified() {
       </div>
 
       <Modal isOpen={isOpen} setIsOpen={handleSwitchModal}>
-        <Modal.Content title="본인 인증 중 에러 발생" desc="" />
+        <Modal.Content
+          colorTheme="alert"
+          title="본인 인증 중 에러 발생"
+          desc=""
+        />
         <Modal.Icon iconType="alert" />
         <Modal.Button colorTheme="confirm" onClick={handleSwitchModal}>
           로그인 페이지로 돌아가기

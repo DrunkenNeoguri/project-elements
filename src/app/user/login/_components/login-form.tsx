@@ -21,7 +21,7 @@ export default function LoginForm() {
           <Form.Label colorTheme="black" htmlFor="email">
             이메일 주소
           </Form.Label>
-          <Form.Input id="email" type="email" />
+          <Form.Input colorTheme="black" id="email" type="email" />
           <Form.ErrorMessage></Form.ErrorMessage>
         </div>
 
@@ -29,7 +29,7 @@ export default function LoginForm() {
           <Form.Label colorTheme="black" htmlFor="password">
             비밀번호
           </Form.Label>
-          <Form.Input id="password" type="password" />
+          <Form.Input colorTheme="black" id="password" type="password" />
           <Form.ErrorMessage></Form.ErrorMessage>
         </div>
 
@@ -50,6 +50,7 @@ export default function LoginForm() {
 
       <Modal isOpen={rememberLogin} setIsOpen={() => setRememberLogin(false)}>
         <Modal.Content
+          colorTheme="alert"
           title="로그인 중 에러 발생"
           desc="내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"
         />
