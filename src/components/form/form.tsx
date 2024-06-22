@@ -61,13 +61,13 @@ function Form(props: FormProp) {
   );
 }
 
+// Input
 type InputProp = InputHTMLAttributes<HTMLInputElement> & {
-  colorTheme: "black" | "white";
+  colorTheme?: "black" | "white";
 };
 
-// Input
 function Input(props: InputProp) {
-  const { id, colorTheme, ...rest } = props;
+  const { id, colorTheme = "black", ...rest } = props;
   const formContext = useContext(FormContext);
 
   if (!formContext) {
@@ -104,11 +104,11 @@ function Input(props: InputProp) {
 // Label
 type LabelProp = LabelHTMLAttributes<HTMLLabelElement> &
   PropsWithChildren & {
-    colorTheme: "black" | "white";
+    colorTheme?: "black" | "white";
   };
 
 function Label(props: LabelProp) {
-  const { children, colorTheme, ...rest } = props;
+  const { children, colorTheme = "black", ...rest } = props;
 
   const labelTheme = {
     black: "text-black",
@@ -156,7 +156,14 @@ type CounterPropType = {
 };
 
 function Counter(props: CounterPropType) {
-  const { id, value, colorTheme, measure, increaseFunc, decreaseFunc } = props;
+  const {
+    id,
+    value,
+    colorTheme = "black",
+    measure,
+    increaseFunc,
+    decreaseFunc,
+  } = props;
 
   const spanTheme = {
     black: "border-black",
@@ -176,7 +183,7 @@ function Counter(props: CounterPropType) {
   };
 
   return (
-    <div className="flex">
+    <div className="flex mt-1 mb-3">
       <button
         onClick={handleDecrease}
         className="bg-primary flex justify-center items-center font-medium12 text-primary border-none outline-none p-0 m-0 w-full max-w-[60px] h-11 rounded-l cursor-pointer drop-shadow-[1px_0_1px_#00000064]"

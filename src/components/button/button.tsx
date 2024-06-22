@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, ReactNode } from "react";
 
 export type ButtonPropType = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
-  colorTheme: ButtoncolorTheme;
+  colorTheme?: ButtoncolorTheme;
 };
 
 export type ButtoncolorTheme =
@@ -16,7 +16,7 @@ export type ButtoncolorTheme =
   | "black";
 
 export default function Button(props: ButtonPropType) {
-  const { children, colorTheme, ...rest } = props;
+  const { children, colorTheme = "primary", ...rest } = props;
 
   const buttonType = {
     primary: "bg-primary text-white",

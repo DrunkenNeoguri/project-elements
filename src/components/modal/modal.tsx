@@ -85,11 +85,11 @@ function Icon({
 // modal button
 type ButtonType = ButtonHTMLAttributes<HTMLButtonElement> &
   PropsWithChildren & {
-    colorTheme: "confirm" | "cancel";
+    colorTheme?: "confirm" | "cancel";
   };
 
 function Button(props: ButtonType) {
-  const { children, colorTheme, ...rest } = props;
+  const { children, colorTheme = "confirm", ...rest } = props;
 
   const buttonTheme = {
     confirm: "bg-primary text-white",
