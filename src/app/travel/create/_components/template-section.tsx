@@ -27,7 +27,7 @@ export default function TemplateSection() {
       </div>
 
       <Modal isOpen={isOpen} setIsOpen={() => setIsOpen(false)}>
-        <Modal.Content title="여행 정보 등록 불가" desc="" />
+        <Modal.Content colorTheme="alert" title="여행 정보 등록 불가" desc="" />
         <Modal.Icon iconType="alert" />
         <Modal.Button colorTheme="confirm" onClick={() => setIsOpen(!isOpen)}>
           알겠습니다.

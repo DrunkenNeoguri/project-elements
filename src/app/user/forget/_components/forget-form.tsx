@@ -14,17 +14,13 @@ export default function ForgetForm() {
       setFormData={setEmailData}
     >
       <div>
-        <Form.Label colorTheme="black" htmlFor="email">
-          이메일 주소
-        </Form.Label>
-        <Form.Input colorTheme="black" id="email" type="email" />
+        <Form.Label htmlFor="email">이메일 주소</Form.Label>
+        <Form.Input id="email" type="email" />
         <Form.ErrorMessage></Form.ErrorMessage>
       </div>
 
       <div className="flex flex-col gap-3 mt-3">
-        <Form.Button colorTheme="primary" type="submit">
-          확인 이메일 보내기
-        </Form.Button>
+        <Form.Button type="submit">확인 이메일 보내기</Form.Button>
 
         <Form.Button colorTheme="invalid" type="button">
           돌아가기

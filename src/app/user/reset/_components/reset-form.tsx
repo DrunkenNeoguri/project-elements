@@ -10,18 +10,14 @@ export default function ResetForm() {
   return (
     <Form onSubmit={handleSubmit} formData={pwData} setFormData={setPwData}>
       <div>
-        <Form.Label colorTheme="black" htmlFor="password">
-          새 비밀번호
-        </Form.Label>
-        <Form.Input colorTheme="black" id="password" type="password" />
+        <Form.Label htmlFor="password">새 비밀번호</Form.Label>
+        <Form.Input id="password" type="password" />
         <Form.ErrorMessage></Form.ErrorMessage>
       </div>
 
       <div>
-        <Form.Label colorTheme="black" htmlFor="confirmPassword">
-          새 비밀번호 재확인
-        </Form.Label>
-        <Form.Input colorTheme="black" id="confirmPassword" type="password" />
+        <Form.Label htmlFor="confirmPassword">새 비밀번호 재확인</Form.Label>
+        <Form.Input id="confirmPassword" type="password" />
         <Form.ErrorMessage></Form.ErrorMessage>
       </div>
 

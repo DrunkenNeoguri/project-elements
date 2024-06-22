@@ -24,7 +24,7 @@ export default function TravelForm() {
         <Form.Label colorTheme="white" htmlFor="title">
           여행 제목
         </Form.Label>
-        <Form.Input id="title" type="text" />
+        <Form.Input colorTheme="black" id="title" type="text" />
         <Form.ErrorMessage></Form.ErrorMessage>
       </div>
 
@@ -32,7 +32,7 @@ export default function TravelForm() {
         <Form.Label colorTheme="white" htmlFor="departureAt">
           출발 일자
         </Form.Label>
-        <Form.Input id="departureAt" type="date" />
+        <Form.Input colorTheme="black" id="departureAt" type="date" />
         <Form.ErrorMessage></Form.ErrorMessage>
       </div>
 
@@ -55,7 +55,7 @@ export default function TravelForm() {
         <Form.Label colorTheme="white" htmlFor="destination">
           여행지
         </Form.Label>
-        <Form.Input id="destination" type="text" />
+        <Form.Input colorTheme="black" id="destination" type="text" />
         <Form.ErrorMessage></Form.ErrorMessage>
       </div>
     </Form>
