@@ -1,13 +1,15 @@
-import CorrectIcon from "./svg-input-correct-icon.svg";
-import IncorrectIcon from "./svg-input-incorrect-icon.svg";
-import ModalInfo from "./svg-modal-info-icon.svg";
-import ModalAlert from "./svg-modal-alert-icon.svg";
-import ModalChecked from "./svg-modal-checked-icon.svg";
-import ModalConfirm from "./svg-modal-confirm-icon.svg";
-import MinusIcon from "./svg-counter-minus-icon.svg";
-import PlusIcon from "./svg-counter-plus-icon.svg";
-import CheckedIcon from "./svg-sign-in-form-checked-icon.svg";
-import UnCheckedIcon from "./svg-sign-in-form-unchecked-icon.svg";
+import CorrectIcon from "./icon-correct.svg";
+import IncorrectIcon from "./icon-incorrect.svg";
+import ModalInfo from "./icon-modal-info.svg";
+import ModalAlert from "./icon-modal-alert.svg";
+import ModalChecked from "./icon-modal-checked.svg";
+import ModalConfirm from "./icon-modal-confirm.svg";
+import MinusIcon from "./icon-minus.svg";
+import PlusIcon from "./icon-plus.svg";
+import CheckedIcon from "./icon-checked.svg";
+import UnCheckedIcon from "./icon-unchecked.svg";
+import PrevIcon from "./icon-prev.svg";
+import HamburgerIcon from "./icon-hamburger.svg";
 
 export {
   CorrectIcon,
@@ -20,4 +22,6 @@ export {
   PlusIcon,
   CheckedIcon,
   UnCheckedIcon,
+  PrevIcon,
+  HamburgerIcon,
 };
