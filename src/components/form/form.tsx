@@ -30,14 +30,14 @@ type FormContextType = {
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
 // Form
-type FormProp = FormHTMLAttributes<HTMLFormElement> &
+type FormPropType = FormHTMLAttributes<HTMLFormElement> &
   PropsWithChildren & {
     onSubmit: (formData: Record<string, any>) => void;
     formData: Record<string, any>;
     setFormData: Dispatch<SetStateAction<Record<string, any>>>;
   };
 
-function Form(props: FormProp) {
+function Form(props: FormPropType) {
   const { onSubmit, children, formData, setFormData } = props;
 
   const handleFormData = (name: string, value: any) => {
@@ -62,11 +62,11 @@ function Form(props: FormProp) {
 }
 
 // Input
-type InputProp = InputHTMLAttributes<HTMLInputElement> & {
+type InputPropType = InputHTMLAttributes<HTMLInputElement> & {
   colorTheme?: "black" | "white";
 };
 
-function Input(props: InputProp) {
+function Input(props: InputPropType) {
   const { id, colorTheme = "black", ...rest } = props;
   const formContext = useContext(FormContext);
 
@@ -102,12 +102,12 @@ function Input(props: InputProp) {
 }
 
 // Label
-type LabelProp = LabelHTMLAttributes<HTMLLabelElement> &
+type LabelPropType = LabelHTMLAttributes<HTMLLabelElement> &
   PropsWithChildren & {
     colorTheme?: "black" | "white";
   };
 
-function Label(props: LabelProp) {
+function Label(props: LabelPropType) {
   const { children, colorTheme = "black", ...rest } = props;
 
   const labelTheme = {
@@ -124,11 +124,11 @@ function Label(props: LabelProp) {
 }
 
 // Error Message
-type ErrorMessageProp = ButtonHTMLAttributes<HTMLButtonElement> & {
+type ErrorMessagePropType = ButtonHTMLAttributes<HTMLButtonElement> & {
   text?: string;
 };
 
-function ErrorMessage(props: ErrorMessageProp) {
+function ErrorMessage(props: ErrorMessagePropType) {
   const { text, ...rest } = props;
   return (
     <span className="font-medium10 text-error mt-[1px]" {...rest}>

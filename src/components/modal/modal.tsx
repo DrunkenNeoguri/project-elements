@@ -17,12 +17,12 @@ type ModalContextType = {
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 // Modal
-type ModalProp = PropsWithChildren & {
+type ModalPropType = PropsWithChildren & {
   isOpen: boolean;
   setIsOpen: () => void;
 };
 
-function Modal(props: ModalProp) {
+function Modal(props: ModalPropType) {
   const { children, isOpen, setIsOpen } = props;
 
   return (
