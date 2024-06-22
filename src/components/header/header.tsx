@@ -1,36 +1,57 @@
-import { StHeader } from "../styles/header";
-import CreateListIcon from "../../assets/icons/svg-header-create-list-icon.svg?react";
-import BackArrowIcon from "../../assets/icons/svg-header-arrow-icon.svg?react";
-import SideBarIcon from "../../assets/icons/svg-header-sidebar-icon.svg?react";
-import SideBar from "./sidebar";
-import useHeader from "../hooks/use-header";
-import { HeaderPropType } from "../types/header";
-import { placeSVGIconByHeaderType } from "../utils/header";
+"use client";
+import { useRouter } from "next/navigation";
+import { ReactNode, useState } from "react";
+import { HamburgerIcon, PrevIcon } from "../../assets/icons/icons";
+
+type HeaderPropType = {
+  activePrev: boolean;
+  useSideBar: boolean;
+  actionButton?: ReactNode;
+  title?: string;
+};
+
+// <SideBar openState={openState} onClose={() => closeSideBar()} />
 
 export default function Header(props: HeaderPropType) {
-  const { headerType } = props;
-  const {
-    activeShadowState,
-    openState,
-    activeLeftButton,
-    activeRightButton,
-    closeSideBar,
-  } = useHeader();
-  const leftIconList = [<CreateListIcon />, <BackArrowIcon />];
-  const rightIconList = [<SideBarIcon />, <></>];
+  const { activePrev, useSideBar, actionButton, title } = props;
+  const router = useRouter();
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const addPrevCursor = activePrev ? "cursor-pointer" : "cursor-default";
+  const addSideBarCursor = useSideBar ? "cursor-pointer" : "cursor-default";
+
+  const handleMoveToPrevPage = () => {
+    router.back();
+  };
+
+  const handleSwitchSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   return (
-    <>
-      <StHeader.Header $activeShadow={activeShadowState}>
-        <StHeader.Button onClick={() => activeLeftButton(headerType)}>
-          {leftIconList[placeSVGIconByHeaderType(headerType)]}
-        </StHeader.Button>
-        {/* <StHeader.Title>제목</StHeader.Title> */}
-        <StHeader.Button onClick={() => activeRightButton(headerType)}>
-          {rightIconList[placeSVGIconByHeaderType(headerType)]}
-        </StHeader.Button>
-      </StHeader.Header>
-      <SideBar openState={openState} onClose={() => closeSideBar()} />
-    </>
+    <header className="w-full h-auto px-4 py-6 bg-primaryDeep text-white rounded-b-xl drop-shadow-[0px_4px_4px_#00000064] ease-in-out duration-[200ms] fixed max-w-[379px]">
+      <div className="h-6 w-full flex justify-center">
+        <button
+          className={"w-6 h-4 bg-transparent mr-auto ml-0 " + addPrevCursor}
+          disabled={!activePrev}
+          onClick={handleMoveToPrevPage}
+        >
+          {activePrev && <PrevIcon />}
+        </button>
+
+        {title && <h1 className="font-medium24 text-white">{title}</h1>}
+        {actionButton}
+
+        <button
+          className={
+            "w-6 h-4 bg-transparent mr-auto ml-0 cursor-pointer" +
+            addSideBarCursor
+          }
+          disabled={!useSideBar}
+          onClick={handleSwitchSidebar}
+        >
+          {useSideBar && <HamburgerIcon />}
+        </button>
+      </div>
+    </header>
   );
 }
