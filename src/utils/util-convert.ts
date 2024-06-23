@@ -36,6 +36,8 @@ export const convertFirebaseErrorMessageByFirebaseErrorCode = (
       return `인증 시간이 만료되었습니다.\n로그인하셔서 이메일 인증을 다시 시도해주세요.`;
     case "auth/invalid-action-code":
       return `인증 처리가 유효하지 않습니다.\n접속한 링크가 정확한지 확인해주세요.`;
+    case "auth/too-many-requests":
+      return `계속된 요청으로 서버 부하 방지를 위해 잠시 동안 요청을 중단했습니다.\n잠시 후, 다시 시도해주세요.`;
     default:
       return `알 수 없는 에러입니다.\n관리자에게 문의해주세요.`;
   }

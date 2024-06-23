@@ -2,13 +2,27 @@
 import { CheckedIcon, UnCheckedIcon } from "../../../../assets/icons/icons";
 import Form from "../../../../components/form/form";
 import Modal from "../../../../components/modal/modal";
+import AuthService from "../../../../services/auth-services";
 import useLoginForm from "../_hooks/use-login-form";
+import {
+  changeEmailErrorMsg,
+  changePasswordErrorMsg,
+  checkLoginDataTypeCheck,
+} from "../utils/login.utils";
 
 export default function LoginForm() {
   const { loginData, setLoginData, rememberLogin, setRememberLogin } =
     useLoginForm();
 
-  const handleSubmit = () => {};
+  const handleSubmit = async () => {
+    const validityCheck = checkLoginDataTypeCheck(loginData);
+
+    if (validityCheck) {
+      const loginState = await AuthService.postLoginProcess(loginData);
+      if (loginState === "OK") {
+      }
+    }
+  };
 
   return (
     <>
@@ -17,16 +31,20 @@ export default function LoginForm() {
         formData={loginData}
         setFormData={setLoginData}
       >
-        <div>
+        <div className="flex flex-col mb-3">
           <Form.Label htmlFor="email">이메일 주소</Form.Label>
           <Form.Input id="email" type="email" />
-          <Form.ErrorMessage></Form.ErrorMessage>
+          <Form.ErrorMessage>
+            {changeEmailErrorMsg(loginData.email)}
+          </Form.ErrorMessage>
         </div>
 
-        <div>
+        <div className="flex flex-col mb-3">
           <Form.Label htmlFor="password">비밀번호</Form.Label>
           <Form.Input id="password" type="password" />
-          <Form.ErrorMessage></Form.ErrorMessage>
+          <Form.ErrorMessage>
+            {changePasswordErrorMsg(loginData.password)}
+          </Form.ErrorMessage>
         </div>
 
         <button

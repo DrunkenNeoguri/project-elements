@@ -1,9 +1,9 @@
 import {
-  ButtonHTMLAttributes,
   ChangeEvent,
   Dispatch,
   FormEvent,
   FormHTMLAttributes,
+  HTMLAttributes,
   InputHTMLAttributes,
   LabelHTMLAttributes,
   PropsWithChildren,
@@ -86,7 +86,7 @@ function Input(props: InputPropType) {
   };
 
   const colorStyle =
-    "bg-invalidLight w-full font-medium16 text-black border rounded m-0 outline-none box-border p-3 mt-1 mb-3 " +
+    "bg-invalidLight w-full font-medium16 text-black border rounded m-0 outline-none box-border p-3 mt-1 " +
     inputTheme[colorTheme];
 
   return (
@@ -124,15 +124,13 @@ function Label(props: LabelPropType) {
 }
 
 // Error Message
-type ErrorMessagePropType = ButtonHTMLAttributes<HTMLButtonElement> & {
-  text?: string;
-};
+type ErrorMessagePropType = HTMLAttributes<HTMLSpanElement> & PropsWithChildren;
 
 function ErrorMessage(props: ErrorMessagePropType) {
-  const { text, ...rest } = props;
+  const { children, ...rest } = props;
   return (
     <span className="font-medium10 text-error mt-[1px]" {...rest}>
-      {text}
+      {children}
     </span>
   );
 }

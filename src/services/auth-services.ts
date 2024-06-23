@@ -13,36 +13,41 @@ import {
 import { firebaseAuth, firestore } from "../utils/util-firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
+import { AccountFormType } from "../types/user.types";
 
 // 문제 없이 200일 시, return "OK";
 class AuthService {
-  static async postLoginProcess(formData: Record<string, string>) {
+  static async postLoginProcess(
+    formData: Pick<AccountFormType, "email" | "password">
+  ) {
     try {
       const auth = firebaseAuth;
       auth.languageCode = "ko";
       // const persistenceSetting =
       //   convertPersistenceByAutoSignInState(autoSignInState);
       // await setPersistence(auth, persistenceSetting);
-      const signInResult = await signInWithEmailAndPassword(
+      const loginResult = await signInWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
 
-      if (signInResult !== undefined) {
-        if (!signInResult.user.emailVerified) {
+      if (loginResult !== undefined) {
+        if (!loginResult.user.emailVerified) {
           return new Error(
             "본 계정은 아직 본인 인증이 완료되지 않았습니다.\n아래 버튼을 눌러 본인 인증을 진행해주세요."
           );
         }
 
         const userInfo = await getDoc(
-          doc(firestore, `users`, signInResult.user.uid)
+          doc(firestore, `users`, loginResult.user.uid)
         );
         localStorage.setItem("userInfo", String(userInfo.data()));
-        return;
       }
+      return "OK";
     } catch (error) {
+      console.log(error);
+      return new Error(convertUnknownTypeErrorToStringMessage(error));
       // const errorMessage = convertUnknownTypeErrorToStringMessage(error);
       // return setModalState({
       //   isOpen: true,
@@ -53,11 +58,7 @@ class AuthService {
     }
   }
 
-  static async postSignUpProcess(formData: {
-    email: string;
-    password: string;
-    username: string;
-  }) {
+  static async postSignUpProcess(formData: AccountFormType) {
     try {
       const auth = firebaseAuth;
       auth.languageCode = "ko";
@@ -85,17 +86,20 @@ class AuthService {
       }
 
       await sendEmailVerification(userData);
+      return "OK";
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));
     }
   }
 
-  static async postFindPasswordProcess(formData: { email: string }) {
+  static async postForgetPasswordProcess(
+    formData: Pick<AccountFormType, "email">
+  ) {
     try {
       const auth = firebaseAuth;
       auth.languageCode = "ko";
       await sendPasswordResetEmail(auth, formData.email);
-      return true;
+      return "OK";
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));
     }
@@ -103,7 +107,7 @@ class AuthService {
 
   static async postResetPasswordProcess(
     actionCode: string,
-    formData: { password: string }
+    formData: Pick<AccountFormType, "password" | "confirmPassword">
   ) {
     try {
       const auth = firebaseAuth;
@@ -116,7 +120,7 @@ class AuthService {
       // }
       await verifyPasswordResetCode(auth, actionCode);
       await confirmPasswordReset(auth, actionCode, formData.password);
-      return true;
+      return "OK";
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));
     }
@@ -148,7 +152,7 @@ class AuthService {
         });
       });
 
-      return true;
+      return "OK";
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));
     }

@@ -1,19 +1,30 @@
 "use client";
 import Form from "../../../../components/form/form";
+import AuthService from "../../../../services/auth-services";
 import useForgetForm from "../_hooks/use-forget-form";
+import { checkForgetDataTypeCheck } from "../utils/forget.utils";
 
 export default function ForgetForm() {
-  const { emailData, setEmailData } = useForgetForm();
+  const { forgetData, setForgetData } = useForgetForm();
 
-  const handleSubmit = () => {};
+  const handleSubmit = async () => {
+    const validityCheck = checkForgetDataTypeCheck(forgetData);
 
+    if (validityCheck) {
+      const forgetState = await AuthService.postForgetPasswordProcess(
+        forgetData
+      );
+      if (forgetState === "OK") {
+      }
+    }
+  };
   return (
     <Form
       onSubmit={handleSubmit}
-      formData={emailData}
-      setFormData={setEmailData}
+      formData={forgetData}
+      setFormData={setForgetData}
     >
-      <div>
+      <div className="flex flex-col mb-3">
         <Form.Label htmlFor="email">이메일 주소</Form.Label>
         <Form.Input id="email" type="email" />
         <Form.ErrorMessage></Form.ErrorMessage>
