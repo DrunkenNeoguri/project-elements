@@ -2,7 +2,7 @@
 import Form from "../../../../components/form/form";
 import AuthService from "../../../../services/auth-services";
 import useForgetForm from "../_hooks/use-forget-form";
-import { checkForgetDataTypeCheck } from "../utils/forget.utils";
+import { checkForgetDataTypeCheck } from "../_utils/forget.utils";
 
 export default function ForgetForm() {
   const { forgetData, setForgetData } = useForgetForm();

@@ -2,7 +2,7 @@
 import Form from "../../../../components/form/form";
 import AuthService from "../../../../services/auth-services";
 import useResetForm from "../_hooks/use-reset-form";
-import { checkResetDataTypeCheck } from "../utils/reset.utils";
+import { checkResetDataTypeCheck } from "../_utils/reset.utils";
 
 export default function ResetForm() {
   const { resetData, setResetData } = useResetForm();

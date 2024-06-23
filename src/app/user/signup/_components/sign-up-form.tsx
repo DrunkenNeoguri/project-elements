@@ -2,7 +2,7 @@
 import Form from "../../../../components/form/form";
 import AuthService from "../../../../services/auth-services";
 import useSignUpForm from "../_hooks/use-sign-up-form";
-import { checkSignUpDataTypeCheck } from "../utils/signup.utils";
+import { checkSignUpDataTypeCheck } from "../_utils/signup.utils";
 
 export default function SignUpForm() {
   const { signUpData, setSignUpData } = useSignUpForm();

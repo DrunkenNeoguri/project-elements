@@ -8,7 +8,7 @@ import {
   changeEmailErrorMsg,
   changePasswordErrorMsg,
   checkLoginDataTypeCheck,
-} from "../utils/login.utils";
+} from "../_utils/login.utils";
 
 export default function LoginForm() {
   const { loginData, setLoginData, rememberLogin, setRememberLogin } =
