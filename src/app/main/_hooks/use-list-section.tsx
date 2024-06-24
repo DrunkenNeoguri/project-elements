@@ -14,7 +14,7 @@ export default function useListSection() {
       return;
     }
     const getTravelList = async () => {
-      const listState = await TravelService.getUserTravelLists(user.uid);
+      const listState = await TravelService.getUserTravelList(user.uid);
       if (listState instanceof Error) {
         return;
       }

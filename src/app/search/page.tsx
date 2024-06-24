@@ -1,17 +1,14 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
-import useListSection from "../main/_hooks/use-list-section";
 import { RoundDot } from "../../components/loader/loader";
 import { UndoIcon } from "../../assets/icons/icons";
 import Ticket from "../../components/ticket/ticket";
+import useSearch from "./_hooks/use-search";
 
 export default function MainSearch() {
-  const { list } = useListSection();
-
-  // ! TODO: Hook 분리
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const keyword = searchParams?.get("keyword") ?? null;
+  const { list, router, keyword } = useSearch();
+  const handleMoveToMain = () => {
+    return router.push("/main");
+  };
 
   if (!list) {
     return (
@@ -20,29 +17,6 @@ export default function MainSearch() {
       </section>
     );
   }
-
-  // ! TODO : 필터링 관련 firestore에서 처리할 수 있는지 확인 필요
-  // ! TODO : 없으면 검색 로직까지 내부적으로 별도로 만들도록 하고 Hook 별도 분리
-  const getSearchlistByFiltering = () => {
-    if (keyword !== null) {
-      const searchList = list.filter((data) => {
-        return (
-          data.title.includes(keyword) || data.destination.includes(keyword)
-        );
-      });
-
-      return searchList.sort(
-        (a, b) =>
-          new Date(a.departureAt).getTime() - new Date(b.departureAt).getTime()
-      );
-    } else {
-      return [];
-    }
-  };
-
-  const handleMoveToMain = () => {
-    return router.push("/main");
-  };
 
   return (
     <section className="flex flex-col gap-1 py-6 px-4 w-full box-border">
@@ -61,13 +35,13 @@ export default function MainSearch() {
       </div>
 
       <div className="flex flex-col gap-4">
-        {getSearchlistByFiltering().length === 0 ? (
+        {list.length === 0 ? (
           <section>
             <img src="/images/img-search-result-empty.webp" alt="" />
             <p>{`검색 결과, 해당하는 여행 계획이 없어요.\n다른 단어로 다시 검색해보시겠어요?`}</p>
           </section>
         ) : (
-          getSearchlistByFiltering()?.map((ticket) => {
+          list?.map((ticket) => {
             return <Ticket key={ticket.id} {...ticket} />;
           })
         )}
