@@ -58,7 +58,6 @@ class AuthService {
       }
       return "OK";
     } catch (error) {
-      console.log(error);
       return new Error(convertUnknownTypeErrorToStringMessage(error));
       // const errorMessage = convertUnknownTypeErrorToStringMessage(error);
       // return setModalState({
