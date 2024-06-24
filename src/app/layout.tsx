@@ -1,4 +1,5 @@
 import { GmarketSansOFT } from "../fonts/fonts";
+import AuthProvider from "../providers/auth-provider";
 import "./global.css";
 
 export default function RootLayout({
@@ -9,7 +10,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={`${GmarketSansOFT.variable}`}>
       <head>
-        <link rel="icon" type="image/svg+xml" href="/icons/icon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
         <title>준비물 챙겼어?</title>
         <meta name="description" content="My App is a..." />
       </head>
@@ -18,7 +19,7 @@ export default function RootLayout({
           className="w-full relative bg-white overflow-scroll box-border max-w-[379px] min-h-[100vh] font-gmarketSans"
           id="root"
         >
-          {children}
+          <AuthProvider>{children}</AuthProvider>
         </main>
       </body>
     </html>
