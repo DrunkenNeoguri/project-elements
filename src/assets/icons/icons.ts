@@ -10,6 +10,9 @@ import CheckedIcon from "./icon-checked.svg";
 import UnCheckedIcon from "./icon-unchecked.svg";
 import PrevIcon from "./icon-prev.svg";
 import HamburgerIcon from "./icon-hamburger.svg";
+import DomesticIcon from "./icon-domestic.svg";
+import ForeignIcon from "./icon-foreign.svg";
+import UndoIcon from "./icon-undo.svg";
 
 export {
   CorrectIcon,
@@ -24,4 +27,7 @@ export {
   UnCheckedIcon,
   PrevIcon,
   HamburgerIcon,
+  DomesticIcon,
+  ForeignIcon,
+  UndoIcon,
 };
