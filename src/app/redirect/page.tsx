@@ -2,6 +2,8 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import { Bar } from "../../components/loader/loader";
+import AuthService from "../../services/auth-services";
 
 export default function Redirect() {
   const router = useRouter();
@@ -11,9 +13,17 @@ export default function Redirect() {
 
   useEffect(() => {
     if (enteredMode === "verifyEmail") {
-      setTimeout(() => {
-        return router.push(`/user/verified?actionCode=${actionCode}`);
-      }, 100);
+      const activeValidation = async () => {
+        const validityState = await AuthService.updateAccountVerification(
+          actionCode
+        );
+        if (validityState === "OK") {
+          setTimeout(() => {
+            return router.push(`/user/verified?actionCode=${actionCode}`);
+          }, 100);
+        }
+      };
+      activeValidation();
     }
     if (enteredMode === "resetPassword") {
       setTimeout(() => {
@@ -22,5 +32,9 @@ export default function Redirect() {
     }
   }, [actionCode, enteredMode, searchParams, router]);
 
-  return <></>;
+  return (
+    <div className="w-full h-[100vh] flex justify-center items-center relative bg-[#37373780]">
+      <Bar />
+    </div>
+  );
 }
