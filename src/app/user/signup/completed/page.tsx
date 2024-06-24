@@ -1,7 +1,10 @@
 "use client";
+import { useSearchParams } from "next/navigation";
 import Button from "../../../../components/button/button";
 
 export default function SignUpCompleted() {
+  const searchParams = useSearchParams();
+
   return (
     <>
       <div className="flex flex-col gap-[10px] box-border my-6 w-full px-4 break-keep">
@@ -14,7 +17,9 @@ export default function SignUpCompleted() {
       <div className="flex flex-col gap-2 box-border mx-0 px-4 w-full">
         <span className="font-bold12 text-black">작성해주신 이메일 주소</span>
 
-        <span className="font-medium16 text-black underline">email</span>
+        <span className="font-medium16 text-black underline">
+          {searchParams?.get("email")}
+        </span>
       </div>
 
       <div className="px-4 w-full my-6">

@@ -7,7 +7,7 @@ export default function LoginHelpBox() {
         <span className="font-light10 text-black">회원이 아니신가요?</span>
         <Link
           className="font-light10 text-primary underline"
-          href="/users/signup"
+          href="/user/signup"
         >
           회원가입
         </Link>
@@ -18,7 +18,7 @@ export default function LoginHelpBox() {
         </span>
         <Link
           className="font-light10 text-primary underline"
-          href="/users/find"
+          href="/user/forget"
         >
           비밀번호 찾기
         </Link>

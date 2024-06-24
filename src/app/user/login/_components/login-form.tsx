@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { CheckedIcon, UnCheckedIcon } from "../../../../assets/icons/icons";
 import Form from "../../../../components/form/form";
 import Modal from "../../../../components/modal/modal";
@@ -13,6 +14,7 @@ import {
 export default function LoginForm() {
   const { loginData, setLoginData, rememberLogin, setRememberLogin } =
     useLoginForm();
+  const router = useRouter();
 
   const handleSubmit = async () => {
     const validityCheck = checkLoginDataTypeCheck(loginData);
@@ -20,6 +22,7 @@ export default function LoginForm() {
     if (validityCheck) {
       const loginState = await AuthService.postLoginProcess(loginData);
       if (loginState === "OK") {
+        router.push("/main");
       }
     }
   };
