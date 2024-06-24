@@ -4,9 +4,9 @@ import { TravelBasicInfoType } from "../types/template.types";
 import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
 
 class TravelService {
-  static async getUserTravelLists(userUid: string) {
+  static async getUserTravelList(userUid: string, keyword?: string | null) {
     try {
-      const listsArray: TravelBasicInfoType[] = [];
+      let travelList: TravelBasicInfoType[] = [];
       const docsState = await getDocs(
         collection(firestore, `travels`, userUid, "docs")
       );
@@ -20,7 +20,7 @@ class TravelService {
           destination,
           id,
         } = doc.data();
-        listsArray.push({
+        travelList.push({
           travelType,
           title,
           departureAt,
@@ -30,7 +30,20 @@ class TravelService {
         });
       });
 
-      return listsArray;
+      if (keyword) {
+        travelList = travelList.filter((data) => {
+          return (
+            data.title.includes(keyword) || data.destination.includes(keyword)
+          );
+        });
+
+        travelList.sort(
+          (a, b) =>
+            new Date(a.departureAt).getTime() -
+            new Date(b.departureAt).getTime()
+        );
+      }
+      return travelList;
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));
     }
