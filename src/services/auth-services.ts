@@ -1,5 +1,7 @@
 import {
   applyActionCode,
+  browserLocalPersistence,
+  browserSessionPersistence,
   confirmPasswordReset,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -17,15 +19,25 @@ import { AccountFormType } from "../types/user.types";
 
 // 문제 없이 200일 시, return "OK";
 class AuthService {
+  static async updateAccountPersistenceState(rememberState: boolean) {
+    try {
+      const auth = firebaseAuth;
+      await setPersistence(
+        auth,
+        rememberState ? browserLocalPersistence : browserSessionPersistence
+      );
+    } catch (error) {
+      return new Error(convertUnknownTypeErrorToStringMessage(error));
+    }
+  }
+
   static async postLoginProcess(
     formData: Pick<AccountFormType, "email" | "password">
   ) {
     try {
       const auth = firebaseAuth;
       auth.languageCode = "ko";
-      // const persistenceSetting =
-      //   convertPersistenceByAutoSignInState(autoSignInState);
-      // await setPersistence(auth, persistenceSetting);
+
       const loginResult = await signInWithEmailAndPassword(
         auth,
         formData.email,
@@ -111,13 +123,12 @@ class AuthService {
   ) {
     try {
       const auth = firebaseAuth;
-      // const actionCode = searchParams.get("actionCode");
-      // if (actionCode === null) {
-      //   return setOpenState({
-      //     state: true,
-      //     message: `유효하지 않은 접근입니다.\n비밀번호 찾기 페이지로 돌아가\n절차를 다시 진행해주세요.`,
-      //   });
-      // }
+
+      if (actionCode === null) {
+        return new Error(
+          `유효하지 않은 접근입니다.\n비밀번호 찾기 페이지로 돌아가\n절차를 다시 진행해주세요.`
+        );
+      }
       await verifyPasswordResetCode(auth, actionCode);
       await confirmPasswordReset(auth, actionCode, formData.password);
       return "OK";
@@ -126,8 +137,10 @@ class AuthService {
     }
   }
 
-  static async updateAccountVerificationState(actionCode: string) {
-    if (actionCode === null) {
+  static async updateAccountVerification(
+    actionCode: string | null | undefined
+  ) {
+    if (actionCode === null || !actionCode) {
       return new Error(
         "본인 인증에 실패했습니다.\n로그인 페이지로 돌아가 로그인 후,\n본인 인증을 다시 진행해주세요."
       );
