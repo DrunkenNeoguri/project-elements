@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 import { HamburgerIcon, PrevIcon } from "../../assets/icons/icons";
+import useHeader from "./use-header";
 
 type HeaderPropType = {
   activePrev?: boolean;
@@ -22,9 +23,15 @@ export default function Header(props: HeaderPropType) {
     title,
   } = props;
   const router = useRouter();
+  const { shadow } = useHeader();
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
+  // dynamic css styling
   const addPrevCursor = activePrev ? "cursor-pointer" : "cursor-default";
   const addSideBarCursor = useSideBar ? "cursor-pointer" : "cursor-default";
+  const addViewShadow = shadow
+    ? "drop-shadow-[0px_4px_4px_#00000064] ease-in-out duration-[200ms]"
+    : "";
 
   const handleMoveToPrevPage = () => {
     router.back();
@@ -35,7 +42,12 @@ export default function Header(props: HeaderPropType) {
   };
 
   return (
-    <header className="w-full h-auto px-4 py-6 bg-primaryDeep text-white rounded-b-xl drop-shadow-[0px_4px_4px_#00000064] ease-in-out duration-[200ms] fixed max-w-[379px] z-50">
+    <header
+      className={
+        "w-full h-auto px-4 py-6 bg-primaryDeep text-white rounded-b-xl fixed max-w-[379px] z-50 " +
+        addViewShadow
+      }
+    >
       <div className="h-6 w-full flex justify-center">
         {activePrev && (
           <button
