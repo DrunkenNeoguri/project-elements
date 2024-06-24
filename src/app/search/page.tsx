@@ -2,8 +2,8 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import useListSection from "../main/_hooks/use-list-section";
 import { RoundDot } from "../../components/loader/loader";
-import TravelTicket from "../main/_components/travel-ticket";
 import { UndoIcon } from "../../assets/icons/icons";
+import Ticket from "../../components/ticket/ticket";
 
 export default function MainSearch() {
   const { list } = useListSection();
@@ -68,7 +68,7 @@ export default function MainSearch() {
           </section>
         ) : (
           getSearchlistByFiltering()?.map((ticket) => {
-            return <TravelTicket key={ticket.id} {...ticket} />;
+            return <Ticket key={ticket.id} {...ticket} />;
           })
         )}
       </div>

@@ -1,5 +1,5 @@
+import Ticket from "../../../components/ticket/ticket";
 import { TravelBasicInfoType } from "../../../types/template.types";
-import TravelTicket from "./travel-ticket";
 
 type TravelListPropsType = {
   title: string;
@@ -16,7 +16,7 @@ export default function TravelList(props: TravelListPropsType) {
 
       <div className="flex flex-col gap-4">
         {lists?.map((ticket) => {
-          return <TravelTicket key={ticket.id} {...ticket} />;
+          return <Ticket key={ticket.id} {...ticket} />;
         })}
       </div>
     </section>

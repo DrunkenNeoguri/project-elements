@@ -1,21 +1,15 @@
-import { useRouter } from "next/navigation";
-import { DomesticIcon, ForeignIcon } from "../../../assets/icons/icons";
-import { TravelBasicInfoType } from "../../../types/template.types";
+import Link from "next/link";
+import { DomesticIcon, ForeignIcon } from "../../assets/icons/icons";
+import { TravelBasicInfoType } from "../../types/template.types";
 
-export default function TravelTicket(props: TravelBasicInfoType) {
-  const router = useRouter();
+export default function Ticket(props: TravelBasicInfoType) {
   const { id, travelType, title, departureAt, travelPeriod, destination } =
     props;
 
-  const handleMoveToListPage = () => {
-    return router.push(`/travel/main?travelId=${id}`);
-  };
-
   return (
-    <button
+    <Link
       id={id}
-      type="button"
-      onClick={handleMoveToListPage}
+      href={`/travel/main?travelId=${id}`}
       className="bg-white outline-none border-none rounded-md p-0 m-0 w-full box-border overflow-hidden cursor-pointer drop-shadow-[0_4px_4px_#00000064]"
     >
       {travelType === "domestic" ? (
@@ -69,6 +63,6 @@ export default function TravelTicket(props: TravelBasicInfoType) {
           className="max-w-6 max-h-[84px]"
         />
       </div>
-    </button>
+    </Link>
   );
 }
