@@ -1,15 +1,10 @@
-export type TravelCaseType = "domestic" | "foreign";
-
-export type TravelInfoType = {
-  travelType: TravelCaseType;
+export type TravelBasicInfoType = {
+  id: string;
+  travelType: "domestic" | "foreign";
   title: string;
   departureAt: string;
   travelPeriod: number;
   destination: string;
-};
-
-export type TravelListType = TravelInfoType & {
-  id: string;
 };
 
 export type ElementCategoryColorType = "red" | "blue" | "green";
