@@ -13,6 +13,13 @@ import HamburgerIcon from "./icon-hamburger.svg";
 import DomesticIcon from "./icon-domestic.svg";
 import ForeignIcon from "./icon-foreign.svg";
 import UndoIcon from "./icon-undo.svg";
+import SearchIcon from "./icon-search.svg";
+import ActiveSearchIcon from "./icon-search-active.svg";
+import FolderIcon from "./icon-folder.svg";
+import DocsSearchIcon from "./icon-docs-search.svg";
+import NewsIcon from "./icon-news.svg";
+import CurrencyIcon from "./icon-currency.svg";
+import ConfigIcon from "./icon-config.svg";
 
 export {
   CorrectIcon,
@@ -30,4 +37,11 @@ export {
   DomesticIcon,
   ForeignIcon,
   UndoIcon,
+  SearchIcon,
+  ActiveSearchIcon,
+  FolderIcon,
+  DocsSearchIcon,
+  NewsIcon,
+  CurrencyIcon,
+  ConfigIcon,
 };

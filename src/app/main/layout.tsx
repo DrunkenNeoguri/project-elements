@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         </div>
       }
     >
-      <Header useSideBar={false} />
+      <Header activeSearch={true} useSideBar={true} />
       <MainHeader />
 
       <section className="flex flex-col w-full justify-center items-center">

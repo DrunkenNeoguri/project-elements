@@ -1,8 +1,14 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { ReactNode, useState } from "react";
-import { HamburgerIcon, PrevIcon } from "../../assets/icons/icons";
+import { ChangeEvent, FormEvent, ReactNode } from "react";
+import {
+  ActiveSearchIcon,
+  HamburgerIcon,
+  PrevIcon,
+  SearchIcon,
+} from "../../assets/icons/icons";
 import useHeader from "./use-header";
+import SideBar from "../sidebar/sidebar";
+import Portal from "../modal/portal";
 
 type HeaderPropType = {
   activePrev?: boolean;
@@ -22,9 +28,16 @@ export default function Header(props: HeaderPropType) {
     actionButton,
     title,
   } = props;
-  const router = useRouter();
-  const { shadow } = useHeader();
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const {
+    shadow,
+    router,
+    openSearch,
+    setOpenSearch,
+    keyword,
+    setKeyword,
+    openSidebar,
+    setOpenSidebar,
+  } = useHeader();
 
   // dynamic css styling
   const addPrevCursor = activePrev ? "cursor-pointer" : "cursor-default";
@@ -34,55 +47,93 @@ export default function Header(props: HeaderPropType) {
     : "";
 
   const handleMoveToPrevPage = () => {
-    router.back();
+    return router.back();
+  };
+
+  const handleSwitchSearch = () => {
+    return setOpenSearch(true);
+  };
+
+  const handleChangeKeyword = (e: ChangeEvent<HTMLInputElement>) => {
+    return setKeyword(e.currentTarget.value);
   };
 
   const handleSwitchSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+    document.body.style.overflow =
+      document.body.style.overflow !== "hidden" ? "hidden" : "auto";
+    return setOpenSidebar(!openSidebar);
+  };
+
+  const handleSearchKeyword = (e: FormEvent) => {
+    e.preventDefault();
+    return router.push(`/search?keyword=${keyword}`);
   };
 
   return (
-    <header
-      className={
-        "w-full h-auto px-4 py-6 bg-primaryDeep text-white rounded-b-xl fixed max-w-[379px] z-50 " +
-        addViewShadow
-      }
-    >
-      <div className="h-6 w-full flex justify-center">
-        {activePrev && (
-          <button
-            className={"w-6 h-4 bg-transparent mr-auto ml-0 " + addPrevCursor}
-            disabled={!activePrev}
-            onClick={handleMoveToPrevPage}
-          >
-            {activePrev && <PrevIcon />}
-          </button>
-        )}
+    <>
+      <header
+        className={
+          "w-full h-[72px] p-4 bg-primaryDeep text-white rounded-b-xl fixed max-w-[379px] z-40 " +
+          addViewShadow
+        }
+      >
+        <div className="h-full w-full flex justify-between items-center">
+          {activePrev && (
+            <button
+              className={"w-8 h-8 bg-transparent mr-auto ml-0 " + addPrevCursor}
+              disabled={!activePrev}
+              onClick={handleMoveToPrevPage}
+            >
+              {activePrev && <PrevIcon />}
+            </button>
+          )}
 
-        {title && <h1 className="font-medium24 text-white">{title}</h1>}
+          {title && <h1 className="font-medium24 text-white">{title}</h1>}
 
-        {activeSearch && (
-          <div>
-            <input />
-            <button></button>
+          {activeSearch &&
+            (openSearch ? (
+              <form className="w-full mr-2" onSubmit={handleSearchKeyword}>
+                <input
+                  className="bg-invalidLight w-full font-medium16 text-black border rounded m-0 outline-none box-border py-2 pl-4 pr-10 border-black relative"
+                  value={keyword}
+                  onChange={handleChangeKeyword}
+                />
+                <button className="w-8 h-8 bg-transparent mr-0 ml-auto cursor-pointer absolute top-5 right-[56px]">
+                  <ActiveSearchIcon />
+                </button>
+              </form>
+            ) : (
+              <button
+                className="w-8 h-8 bg-transparent mr-2 ml-auto cursor-pointer"
+                onClick={handleSwitchSearch}
+              >
+                <SearchIcon />
+              </button>
+            ))}
+
+          {actionButton}
+
+          {useSideBar && (
+            <button
+              className={
+                "w-8 h-8 bg-transparent mr-0 ml-0 cursor-pointer" +
+                addSideBarCursor
+              }
+              disabled={!useSideBar}
+              onClick={handleSwitchSidebar}
+            >
+              <HamburgerIcon />
+            </button>
+          )}
+        </div>
+      </header>
+      {openSidebar && (
+        <Portal container={document.body}>
+          <div className="max-w-[379px] h-[100vh] w-full bg-shadow fixed z-50">
+            <SideBar onClick={handleSwitchSidebar} />
           </div>
-        )}
-
-        {actionButton}
-
-        {useSideBar && (
-          <button
-            className={
-              "w-6 h-4 bg-transparent mr-auto ml-0 cursor-pointer" +
-              addSideBarCursor
-            }
-            disabled={!useSideBar}
-            onClick={handleSwitchSidebar}
-          >
-            <HamburgerIcon />
-          </button>
-        )}
-      </div>
-    </header>
+        </Portal>
+      )}
+    </>
   );
 }

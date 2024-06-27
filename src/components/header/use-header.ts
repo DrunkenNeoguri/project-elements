@@ -1,16 +1,25 @@
 import { useEffect, useState } from "react";
 import { throttle } from "lodash-es";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function useHeader() {
   // const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-
-  // ! Remind: 준비물 페이지에서도 사이즈에 따라 다르므로 이 상태로 정말 괜찮은지 생각해봐야함...
   const currentPath = usePathname();
   const isMainPath =
     currentPath === "/main" || currentPath === "/" ? false : true;
+  const searchParams = useSearchParams();
+  const currentKeyword = searchParams?.get("keyword");
 
+  const [openSearch, setOpenSearch] = useState<boolean>(
+    currentKeyword ? true : false
+  );
+  const [keyword, setKeyword] = useState<string>(currentKeyword ?? "");
   const [shadow, setShadow] = useState(isMainPath);
+  const [openSidebar, setOpenSidebar] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  // ! Remind: 준비물 페이지에서도 사이즈에 따라 다르므로 이 상태로 정말 괜찮은지 생각해봐야함..
 
   // const activeRightButton = (headerType: HeaderType) => {
   //   switch (headerType) {
@@ -51,5 +60,12 @@ export default function useHeader() {
 
   return {
     shadow,
+    router,
+    openSearch,
+    setOpenSearch,
+    keyword,
+    setKeyword,
+    openSidebar,
+    setOpenSidebar,
   };
 }

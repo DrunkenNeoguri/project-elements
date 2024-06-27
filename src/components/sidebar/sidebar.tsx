@@ -1,63 +1,82 @@
-import { StSidebar } from "../styles/sidebar";
-import { SideBarPropType } from "../types/sidebar";
-import SideBarIcon from "../../assets/icons/svg-header-sidebar-icon.svg?react";
-import SearchIcon from "../../assets/icons/svg-sidebar-search-icon.svg?react";
-import ListManagementIcon from "../../assets/icons/svg-sidebar-list-management-icon.svg?react";
-import ExchangeIcon from "../../assets/icons/svg-sidebar-exchange-icon.svg?react";
-import SettingIcon from "../../assets/icons/svg-sidebar-setting-icon.svg?react";
-import useSidebar from "../hooks/use-sidebar";
+"use client";
+import {
+  ConfigIcon,
+  CurrencyIcon,
+  DocsSearchIcon,
+  FolderIcon,
+  HamburgerIcon,
+  NewsIcon,
+} from "../../assets/icons/icons";
+import Link from "next/link";
 
-export default function SideBar(props: SideBarPropType) {
-  const {
-    formInput,
-    setFormInput,
-    setQueryStringForSearchTravelData,
-    signOutAndMoveToSignIn,
-  } = useSidebar();
-  const { onClose, openState } = props;
+export default function SideBar({ onClick }: { onClick: () => void }) {
   return (
-    <StSidebar.Wrapper id="sidebar" $openState={openState}>
-      <StSidebar.TitleBox>
-        <StSidebar.Title>준비물 챙겼어?</StSidebar.Title>
-        <StSidebar.HamburgerButton onClick={onClose}>
-          <SideBarIcon />
-        </StSidebar.HamburgerButton>
-      </StSidebar.TitleBox>
-      <StSidebar.SearchBox
-        onSubmit={(e) => {
-          setQueryStringForSearchTravelData(e, onClose);
-        }}
-      >
-        <StSidebar.SearchIcon type="submit">
-          <SearchIcon />
-        </StSidebar.SearchIcon>
-        <StSidebar.SearchInput
-          placeholder="등록했던 여행을 찾으시나요?"
-          value={formInput}
-          onChange={(e) => setFormInput(e.currentTarget.value)}
-        />
-      </StSidebar.SearchBox>
-      <StSidebar.AreaBorder />
-      <StSidebar.ButtonBox>
-        <StSidebar.Button>
-          <ListManagementIcon />
-          여행 리스트 관리
-        </StSidebar.Button>
-        <StSidebar.Button>
-          <ExchangeIcon />
-          환율 정보
-        </StSidebar.Button>
-        <StSidebar.Button>
-          <SettingIcon />
-          설정
-        </StSidebar.Button>
-      </StSidebar.ButtonBox>
-      <StSidebar.LogOutText
-        type="button"
-        onClick={() => signOutAndMoveToSignIn()}
-      >
+    <nav className="bg-primary flex flex-col rounded-l-xl py-6 pr-4 pl-6 w-[calc(100%-64px)] h-[100vh] z-50 b-0 r-0 box-border absolute right-0 overflow-hidden font-gmarketSans">
+      <div className="flex justify-between items-center mb-8">
+        <h3 className="font-bold20 text-white p-0 m-0">준비물 챙겼어?</h3>
+        <button
+          className="bg-transparent text-white p-0 m-0 border-none outline-none box-border cursor-pointer"
+          onClick={onClick}
+        >
+          <HamburgerIcon />
+        </button>
+      </div>
+
+      <div className="bg-white w-full h-[2px] rounded-lg mt-6 mb-8" />
+      <div className="flex flex-col items-start gap-9 p-0 w-full h-full mb-auto">
+        <Link
+          href="/manage"
+          className="bg-transparent flex items-center gap-3 font-bold20 text-white border-none rounded outline-none w-full box-border h-11 cursor-pointer"
+        >
+          <div className="w-6 h-6">
+            <FolderIcon />
+          </div>
+          <span className="mt-1">여행 리스트 관리</span>
+        </Link>
+
+        <Link
+          href="/template"
+          className="bg-transparent flex items-center gap-3 font-bold20 text-white border-none rounded outline-none w-full box-border h-11 cursor-pointer"
+        >
+          <div className="w-6 h-6">
+            <DocsSearchIcon />
+          </div>
+          <span className="mt-1">템플릿 찾기</span>
+        </Link>
+
+        <Link
+          href="/currency"
+          className="bg-transparent flex items-center gap-3 font-bold20 text-white border-none rounded outline-none w-full box-border h-11 cursor-pointer"
+        >
+          <div className="w-6 h-6">
+            <CurrencyIcon />
+          </div>
+          <span className="mt-1">환율 정보</span>
+        </Link>
+
+        <Link
+          href="/news"
+          className="bg-transparent flex items-center gap-3 font-bold20 text-white border-none rounded outline-none w-full box-border h-11 cursor-pointer"
+        >
+          <div className="w-6 h-6">
+            <NewsIcon />
+          </div>
+          <span className="mt-1">여행 뉴스</span>
+        </Link>
+
+        <Link
+          href="/config"
+          className="bg-transparent flex items-center gap-3 font-bold20 text-white border-none rounded outline-none w-full box-border h-11 cursor-pointer"
+        >
+          <div className="w-6 h-6">
+            <ConfigIcon />
+          </div>
+          <span className="mt-1">설정</span>
+        </Link>
+      </div>
+      <button className="inline ml-auto text-white font-medium14 border-none outline-none p-0">
         로그아웃
-      </StSidebar.LogOutText>
-    </StSidebar.Wrapper>
+      </button>
+    </nav>
   );
 }
