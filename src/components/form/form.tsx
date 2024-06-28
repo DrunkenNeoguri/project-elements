@@ -35,10 +35,11 @@ type FormPropType = FormHTMLAttributes<HTMLFormElement> &
     onSubmit: (formData: Record<string, any>) => void;
     formData: Record<string, any>;
     setFormData: Dispatch<SetStateAction<Record<string, any>>>;
+    styles?: string;
   };
 
 function Form(props: FormPropType) {
-  const { onSubmit, children, formData, setFormData } = props;
+  const { children, onSubmit, formData, setFormData, styles } = props;
 
   const handleFormData = (name: string, value: any) => {
     setFormData({ ...formData, [name]: value });
@@ -52,7 +53,7 @@ function Form(props: FormPropType) {
   return (
     <FormContext.Provider value={{ formData, handleFormData }}>
       <form
-        className="flex flex-col w-full px-4 box-border"
+        className={"flex flex-col w-full px-0 box-border " + styles}
         onSubmit={handleSubmit}
       >
         {children}
@@ -181,8 +182,9 @@ function Counter(props: CounterPropType) {
   };
 
   return (
-    <div className="flex mt-1 mb-3">
+    <div className="flex mt-1">
       <button
+        type="button"
         onClick={handleDecrease}
         className="bg-primary flex justify-center items-center font-medium12 text-primary border-none outline-none p-0 m-0 w-full max-w-[60px] h-11 rounded-l cursor-pointer drop-shadow-[1px_0_1px_#00000064]"
       >
@@ -192,6 +194,7 @@ function Counter(props: CounterPropType) {
         {`${value}${measure ?? ""}`}
       </span>
       <button
+        type="button"
         onClick={handleIncrease}
         className="bg-primary flex justify-center items-center font-medium12 text-primary border-none outline-none p-0 m-0 w-full max-w-[60px] h-11 rounded-r cursor-pointer drop-shadow-[-1px_0_1px_#00000064]"
       >
