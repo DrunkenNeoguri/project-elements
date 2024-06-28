@@ -1,7 +1,12 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, writeBatch } from "firebase/firestore";
 import { firestore } from "../utils/util-firebase";
 import { TravelBasicInfoType } from "../types/template.types";
 import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
+import {
+  basicTemplate,
+  domesticTemplate,
+  foreignTemplate,
+} from "../utils/util-template";
 
 class TravelService {
   static async getUserTravelList(userUid: string, keyword?: string | null) {
@@ -44,6 +49,52 @@ class TravelService {
         );
       }
       return travelList;
+    } catch (error) {
+      return new Error(convertUnknownTypeErrorToStringMessage(error));
+    }
+  }
+
+  static async postCreateNewTravel(
+    userUid: string,
+    useTemplate: boolean,
+    formData: TravelBasicInfoType
+  ) {
+    try {
+      const template = () => {
+        if (!useTemplate) return basicTemplate;
+        if (formData.travelType === "domestic") return domesticTemplate;
+        if (formData.travelType === "foreign") return foreignTemplate;
+      };
+
+      const batch = writeBatch(firestore);
+
+      const travelsReference = doc(
+        collection(firestore, `travels`, userUid, "docs"),
+        formData.id
+      );
+
+      const ListsReference = doc(
+        collection(firestore, `lists`, userUid, "docs"),
+        formData.id
+      );
+
+      const userReferecnce = doc(firestore, `users`, userUid);
+
+      await batch.set(travelsReference, {
+        ...formData,
+      });
+
+      await batch.set(ListsReference, {
+        ...template,
+        id: formData.id,
+      });
+
+      await batch.set(userReferecnce, {
+        recentTravel: formData.id,
+      });
+
+      await batch.commit();
+      return "OK";
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));
     }
