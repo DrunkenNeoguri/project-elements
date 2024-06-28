@@ -88,7 +88,11 @@ export default function Header(props: HeaderPropType) {
             </button>
           )}
 
-          {title && <h1 className="font-medium24 text-white">{title}</h1>}
+          {title && (
+            <h1 className="font-medium24 text-white ml-auto mr-auto">
+              {title}
+            </h1>
+          )}
 
           {activeSearch &&
             (openSearch ? (
