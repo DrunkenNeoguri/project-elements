@@ -9,6 +9,7 @@ import {
   sendPasswordResetEmail,
   setPersistence,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile,
   verifyPasswordResetCode,
 } from "firebase/auth";
@@ -164,6 +165,15 @@ class AuthService {
         });
       });
 
+      return "OK";
+    } catch (error) {
+      return new Error(convertUnknownTypeErrorToStringMessage(error));
+    }
+  }
+
+  static async postLogOutProcess() {
+    try {
+      await signOut(firebaseAuth);
       return "OK";
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));

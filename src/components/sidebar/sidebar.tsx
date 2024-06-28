@@ -8,8 +8,24 @@ import {
   NewsIcon,
 } from "../../assets/icons/icons";
 import Link from "next/link";
+import AuthService from "../../services/auth-services";
+import Button from "../button/button";
+import { useRouter } from "next/navigation";
 
 export default function SideBar({ onClick }: { onClick: () => void }) {
+  const router = useRouter();
+
+  const handleLogOutAccount = async () => {
+    const logOutState = await AuthService.postLogOutProcess();
+    if (logOutState === "OK") {
+      return router.push("/login");
+    }
+  };
+
+  const handleMoveToTravelCreate = () => {
+    return router.push("/travel/create");
+  };
+
   return (
     <nav className="bg-primary flex flex-col rounded-l-xl py-6 pr-4 pl-6 w-[calc(100%-64px)] h-[100vh] z-50 b-0 r-0 box-border absolute right-0 overflow-hidden font-gmarketSans">
       <div className="flex justify-between items-center mb-8">
@@ -21,6 +37,14 @@ export default function SideBar({ onClick }: { onClick: () => void }) {
           <HamburgerIcon />
         </button>
       </div>
+
+      <Button
+        colorTheme="primaryReverse"
+        type="button"
+        onClick={handleMoveToTravelCreate}
+      >
+        새 여행 추가하기
+      </Button>
 
       <div className="bg-white w-full h-[2px] rounded-lg mt-6 mb-8" />
       <div className="flex flex-col items-start gap-9 p-0 w-full h-full mb-auto">
@@ -74,7 +98,11 @@ export default function SideBar({ onClick }: { onClick: () => void }) {
           <span className="mt-1">설정</span>
         </Link>
       </div>
-      <button className="inline ml-auto text-white font-medium14 border-none outline-none p-0">
+      <button
+        className="inline ml-auto text-white font-medium14 border-none outline-none p-0"
+        type="button"
+        onClick={handleLogOutAccount}
+      >
         로그아웃
       </button>
     </nav>
