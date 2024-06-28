@@ -34,6 +34,7 @@ export default function SignUpForm() {
       onSubmit={handleSubmit}
       formData={signUpData}
       setFormData={setSignUpData}
+      styles="px-4"
     >
       <div className="flex flex-col mb-3">
         <Form.Label htmlFor="email">이메일 주소</Form.Label>

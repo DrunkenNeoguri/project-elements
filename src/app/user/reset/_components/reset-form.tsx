@@ -25,6 +25,7 @@ export default function ResetForm() {
       onSubmit={handleSubmit}
       formData={resetData}
       setFormData={setResetData}
+      styles="px-4"
     >
       <div className="flex flex-col mb-3">
         <Form.Label htmlFor="password">새 비밀번호</Form.Label>
