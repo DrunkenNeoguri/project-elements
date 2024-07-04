@@ -1,9 +1,8 @@
 "use client";
-import { Dispatch } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import Button from "../../../../components/button/button";
 import { TravelBasicInfoType } from "../../../../types/template.types";
-import { SetStateAction, useAtom } from "jotai";
-import { userInfoAtom } from "../../../../atoms/userInfo";
+import { AuthContext } from "../../../../providers/auth-provider";
 
 type PropType = {
   handlePrevStep: () => void;
@@ -18,7 +17,7 @@ export default function ConfirmSection({
   travelData,
   setTravelData,
 }: PropType) {
-  const [user] = useAtom(userInfoAtom);
+  const user = useContext(AuthContext);
   const handleChangeHeaderColor = () => {
     return travelData?.travelType === "domestic"
       ? "bg-secondary text-white"
