@@ -30,13 +30,13 @@ export default function ResetForm() {
       <div className="flex flex-col mb-3">
         <Form.Label htmlFor="password">새 비밀번호</Form.Label>
         <Form.Input id="password" type="password" />
-        <Form.ErrorMessage></Form.ErrorMessage>
+        <Form.ErrorText></Form.ErrorText>
       </div>
 
       <div className="flex flex-col mb-3">
         <Form.Label htmlFor="confirmPassword">새 비밀번호 재확인</Form.Label>
         <Form.Input id="confirmPassword" type="password" />
-        <Form.ErrorMessage></Form.ErrorMessage>
+        <Form.ErrorText></Form.ErrorText>
       </div>
 
       <Form.Button colorTheme="primary" type="submit">

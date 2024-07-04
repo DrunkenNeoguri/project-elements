@@ -28,7 +28,7 @@ export default function ForgetForm() {
       <div className="flex flex-col mb-3">
         <Form.Label htmlFor="email">이메일 주소</Form.Label>
         <Form.Input id="email" type="email" />
-        <Form.ErrorMessage></Form.ErrorMessage>
+        <Form.ErrorText></Form.ErrorText>
       </div>
 
       <div className="flex flex-col gap-3 mt-3">

@@ -38,17 +38,17 @@ export default function LoginForm() {
         <div className="flex flex-col mb-3">
           <Form.Label htmlFor="email">이메일 주소</Form.Label>
           <Form.Input id="email" type="email" />
-          <Form.ErrorMessage>
+          <Form.ErrorText>
             {changeEmailErrorMsg(loginData.email)}
-          </Form.ErrorMessage>
+          </Form.ErrorText>
         </div>
 
         <div className="flex flex-col mb-3">
           <Form.Label htmlFor="password">비밀번호</Form.Label>
           <Form.Input id="password" type="password" />
-          <Form.ErrorMessage>
+          <Form.ErrorText>
             {changePasswordErrorMsg(loginData.password)}
-          </Form.ErrorMessage>
+          </Form.ErrorText>
         </div>
 
         <button

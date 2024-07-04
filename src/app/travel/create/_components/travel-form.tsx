@@ -86,7 +86,7 @@ export default function TravelForm({
             여행 제목
           </Form.Label>
           <Form.Input colorTheme="black" id="title" type="text" />
-          <Form.ErrorMessage></Form.ErrorMessage>
+          <Form.ErrorText></Form.ErrorText>
         </div>
 
         <div>
@@ -94,7 +94,7 @@ export default function TravelForm({
             출발 일자
           </Form.Label>
           <Form.Input colorTheme="black" id="departureAt" type="date" />
-          <Form.ErrorMessage></Form.ErrorMessage>
+          <Form.ErrorText></Form.ErrorText>
         </div>
 
         <div>
@@ -109,7 +109,7 @@ export default function TravelForm({
             increaseFunc={handleIncraesePeriod}
             decreaseFunc={handleDecraesePeriod}
           />
-          <Form.ErrorMessage></Form.ErrorMessage>
+          <Form.ErrorText></Form.ErrorText>
         </div>
 
         <div>
@@ -117,7 +117,7 @@ export default function TravelForm({
             여행지
           </Form.Label>
           <Form.Input colorTheme="black" id="destination" type="text" />
-          <Form.ErrorMessage></Form.ErrorMessage>
+          <Form.ErrorText></Form.ErrorText>
         </div>
 
         <div className="flex flex-col gap-3 mt-auto mb-6 mx-0 w-full box-border">

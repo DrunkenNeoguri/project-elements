@@ -39,37 +39,35 @@ export default function SignUpForm() {
       <div className="flex flex-col mb-3">
         <Form.Label htmlFor="email">이메일 주소</Form.Label>
         <Form.Input id="email" type="email" />
-        <Form.ErrorMessage>
-          {changeEmailErrorMsg(signUpData.email)}
-        </Form.ErrorMessage>
+        <Form.ErrorText>{changeEmailErrorMsg(signUpData.email)}</Form.ErrorText>
       </div>
 
       <div className="flex flex-col mb-3">
         <Form.Label htmlFor="password">비밀번호</Form.Label>
         <Form.Input id="password" type="password" />
-        <Form.ErrorMessage>
+        <Form.ErrorText>
           {changePasswordErrorMsg(signUpData.password)}
-        </Form.ErrorMessage>
+        </Form.ErrorText>
       </div>
 
       <div className="flex flex-col mb-3">
         <Form.Label htmlFor="confirmPassword">비밀번호 재확인</Form.Label>
         <Form.Input id="confirmPassword" type="password" />
-        <Form.ErrorMessage>
+        <Form.ErrorText>
           {changeConfirmPasswordErrorMsg(
             signUpData.confirmPassword,
             signUpData.password
           )}
-        </Form.ErrorMessage>
+        </Form.ErrorText>
       </div>
 
       <div className="flex flex-col mb-3">
         <Form.Label htmlFor="username">닉네임</Form.Label>
         <Form.Input id="username" type="text" />
 
-        <Form.ErrorMessage>
+        <Form.ErrorText>
           {changeUsernameErrorMsg(signUpData.username)}
-        </Form.ErrorMessage>
+        </Form.ErrorText>
       </div>
 
       <div className="flex flex-col gap-3">
