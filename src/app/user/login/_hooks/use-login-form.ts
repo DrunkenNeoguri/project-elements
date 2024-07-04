@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 // @MEMO - 네이버에서는 로그인 정보 기록이 아닌 로그인 정보 유지를 하고 있음.
@@ -8,6 +9,16 @@ import { useState } from "react";
 export default function useLoginForm() {
   const [loginData, setLoginData] = useState<Record<string, string>>({});
   const [rememberLogin, setRememberLogin] = useState<boolean>(false);
+  const [modalMsg, setModalMsg] = useState<string | undefined>();
+  const router = useRouter();
 
-  return { loginData, setLoginData, rememberLogin, setRememberLogin };
+  return {
+    loginData,
+    setLoginData,
+    modalMsg,
+    setModalMsg,
+    rememberLogin,
+    setRememberLogin,
+    router,
+  };
 }

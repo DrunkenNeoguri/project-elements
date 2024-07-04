@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { CheckedIcon, UnCheckedIcon } from "../../../../assets/icons/icons";
 import Form from "../../../../components/form/form";
 import Modal from "../../../../components/modal/modal";
@@ -12,9 +11,15 @@ import {
 } from "../_utils/login.utils";
 
 export default function LoginForm() {
-  const { loginData, setLoginData, rememberLogin, setRememberLogin } =
-    useLoginForm();
-  const router = useRouter();
+  const {
+    loginData,
+    setLoginData,
+    modalMsg,
+    setModalMsg,
+    rememberLogin,
+    setRememberLogin,
+    router,
+  } = useLoginForm();
 
   const handleSubmit = async () => {
     const validityCheck = checkLoginDataTypeCheck(loginData);
@@ -23,6 +28,8 @@ export default function LoginForm() {
       const loginState = await AuthService.postLoginProcess(loginData);
       if (loginState === "OK") {
         router.push("/main");
+      } else {
+        setModalMsg(loginState.message);
       }
     }
   };
@@ -66,16 +73,19 @@ export default function LoginForm() {
         </Form.Button>
       </Form>
 
-      <Modal isOpen={rememberLogin} setIsOpen={() => setRememberLogin(false)}>
+      <Modal
+        isOpen={Boolean(modalMsg)}
+        setIsOpen={() => setModalMsg(undefined)}
+      >
         <Modal.Content
           colorTheme="alert"
           title="로그인 중 에러 발생"
-          desc="내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"
+          desc={modalMsg ?? ""}
         />
         <Modal.Icon iconType="alert" />
         <Modal.Button
           colorTheme="confirm"
-          onClick={() => setRememberLogin(!rememberLogin)}
+          onClick={() => setModalMsg(undefined)}
         >
           알겠습니다.
         </Modal.Button>
@@ -83,20 +93,3 @@ export default function LoginForm() {
     </>
   );
 }
-
-// {modalState.isOpen && (
-//   <Portal
-//     children={
-//       <Modal
-//         title="로그인 중 에러 발생"
-//         context={modalState.message}
-//         modalType="alert"
-//         primary={{
-//           text: modalState.buttonText,
-//           func: modalState.closeFunc,
-//         }}
-//       />
-//     }
-//     container={document.body}
-//   />
-// )}
