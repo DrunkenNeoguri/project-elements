@@ -12,22 +12,32 @@ type InputPropType = InputHTMLAttributes<HTMLInputElement> & {
 export default function Input(props: InputPropType) {
   const { id, colorTheme = "black", styles, value, onChange, ...rest } = props;
   const formContext = useContext(FormContext);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (formContext && id) {
-      formContext.handleFormData(id, e.currentTarget.value);
-    }
-    if (onChange) {
-      onChange();
-    }
-  };
-
   const inputTheme = {
     black: "border-black ",
     white: "border-white ",
   };
 
-  const inputValue = formContext && id ? formContext.formData[id] : value;
+  if (!formContext) {
+    return (
+      <input
+        id={id}
+        className={
+          "bg-invalidLight w-full font-medium16 text-black border rounded m-0 outline-none box-border p-3 mt-1 " +
+          inputTheme[colorTheme] +
+          styles
+        }
+        {...rest}
+        value={value}
+        onChange={onChange}
+      />
+    );
+  }
+
+  const { formData, handleFormData } = formContext;
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    handleFormData(id!, e.currentTarget.value);
+  };
 
   return (
     <input
@@ -38,7 +48,7 @@ export default function Input(props: InputPropType) {
         styles
       }
       {...rest}
-      value={inputValue}
+      value={formData[id!] || ""}
       onChange={handleChange}
     />
   );
