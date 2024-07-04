@@ -1,26 +1,28 @@
 "use client";
-import { useAtom } from "jotai";
-import { userInfoAtom } from "../atoms/userInfo";
-import { ReactNode, useEffect } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import { firebaseAuth } from "../utils/util-firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { User, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
+type AuthContextType = User | null;
+
+export const AuthContext = createContext<AuthContextType>(null);
+
 export default function AuthProvider({ children }: { children: ReactNode }) {
-  const [, setUserInfo] = useAtom(userInfoAtom);
+  const [user, setUser] = useState<AuthContextType>(null);
   const router = useRouter();
 
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
-        return setUserInfo(user);
+        return setUser(user);
       } else {
-        setUserInfo(null);
+        setUser(null);
         router.push("/user/login");
         return new Error("Authorization token is expired.");
       }
     });
-  }, [router, setUserInfo]);
+  }, [router]);
 
-  return <>{children}</>;
+  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 }

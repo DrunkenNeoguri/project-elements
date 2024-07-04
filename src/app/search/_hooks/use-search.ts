@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TravelBasicInfoType } from "../../../types/template.types";
-import { useAtom } from "jotai";
-import { userInfoAtom } from "../../../atoms/userInfo";
 import TravelService from "../../../services/travel-services";
 import { useRouter, useSearchParams } from "next/navigation";
+import { AuthContext } from "../../../providers/auth-provider";
 
 export default function useSearch() {
   const [list, setList] = useState<TravelBasicInfoType[]>();
-  const [user] = useAtom(userInfoAtom);
+  const user = useContext(AuthContext);
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const keyword = searchParams?.get("keyword") ?? null;
 
   useEffect(() => {
-    if (!user?.uid) {
+    if (!user || !user?.uid) {
       return;
     }
     const getTravelList = async () => {
