@@ -1,23 +1,17 @@
 import {
-  ChangeEvent,
   Dispatch,
   FormEvent,
   FormHTMLAttributes,
-  HTMLAttributes,
-  InputHTMLAttributes,
-  LabelHTMLAttributes,
   PropsWithChildren,
   SetStateAction,
   createContext,
-  useContext,
 } from "react";
-import {
-  CorrectIcon,
-  IncorrectIcon,
-  MinusIcon,
-  PlusIcon,
-} from "../../assets/icons/icons";
+import { CorrectIcon, IncorrectIcon } from "../../assets/icons/icons";
 import Button from "../button/button";
+import Label from "../label/label";
+import Counter from "../counter/counter";
+import ErrorText from "../error-text/error-text";
+import Input from "../input/input";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -27,7 +21,9 @@ type FormContextType = {
   handleFormData: (name: string, value: any) => void;
 };
 
-const FormContext = createContext<FormContextType | undefined>(undefined);
+export const FormContext = createContext<FormContextType | undefined>(
+  undefined
+);
 
 // Form
 type FormPropType = FormHTMLAttributes<HTMLFormElement> &
@@ -62,80 +58,6 @@ function Form(props: FormPropType) {
   );
 }
 
-// Input
-type InputPropType = InputHTMLAttributes<HTMLInputElement> & {
-  colorTheme?: "black" | "white";
-};
-
-function Input(props: InputPropType) {
-  const { id, colorTheme = "black", ...rest } = props;
-  const formContext = useContext(FormContext);
-
-  if (!formContext) {
-    return;
-  }
-
-  const { formData, handleFormData } = formContext;
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleFormData(id!, e.currentTarget.value);
-  };
-
-  const inputTheme = {
-    black: "border-black",
-    white: "border-white",
-  };
-
-  const colorStyle =
-    "bg-invalidLight w-full font-medium16 text-black border rounded m-0 outline-none box-border p-3 mt-1 " +
-    inputTheme[colorTheme];
-
-  return (
-    <input
-      id={id}
-      className={colorStyle}
-      {...rest}
-      value={formData[id!] || ""}
-      onChange={handleChange}
-      style={{ color: "#373737" }}
-    />
-  );
-}
-
-// Label
-type LabelPropType = LabelHTMLAttributes<HTMLLabelElement> &
-  PropsWithChildren & {
-    colorTheme?: "black" | "white";
-  };
-
-function Label(props: LabelPropType) {
-  const { children, colorTheme = "black", ...rest } = props;
-
-  const labelTheme = {
-    black: "text-black",
-    white: "text-white",
-  };
-
-  const labelStyle = "font-bold12 mb-1 " + labelTheme[colorTheme];
-  return (
-    <label className={labelStyle} {...rest}>
-      {children}
-    </label>
-  );
-}
-
-// Error Message
-type ErrorMessagePropType = HTMLAttributes<HTMLSpanElement> & PropsWithChildren;
-
-function ErrorMessage(props: ErrorMessagePropType) {
-  const { children, ...rest } = props;
-  return (
-    <span className="font-medium10 text-error mt-[1px]" {...rest}>
-      {children}
-    </span>
-  );
-}
-
 // Valid Icon
 function ValidIcon(validState: boolean) {
   return (
@@ -145,71 +67,13 @@ function ValidIcon(validState: boolean) {
   );
 }
 
-type CounterPropType = {
-  id: string;
-  value: number;
-  colorTheme: "black" | "white";
-  increaseFunc: () => void;
-  decreaseFunc: () => void;
-  measure?: string;
-};
-
-function Counter(props: CounterPropType) {
-  const {
-    id,
-    value,
-    colorTheme = "black",
-    measure,
-    increaseFunc,
-    decreaseFunc,
-  } = props;
-
-  const spanTheme = {
-    black: "border-black",
-    white: "border-white",
-  };
-
-  const viewStyle =
-    "bg-invalidLight flex justify-center items-center font-medium16 text-black w-full m-0 outline-none box-border border " +
-    spanTheme[colorTheme];
-
-  const handleIncrease = () => {
-    increaseFunc();
-  };
-
-  const handleDecrease = () => {
-    decreaseFunc();
-  };
-
-  return (
-    <div className="flex mt-1">
-      <button
-        type="button"
-        onClick={handleDecrease}
-        className="bg-primary flex justify-center items-center font-medium12 text-primary border-none outline-none p-0 m-0 w-full max-w-[60px] h-11 rounded-l cursor-pointer drop-shadow-[1px_0_1px_#00000064]"
-      >
-        <MinusIcon />
-      </button>
-      <span id={id} className={viewStyle}>
-        {`${value}${measure ?? ""}`}
-      </span>
-      <button
-        type="button"
-        onClick={handleIncrease}
-        className="bg-primary flex justify-center items-center font-medium12 text-primary border-none outline-none p-0 m-0 w-full max-w-[60px] h-11 rounded-r cursor-pointer drop-shadow-[-1px_0_1px_#00000064]"
-      >
-        <PlusIcon />
-      </button>
-    </div>
-  );
-}
-
 Form.Label = Label;
 Form.Input = Input;
 Form.Counter = Counter;
 Form.Button = Button;
-Form.ErrorMessage = ErrorMessage;
+Form.ErrorText = ErrorText;
 Form.VaildIcon = ValidIcon;
 
 export default Form;
+
 /* eslint-enable @typescript-eslint/no-explicit-any */

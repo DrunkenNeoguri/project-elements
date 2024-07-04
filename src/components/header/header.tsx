@@ -66,6 +66,7 @@ export default function Header(props: HeaderPropType) {
 
   const handleSearchKeyword = (e: FormEvent) => {
     e.preventDefault();
+    document.body.style.overflow === "auto";
     return router.push(`/search?keyword=${keyword}`);
   };
 
