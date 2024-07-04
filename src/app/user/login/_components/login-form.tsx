@@ -25,6 +25,7 @@ export default function LoginForm() {
     const validityCheck = checkLoginDataTypeCheck(loginData);
 
     if (validityCheck) {
+      await AuthService.updateAccountPersistenceState(rememberLogin);
       const loginState = await AuthService.postLoginProcess(loginData);
       if (loginState === "OK") {
         router.push("/main");
