@@ -27,7 +27,7 @@ export const convertFirebaseErrorMessageByFirebaseErrorCode = (
     case "auth/unsupported-persistence-type":
       return `시스템의 문제로 인해 로그인 처리가 되지 않았습니다.\n관리자에게 문의해주세요.`;
     case "auth/email-already-in-use":
-      return `이미 가입된 이메일입니다.\n\n로그인 페이지로 돌아가 진행해주시거나 비밀번호 찾기를 이용해주세요.`;
+      return `이미 가입된 이메일입니다.\n\n이전 화면으로 돌아가 로그인을 시도해주시거나, 계정 정보가 기억나지 않다면 비밀번호 찾기를 이용해주세요.`;
     case "auth/operation-not-allowed":
       return `현재 비활성화 처리된 이메일 계정입니다.\n관리자에게 문의해주세요.`;
     case "auth/weak-password":

@@ -30,7 +30,7 @@ function Modal(props: ModalPropType) {
       {isOpen && (
         <Portal container={document.body}>
           <div className="w-full h-[100vh] bg-shadowModal flex justify-center items-center absolute z-10 top-0 font-gmarketSans animate-fadeIn">
-            <div className="bg-white flex flex-col justify-center items-center text-center border-none rounded-lg h-auto w-[calc(100%-98px)] max-w-[262px] pt-8 pb-3 px-7 absolute z-20 font-gmarketSans drop-shadow-[4px_4px_8px_#0000004D]">
+            <div className="bg-white flex flex-col justify-center items-center text-center border-none rounded-lg h-auto w-[calc(100%-72px)] max-w-[288px] pt-8 pb-3 px-7 absolute z-20 font-gmarketSans drop-shadow-[4px_4px_8px_#0000004D]">
               {children}
             </div>
           </div>
@@ -81,7 +81,7 @@ function Icon({
     confirm: <ModalConfirm />,
     checked: <ModalChecked />,
   };
-  return <div className="w-12 h-12 m-0 mt-9 mb-7">{iconList[iconType]}</div>;
+  return <div className="w-12 h-12 mx-0 my-8">{iconList[iconType]}</div>;
 }
 
 // modal button
