@@ -7,7 +7,7 @@ export default function useListSection() {
   const [list, setList] = useState<TravelBasicInfoType[]>();
   const user = useContext(AuthContext);
 
-  // ? Think: 해당 훅을 추후에 tanstack-query를 이용한 공용 훅으로 만드는게 좋을 것 같다.
+  // ?CONCERN: 해당 훅을 추후에 tanstack-query를 이용한 공용 훅으로 만드는게 좋을 것 같다.
   useEffect(() => {
     if (!user || !user?.uid) {
       return;

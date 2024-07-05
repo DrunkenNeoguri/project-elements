@@ -1,3 +1,4 @@
+// ?CONCERN: JSON MOCK Data로 변경할지 고민
 export const foreignTemplate = [
   {
     categoryName: "필수",
