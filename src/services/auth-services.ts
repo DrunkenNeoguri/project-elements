@@ -18,7 +18,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
 import { AccountFormType } from "../types/user.types";
 
-// 문제 없이 200일 시, return "OK";
+// *MEMO: 문제 없이 200일 시, 예외를 제외하고 return "OK";
 class AuthService {
   static async updateAccountPersistenceState(rememberState: boolean) {
     try {
@@ -47,26 +47,21 @@ class AuthService {
 
       if (loginResult !== undefined) {
         if (!loginResult.user.emailVerified) {
+          await sendEmailVerification(loginResult.user);
           return new Error(
-            "본 계정은 아직 본인 인증이 완료되지 않았습니다.\n아래 버튼을 눌러 본인 인증을 진행해주세요."
+            `아직 본인 인증이 완료되지 않아 확인을 위해 가입하신 이메일 주소로 본인 인증 메일을 보내드렸습니다.\n\n메일함에서 내용을 확인하셔서 본인 인증을 완료해주시기 바랍니다.`
           );
         }
 
         const userInfo = await getDoc(
           doc(firestore, `users`, loginResult.user.uid)
         );
+
         localStorage.setItem("userInfo", String(userInfo.data()));
       }
       return "OK";
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));
-      // const errorMessage = convertUnknownTypeErrorToStringMessage(error);
-      // return setModalState({
-      //   isOpen: true,
-      //   message: errorMessage,
-      //   buttonText: "알겠습니다.",
-      //   closeFunc: () => clearModalState(),
-      // });
     }
   }
 
@@ -126,7 +121,7 @@ class AuthService {
 
       if (actionCode === null) {
         return new Error(
-          `유효하지 않은 접근입니다.\n비밀번호 찾기 페이지로 돌아가\n절차를 다시 진행해주세요.`
+          `유효하지 않은 접근입니다.\n비밀번호 찾기 페이지로 돌아가 절차를 다시 진행해주세요.`
         );
       }
       await verifyPasswordResetCode(auth, actionCode);
