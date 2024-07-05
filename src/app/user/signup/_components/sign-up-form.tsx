@@ -61,8 +61,8 @@ export default function SignUpForm() {
           <Form.Input id="confirmPassword" type="password" />
           <Form.ErrorText>
             {changeConfirmPasswordErrorMsg(
-              signUpData.confirmPassword,
-              signUpData.password
+              signUpData.password,
+              signUpData.confirmPassword
             )}
           </Form.ErrorText>
         </div>

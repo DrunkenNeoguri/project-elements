@@ -10,8 +10,8 @@ import {
   usernameRegExp,
 } from "../../../../utils/util-constants";
 
-export const changeEmailErrorMsg = (email: string | undefined) => {
-  if (email === undefined) {
+export const changeEmailErrorMsg = (email?: string) => {
+  if (!email) {
     return "";
   }
   if (email.trim() === "") {
@@ -24,8 +24,8 @@ export const changeEmailErrorMsg = (email: string | undefined) => {
   }
 };
 
-export const changePasswordErrorMsg = (password: string | undefined) => {
-  if (password === undefined) {
+export const changePasswordErrorMsg = (password?: string) => {
+  if (!password) {
     return "";
   }
   if (password.trim() === "") {
@@ -39,10 +39,11 @@ export const changePasswordErrorMsg = (password: string | undefined) => {
 };
 
 export const changeConfirmPasswordErrorMsg = (
-  password: string | undefined,
-  confirmPassword: string | undefined
+  password?: string,
+  confirmPassword?: string
 ) => {
-  if (confirmPassword === undefined) {
+  if (!confirmPassword) {
+    console.log("예??");
     return "";
   }
   if (confirmPassword.trim() === "") {
@@ -57,8 +58,8 @@ export const changeConfirmPasswordErrorMsg = (
   return;
 };
 
-export const changeUsernameErrorMsg = (username: string | undefined) => {
-  if (username === undefined) {
+export const changeUsernameErrorMsg = (username?: string) => {
+  if (!username) {
     return "";
   }
   if (username.trim() === "") {
