@@ -76,7 +76,7 @@ export default function SignUpForm() {
           </Form.ErrorText>
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 mt-3">
           <Form.Button colorTheme="primary" type="submit">
             다음 단계로
           </Form.Button>
