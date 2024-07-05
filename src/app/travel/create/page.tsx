@@ -1,29 +1,30 @@
 "use client";
-import { useState } from "react";
 import Stepper from "./_components/stepper";
 import SelectSection from "./_components/select-section";
 import TravelForm from "./_components/travel-form";
 import ConfirmSection from "./_components/confirm-section";
 import TemplateSection from "./_components/template-section";
-import { TravelBasicInfoType } from "../../../types/template.types";
+import ChangeCover from "./_components/change-cover";
+import useTravelCreate from "./_hooks/use-travel-create";
 
-export default function Create() {
-  const [currentStep, setCurrentStep] = useState<number>(0);
-  const [travelData, setTravelData] = useState<TravelBasicInfoType>({
-    id: "",
-    travelType: "domestic",
-    title: "",
-    departureAt: "",
-    travelPeriod: 0,
-    destination: "",
-  });
+export default function TravelCreate() {
+  const {
+    currentStep,
+    setCurrentStep,
+    activeCover,
+    setActiveCover,
+    travelData,
+    setTravelData,
+  } = useTravelCreate();
 
   const handleMoveNextStep = () => {
-    setCurrentStep(currentStep + 1);
+    setActiveCover("fadeOut");
+    setTimeout(() => setCurrentStep(currentStep + 1), 500);
   };
 
   const handleMovePrevStep = () => {
-    setCurrentStep(currentStep - 1);
+    setActiveCover("fadeOut");
+    setTimeout(() => setCurrentStep(currentStep - 1), 500);
   };
 
   const componentSteps = [
@@ -52,17 +53,9 @@ export default function Create() {
   return (
     <>
       <Stepper currentStep={currentStep} />
-      {componentSteps[currentStep]}
+      <ChangeCover animation={activeCover}>
+        {componentSteps[currentStep]}
+      </ChangeCover>
     </>
   );
 }
-
-// background-color: ${(props) =>
-//   convertBackgroundColorByCompareWithStep(
-//     props.$assignStep,
-//     props.$currentStep
-//   )};
-// display: block;
-
-// width: calc((100% - 96px) / 3);
-// height: 2px;
