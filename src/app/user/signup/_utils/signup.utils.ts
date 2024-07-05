@@ -43,7 +43,6 @@ export const changeConfirmPasswordErrorMsg = (
   confirmPassword?: string
 ) => {
   if (!confirmPassword) {
-    console.log("예??");
     return "";
   }
   if (confirmPassword.trim() === "") {
