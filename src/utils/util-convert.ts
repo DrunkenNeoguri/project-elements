@@ -35,7 +35,7 @@ export const convertFirebaseErrorMessageByFirebaseErrorCode = (
     case "auth/expired-action-code":
       return `인증 시간이 만료되었습니다.\n로그인하셔서 이메일 인증을 다시 시도해주세요.`;
     case "auth/invalid-action-code":
-      return `인증 처리가 유효하지 않습니다.\n접속한 링크가 정확한지 확인해주세요.`;
+      return `인증 처리가 유효하지 않습니다.\n접속한 링크가 정확한지 재확인하시거나, 로그인 페이지로 돌아가 비밀번호 찾기를 다시 진행해주세요.`;
     case "auth/too-many-requests":
       return `계속된 요청으로 서버 부하 방지를 위해 잠시 동안 요청을 중단했습니다.\n잠시 후, 다시 시도해주세요.`;
     case "auth/invalid-credential":
