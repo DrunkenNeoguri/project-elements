@@ -1,5 +1,5 @@
 import ListSection from "./_components/list-section";
 
-export default function MainSearch() {
+export default function Main() {
   return <ListSection />;
 }
