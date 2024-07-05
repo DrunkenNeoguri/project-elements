@@ -1,40 +1,35 @@
 "use client";
-
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 import { Bar } from "../../components/loader/loader";
-import AuthService from "../../services/auth-services";
+import Modal from "../../components/modal/modal";
+import useRedirect from "./_hooks/use-redirect";
 
 export default function Redirect() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const enteredMode = searchParams?.get("mode");
-  const actionCode = searchParams?.get("oobCode");
+  const { modalMsg, setModalMsg } = useRedirect();
 
-  useEffect(() => {
-    if (enteredMode === "verifyEmail") {
-      const activeValidation = async () => {
-        const validityState = await AuthService.updateAccountVerification(
-          actionCode
-        );
-        if (validityState === "OK") {
-          setTimeout(() => {
-            return router.push(`/user/verified?actionCode=${actionCode}`);
-          }, 100);
-        }
-      };
-      activeValidation();
-    }
-    if (enteredMode === "resetPassword") {
-      setTimeout(() => {
-        return router.push(`/user/reset?actionCode=${actionCode}`);
-      }, 100);
-    }
-  }, [actionCode, enteredMode, searchParams, router]);
+  const handleModalClose = () => {
+    setModalMsg(undefined);
+    return window.close();
+  };
 
   return (
-    <div className="w-full h-[100vh] flex justify-center items-center relative bg-[#37373780]">
-      <Bar />
-    </div>
+    <>
+      <div className="w-full h-[100vh] flex justify-center items-center relative bg-[#37373780]">
+        <Bar />
+      </div>
+      <Modal
+        isOpen={Boolean(modalMsg)}
+        setIsOpen={() => setModalMsg(undefined)}
+      >
+        <Modal.Content
+          colorTheme="alert"
+          title="본인 확인 중 에러 발생"
+          desc={modalMsg ?? ""}
+        />
+        <Modal.Icon iconType="alert" />
+        <Modal.Button colorTheme="confirm" onClick={handleModalClose}>
+          창 닫기
+        </Modal.Button>
+      </Modal>
+    </>
   );
 }
