@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Button from "../../../../components/button/button";
 
 export default function ForgetSend() {
@@ -10,9 +11,12 @@ export default function ForgetSend() {
         </span>
       </div>
       <div className="flex flex-col gap-3 w-full mx-0 box-border px-4">
-        <Button type="button" colorTheme="primary">
+        <Link
+          className="flex justify-center items-center w-full h-11 border-none rounded border-box font-bold16 cursor-pointer bg-primary text-white"
+          href="/user/login"
+        >
           로그인 페이지로 돌아가기
-        </Button>
+        </Link>
         <Button type="button" colorTheme="invalid">
           창 닫기
         </Button>

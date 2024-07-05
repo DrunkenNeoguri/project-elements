@@ -6,7 +6,8 @@ import useForgetForm from "../_hooks/use-forget-form";
 import { checkForgetDataTypeCheck } from "../_utils/forget.utils";
 
 export default function ForgetForm() {
-  const { forgetData, setForgetData, modalMsg, setModalMsg } = useForgetForm();
+  const { forgetData, setForgetData, modalMsg, setModalMsg, router } =
+    useForgetForm();
 
   const handleSubmit = async () => {
     const validityCheck = checkForgetDataTypeCheck(forgetData);
@@ -16,8 +17,9 @@ export default function ForgetForm() {
         forgetData
       );
       if (forgetState === "OK") {
+        return router.push("/user/forget/send");
       } else {
-        setModalMsg(forgetState.message);
+        return setModalMsg(forgetState.message);
       }
     }
   };
