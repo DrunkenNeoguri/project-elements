@@ -62,7 +62,9 @@ function Content(props: ContentType) {
   return (
     <>
       <h2 className={titleStyle}>{title}</h2>
-      <p className="font-medium12 text-black p-0 px-[10px] m-0">{desc}</p>
+      <p className="font-medium12 text-black p-0 px-[10px] m-0 break-keep whitespace-pre-wrap">
+        {desc}
+      </p>
     </>
   );
 }
