@@ -1,13 +1,11 @@
 "use client";
-import { useRouter } from "next/navigation";
 import TravelList from "./travel-list";
 import Button from "../../../components/button/button";
 import useListSection from "../_hooks/use-list-section";
 import { RoundDot } from "../../../components/loader/loader";
 
 export default function ListSection() {
-  const { list } = useListSection();
-  const router = useRouter();
+  const { list, router } = useListSection();
 
   const handleMoveToTravelCreate = () => {
     return router.push("/travel/create");

@@ -1,11 +1,10 @@
 "use client";
-import { useContext, useState } from "react";
 import Button from "../../../../components/button/button";
 import Modal from "../../../../components/modal/modal";
 import { TravelBasicInfoType } from "../../../../types/template.types";
 import TravelService from "../../../../services/travel-services";
-import { useRouter } from "next/navigation";
-import { AuthContext } from "../../../../providers/auth-provider";
+
+import useTemplateSection from "../_hooks/use-template-section";
 
 type PropType = {
   handlePrevStep: () => void;
@@ -16,9 +15,7 @@ export default function TemplateSection({
   handlePrevStep,
   travelData,
 }: PropType) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const user = useContext(AuthContext);
-  const router = useRouter();
+  const { isOpen, setIsOpen, user, router } = useTemplateSection();
 
   const handleMoveToMakeList = async (useTemplate: boolean) => {
     if (!user?.uid) {

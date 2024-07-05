@@ -1,12 +1,10 @@
 "use client";
-import { useState } from "react";
 import Button from "../../../components/button/button";
 import Modal from "../../../components/modal/modal";
-import { useRouter } from "next/navigation";
+import useVerified from "./hooks/use-verified";
 
 export default function Verified() {
-  const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
+  const { isOpen, setIsOpen, router } = useVerified();
 
   const handleMoveToLoginPage = () => {
     return router.push("/user/login");
