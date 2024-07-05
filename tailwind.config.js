@@ -18,7 +18,25 @@ module.exports = {
           opacity: "100%",
         },
       },
+      fadeOut: {
+        from: {
+          opacity: "100%",
+        },
+        to: {
+          opacity: "0%",
+        },
+      },
       bar: {
+        "0%, 80%, 100%": {
+          "box-shadow": "0 0",
+          height: "4em",
+        },
+        "40%": {
+          "box-shadow": "0 -2em",
+          height: "6em",
+        },
+      },
+      barSide: {
         "0%, 80%, 100%": {
           "box-shadow": "0 0",
           height: "4em",
@@ -64,9 +82,11 @@ module.exports = {
       },
     },
     animation: {
-      fadeIn: "fadeIn 0.2s",
+      fadeIn: "fadeIn 1s",
+      fadeOut: "fadeOut 1s",
       roundSpin: "roundSpin 1.1s infinite ease",
       bar: "bar 1s infinite ease-in-out",
+      barSide: "barSide 1s infinite ease-in-out",
     },
     fontSize: {
       "2xs": ["10px", "14px"],
