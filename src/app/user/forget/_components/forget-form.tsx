@@ -3,7 +3,10 @@ import Form from "../../../../components/form/form";
 import Modal from "../../../../components/modal/modal";
 import AuthService from "../../../../services/auth-services";
 import useForgetForm from "../_hooks/use-forget-form";
-import { checkForgetDataTypeCheck } from "../_utils/forget.utils";
+import {
+  changeEmailErrorMsg,
+  checkForgetDataTypeCheck,
+} from "../_utils/forget.utils";
 
 export default function ForgetForm() {
   const { forgetData, setForgetData, modalMsg, setModalMsg, router } =
@@ -34,7 +37,9 @@ export default function ForgetForm() {
         <div className="flex flex-col mb-3">
           <Form.Label htmlFor="email">이메일 주소</Form.Label>
           <Form.Input id="email" type="email" />
-          <Form.ErrorText></Form.ErrorText>
+          <Form.ErrorText>
+            {changeEmailErrorMsg(forgetData.email)}
+          </Form.ErrorText>
         </div>
 
         <div className="flex flex-col gap-3 mt-3">
@@ -45,6 +50,7 @@ export default function ForgetForm() {
           </Form.Button>
         </div>
       </Form>
+
       <Modal
         isOpen={Boolean(modalMsg)}
         setIsOpen={() => setModalMsg(undefined)}
