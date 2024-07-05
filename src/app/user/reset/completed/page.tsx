@@ -1,14 +1,6 @@
-"use client";
-import { useRouter } from "next/navigation";
-import Button from "../../../../components/button/button";
+import Link from "next/link";
 
 export default function ResetCompleted() {
-  const router = useRouter();
-
-  const handleMoveToLogin = () => {
-    return router.push("/user/login");
-  };
-
   return (
     <>
       <div className="flex flex-col gap-[10px] box-border mt-6 my-6 w-full px-4 break-keep">
@@ -19,9 +11,12 @@ export default function ResetCompleted() {
       </div>
 
       <div className="w-full px-4">
-        <Button type="button" colorTheme="primary" onClick={handleMoveToLogin}>
+        <Link
+          className="flex justify-center items-center w-full h-11 border-none rounded border-box font-bold16 cursor-pointer bg-primary text-white"
+          href="/user/login"
+        >
           로그인 페이지로 이동
-        </Button>
+        </Link>
       </div>
     </>
   );

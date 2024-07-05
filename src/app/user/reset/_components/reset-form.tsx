@@ -3,10 +3,15 @@ import Form from "../../../../components/form/form";
 import Modal from "../../../../components/modal/modal";
 import AuthService from "../../../../services/auth-services";
 import useResetForm from "../_hooks/use-reset-form";
-import { checkResetDataTypeCheck } from "../_utils/reset.utils";
+import {
+  changeConfirmPasswordErrorMsg,
+  changePasswordErrorMsg,
+  checkResetDataTypeCheck,
+} from "../_utils/reset.utils";
 
 export default function ResetForm() {
-  const { resetData, setResetData, modalMsg, setModalMsg } = useResetForm();
+  const { resetData, setResetData, modalMsg, setModalMsg, router } =
+    useResetForm();
 
   const handleSubmit = async () => {
     const validityCheck = checkResetDataTypeCheck(resetData);
@@ -17,8 +22,9 @@ export default function ResetForm() {
         resetData
       );
       if (resetState === "OK") {
+        return router.push("/user/reset/completed");
       } else {
-        setModalMsg(resetState.message);
+        return setModalMsg(resetState.message);
       }
     }
   };
@@ -34,19 +40,27 @@ export default function ResetForm() {
         <div className="flex flex-col mb-3">
           <Form.Label htmlFor="password">새 비밀번호</Form.Label>
           <Form.Input id="password" type="password" />
-          <Form.ErrorText></Form.ErrorText>
+          <Form.ErrorText>
+            {changePasswordErrorMsg(resetData.password)}
+          </Form.ErrorText>
         </div>
 
         <div className="flex flex-col mb-3">
           <Form.Label htmlFor="confirmPassword">새 비밀번호 재확인</Form.Label>
           <Form.Input id="confirmPassword" type="password" />
-          <Form.ErrorText></Form.ErrorText>
+          <Form.ErrorText>
+            {changeConfirmPasswordErrorMsg(
+              resetData.password,
+              resetData.confirmPassword
+            )}
+          </Form.ErrorText>
         </div>
 
-        <Form.Button colorTheme="primary" type="submit">
+        <Form.Button colorTheme="primary" type="submit" styles="mt-3">
           새 비밀번호로 변경
         </Form.Button>
       </Form>
+
       <Modal
         isOpen={Boolean(modalMsg)}
         setIsOpen={() => setModalMsg(undefined)}
