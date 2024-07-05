@@ -7,8 +7,8 @@ import {
   passwordRegExp,
 } from "../../../../utils/util-constants";
 
-export const changeEmailErrorMsg = (email: string | undefined) => {
-  if (email === undefined) {
+export const changeEmailErrorMsg = (email?: string) => {
+  if (!email) {
     return "";
   }
   if (email.trim() === "") {
@@ -21,8 +21,8 @@ export const changeEmailErrorMsg = (email: string | undefined) => {
   }
 };
 
-export const changePasswordErrorMsg = (password: string | undefined) => {
-  if (password === undefined) {
+export const changePasswordErrorMsg = (password?: string) => {
+  if (!password) {
     return "";
   }
   if (password.trim() === "") {
