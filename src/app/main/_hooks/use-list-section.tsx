@@ -22,7 +22,7 @@ export default function useListSection() {
       setList(listState);
     };
     getTravelList();
-  }, [user?.uid, setList]);
+  }, [user, user?.uid, setList]);
 
   return { list, router };
 }
