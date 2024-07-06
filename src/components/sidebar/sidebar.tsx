@@ -28,8 +28,17 @@ export default function SideBar({ onClick }: { onClick: () => void }) {
     return router.push("/travel/create");
   };
 
+  // ?CONCERN: Button Hover 효과 구현 어떻게 할지 고민..
+  // ?CONCERN: Dimd와 분리하면서 Sidebar도 애니메이션 우떠케 처리할지..
+  // background-color: ${colors.white};
+  // color: ${colors.black};
+  // transition: ease-in-out 0.2s;
+  // path {
+  //   fill: ${colors.black};
+  // }
+
   return (
-    <nav className="bg-primary flex flex-col rounded-l-xl pt-[22px] pb-6 pr-4 pl-6 w-[calc(100%-64px)] h-[100vh] z-50 b-0 r-0 box-border absolute right-0 overflow-hidden font-gmarketSans">
+    <nav className="bg-primary flex flex-col rounded-l-xl pt-[22px] pb-6 pr-4 pl-6 w-[calc(100%-64px)] h-[100vh] z-50 b-0 r-0 box-border absolute right-0 overflow-hidden font-gmarketSans drop-shadow-[-8px_0_4px_#00000064]">
       <div className="flex justify-between items-center mb-6">
         <h3 className="font-bold20 text-white p-0 m-0">준비물 챙겼어?</h3>
         <button
