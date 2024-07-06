@@ -18,7 +18,7 @@ type HeaderPropType = {
   title?: string;
 };
 
-// <SideBar openState={openState} onClose={() => closeSideBar()} />
+// TODO: Sidebar와 Dimd 분리, 애니메이션 처리 등에 대해서 고민해봐야함.
 
 export default function Header(props: HeaderPropType) {
   const {
@@ -76,6 +76,10 @@ export default function Header(props: HeaderPropType) {
     }
     return router.push(`/search?keyword=${keyword}`);
   };
+
+  const sidebarBgStyle = openSidebar
+    ? "opacity-1 animate-[fadeIn_0.2s]"
+    : "opacity-0 animate-[fadeOut_0.2s]";
 
   return (
     <>
@@ -145,7 +149,12 @@ export default function Header(props: HeaderPropType) {
       </header>
       {openSidebar && (
         <Portal container={document.body}>
-          <div className="max-w-[379px] h-[100vh] w-full bg-shadow fixed z-50">
+          <div
+            className={
+              "max-w-[379px] h-[100vh] w-full bg-shadowModal fixed z-50 " +
+              sidebarBgStyle
+            }
+          >
             <SideBar onClick={handleSwitchSidebar} />
           </div>
         </Portal>
