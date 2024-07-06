@@ -51,7 +51,7 @@ export default function Header(props: HeaderPropType) {
   };
 
   const handleSwitchSearch = () => {
-    return setOpenSearch(true);
+    return setOpenSearch(!openSearch);
   };
 
   const handleChangeKeyword = (e: ChangeEvent<HTMLInputElement>) => {
@@ -67,6 +67,13 @@ export default function Header(props: HeaderPropType) {
   const handleSearchKeyword = (e: FormEvent) => {
     e.preventDefault();
     document.body.style.overflow === "auto";
+    return router.push(`/search?keyword=${keyword}`);
+  };
+
+  const handleSearchButton = () => {
+    if (!keyword || keyword.trim() === "") {
+      return handleSwitchSearch();
+    }
     return router.push(`/search?keyword=${keyword}`);
   };
 
@@ -103,7 +110,11 @@ export default function Header(props: HeaderPropType) {
                   value={keyword}
                   onChange={handleChangeKeyword}
                 />
-                <button className="w-8 h-8 bg-transparent mr-0 ml-auto cursor-pointer absolute top-5 right-[56px]">
+                <button
+                  type="button"
+                  onClick={handleSearchButton}
+                  className="w-8 h-8 bg-transparent mr-0 ml-auto cursor-pointer absolute top-5 right-[56px]"
+                >
                   <ActiveSearchIcon />
                 </button>
               </form>
@@ -121,7 +132,7 @@ export default function Header(props: HeaderPropType) {
           {useSideBar && (
             <button
               className={
-                "w-8 h-8 bg-transparent mr-0 ml-0 cursor-pointer" +
+                "w-8 h-8 bg-transparent mr-0 ml-0 cursor-pointer pb-1" +
                 addSideBarCursor
               }
               disabled={!useSideBar}
