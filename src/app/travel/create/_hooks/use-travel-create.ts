@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TravelBasicInfoType } from "../../../../types/template.types";
+import { TravelBasicInfoType } from "../../../../types/travel.types";
 
 export default function useTravelCreate() {
   const [currentStep, setCurrentStep] = useState<number>(0);

@@ -1,6 +1,6 @@
 import { collection, doc, getDocs, writeBatch } from "firebase/firestore";
 import { firestore } from "../utils/util-firebase";
-import { TravelBasicInfoType } from "../types/template.types";
+import { TravelBasicInfoType } from "../types/travel.types";
 import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
 import {
   basicTemplate,

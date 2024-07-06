@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import Button from "../../../../components/button/button";
 import { Dispatch, SetStateAction } from "react";
-import { TravelBasicInfoType } from "../../../../types/template.types";
+import { TravelBasicInfoType } from "../../../../types/travel.types";
 
 type PropType = {
   handleNextStep: () => void;

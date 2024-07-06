@@ -23,7 +23,7 @@ export type TravelElementType = {
 };
 
 export type TravelElementListType = {
-  travelInfo: TravelInfoType;
+  travelInfo: TravelBasicInfoType;
   elementList: ElementCategoryType[];
 };
 

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import TravelService from "../../../services/travel-services";
-import { TravelBasicInfoType } from "../../../types/template.types";
+import { TravelBasicInfoType } from "../../../types/travel.types";
 import { AuthContext } from "../../../providers/auth-provider";
 import { useRouter } from "next/navigation";
 

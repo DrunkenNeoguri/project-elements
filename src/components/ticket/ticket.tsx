@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DomesticIcon, ForeignIcon } from "../../assets/icons/icons";
-import { TravelBasicInfoType } from "../../types/template.types";
+import { TravelBasicInfoType } from "../../types/travel.types";
 
 export default function Ticket(props: TravelBasicInfoType) {
   const { id, travelType, title, departureAt, travelPeriod, destination } =

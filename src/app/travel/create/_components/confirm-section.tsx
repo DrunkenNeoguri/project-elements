@@ -1,7 +1,7 @@
 "use client";
 import { Dispatch, SetStateAction, useContext } from "react";
 import Button from "../../../../components/button/button";
-import { TravelBasicInfoType } from "../../../../types/template.types";
+import { TravelBasicInfoType } from "../../../../types/travel.types";
 import { AuthContext } from "../../../../providers/auth-provider";
 
 type PropType = {

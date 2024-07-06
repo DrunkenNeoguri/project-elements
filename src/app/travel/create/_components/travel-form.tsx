@@ -2,7 +2,7 @@
 import { Dispatch } from "react";
 import Form from "../../../../components/form/form";
 import { SetStateAction } from "jotai";
-import { TravelBasicInfoType } from "../../../../types/template.types";
+import { TravelBasicInfoType } from "../../../../types/travel.types";
 import Button from "../../../../components/button/button";
 
 type PropType = {

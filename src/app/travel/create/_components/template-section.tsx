@@ -1,7 +1,7 @@
 "use client";
 import Button from "../../../../components/button/button";
 import Modal from "../../../../components/modal/modal";
-import { TravelBasicInfoType } from "../../../../types/template.types";
+import { TravelBasicInfoType } from "../../../../types/travel.types";
 import TravelService from "../../../../services/travel-services";
 
 import useTemplateSection from "../_hooks/use-template-section";

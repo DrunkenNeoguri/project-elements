@@ -1,5 +1,5 @@
 import Ticket from "../../../components/ticket/ticket";
-import { TravelBasicInfoType } from "../../../types/template.types";
+import { TravelBasicInfoType } from "../../../types/travel.types";
 
 type TravelListPropsType = {
   title: string;
