@@ -13,6 +13,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
 
+  // ?CONCERN: 예외 경로만 별도로 처리할 수 있는 방안을 좀 더 깔끔하게 할 수 있는 방법이 있을지...
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, (user) => {
       if (user) {
@@ -20,17 +21,17 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       } else {
         setUser(null);
 
-        const exceptionPaths = [
-          "/",
-          "/main",
-          "/travel/create",
-          "/template",
-          "/element/create",
-        ];
+        // const exceptionPaths = [
+        //   "/",
+        //   "/main",
+        //   "/travel/create",
+        //   "/template",
+        //   "/element/create",
+        // ];
 
-        if (exceptionPaths.includes(pathname)) {
-          router.push("/user/login");
-        }
+        // if (exceptionPaths.includes(pathname)) {
+        router.push("/user/login");
+        // }
         return new Error("Authorization token is expired.");
       }
     });

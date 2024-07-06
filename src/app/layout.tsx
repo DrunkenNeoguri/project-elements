@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { GmarketSansOFT } from "../fonts/fonts";
 import AuthProvider from "../providers/auth-provider";
 import "./global.css";
@@ -19,7 +20,9 @@ export default function RootLayout({
           className="w-full relative bg-white overflow-scroll box-border max-w-[379px] min-h-[100vh] font-gmarketSans"
           id="root"
         >
-          <AuthProvider>{children}</AuthProvider>
+          <Suspense>
+            <AuthProvider>{children}</AuthProvider>
+          </Suspense>
         </main>
       </body>
     </html>
