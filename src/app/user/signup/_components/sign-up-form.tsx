@@ -101,7 +101,7 @@ export default function SignUpForm() {
         />
         <Modal.Icon iconType="alert" />
         <Modal.Button
-          colorTheme="confirm"
+          colorTheme="primary"
           onClick={() => setModalMsg(undefined)}
         >
           알겠습니다.

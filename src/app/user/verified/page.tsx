@@ -48,7 +48,7 @@ export default function Verified() {
           desc=""
         />
         <Modal.Icon iconType="alert" />
-        <Modal.Button colorTheme="confirm" onClick={handleSwitchModal}>
+        <Modal.Button colorTheme="primary" onClick={handleSwitchModal}>
           로그인 페이지로 돌아가기
         </Modal.Button>
       </Modal>

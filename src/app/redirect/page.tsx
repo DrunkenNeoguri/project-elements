@@ -26,7 +26,7 @@ export default function Redirect() {
           desc={modalMsg ?? ""}
         />
         <Modal.Icon iconType="alert" />
-        <Modal.Button colorTheme="confirm" onClick={handleModalClose}>
+        <Modal.Button colorTheme="primary" onClick={handleModalClose}>
           창 닫기
         </Modal.Button>
       </Modal>
