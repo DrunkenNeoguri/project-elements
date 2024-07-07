@@ -19,7 +19,7 @@ export default function useHeader() {
 
   const router = useRouter();
 
-  // ! Remind: 준비물 페이지에서도 사이즈에 따라 다르므로 이 상태로 정말 괜찮은지 생각해봐야함..
+  // ?CONCERN: 준비물 페이지에서도 사이즈에 따라 다르므로 이 상태로 정말 괜찮은지 생각해봐야함..
 
   // const activeRightButton = (headerType: HeaderType) => {
   //   switch (headerType) {
