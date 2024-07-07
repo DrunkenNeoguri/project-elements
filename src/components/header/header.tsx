@@ -8,7 +8,7 @@ import {
 } from "../../assets/icons/icons";
 import useHeader from "./use-header";
 import SideBar from "../sidebar/sidebar";
-import Portal from "../modal/portal";
+import Portal from "../portal/portal";
 
 type HeaderPropType = {
   activePrev?: boolean;

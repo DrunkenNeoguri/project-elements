@@ -1,5 +1,4 @@
-import { ButtonHTMLAttributes, PropsWithChildren, createContext } from "react";
-import Portal from "./portal";
+import { PropsWithChildren, createContext } from "react";
 import {
   ModalAlert,
   ModalChecked,
@@ -7,6 +6,8 @@ import {
   ModalInfo,
 } from "../../assets/icons/icons";
 import { Bar } from "../loader/loader";
+import Portal from "../portal/portal";
+import Button from "../button/button";
 
 // Modal Context API
 type ModalContextType = {
@@ -82,31 +83,6 @@ function Icon({
     checked: <ModalChecked />,
   };
   return <div className="w-12 h-12 mx-0 my-8">{iconList[iconType]}</div>;
-}
-
-// modal button
-type ButtonType = ButtonHTMLAttributes<HTMLButtonElement> &
-  PropsWithChildren & {
-    colorTheme?: "confirm" | "cancel";
-  };
-
-function Button(props: ButtonType) {
-  const { children, colorTheme = "confirm", ...rest } = props;
-
-  const buttonTheme = {
-    confirm: "bg-primary text-white",
-    cancel: "bg-white text-primary",
-  };
-
-  const buttonStyle =
-    "flex justify-center items-center w-full h-9 border-none rounded border-box font-bold12 cursor-pointer mb-3 " +
-    buttonTheme[colorTheme];
-
-  return (
-    <button className={buttonStyle} type="button" {...rest}>
-      {children}
-    </button>
-  );
 }
 
 Modal.Content = Content;
