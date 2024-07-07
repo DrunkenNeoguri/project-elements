@@ -6,6 +6,6 @@ export function RoundDot() {
 
 export function Bar() {
   return (
-    <div className="animate-bar bg-white w-4 h-16 text-white -indent-96 my-[88px] mx-auto relative text-[11px] translate-z-0 z-20 delay-[-0.16s] before:bg-white before:animate-bar before:w-4 before:h-16 before:absolute before:top-0 before:content-[''] before:left-[-6px] before:delay-[-0.32s] after:bg-white after:animate-bar after:w-4 after:h-16 after:absolute after:top-0 after:content-[''] after:left-[6px]" />
+    <div className="animate-[scaleHeight_1s_infinite_ease-in-out_-0.16s] text-primary relative font-[11px] bg-primary w-4 h-16 before:content-[''] before:absolute before:top-0 before:left-[-32px] before:bg-primary before:w-4 before:h-16 before:animate-[scaleHeight_1s_infinite_ease-in-out_-0.32s] after:content-[''] after:absolute after:top-0 after:left-[32px] after:bg-primary after:w-4 after:h-16 after:animate-scaleHeight" />
   );
 }

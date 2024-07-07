@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
 import plugin from "tailwindcss";
-
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,6 +9,16 @@ module.exports = {
   ],
   theme: {
     keyframes: {
+      scaleHeight: {
+        "0%, 80%, 100%": {
+          boxShadow: "0 0",
+          height: "64px",
+        },
+        "40%": {
+          boxShadow: "0 -32px",
+          height: "80px",
+        },
+      },
       fadeIn: {
         from: {
           opacity: "0%",
@@ -82,6 +91,7 @@ module.exports = {
       },
     },
     animation: {
+      scaleHeight: "scaleHeight 1s infinite ease-in-out",
       fadeIn: "fadeIn 1s",
       fadeOut: "fadeOut 1s",
       roundSpin: "roundSpin 1.1s infinite ease",
