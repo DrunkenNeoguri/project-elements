@@ -8,6 +8,7 @@ import {
 import { Bar } from "../loader/loader";
 import Portal from "../portal/portal";
 import Button from "../button/button";
+import Backdrop from "../backdrop/backdrop";
 
 // Modal Context API
 type ModalContextType = {
@@ -30,11 +31,11 @@ function Modal(props: ModalPropType) {
     <ModalContext.Provider value={{ isOpen, setIsOpen }}>
       {isOpen && (
         <Portal container={document.body}>
-          <div className="w-full h-[100vh] bg-shadowModal flex justify-center items-center absolute z-50 top-0 font-gmarketSans animate-[fadeIn_0.5s]">
-            <div className="bg-white flex flex-col justify-center items-center text-center border-none rounded-lg h-auto w-[calc(100%-72px)] max-w-[288px] pt-8 pb-3 px-7 absolute z-20 font-gmarketSans drop-shadow-[4px_4px_8px_#0000004D]">
+          <Backdrop>
+            <div className="bg-white flex flex-col justify-center items-center font-gmarketSans text-center border-none rounded-lg w-[calc(100%-72px)] max-w-[288px] h-auto pt-8 pb-3 px-7 absolute z-20 drop-shadow-[4px_4px_8px_#0000004D]">
               {children}
             </div>
-          </div>
+          </Backdrop>
         </Portal>
       )}
     </ModalContext.Provider>

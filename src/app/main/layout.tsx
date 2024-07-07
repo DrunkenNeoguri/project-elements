@@ -4,6 +4,7 @@ import Header from "../../components/header/header";
 import { AuthContext } from "../../providers/auth-provider.tsx";
 import MainHeader from "./_components/main-header.tsx";
 import { Bar } from "../../components/loader/loader.tsx";
+import Backdrop from "../../components/backdrop/backdrop.tsx";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const user = useContext(AuthContext);
@@ -11,9 +12,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       {!user && (
-        <div className="w-full max-w-[379px] h-[100vh] flex justify-center items-center absolute z-[45] top-0 bg-white">
+        <Backdrop colorTheme="loader">
           <Bar />
-        </div>
+        </Backdrop>
       )}
       <Header activeSearch={true} useSideBar={true} />
       <Suspense>
