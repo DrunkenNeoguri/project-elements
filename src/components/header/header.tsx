@@ -85,7 +85,7 @@ export default function Header(props: HeaderPropType) {
     <>
       <header
         className={
-          "w-full h-[72px] p-4 bg-primaryDeep text-white rounded-b-xl fixed max-w-[379px] z-40 " +
+          "w-full h-[72px] p-4 bg-primaryDeep text-white rounded-b-xl fixed max-w-[379px] z-40 top-0" +
           addViewShadow
         }
       >

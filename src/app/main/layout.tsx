@@ -1,26 +1,24 @@
 "use client";
-import { ReactNode, useContext } from "react";
+import { ReactNode, Suspense, useContext } from "react";
 import Header from "../../components/header/header";
-import { Bar } from "../../components/loader/loader";
 import { AuthContext } from "../../providers/auth-provider.tsx";
 import MainHeader from "./_components/main-header.tsx";
+import { Bar } from "../../components/loader/loader.tsx";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const user = useContext(AuthContext);
 
-  if (!user) {
-    return (
-      <section className="w-full h-[100vh] flex justify-center items-center bg-[#37373780]">
-        <Bar />
-      </section>
-    );
-  }
-
   return (
     <>
+      {!user && (
+        <div className="w-full max-w-[379px] h-[100vh] flex justify-center items-center absolute z-[45] top-0 bg-white">
+          <Bar />
+        </div>
+      )}
       <Header activeSearch={true} useSideBar={true} />
-      <MainHeader user={user} />
-
+      <Suspense>
+        <MainHeader username={user?.displayName} />
+      </Suspense>
       <section className="flex flex-col w-full justify-center items-center">
         {children}
       </section>
