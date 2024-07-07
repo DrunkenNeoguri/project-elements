@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .font-bold10 {
+    @apply font-bold whitespace-pre-wrap text-2xs;
+  }
+  .font-bold12 {
+    @apply font-bold whitespace-pre-wrap text-1xs;
+  }
+  .font-bold14 {
+    @apply font-bold whitespace-pre-wrap text-xs;
+  }
+  .font-bold16 {
+    @apply font-bold whitespace-pre-wrap text-sm;
+  }
+  .font-bold18 {
+    @apply font-bold whitespace-pre-wrap text-base;
+  }
+  .font-bold20 {
+    @apply font-bold whitespace-pre-wrap text-lg;
+  }
+  .font-bold24 {
+    @apply font-bold whitespace-pre-wrap text-xl;
+  }
+  .font-bold28 {
+    @apply font-bold whitespace-pre-wrap text-1xl;
+  }
+  .font-medium10 {
+    @apply font-medium whitespace-pre-wrap text-2xs;
+  }
+  .font-medium12 {
+    @apply font-medium whitespace-pre-wrap text-1xs;
+  }
+  .font-medium14 {
+    @apply font-medium whitespace-pre-wrap text-xs;
+  }
+  .font-medium16 {
+    @apply font-medium whitespace-pre-wrap text-sm;
+  }
+  .font-medium18 {
+    @apply font-medium whitespace-pre-wrap text-base;
+  }
+  .font-medium20 {
+    @apply font-medium whitespace-pre-wrap text-lg;
+  }
+  .font-medium24 {
+    @apply font-medium whitespace-pre-wrap text-xl;
+  }
+  .font-medium28 {
+    @apply font-medium whitespace-pre-wrap text-1xl;
+  }
+  .font-light10 {
+    @apply font-light whitespace-pre-wrap text-2xs;
+  }
+  .font-light12 {
+    @apply font-light whitespace-pre-wrap text-1xs;
+  }
+  .font-light14 {
+    @apply font-light whitespace-pre-wrap text-xs;
+  }
+  .font-light16 {
+    @apply font-light whitespace-pre-wrap text-sm;
+  }
+  .font-light18 {
+    @apply font-light whitespace-pre-wrap text-base;
+  }
+  .font-light20 {
+    @apply font-light whitespace-pre-wrap text-lg;
+  }
+  .font-light24 {
+    @apply font-light whitespace-pre-wrap text-lg;
+  }
+  .font-light28 {
+    @apply font-light whitespace-pre-wrap text-xl;
+  }
+}
