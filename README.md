@@ -40,20 +40,26 @@
     - [JavaScript](https://developer.mozilla.org/ko/docs/Web/JavaScript), [TypeScript](https://www.typescriptlang.org/)
 - **Frontend**
     - [React](https://ko.react.dev/)
-    - [Vite](https://ko.vitejs.dev/)
-    - [styled-components](https://styled-components.com/)
-    - [Jotai](https://jotai.org/)
-    - [TanStack-Query (React-Query)](https://tanstack.com/query/latest)
+    - [Next.js 13](https://nextjs.org/)
+    - [tailwind CSS](https://tailwindcss.com/)
+    - [Context API (React)](https://ko.react.dev/reference/react/createContext)
     - [i18next](https://www.i18next.com/)
+    - [~~Vite~~](https://ko.vitejs.dev/)
+    - [~~styled-components~~](https://styled-components.com/)
+    - [~~Jotai~~](https://jotai.org/)
+    - [~~TanStack-Query (React-Query)~~](https://tanstack.com/query/latest)
 - **Backend | CI/CD**
     - [Firebase v9](https://console.firebase.google.com/u/0/)
     - [vercel](https://vercel.com/)
-
 ---
 
 ## ℹ️ 프로젝트 정보
-[🔗 API 명세](https://develop-neoguri.notion.site/509a0f3794df4e4eb86d37d656815cd2?v=efbf4d99414a495e81e97c28845b6817)  
-[🌉 브랜치 관리](https://develop-neoguri.notion.site/d201b2203f464c0a8f54a451de78873a)  
+[🎨 디자인 문서 (Figma)](https://www.figma.com/design/p7uM1yZSHFh05LIsu5L0tj/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=12-45)  
+[🪲 버그(이슈) 보고](https://github.com/DrunkenNeoguri/project-elements/issues)  
+[📋 프로젝트 개발 현황](https://github.com/users/DrunkenNeoguri/projects/3)  
+
+[🔗 API 명세](https://www.notion.so/509a0f3794df4e4eb86d37d656815cd2?pvs=21)  
+[🌉 브랜치 관리](https://www.notion.so/d201b2203f464c0a8f54a451de78873a?pvs=21)  
 [✅ Commit, Pull Request 규칙](https://develop-neoguri.notion.site/Commit-Pull-Request-0dccba0c20e643829fdc1d309315100a)  
 [✏️ Github Project & Issue 규칙](https://develop-neoguri.notion.site/Github-Project-Issue-c212ec456e5a4a35a434ad41a2a1160e)  
 [⚠️ 코드 컨벤션](https://develop-neoguri.notion.site/f4539d2ffff84eddaed3cf2994652770)  
