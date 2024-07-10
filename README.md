@@ -12,6 +12,7 @@
 
 해당 프로젝트를 이용해 많은 분들이 여행을 준비하는 데에 조금이라도 도움이 될 수 있기를 바랍니다.
 
+  
 ---
 
 ## 📃 프로젝트 특징
@@ -22,16 +23,17 @@
 공유 기능을 통해 타인의 준비물을 내 세팅에 반영할 수 있어요!
 - 다른 사람들과 여행을 함께 준비하고 계신가요?
 모두가 같이 공유할 수 있도록 여행 준비물을 그룹에 초대할 수 있어요!  
-(해당 기능은 추가 예정입니다.)
+(런칭 후 향후 업데이트 예정입니다.)
 - 여행 중 지출 기록을 남기실 수 있도록, 각 여행의 화폐에 맞게 가계부를 남길 수 있어요.  
-(해당 기능은 추가 예정입니다.)
+(런칭 후 향후 업데이트 예정입니다.)
 
+  
 ---
 
 ## 🖼️ 프로젝트 시연
-
-(현재 제작중입니다.)
-
+현재 프로젝트 제작이 진행중이며, 아래 이미지는 구현이 완료된 부분까지 시연을 진행했습니다.
+![demostration image](https://file.notion.so/f/f/c84d6d26-27db-41c4-97d3-b4249a4824d1/e3c5bece-9a12-47cc-8f5c-5cc854339d66/test-demonstration.gif?id=ca23fe1b-f7be-4b42-8fd0-8252503329d6&table=block&spaceId=c84d6d26-27db-41c4-97d3-b4249a4824d1&expirationTimestamp=1720663200000&signature=a0lBVPS85C7sQwApwC7rJ5r02FX-FymKps-uwClZiMM)
+  
 ---
 
 ## 🏗️ 기술 스택 / 아키텍쳐
@@ -63,3 +65,4 @@
 [✅ Commit, Pull Request 규칙](https://develop-neoguri.notion.site/Commit-Pull-Request-0dccba0c20e643829fdc1d309315100a)  
 [✏️ Github Project & Issue 규칙](https://develop-neoguri.notion.site/Github-Project-Issue-c212ec456e5a4a35a434ad41a2a1160e)  
 [⚠️ 코드 컨벤션](https://develop-neoguri.notion.site/f4539d2ffff84eddaed3cf2994652770)  
+[📁 폴더 구조](https://develop-neoguri.notion.site/b668ea9dfb844e8cad1be1c55e553bb3)
