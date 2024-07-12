@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 // import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,5 +14,8 @@ const firebaseConfig = {
 
 const firebase = initializeApp(firebaseConfig);
 export const firebaseAuth = getAuth(firebase);
-export const firestore = getFirestore(firebase);
+export async function firestore() {
+  const { getFirestore } = await import("firebase/firestore");
+  return getFirestore(firebase);
+}
 // export const firebaseAnalytics = getAnalytics(firebase);

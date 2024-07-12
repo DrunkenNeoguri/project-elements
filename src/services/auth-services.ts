@@ -54,7 +54,7 @@ class AuthService {
         }
 
         const userInfo = await getDoc(
-          doc(firestore, `users`, loginResult.user.uid)
+          doc(await firestore(), `users`, loginResult.user.uid)
         );
 
         localStorage.setItem("userInfo", String(userInfo.data()));
@@ -152,7 +152,7 @@ class AuthService {
           );
         }
 
-        return await setDoc(doc(firestore, `users`, user.uid), {
+        return await setDoc(doc(await firestore(), `users`, user.uid), {
           email: user.email,
           username: user.displayName,
           createdAt: new Date().getTime(),
