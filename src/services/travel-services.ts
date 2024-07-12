@@ -13,7 +13,7 @@ class TravelService {
     try {
       let travelList: TravelBasicInfoType[] = [];
       const docsState = await getDocs(
-        collection(firestore, `travels`, userUid, "docs")
+        collection(await firestore(), `travels`, userUid, "docs")
       );
 
       docsState.forEach((doc) => {
@@ -66,19 +66,22 @@ class TravelService {
         if (formData.travelType === "foreign") return foreignTemplate;
       };
 
-      const batch = writeBatch(firestore);
+      const userInfo = localStorage.getItem("userInfo") ?? "";
+      const parseUserInfo = JSON.parse(userInfo);
+
+      const batch = writeBatch(await firestore());
 
       const travelsReference = doc(
-        collection(firestore, `travels`, userUid, "docs"),
+        collection(await firestore(), `travels`, userUid, "docs"),
         formData.id
       );
 
       const ListsReference = doc(
-        collection(firestore, `lists`, userUid, "docs"),
+        collection(await firestore(), `lists`, userUid, "docs"),
         formData.id
       );
 
-      const userReferecnce = doc(firestore, `users`, userUid);
+      const userReferecnce = doc(await firestore(), `users`, userUid);
 
       await batch.set(travelsReference, {
         ...formData,
@@ -90,6 +93,7 @@ class TravelService {
       });
 
       await batch.set(userReferecnce, {
+        ...parseUserInfo,
         recentTravel: formData.id,
       });
 

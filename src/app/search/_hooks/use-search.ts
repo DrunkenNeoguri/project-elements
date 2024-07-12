@@ -27,7 +27,7 @@ export default function useSearch() {
       setList(listState);
     };
     getTravelList();
-  }, [user?.uid, setList, keyword]);
+  }, [user, user?.uid, setList, keyword]);
 
   return { list, router, keyword };
 }
