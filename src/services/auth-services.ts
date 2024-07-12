@@ -57,7 +57,7 @@ class AuthService {
           doc(await firestore(), `users`, loginResult.user.uid)
         );
 
-        localStorage.setItem("userInfo", String(userInfo.data()));
+        localStorage.setItem("userInfo", JSON.stringify(userInfo.data()));
       }
       return "OK";
     } catch (error) {

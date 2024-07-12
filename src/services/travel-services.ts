@@ -66,6 +66,9 @@ class TravelService {
         if (formData.travelType === "foreign") return foreignTemplate;
       };
 
+      const userInfo = localStorage.getItem("userInfo") ?? "";
+      const parseUserInfo = JSON.parse(userInfo);
+
       const batch = writeBatch(await firestore());
 
       const travelsReference = doc(
@@ -90,6 +93,7 @@ class TravelService {
       });
 
       await batch.set(userReferecnce, {
+        ...parseUserInfo,
         recentTravel: formData.id,
       });
 
