@@ -10,7 +10,7 @@ export default function Backdrop(props: BackdropPropType) {
 
   const backdropType = {
     loader: "bg-white ",
-    backdrop: "bg-shadowModal animate-[fadeIn_0.5s] ",
+    backdrop: "bg-shadowModal animate-[fadeIn_0.25s] ",
   };
 
   return (
