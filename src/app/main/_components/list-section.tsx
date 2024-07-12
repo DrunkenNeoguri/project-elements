@@ -4,8 +4,8 @@ import Button from "../../../components/button/button";
 import useListSection from "../_hooks/use-list-section";
 import { RoundDot } from "../../../components/loader/loader";
 
-export default function ListSection() {
-  const { list, router } = useListSection();
+export default function ListSection({ uid }: { uid?: string }) {
+  const { list, router } = useListSection(uid);
 
   const handleMoveToTravelCreate = () => {
     return router.push("/travel/create");
