@@ -19,7 +19,7 @@ export default function SideBar({ onClick }: { onClick: () => void }) {
     document.body.style.overflow = "";
     const logOutState = await AuthService.postLogOutProcess();
     if (logOutState === "OK") {
-      return router.push("/login");
+      return router.push("/user/login");
     }
   };
 
