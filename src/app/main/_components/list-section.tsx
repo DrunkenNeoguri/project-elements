@@ -3,6 +3,10 @@ import TravelList from "./travel-list";
 import Button from "../../../components/button/button";
 import useListSection from "../_hooks/use-list-section";
 import { RoundDot } from "../../../components/loader/loader";
+import {
+  filterClosedTravelData,
+  filterRecentViewTravelData,
+} from "../_utils/utils-lists";
 
 export default function ListSection({ uid }: { uid?: string }) {
   const { list, router } = useListSection(uid);
@@ -33,8 +37,11 @@ export default function ListSection({ uid }: { uid?: string }) {
 
   return (
     <section className="flex flex-col w-full pt-3 pb-6 px-0 box-border">
-      <TravelList title="최근 확인했던 여행" lists={list} />
-      <TravelList title="다가오는 여행" lists={list} />
+      <TravelList
+        title="최근 확인했던 여행"
+        lists={filterRecentViewTravelData(list)}
+      />
+      <TravelList title="다가오는 여행" lists={filterClosedTravelData(list)} />
       <TravelList title="생성된 여행 리스트" lists={list} />
     </section>
   );
