@@ -20,6 +20,8 @@ import DocsSearchIcon from "./icon-docs-search.svg";
 import NewsIcon from "./icon-news.svg";
 import CurrencyIcon from "./icon-currency.svg";
 import ConfigIcon from "./icon-config.svg";
+import SelectedIcon from "./icon-selected.svg";
+import UnselectedIcon from "./icon-unselected.svg";
 
 export {
   CorrectIcon,
@@ -44,4 +46,6 @@ export {
   NewsIcon,
   CurrencyIcon,
   ConfigIcon,
+  SelectedIcon,
+  UnselectedIcon,
 };
