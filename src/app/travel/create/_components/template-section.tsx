@@ -54,7 +54,7 @@ export default function TemplateSection({
     );
 
     if (createListState === "OK") {
-      return router.push(`/elements/create?id=${travelData.id}`);
+      return router.push(`/element/create?id=${travelData.id}`);
     }
   };
 
