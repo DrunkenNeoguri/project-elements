@@ -2,11 +2,12 @@ import { createContext, PropsWithChildren, useState } from "react";
 
 type ExternalContextType = {
   externalList: string[];
-  handleExternalList?: (key: string) => void;
+  handleExternalList: (key: string) => void;
 };
 
 export const ExternalContext = createContext<ExternalContextType>({
   externalList: [],
+  handleExternalList: (key: string) => key,
 });
 
 export default function ExternalProvider(props: PropsWithChildren) {

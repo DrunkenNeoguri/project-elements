@@ -12,8 +12,15 @@ import {
 import Modal from "../../../../components/modal/modal";
 
 export default function SignUpForm() {
-  const { signUpData, setSignUpData, modalMsg, setModalMsg, router } =
-    useSignUpForm();
+  const {
+    signUpData,
+    setSignUpData,
+    modalMsg,
+    setModalMsg,
+    externalList,
+    handleExternalList,
+    router,
+  } = useSignUpForm();
 
   const handleSubmit = async () => {
     const validityCheck = checkSignUpDataTypeCheck(signUpData);
@@ -23,6 +30,7 @@ export default function SignUpForm() {
       if (signUpState === "OK") {
         router.push(`/user/signup/completed?email=${signUpData.email}`);
       } else {
+        handleExternalList("signup");
         setModalMsg(signUpState.message);
       }
     }
@@ -30,6 +38,11 @@ export default function SignUpForm() {
 
   const handleMoveToLoginPage = () => {
     router.push("/user/login");
+  };
+
+  const handleCloseModal = () => {
+    handleExternalList("signup");
+    setModalMsg(undefined);
   };
 
   return (
@@ -91,8 +104,8 @@ export default function SignUpForm() {
         </div>
       </Form>
       <Modal
-        isOpen={Boolean(modalMsg)}
-        setIsOpen={() => setModalMsg(undefined)}
+        isOpen={externalList.includes("signup")}
+        setIsOpen={handleCloseModal}
       >
         <Modal.Content
           colorTheme="alert"
@@ -100,10 +113,7 @@ export default function SignUpForm() {
           desc={modalMsg ?? ""}
         />
         <Modal.Icon iconType="alert" />
-        <Modal.Button
-          colorTheme="primary"
-          onClick={() => setModalMsg(undefined)}
-        >
+        <Modal.Button colorTheme="primary" onClick={handleCloseModal}>
           알겠습니다.
         </Modal.Button>
       </Modal>

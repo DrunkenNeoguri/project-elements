@@ -10,8 +10,15 @@ import {
 } from "../_utils/reset.utils";
 
 export default function ResetForm() {
-  const { resetData, setResetData, modalMsg, setModalMsg, router } =
-    useResetForm();
+  const {
+    resetData,
+    setResetData,
+    modalMsg,
+    setModalMsg,
+    router,
+    externalList,
+    handleExternalList,
+  } = useResetForm();
 
   const handleSubmit = async () => {
     const validityCheck = checkResetDataTypeCheck(resetData);
@@ -24,9 +31,15 @@ export default function ResetForm() {
       if (resetState === "OK") {
         return router.push("/user/reset/completed");
       } else {
+        handleExternalList("reset");
         return setModalMsg(resetState.message);
       }
     }
+  };
+
+  const handleCloseModal = () => {
+    handleExternalList("reset");
+    setModalMsg(undefined);
   };
 
   return (
@@ -62,8 +75,8 @@ export default function ResetForm() {
       </Form>
 
       <Modal
-        isOpen={Boolean(modalMsg)}
-        setIsOpen={() => setModalMsg(undefined)}
+        isOpen={externalList.includes("reset")}
+        setIsOpen={handleCloseModal}
       >
         <Modal.Content
           colorTheme="alert"
@@ -71,10 +84,7 @@ export default function ResetForm() {
           desc={modalMsg ?? ""}
         />
         <Modal.Icon iconType="alert" />
-        <Modal.Button
-          colorTheme="primary"
-          onClick={() => setModalMsg(undefined)}
-        >
+        <Modal.Button colorTheme="primary" onClick={handleCloseModal}>
           알겠습니다.
         </Modal.Button>
       </Modal>

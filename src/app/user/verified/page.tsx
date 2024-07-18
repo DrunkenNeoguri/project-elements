@@ -4,14 +4,14 @@ import Modal from "../../../components/modal/modal";
 import useVerified from "./hooks/use-verified";
 
 export default function Verified() {
-  const { isOpen, setIsOpen, router } = useVerified();
+  const { externalList, handleExternalList, router } = useVerified();
 
   const handleMoveToLoginPage = () => {
     return router.push("/user/login");
   };
 
   const handleSwitchModal = () => {
-    return setIsOpen(!isOpen);
+    handleExternalList("verified");
   };
 
   return (
@@ -41,7 +41,10 @@ export default function Verified() {
         </Button>
       </div>
 
-      <Modal isOpen={isOpen} setIsOpen={handleSwitchModal}>
+      <Modal
+        isOpen={externalList.includes("verified")}
+        setIsOpen={handleSwitchModal}
+      >
         <Modal.Content
           colorTheme="alert"
           title="본인 인증 중 에러 발생"
