@@ -88,7 +88,7 @@ class TravelService {
       });
 
       await batch.set(ListsReference, {
-        ...template,
+        ...template(),
         id: formData.id,
       });
 
