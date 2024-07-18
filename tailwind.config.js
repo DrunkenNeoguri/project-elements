@@ -121,6 +121,7 @@ module.exports = {
         primaryLight: "#A6CAFF",
         secondary: "#008D18",
         white: "#FFFFFF",
+        gray: "#D9D9D9",
         black: "#373737",
         error: "#D80000",
         invalid: "#909090",
