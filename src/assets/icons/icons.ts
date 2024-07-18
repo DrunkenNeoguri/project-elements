@@ -22,6 +22,7 @@ import CurrencyIcon from "./icon-currency.svg";
 import ConfigIcon from "./icon-config.svg";
 import SelectedIcon from "./icon-selected.svg";
 import UnselectedIcon from "./icon-unselected.svg";
+import ThreeDotsIcon from "./icon-three-dots.svg";
 
 export {
   CorrectIcon,
@@ -48,4 +49,5 @@ export {
   ConfigIcon,
   SelectedIcon,
   UnselectedIcon,
+  ThreeDotsIcon,
 };
