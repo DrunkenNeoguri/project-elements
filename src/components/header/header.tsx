@@ -136,7 +136,7 @@ export default function Header(props: HeaderPropType) {
           {useSideBar && (
             <button
               className={
-                "w-8 h-8 bg-transparent mr-0 ml-0 cursor-pointer pb-1" +
+                "w-8 h-8 bg-transparent mr-0 ml-0 cursor-pointer pb-1 " +
                 addSideBarCursor
               }
               disabled={!useSideBar}
