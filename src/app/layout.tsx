@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { GmarketSansOFT } from "../fonts/fonts";
-import AuthProvider from "../providers/auth-provider";
 import "./global.css";
+import ExternalProvider from "../providers/external-provider";
 
 export default function RootLayout({
   children,
@@ -21,7 +21,7 @@ export default function RootLayout({
           id="root"
         >
           <Suspense>
-            <AuthProvider>{children}</AuthProvider>
+            <ExternalProvider>{children}</ExternalProvider>
           </Suspense>
         </main>
       </body>
