@@ -38,7 +38,7 @@ export default function BottomSheet(props: BottomSheetPropType) {
     >
       <Portal container={document.body}>
         <Backdrop>
-          <div className="flex flex-col justify-center items-center fixed bottom-0 bg-white font-gmarketSans text-center border-none rounded-t-lg w-fill max-h-[368px] pt-6 pb-4 z-20 drop-shadow-[4px_4px_8px_#0000004D]">
+          <div className="flex flex-col justify-center items-start fixed bottom-0 bg-white font-gmarketSans text-center border-none rounded-t-lg w-full max-w-[379px] max-h-[368px] pt-6 pb-4 z-20 drop-shadow-[4px_4px_8px_#0000004D]">
             {children}
           </div>
         </Backdrop>
