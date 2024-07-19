@@ -3,7 +3,7 @@ import { useState } from "react";
 import CategoryBottomSheet from "./_components/category-bottom-sheet";
 import ElementHeader from "./_components/element-header";
 import useTravelCreate from "./_hooks/use-travel-create";
-import ElementsSection from "./_components/list-section";
+import ElementsSection from "./_components/elements-section";
 
 export default function ElementCreate() {
   const { elements } = useTravelCreate();
