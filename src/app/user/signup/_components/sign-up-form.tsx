@@ -90,8 +90,18 @@ export default function SignUpForm() {
         </div>
 
         <div className="flex flex-col gap-3 mt-3">
-          <Form.Button colorTheme="primary" type="submit">
-            다음 단계로
+          <Form.Button
+            disabled={!checkSignUpDataTypeCheck(signUpData)}
+            colorTheme={
+              checkSignUpDataTypeCheck(signUpData)
+                ? "primary"
+                : "invalidReverse"
+            }
+            type="submit"
+          >
+            {checkSignUpDataTypeCheck(signUpData)
+              ? "다음 단계로"
+              : "내용을 모두 기입해주세요."}
           </Form.Button>
 
           <Form.Button
