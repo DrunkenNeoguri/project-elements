@@ -1,14 +1,14 @@
 "use client";
 import { Dispatch, SetStateAction, useContext } from "react";
 import Button from "../../../../components/button/button";
-import { TravelBasicInfoType } from "../../../../types/travel.types";
+import { TravelBasicType } from "../../../../types/travel.types";
 import { AuthContext } from "../../../../providers/auth-provider";
 
 type PropType = {
   handlePrevStep: () => void;
   handleNextStep: () => void;
-  travelData: TravelBasicInfoType;
-  setTravelData: Dispatch<SetStateAction<TravelBasicInfoType>>;
+  travelData: TravelBasicType;
+  setTravelData: Dispatch<SetStateAction<TravelBasicType>>;
 };
 
 export default function ConfirmSection({

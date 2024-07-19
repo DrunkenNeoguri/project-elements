@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { TravelBasicInfoType } from "../../../types/travel.types";
+import { TravelBasicType } from "../../../types/travel.types";
 import TravelService from "../../../services/travel-services";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AuthContext } from "../../../providers/auth-provider";
 
 export default function useSearch() {
-  const [list, setList] = useState<TravelBasicInfoType[]>();
+  const [list, setList] = useState<TravelBasicType[]>();
   const user = useContext(AuthContext);
   const searchParams = useSearchParams();
   const router = useRouter();

@@ -2,14 +2,14 @@
 import { Dispatch } from "react";
 import Form from "../../../../components/form/form";
 import { SetStateAction } from "jotai";
-import { TravelBasicInfoType } from "../../../../types/travel.types";
+import { TravelBasicType } from "../../../../types/travel.types";
 import Button from "../../../../components/button/button";
 
 type PropType = {
   handlePrevStep: () => void;
   handleNextStep: () => void;
-  travelData: TravelBasicInfoType;
-  setTravelData: Dispatch<SetStateAction<TravelBasicInfoType>>;
+  travelData: TravelBasicType;
+  setTravelData: Dispatch<SetStateAction<TravelBasicType>>;
 };
 
 export default function TravelForm({

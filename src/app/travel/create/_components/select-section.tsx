@@ -2,11 +2,11 @@
 import { useRouter } from "next/navigation";
 import Button from "../../../../components/button/button";
 import { Dispatch, SetStateAction } from "react";
-import { TravelBasicInfoType } from "../../../../types/travel.types";
+import { TravelBasicType } from "../../../../types/travel.types";
 
 type PropType = {
   handleNextStep: () => void;
-  setTravelData: Dispatch<SetStateAction<TravelBasicInfoType>>;
+  setTravelData: Dispatch<SetStateAction<TravelBasicType>>;
 };
 
 export default function SelectSection({

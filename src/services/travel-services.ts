@@ -1,6 +1,6 @@
 import { collection, doc, getDocs, writeBatch } from "firebase/firestore";
 import { firestore } from "../utils/util-firebase";
-import { TravelBasicInfoType } from "../types/travel.types";
+import { TravelBasicType } from "../types/travel.types";
 import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
 import {
   basicTemplate,
@@ -11,7 +11,7 @@ import {
 class TravelService {
   static async getUserTravelList(userUid: string, keyword?: string | null) {
     try {
-      let travelList: TravelBasicInfoType[] = [];
+      let travelList: TravelBasicType[] = [];
       const docsState = await getDocs(
         collection(await firestore(), `travels`, userUid, "docs")
       );
@@ -57,7 +57,7 @@ class TravelService {
   static async postCreateNewTravel(
     userUid: string,
     useTemplate: boolean,
-    formData: TravelBasicInfoType
+    formData: TravelBasicType
   ) {
     try {
       const template = () => {
@@ -76,8 +76,8 @@ class TravelService {
         formData.id
       );
 
-      const ListsReference = doc(
-        collection(await firestore(), `lists`, userUid, "docs"),
+      const elementsReference = doc(
+        collection(await firestore(), `elements`, userUid, "docs"),
         formData.id
       );
 
@@ -87,9 +87,9 @@ class TravelService {
         ...formData,
       });
 
-      await batch.set(ListsReference, {
-        ...template(),
-        id: formData.id,
+      await batch.set(elementsReference, {
+        info: { ...formData },
+        elements: { ...template() },
       });
 
       await batch.set(userReferecnce, {
