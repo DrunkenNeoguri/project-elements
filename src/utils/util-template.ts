@@ -1,8 +1,9 @@
 // ?CONCERN: JSON MOCK Data로 변경할지 고민
+
 export const foreignTemplate = [
   {
     categoryName: "필수",
-    categoryColor: "red",
+    categoryColor: "01",
     elements: [
       {
         elementName: "여권",
@@ -64,7 +65,7 @@ export const foreignTemplate = [
   },
   {
     categoryName: "의류",
-    categoryColor: "blue",
+    categoryColor: "02",
     elements: [
       {
         elementName: "옷",
@@ -106,7 +107,7 @@ export const foreignTemplate = [
   },
   {
     categoryName: "전자기기",
-    categoryColor: "green",
+    categoryColor: "03",
     elements: [
       {
         elementName: "충전기",
@@ -144,7 +145,7 @@ export const foreignTemplate = [
   },
   {
     categoryName: "미용",
-    categoryColor: "orange",
+    categoryColor: "04",
     elements: [
       {
         elementName: "스킨",
@@ -238,7 +239,7 @@ export const foreignTemplate = [
   },
   {
     categoryName: "상비약",
-    categoryColor: "mint",
+    categoryColor: "05",
     elements: [
       {
         elementName: "종합감기약",
@@ -284,7 +285,7 @@ export const foreignTemplate = [
   },
   {
     categoryName: "기타",
-    categoryColor: "gray",
+    categoryColor: "06",
     elements: [
       {
         elementName: "담요",
@@ -329,7 +330,7 @@ export const foreignTemplate = [
 export const domesticTemplate = [
   {
     categoryName: "필수",
-    categoryColor: "red",
+    categoryColor: "01",
     elements: [
       {
         elementName: "지갑",
@@ -351,7 +352,7 @@ export const domesticTemplate = [
   },
   {
     categoryName: "의류",
-    categoryColor: "blue",
+    categoryColor: "02",
     elements: [
       {
         elementName: "옷",
@@ -397,7 +398,7 @@ export const domesticTemplate = [
   },
   {
     categoryName: "전자기기",
-    categoryColor: "green",
+    categoryColor: "03",
     elements: [
       {
         elementName: "충전기",
@@ -431,7 +432,7 @@ export const domesticTemplate = [
   },
   {
     categoryName: "미용",
-    categoryColor: "orange",
+    categoryColor: "04",
     elements: [
       {
         elementName: "스킨",
@@ -525,7 +526,7 @@ export const domesticTemplate = [
   },
   {
     categoryName: "상비약",
-    categoryColor: "mint",
+    categoryColor: "05",
     elements: [
       {
         elementName: "종합감기약",
@@ -571,7 +572,7 @@ export const domesticTemplate = [
   },
   {
     categoryName: "기타",
-    categoryColor: "gray",
+    categoryColor: "06",
     elements: [
       {
         elementName: "우산",
@@ -616,7 +617,7 @@ export const domesticTemplate = [
 export const basicTemplate = [
   {
     categoryName: "중요",
-    categoryColor: "red",
+    categoryColor: "01",
     elements: [
       {
         elementName: "지갑",
