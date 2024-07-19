@@ -1,15 +1,15 @@
 import Link from "next/link";
 import { DomesticIcon, ForeignIcon } from "../../assets/icons/icons";
-import { TravelBasicInfoType } from "../../types/travel.types";
+import { TravelBasicType } from "../../types/travel.types";
 
-export default function Ticket(props: TravelBasicInfoType) {
+export default function Ticket(props: TravelBasicType) {
   const { id, travelType, title, departureAt, travelPeriod, destination } =
     props;
 
   return (
     <Link
       id={id}
-      href={`/travel/main?travelId=${id}`}
+      href={`/element/create?id=${id}`}
       className="bg-white outline-none border-none rounded-md p-0 m-0 w-full box-border overflow-hidden cursor-pointer drop-shadow-[0_4px_4px_#00000064]"
     >
       {travelType === "domestic" ? (
