@@ -131,39 +131,40 @@ module.exports = {
         shadowModal: "#37373773",
         paletteColor01: "#898CFF",
         paletteColor02: "#FF89B5",
-        paletteColor03: "#FFDC89",
+        paletteColor03: "#FFC53D",
         paletteColor04: "#90D4F7",
         paletteColor05: "#71E096",
         paletteColor06: "#F5A26F",
         paletteColor07: "#668DE5",
         paletteColor08: "#ED6D79",
-        paletteColor09: "#5AD0E5",
+        paletteColor09: "#21B7D1",
         paletteColor10: "#DA97E0",
-        paletteColor11: "#CFF381",
+        paletteColor11: "#B4EC3B",
         paletteColor12: "#FF96E3",
         paletteColor13: "#BB96FF",
-        paletteColor14: "#67EEBD",
+        paletteColor14: "#22E69F",
+        paletteSubColor01: "#B8BAFF",
+        paletteSubColor02: "#FFB8D2",
+        paletteSubColor03: "#FFDC89",
+        paletteSubColor04: "#BCE5FA",
+        paletteSubColor05: "#A9ECC0",
+        paletteSubColor06: "#F9C7A8",
+        paletteSubColor07: "#A3BAEF",
+        paletteSubColor08: "#F4A7AE",
+        paletteSubColor09: "#5AD0E5",
+        paletteSubColor10: "#E8C0EC",
+        paletteSubColor11: "#CFF381",
+        paletteSubColor12: "#FFC0EE",
+        paletteSubColor13: "#D6C0FF",
+        paletteSubColor14: "#67EEBD",
       },
     },
   },
-  plugins: [
-    plugin(function ({ matchUtilities, theme }) {
-      matchUtilities(
-        {
-          "translate-z": (value) => ({
-            "--tw-translate-z": value,
-            transform: ` translate3d(var(--tw-translate-x), var(--tw-translate-y), var(--tw-translate-z)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))`,
-          }), // this is actual CSS
-        },
-        { values: theme("translate"), supportsNegativeValues: true }
-      );
-    }),
+  plugins: [],
+  safelist: [
+    {
+      pattern:
+        /(bg|text|border)-paletteSubColor(01|02|03|04|05|06|07|08|09|10|11|12|13|14|)/,
+    },
   ],
 };
-
-// "scripts": {
-//   "dev": "vite",
-//   "build": "tsc && vite build",
-//   "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-//   "preview": "vite preview"
-// },
