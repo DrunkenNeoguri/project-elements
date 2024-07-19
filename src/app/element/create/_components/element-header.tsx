@@ -1,8 +1,9 @@
-type ElementHeaderPropsType = {
-  title: string;
-  departureAt: string;
-  travelPeriod: number;
-};
+import { TravelBasicType } from "../../../../types/travel.types";
+
+type ElementHeaderPropsType = Pick<
+  TravelBasicType,
+  "title" | "departureAt" | "travelPeriod"
+>;
 
 export default function ElementHeader(props: ElementHeaderPropsType) {
   const { title = "", departureAt = "", travelPeriod = 0 } = props;
