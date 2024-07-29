@@ -2,15 +2,18 @@ import { TravelBasicType } from "./travel.types";
 
 export type ElementBasicType = {
   elementName: string;
-  Charge?: string;
-  ChargeUID?: string;
+  elementId: string;
+  elementColorTheme: string;
   isChecked: boolean;
+  elementOrder: number;
 };
 
 export type CategoryBasicType = {
   categoryName: string;
-  categoryColor: string;
-  elements: ElementBasicType[];
+  categoryId: string;
+  categoryColorTheme: string;
+  categoryOrder: number;
+  categoryElements: ElementBasicType[];
 };
 
 export type ElementsType = {
