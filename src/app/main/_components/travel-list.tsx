@@ -16,7 +16,7 @@ export default function TravelList(props: TravelListPropsType) {
 
       <div className="flex flex-col gap-4">
         {lists?.map((ticket) => {
-          return <Ticket key={ticket?.id} {...ticket} />;
+          return <Ticket key={ticket?.id + title} {...ticket} />;
         })}
       </div>
     </section>
