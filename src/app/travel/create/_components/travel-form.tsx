@@ -99,7 +99,7 @@ export default function TravelForm({
 
         <div>
           <Form.Label colorTheme="white" htmlFor="travelPeriod">
-            출발 일자
+            여행 기간
           </Form.Label>
           <Form.Counter
             id="travelPeriod"
