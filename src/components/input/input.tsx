@@ -6,7 +6,7 @@ type InputPropType = InputHTMLAttributes<HTMLInputElement> & {
   colorTheme?: "black" | "white";
   styles?: string;
   value?: string;
-  onChange?: () => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function Input(props: InputPropType) {

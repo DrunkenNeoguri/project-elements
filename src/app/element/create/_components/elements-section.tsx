@@ -1,4 +1,5 @@
 import Category from "../../../../components/category/category";
+import Element from "../../../../components/element/element";
 import {
   CategoryBasicType,
   ElementsType,
@@ -17,16 +18,20 @@ export default function ElementsSection(props: ElementsSectionPropType) {
 
   return (
     <section className="flex flex-col w-full p-4">
-      {categoryList?.map((category: CategoryBasicType, idx: number) => {
+      {categoryList?.map((category: CategoryBasicType) => {
         return (
-          <div id={`category${idx + 1}`} className="flex flex-col gap-3 mb-6">
+          <div
+            key={category.categoryId}
+            id={"category" + category.categoryOrder}
+            className="flex flex-col gap-3 mb-6"
+          >
             <Category
               name={category.categoryName}
-              color={category.categoryColor}
+              color={category.categoryColorTheme}
               state="custom"
             />
-            {category.elements.map((element) => (
-              <div>{element.elementName}</div>
+            {category.categoryElements.map((element) => (
+              <Element key={element.elementId} state="basic" {...element} />
             ))}
           </div>
         );
