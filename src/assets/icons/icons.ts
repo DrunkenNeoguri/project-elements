@@ -4,8 +4,8 @@ import ModalInfo from "./icon-modal-info.svg";
 import ModalAlert from "./icon-modal-alert.svg";
 import ModalChecked from "./icon-modal-checked.svg";
 import ModalConfirm from "./icon-modal-confirm.svg";
-import MinusIcon from "./icon-minus.svg";
-import PlusIcon from "./icon-plus.svg";
+import DecreaseIcon from "./icon-decrease.svg";
+import IncreaseIcon from "./icon-increase.svg";
 import CheckedIcon from "./icon-checked.svg";
 import UnCheckedIcon from "./icon-unchecked.svg";
 import PrevIcon from "./icon-prev.svg";
@@ -23,6 +23,8 @@ import ConfigIcon from "./icon-config.svg";
 import SelectedIcon from "./icon-selected.svg";
 import UnselectedIcon from "./icon-unselected.svg";
 import ThreeDotsIcon from "./icon-three-dots.svg";
+import AddIcon from "./icon-add.svg";
+import AddPrimaryIcon from "./icon-add-primary.svg";
 
 export {
   CorrectIcon,
@@ -31,8 +33,8 @@ export {
   ModalChecked,
   ModalConfirm,
   ModalInfo,
-  MinusIcon,
-  PlusIcon,
+  DecreaseIcon,
+  IncreaseIcon,
   CheckedIcon,
   UnCheckedIcon,
   PrevIcon,
@@ -50,4 +52,6 @@ export {
   SelectedIcon,
   UnselectedIcon,
   ThreeDotsIcon,
+  AddIcon,
+  AddPrimaryIcon,
 };
