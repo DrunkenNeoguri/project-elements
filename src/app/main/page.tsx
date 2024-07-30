@@ -13,7 +13,7 @@ export default function Main() {
   return (
     <>
       {!user && (
-        <Backdrop colorTheme="loader">
+        <Backdrop colorTheme="loader" disabled>
           <Bar />
         </Backdrop>
       )}

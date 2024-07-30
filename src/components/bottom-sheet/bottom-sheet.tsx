@@ -23,10 +23,11 @@ export const BottomSheetContext = createContext<
 type BottomSheetPropType = PropsWithChildren & {
   bottomSheetData: Record<string, string>;
   setBottomSheetData: Dispatch<SetStateAction<Record<string, string>>>;
+  onClose: () => void;
 };
 
 export default function BottomSheet(props: BottomSheetPropType) {
-  const { children, bottomSheetData, setBottomSheetData } = props;
+  const { children, bottomSheetData, setBottomSheetData, onClose } = props;
 
   const handleBottomSheetData = (name: string, value: string) => {
     setBottomSheetData({ ...bottomSheetData, [name]: value });
@@ -37,11 +38,10 @@ export default function BottomSheet(props: BottomSheetPropType) {
       value={{ bottomSheetData, handleBottomSheetData }}
     >
       <Portal container={document.body}>
-        <Backdrop>
-          <div className="flex flex-col justify-center items-start fixed bottom-0 bg-white font-gmarketSans text-center border-none rounded-t-lg w-full max-w-[379px] max-h-[368px] pt-6 pb-4 z-20 drop-shadow-[4px_4px_8px_#0000004D]">
-            {children}
-          </div>
-        </Backdrop>
+        <div className="flex flex-col justify-center items-start fixed bottom-0 bg-white font-gmarketSans text-center border-none rounded-t-lg w-full max-w-[379px] max-h-[368px] pt-6 pb-4 z-[60] drop-shadow-[0_-4px_4px_#0000004D]">
+          {children}
+        </div>
+        <Backdrop onClick={onClose} />
       </Portal>
     </BottomSheetContext.Provider>
   );
