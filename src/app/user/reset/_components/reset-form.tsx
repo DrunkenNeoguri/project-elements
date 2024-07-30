@@ -74,10 +74,7 @@ export default function ResetForm() {
         </Form.Button>
       </Form>
 
-      <Modal
-        isOpen={externalList.includes("reset")}
-        setIsOpen={handleCloseModal}
-      >
+      <Modal isOpen={externalList.has("reset")} setIsOpen={handleCloseModal}>
         <Modal.Content
           colorTheme="alert"
           title="비밀번호 변경 중 에러 발생"

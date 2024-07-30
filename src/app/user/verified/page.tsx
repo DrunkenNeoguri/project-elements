@@ -42,7 +42,7 @@ export default function Verified() {
       </div>
 
       <Modal
-        isOpen={externalList.includes("verified")}
+        isOpen={externalList.has("verified")}
         setIsOpen={handleSwitchModal}
       >
         <Modal.Content

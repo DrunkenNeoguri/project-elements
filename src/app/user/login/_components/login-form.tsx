@@ -82,10 +82,7 @@ export default function LoginForm() {
         </Form.Button>
       </Form>
 
-      <Modal
-        isOpen={externalList.includes("login")}
-        setIsOpen={handleCloseModal}
-      >
+      <Modal isOpen={externalList.has("login")} setIsOpen={handleCloseModal}>
         <Modal.Content
           colorTheme="alert"
           title="로그인 중 에러 발생"

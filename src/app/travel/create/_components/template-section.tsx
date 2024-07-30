@@ -97,7 +97,7 @@ export default function TemplateSection({
       </div>
 
       <Modal
-        isOpen={externalList.includes("travelCreate")}
+        isOpen={externalList.has("travelCreate")}
         setIsOpen={handleCloseModal}
       >
         <Modal.Content

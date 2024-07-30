@@ -65,10 +65,7 @@ export default function ForgetForm() {
         </div>
       </Form>
 
-      <Modal
-        isOpen={externalList.includes("forget")}
-        setIsOpen={handleCloseModal}
-      >
+      <Modal isOpen={externalList.has("forget")} setIsOpen={handleCloseModal}>
         <Modal.Content
           colorTheme="alert"
           title="로그인 중 에러 발생"

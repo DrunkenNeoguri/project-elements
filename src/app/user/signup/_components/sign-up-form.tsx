@@ -113,10 +113,7 @@ export default function SignUpForm() {
           </Form.Button>
         </div>
       </Form>
-      <Modal
-        isOpen={externalList.includes("signup")}
-        setIsOpen={handleCloseModal}
-      >
+      <Modal isOpen={externalList.has("signup")} setIsOpen={handleCloseModal}>
         <Modal.Content
           colorTheme="alert"
           title="회원가입 중 에러 발생"
