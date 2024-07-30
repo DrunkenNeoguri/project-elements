@@ -1,18 +1,27 @@
+"use client";
+import { useContext } from "react";
 import { ThreeDotsIcon } from "../../assets/icons/icons";
+import { ExternalContext } from "../../providers/external-provider";
 
 type CategoryPropType = {
   name: string;
   color: string;
-  state?: "custom" | "read";
+  state?: "upserting" | "checking";
 };
 
 export default function Category(props: CategoryPropType) {
   const { name, color, state = "read" } = props;
 
+  const { handleExternalList } = useContext(ExternalContext);
+
+  const handleSwitchSelectCategoryBottomSheet = () => {
+    handleExternalList("element-create-selectCategory");
+  };
+
   const categoryStyle = {
     mainColor: "bg-paletteColor" + color,
     subColor: "bg-paletteSubColor" + color,
-    state: state === "custom" ? "" : "mr-3",
+    state: state === "upserting" ? "" : "mr-3",
   };
   return (
     <div
@@ -36,10 +45,12 @@ export default function Category(props: CategoryPropType) {
         />
       </div>
 
-      {state === "custom" && (
+      {state === "upserting" && (
         <button
+          title="카테고리 상세 메뉴 열기"
           type="button"
           className="w-7 h-7 rounded mr-2 bg-transparent flex justify-center items-center"
+          onClick={handleSwitchSelectCategoryBottomSheet}
         >
           <ThreeDotsIcon />
         </button>
