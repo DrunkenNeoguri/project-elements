@@ -8,6 +8,11 @@ type TravelListPropsType = {
 
 export default function TravelList(props: TravelListPropsType) {
   const { title, lists } = props;
+
+  if (lists.length < 1) {
+    return;
+  }
+
   return (
     <section className="flex flex-col gap-1 py-3 px-4 w-full box-border">
       <div className="flex justify-between items-center p-0 m-0">
