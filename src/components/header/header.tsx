@@ -116,6 +116,7 @@ export default function Header(props: HeaderPropType) {
                 />
                 <button
                   type="button"
+                  title="관련 내용 검색"
                   onClick={handleSearchButton}
                   className="w-8 h-8 bg-transparent mr-0 ml-auto cursor-pointer absolute top-5 right-[56px]"
                 >
@@ -124,6 +125,7 @@ export default function Header(props: HeaderPropType) {
               </form>
             ) : (
               <button
+                title="검색창 열기"
                 className="w-8 h-8 bg-transparent mr-2 ml-auto cursor-pointer"
                 onClick={handleSwitchSearch}
               >
@@ -135,6 +137,7 @@ export default function Header(props: HeaderPropType) {
 
           {useSideBar && (
             <button
+              title="사이드바 열기"
               className={
                 "w-8 h-8 bg-transparent mr-0 ml-0 cursor-pointer pb-1 " +
                 addSideBarCursor

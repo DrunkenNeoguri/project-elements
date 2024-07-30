@@ -42,6 +42,7 @@ export default function SideBar({ onClick }: { onClick: () => void }) {
       <div className="flex justify-between items-center mb-6">
         <h3 className="font-bold20 text-white p-0 m-0">준비물 챙겼어?</h3>
         <button
+          title="사이드바 닫기"
           className="bg-transparent text-white p-0 m-0 border-none outline-none box-border cursor-pointer"
           onClick={onClick}
         >

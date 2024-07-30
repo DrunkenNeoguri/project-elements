@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const { handleExternalList } = useContext(ExternalContext);
 
   const handleSwitchCategoryBottomSheet = () => {
-    handleExternalList("element-create-category");
+    handleExternalList("element-create-selectElementList");
   };
 
   return (
@@ -18,6 +18,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         activePrev={true}
         actionButton={
           <button
+            title="준비물 목록 옵션 열기"
             type="button"
             className="w-8 h-8 bg-transparent mr-0 ml-auto cursor-pointer pb-1"
             onClick={handleSwitchCategoryBottomSheet}
