@@ -24,7 +24,9 @@ import SelectedIcon from "./icon-selected.svg";
 import UnselectedIcon from "./icon-unselected.svg";
 import ThreeDotsIcon from "./icon-three-dots.svg";
 import AddIcon from "./icon-add.svg";
-import AddPrimaryIcon from "./icon-add-primary.svg";
+import CreateCategoryIcon from "./icon-create-category.svg";
+import CreateElementIcon from "./icon-create-element.svg";
+import ModifyElementIcon from "./icon-modify-element.svg";
 
 export {
   CorrectIcon,
@@ -53,5 +55,7 @@ export {
   UnselectedIcon,
   ThreeDotsIcon,
   AddIcon,
-  AddPrimaryIcon,
+  CreateCategoryIcon,
+  CreateElementIcon,
+  ModifyElementIcon,
 };
