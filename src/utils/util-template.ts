@@ -1042,22 +1042,6 @@ export const domesticTemplate = [
 
 export const basicTemplate = [
   {
-    categoryName: "중요",
-    categoryId: "category1",
-    categoryColorTheme: "01",
-    categoryOrder: 1,
-    categoryElements: [
-      {
-        elementName: "지갑",
-        isChecked: false,
-      },
-      {
-        elementName: "핸드폰",
-        isChecked: false,
-      },
-    ],
-  },
-  {
     categoryName: "필수",
     categoryId: "category1",
     categoryColorTheme: "01",

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AddIcon, AddPrimaryIcon } from "../../../../assets/icons/icons";
+import { AddIcon } from "../../../../assets/icons/icons";
 import Category from "../../../../components/category/category";
 import Element from "../../../../components/element/element";
 import {
@@ -16,9 +16,7 @@ export default function ElementsSection(props: ElementsSectionPropType) {
   const { elements } = props;
   const { handleExternalList } = useContext(ExternalContext);
 
-  const categoryList = !elements
-    ? undefined
-    : Object.keys(elements).map((key) => elements[key]);
+  const categoryList = elements && Object.values(elements);
 
   const handleSwitchCategoryBottomSheet = () => {
     handleExternalList("element-create-category");
@@ -39,20 +37,22 @@ export default function ElementsSection(props: ElementsSectionPropType) {
               state="upserting"
             />
             {category.categoryElements.map((element) => (
-              <Element key={element.elementId} state="upserting" {...element} />
+              <Element key={element.elementId} state="base" {...element} />
             ))}
-            <button className="flex items-center rounded w-full gap-2 px-3 py-2 m-0 outline-none border-none text-primary bg-transparent">
-              <AddPrimaryIcon />
-              <span className="mt-[2px]">준비물 추가</span>
-            </button>
-            {/* <Element
-              state="create"
-              elementId={"고민..."}
+            <Element
+              state="new"
+              elementId={`category1-element${
+                Math.max(
+                  ...category.categoryElements.map((element) =>
+                    parseInt(element.elementId.split("-")[1])
+                  )
+                ) + 1
+              }`}
               elementName=""
               elementColorTheme={category.categoryColorTheme}
               isChecked={false}
               elementOrder={category.categoryElements.length + 1}
-            /> */}
+            />
           </div>
         );
       })}

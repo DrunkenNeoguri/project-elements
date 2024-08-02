@@ -16,9 +16,7 @@ export type CategoryBasicType = {
   categoryElements: ElementBasicType[];
 };
 
-export type ElementsType = {
-  [key in number]: CategoryBasicType;
-};
+export type ElementsType = Map<number, CategoryBasicType>;
 
 export type ElementsBasicType = {
   info: TravelBasicType;

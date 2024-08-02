@@ -22,7 +22,7 @@ export default function ElementCreate() {
         departureAt={elements?.info.departureAt}
         travelPeriod={elements?.info.travelPeriod}
       />
-      <ElementsSection elements={elements?.elements} />
+      <ElementsSection elements={new Map(elements?.elements)} />
       <SelectStaffBottomSheet
         bottomSheetData={bottomSheetData}
         setBottomSheetData={setBottomSheetData}
