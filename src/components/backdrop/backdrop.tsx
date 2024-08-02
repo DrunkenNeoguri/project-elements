@@ -16,7 +16,7 @@ export default function Backdrop(props: BackdropPropType) {
   return (
     <button
       className={
-        "w-full max-w-[379px] h-[100vh] flex justify-center items-center absolute z-50 top-0 " +
+        "w-full max-w-[379px] h-[100vh] flex justify-center items-center fixed z-50 top-0 " +
         backdropType[colorTheme] +
         styles
       }
