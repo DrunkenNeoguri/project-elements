@@ -30,14 +30,14 @@ export default function Element(props: ElementPropsType) {
 
   switch (compState) {
     case "check":
-      return CheckElement({ ...props, setCompState });
+      return <CheckElement {...props} setCompState={setCompState} />;
     case "modify":
     case "create":
-      return EditElement({ ...props, setCompState });
+      return <EditElement {...props} setCompState={setCompState} />;
     case "base":
-      return BaseElement({ ...props, setCompState });
+      return <BaseElement {...props} setCompState={setCompState} />;
     case "new":
-      return NewElement(setCompState);
+      return <NewElement setCompState={setCompState} />;
     default:
       return;
   }
@@ -141,7 +141,11 @@ function EditElement(
   );
 }
 
-function NewElement(setCompState: Dispatch<SetStateAction<ElementStateType>>) {
+function NewElement({
+  setCompState,
+}: {
+  setCompState: Dispatch<SetStateAction<ElementStateType>>;
+}) {
   const handleSwitchCompState = () => {
     return setCompState("create");
   };
