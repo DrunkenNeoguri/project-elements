@@ -17,7 +17,7 @@ import {
 import { ElementBasicType } from "../../types/element.types";
 import Input from "../input/input";
 import { ExternalContext } from "../../providers/external-provider";
-import { ElementContext } from "../../providers/element-provider";
+import { ElementsContext } from "../../providers/elements-provider";
 
 type ElementStateType = "base" | "check" | "create" | "modify" | "new";
 
@@ -119,7 +119,7 @@ function EditElement(
   const { state, setCompState, elementName, ...rest } = props;
 
   const [value, setValue] = useState(elementName);
-  const { dispatch } = useContext(ElementContext);
+  const { dispatch } = useContext(ElementsContext);
 
   const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     return setValue(e.currentTarget.value);

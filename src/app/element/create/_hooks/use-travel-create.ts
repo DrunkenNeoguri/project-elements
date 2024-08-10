@@ -2,12 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import ElementService from "../../../../services/element-service";
 import { useSearchParams } from "next/navigation";
 import { AuthContext } from "../../../../providers/auth-provider";
-import { ElementContext } from "../../../../providers/element-provider";
+import { ElementsContext } from "../../../../providers/elements-provider";
 import { TravelBasicType } from "../../../../types/travel.types";
 
 export default function useTravelCreate() {
   const [travelInfo, setTravelInfo] = useState<TravelBasicType>();
-  const { dispatch } = useContext(ElementContext);
+  const { dispatch } = useContext(ElementsContext);
   const user = useContext(AuthContext);
   const searchParams = useSearchParams();
   const listId = searchParams?.get("id");

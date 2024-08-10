@@ -2,24 +2,24 @@
 import { Dispatch, ReactNode, createContext, useReducer } from "react";
 import { CategoryBasicType, ElementBasicType } from "../types/element.types";
 
-type ElementsContextType = {
-  elements: CategoryBasicType[];
-  dispatch: Dispatch<ElementReducerActionType>;
-};
-
-type ElementReducerActionType = {
+type ElementsReducerActionType = {
   type: string;
   target: ElementBasicType | CategoryBasicType | CategoryBasicType[];
 };
 
-export const ElementContext = createContext<ElementsContextType>({
+type ElementsContextType = {
+  elements: CategoryBasicType[];
+  dispatch: Dispatch<ElementsReducerActionType>;
+};
+
+export const ElementsContext = createContext<ElementsContextType>({
   elements: [],
   dispatch: () => {},
 });
 
-const elementReducer = (
+const elementsReducer = (
   elements: CategoryBasicType[],
-  action: ElementReducerActionType
+  action: ElementsReducerActionType
 ) => {
   switch (action.type) {
     case "createElement":
@@ -116,14 +116,14 @@ export default function ElementProvider({ children }: { children: ReactNode }) {
   const [elements, dispatch] = useReducer<
     (
       state: CategoryBasicType[],
-      action: ElementReducerActionType
+      action: ElementsReducerActionType
     ) => CategoryBasicType[],
     CategoryBasicType[]
-  >(elementReducer, [], initialElements);
+  >(elementsReducer, [], initialElements);
 
   return (
-    <ElementContext.Provider value={{ elements, dispatch }}>
+    <ElementsContext.Provider value={{ elements, dispatch }}>
       {children}
-    </ElementContext.Provider>
+    </ElementsContext.Provider>
   );
 }

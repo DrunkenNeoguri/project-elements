@@ -4,10 +4,10 @@ import Category from "../../../../components/category/category";
 import Element from "../../../../components/element/element";
 import { CategoryBasicType } from "../../../../types/element.types";
 import { ExternalContext } from "../../../../providers/external-provider";
-import { ElementContext } from "../../../../providers/element-provider";
+import { ElementsContext } from "../../../../providers/elements-provider";
 
 export default function ElementsSection() {
-  const { elements } = useContext(ElementContext);
+  const { elements } = useContext(ElementsContext);
   const { handleExternalList } = useContext(ExternalContext);
 
   const handleSwitchCategoryBottomSheet = () => {
