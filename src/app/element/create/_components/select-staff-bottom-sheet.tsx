@@ -1,7 +1,6 @@
-import { Dispatch, useContext } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import { ExternalContext } from "../../../../providers/external-provider";
 import BottomSheet from "../../../../components/bottom-sheet/bottom-sheet";
-import { SetStateAction } from "jotai";
 
 type SelectBottomSheetPropsType = {
   bottomSheetData: Record<string, string>;

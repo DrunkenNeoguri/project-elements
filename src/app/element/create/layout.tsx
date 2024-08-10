@@ -4,6 +4,7 @@ import Header from "../../../components/header/header";
 import AuthProvider from "../../../providers/auth-provider";
 import { ExternalContext } from "../../../providers/external-provider";
 import { HamburgerIcon } from "../../../assets/icons/icons";
+import ElementProvider from "../../../providers/element-provider";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { handleExternalList } = useContext(ExternalContext);
@@ -28,7 +29,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         }
       />
       <section className="flex flex-col w-full justify-center items-center">
-        {children}
+        <ElementProvider>{children}</ElementProvider>
       </section>
     </AuthProvider>
   );

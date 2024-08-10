@@ -2,6 +2,7 @@
 import {
   ChangeEvent,
   Dispatch,
+  FormEvent,
   SetStateAction,
   useContext,
   useState,
@@ -16,6 +17,7 @@ import {
 import { ElementBasicType } from "../../types/element.types";
 import Input from "../input/input";
 import { ExternalContext } from "../../providers/external-provider";
+import { ElementContext } from "../../providers/element-provider";
 
 type ElementStateType = "base" | "check" | "create" | "modify" | "new";
 
@@ -53,7 +55,6 @@ function CheckElement(
   const elementStyle = isChecked
     ? "bg-paletteSubColor" + elementColorTheme
     : "bg-gray";
-  console.log("A");
 
   return (
     <button
@@ -115,29 +116,58 @@ function EditElement(
     setCompState: Dispatch<SetStateAction<ElementStateType>>;
   }
 ) {
-  const { state, elementName, elementId } = props;
-  console.log("B");
+  const { state, setCompState, elementName, ...rest } = props;
 
   const [value, setValue] = useState(elementName);
+  const { dispatch } = useContext(ElementContext);
 
   const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     return setValue(e.currentTarget.value);
   };
 
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    if (state === "create") {
+      dispatch!({
+        type: "createElement",
+        target: {
+          elementName: value,
+          ...rest,
+        },
+      });
+    } else if (state === "modify") {
+      dispatch!({
+        type: "updateElement",
+        target: {
+          elementName: value,
+          ...rest,
+        },
+      });
+    }
+    setValue("");
+    setCompState("new");
+  };
+
   return (
-    <div className="flex bg-gray rounded-lg w-full gap-2 p-2 m-0">
+    <form
+      className="flex bg-gray rounded-lg w-full gap-2 p-2 m-0"
+      onSubmit={onSubmit}
+    >
       <Input
-        id={elementId}
         style={{ marginTop: 0 }}
         styles="h-7 p-0 px-2 py-1 border-none"
         value={value}
         onChange={handleChangeValue}
       />
 
-      <button className="flex justify-center items-center w-7 h-7 rounded bg-primary text-white">
+      <button
+        type="submit"
+        className="flex justify-center items-center w-7 h-7 rounded bg-primary text-white"
+      >
         {state === "create" ? <CreateElementIcon /> : <ModifyElementIcon />}
       </button>
-    </div>
+    </form>
   );
 }
 

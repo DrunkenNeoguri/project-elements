@@ -2,21 +2,13 @@ import { useContext } from "react";
 import { AddIcon } from "../../../../assets/icons/icons";
 import Category from "../../../../components/category/category";
 import Element from "../../../../components/element/element";
-import {
-  CategoryBasicType,
-  ElementsType,
-} from "../../../../types/element.types";
+import { CategoryBasicType } from "../../../../types/element.types";
 import { ExternalContext } from "../../../../providers/external-provider";
+import { ElementContext } from "../../../../providers/element-provider";
 
-type ElementsSectionPropType = {
-  elements: ElementsType;
-};
-
-export default function ElementsSection(props: ElementsSectionPropType) {
-  const { elements } = props;
+export default function ElementsSection() {
+  const { elements } = useContext(ElementContext);
   const { handleExternalList } = useContext(ExternalContext);
-
-  const categoryList = elements && Object.values(elements);
 
   const handleSwitchCategoryBottomSheet = () => {
     handleExternalList("element-create-category");
@@ -24,7 +16,7 @@ export default function ElementsSection(props: ElementsSectionPropType) {
 
   return (
     <section className="flex flex-col w-full p-4">
-      {categoryList?.map((category: CategoryBasicType) => {
+      {elements?.map((category: CategoryBasicType) => {
         return (
           <div
             key={category.categoryId}
@@ -36,15 +28,21 @@ export default function ElementsSection(props: ElementsSectionPropType) {
               color={category.categoryColorTheme}
               state="upserting"
             />
-            {category.categoryElements.map((element) => (
-              <Element key={element.elementId} state="base" {...element} />
-            ))}
+
+            {category.categoryElements.map((element) => {
+              return (
+                <Element key={element.elementId} state="base" {...element} />
+              );
+            })}
+
             <Element
               state="new"
-              elementId={`category1-element${
+              elementId={`${category.categoryId}-element${
                 Math.max(
                   ...category.categoryElements.map((element) =>
-                    parseInt(element.elementId.split("-")[1])
+                    parseInt(
+                      element.elementId.split("-")[1].replace("element", "")
+                    )
                   )
                 ) + 1
               }`}
