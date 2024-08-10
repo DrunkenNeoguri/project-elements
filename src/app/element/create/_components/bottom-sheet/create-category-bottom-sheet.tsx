@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useContext } from "react";
-import BottomSheet from "../../../../components/bottom-sheet/bottom-sheet";
-import { ExternalContext } from "../../../../providers/external-provider";
+import BottomSheet from "../../../../../components/bottom-sheet/bottom-sheet";
+import { ExternalContext } from "../../../../../providers/external-provider";
 
 type CategoryBottomSheetPropsType = {
   bottomSheetData: Record<string, string>;
@@ -41,7 +41,9 @@ export default function CreateCategoryBottomSheet(
           >
             취소
           </BottomSheet.Button>
-          <BottomSheet.Button colorTheme="primary">추가</BottomSheet.Button>
+          <BottomSheet.Button type="button" colorTheme="primary">
+            추가
+          </BottomSheet.Button>
         </div>
       </BottomSheet>
     )
