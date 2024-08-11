@@ -6,8 +6,7 @@ import ElementsSection from "./_components/elements-section";
 import ListOptionBottomSheet from "./_components/bottom-sheet/list-option-bottom-sheet";
 import ElementOptionBottomSheet from "./_components/bottom-sheet/element-option-bottom-sheet";
 import CategoryOptionBottomSheet from "./_components/bottom-sheet/category-option-bottom-sheet";
-import SelectStaffBottomSheet from "./_components/bottom-sheet/select-staff-bottom-sheet";
-import CreateCategoryBottomSheet from "./_components/bottom-sheet/create-category-bottom-sheet";
+import EditCategoryBottomSheet from "./_components/bottom-sheet/edit-category-bottom-sheet";
 import PartProvider from "../../../providers/part-provider";
 
 export default function ElementCreate() {
@@ -29,14 +28,11 @@ export default function ElementCreate() {
       />
       <PartProvider>
         <ElementsSection />
-        <SelectStaffBottomSheet
+        {/* <SelectStaffBottomSheet
           bottomSheetData={bottomSheetData}
           setBottomSheetData={setBottomSheetData}
-        />
-        <CreateCategoryBottomSheet
-          bottomSheetData={bottomSheetData}
-          setBottomSheetData={setBottomSheetData}
-        />
+        /> */}
+        <EditCategoryBottomSheet />
         <ListOptionBottomSheet
           bottomSheetData={bottomSheetData}
           setBottomSheetData={setBottomSheetData}

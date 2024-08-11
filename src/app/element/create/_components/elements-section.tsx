@@ -5,12 +5,34 @@ import Element from "../../../../components/element/element";
 import { CategoryBasicType } from "../../../../types/element.types";
 import { ExternalContext } from "../../../../providers/external-provider";
 import { ElementsContext } from "../../../../providers/elements-provider";
+import { PartContext } from "../../../../providers/part-provider";
 
 export default function ElementsSection() {
   const { elements } = useContext(ElementsContext);
   const { handleExternalList } = useContext(ExternalContext);
+  const { handleSetPart } = useContext(PartContext);
 
   const handleSwitchCategoryBottomSheet = () => {
+    handleSetPart({
+      categoryName: "",
+      categoryId:
+        "category" +
+        (Math.max(
+          ...elements.map((category) =>
+            parseInt(
+              category.categoryId.substring(
+                category.categoryId.indexOf("y") + 1,
+                category.categoryId.length
+              )
+            )
+          )
+        ) +
+          1),
+      categoryColorTheme: "01",
+      categoryOrder:
+        Math.max(...elements.map((categoty) => categoty.categoryOrder)) + 1,
+      categoryElements: [],
+    });
     handleExternalList("element-create-category");
   };
 
@@ -23,11 +45,7 @@ export default function ElementsSection() {
             id={"category" + category.categoryOrder}
             className="flex flex-col gap-3 mb-6"
           >
-            <Category
-              name={category.categoryName}
-              color={category.categoryColorTheme}
-              state="upserting"
-            />
+            <Category data={category} state="upserting" />
 
             {category.categoryElements.map((element) => {
               return (
