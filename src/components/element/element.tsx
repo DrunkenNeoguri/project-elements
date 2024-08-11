@@ -18,8 +18,9 @@ import { ElementBasicType } from "../../types/element.types";
 import Input from "../input/input";
 import { ExternalContext } from "../../providers/external-provider";
 import { ElementsContext } from "../../providers/elements-provider";
+import { PartContext } from "../../providers/part-provider";
 
-type ElementStateType = "base" | "check" | "create" | "modify" | "new";
+export type ElementStateType = "base" | "check" | "create" | "modify" | "new";
 
 type ElementPropsType = ElementBasicType & {
   state: ElementStateType;
@@ -28,14 +29,23 @@ type ElementPropsType = ElementBasicType & {
 // ?CONCERN: 케이스에 따라 쓸 수 있도록 Map 인스턴스 혹은 Map 형태로 묶어서 시도...
 // ?CONCERN: 아래와 같이 일단은 Switch로 관리해보기로.
 export default function Element(props: ElementPropsType) {
-  const [compState, setCompState] = useState(props.state);
+  const { state } = props;
+  const [compState, setCompState] = useState(state);
 
   switch (compState) {
     case "check":
-      return <CheckElement {...props} setCompState={setCompState} />;
+      return (
+        <CheckElement
+          {...props}
+          state={compState}
+          setCompState={setCompState}
+        />
+      );
     case "modify":
     case "create":
-      return <EditElement {...props} setCompState={setCompState} />;
+      return (
+        <EditElement {...props} state={compState} setCompState={setCompState} />
+      );
     case "base":
       return <BaseElement {...props} setCompState={setCompState} />;
     case "new":
@@ -51,14 +61,13 @@ function CheckElement(
     setCompState: Dispatch<SetStateAction<ElementStateType>>;
   }
 ) {
-  const { elementName, elementId, elementColorTheme, isChecked } = props;
+  const { elementName, elementColorTheme, isChecked } = props;
   const elementStyle = isChecked
     ? "bg-paletteSubColor" + elementColorTheme
     : "bg-gray";
 
   return (
     <button
-      id={elementId}
       className={
         "flex items-center rounded w-full gap-2 p-2 m-0 outline-none border-none " +
         elementStyle
@@ -79,17 +88,16 @@ function BaseElement(
     setCompState: Dispatch<SetStateAction<ElementStateType>>;
   }
 ) {
-  const { elementName, elementId } = props;
-
+  const { elementName } = props;
+  const { handleSetPart } = useContext(PartContext);
   const { handleExternalList } = useContext(ExternalContext);
 
   const handleSwitchElementBottomSheet = () => {
-    handleExternalList("element-create-selectElement");
+    handleSetPart(props);
+    handleExternalList("element-option-element");
   };
-
   return (
     <div
-      id={elementId}
       className={
         "flex items-center rounded w-full gap-2 p-2 m-0 outline-none border-none bg-gray"
       }
@@ -120,6 +128,7 @@ function EditElement(
 
   const [value, setValue] = useState(elementName);
   const { dispatch } = useContext(ElementsContext);
+  const { handleSetPart } = useContext(PartContext);
 
   const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     return setValue(e.currentTarget.value);
@@ -128,25 +137,33 @@ function EditElement(
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    if (state === "create") {
-      dispatch!({
-        type: "createElement",
-        target: {
-          elementName: value,
-          ...rest,
-        },
-      });
-    } else if (state === "modify") {
-      dispatch!({
-        type: "updateElement",
-        target: {
-          elementName: value,
-          ...rest,
-        },
-      });
+    switch (state) {
+      case "create": {
+        dispatch({
+          type: "createElement",
+          target: {
+            elementName: value,
+            ...rest,
+          },
+        });
+        setValue("");
+        setCompState("new");
+        return handleSetPart(null);
+      }
+
+      case "modify": {
+        dispatch({
+          type: "updateElement",
+          target: {
+            elementName: value,
+            ...rest,
+          },
+        });
+        setValue("");
+        setCompState("base");
+        return handleSetPart(null);
+      }
     }
-    setValue("");
-    setCompState("new");
   };
 
   return (
