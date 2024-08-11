@@ -2,27 +2,32 @@
 import { useContext } from "react";
 import { ThreeDotsIcon } from "../../assets/icons/icons";
 import { ExternalContext } from "../../providers/external-provider";
+import { CategoryBasicType } from "../../types/element.types";
+import { PartContext } from "../../providers/part-provider";
 
 type CategoryPropType = {
-  name: string;
-  color: string;
+  data: CategoryBasicType;
   state?: "upserting" | "checking";
 };
 
 export default function Category(props: CategoryPropType) {
-  const { name, color, state = "read" } = props;
+  const { data, state = "read" } = props;
+  const { categoryColorTheme, categoryName } = props.data;
 
   const { handleExternalList } = useContext(ExternalContext);
+  const { handleSetPart } = useContext(PartContext);
 
   const handleSwitchSelectCategoryBottomSheet = () => {
-    handleExternalList("element-create-selectCategory");
+    handleSetPart(data);
+    handleExternalList("element-option-category");
   };
 
   const categoryStyle = {
-    mainColor: "bg-paletteColor" + color,
-    subColor: "bg-paletteSubColor" + color,
+    mainColor: "bg-paletteColor" + categoryColorTheme,
+    subColor: "bg-paletteSubColor" + categoryColorTheme,
     state: state === "upserting" ? "" : "mr-3",
   };
+
   return (
     <div
       className={
@@ -30,7 +35,7 @@ export default function Category(props: CategoryPropType) {
         categoryStyle.mainColor
       }
     >
-      <span className="font-bold18 text-white ">{name}</span>
+      <span className="font-bold18 text-white ">{categoryName}</span>
 
       <div className={"flex ml-auto " + categoryStyle.state}>
         <div
