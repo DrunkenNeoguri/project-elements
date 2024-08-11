@@ -34,23 +34,32 @@ const elementsReducer = (
               (element) => element.elementId === categoryId
             ) === -1
           ) {
-            category.categoryElements.push(currentElement);
+            return {
+              ...category,
+              categoryElements: [...category.categoryElements, currentElement],
+            };
           }
         }
         return category;
       });
 
-    case "modifyElement":
+    case "updateElement":
       return elements.map((category) => {
         const currentElement = action.target as ElementBasicType;
         const categoryId = currentElement.elementId.split("-")[0];
+
         if (category.categoryId === categoryId) {
-          category.categoryElements.map((element) => {
-            if (element.elementId === currentElement.elementId) {
-              element = currentElement;
-            }
-          });
+          return {
+            ...category,
+            categoryElements: category.categoryElements.map((element) => {
+              if (element.elementId === currentElement.elementId) {
+                return { ...element, ...currentElement };
+              }
+              return element;
+            }),
+          };
         }
+
         return category;
       });
 
@@ -59,9 +68,12 @@ const elementsReducer = (
         const currentElement = action.target as ElementBasicType;
         const categoryId = currentElement.elementId.split("-")[0];
         if (category.categoryId === categoryId) {
-          category.categoryElements.filter(
-            (element) => element.elementId !== currentElement.elementId
-          );
+          return {
+            ...category,
+            categoryElements: category.categoryElements.filter(
+              (element) => element.elementId !== currentElement.elementId
+            ),
+          };
         }
         return category;
       });
