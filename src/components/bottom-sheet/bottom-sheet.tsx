@@ -1,5 +1,10 @@
 "use client";
-import { Dispatch, PropsWithChildren, createContext } from "react";
+import {
+  Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  createContext,
+} from "react";
 import Backdrop from "../backdrop/backdrop";
 import Portal from "../portal/portal";
 import Input from "../input/input";
@@ -7,7 +12,8 @@ import Label from "../label/label";
 import Select from "../select/select";
 import Button from "../button/button";
 import Palette from "../palette/palette";
-import { SetStateAction } from "jotai";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 // Bottom Sheet Context API
 type BottomSheetContextType = {
@@ -21,8 +27,8 @@ export const BottomSheetContext = createContext<
 
 // Bottom Sheet
 type BottomSheetPropType = PropsWithChildren & {
-  bottomSheetData: Record<string, string>;
-  setBottomSheetData: Dispatch<SetStateAction<Record<string, string>>>;
+  bottomSheetData: Record<string, any>;
+  setBottomSheetData: Dispatch<SetStateAction<Record<string, any>>>;
   onClose: () => void;
 };
 
