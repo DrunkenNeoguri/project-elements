@@ -33,7 +33,7 @@ export default function Button(props: ButtonPropType) {
   return (
     <button
       className={
-        "flex justify-center items-center w-full h-11 border-none rounded border-box font-bold16 cursor-pointer " +
+        "flex justify-center items-center w-full h-11 rounded border-box font-bold16 cursor-pointer " +
         buttonType[colorTheme] +
         styles
       }
