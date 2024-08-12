@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 import BottomSheet from "../../../../../components/bottom-sheet/bottom-sheet";
 import { ExternalContext } from "../../../../../providers/external-provider";
 import { PartContext } from "../../../../../providers/part-provider";
@@ -6,29 +6,23 @@ import { ElementBasicType } from "../../../../../types/element.types";
 import { ElementStateType } from "../../../../../components/element/element";
 import { ElementsContext } from "../../../../../providers/elements-provider";
 
-type SelectBottomSheetPropsType = {
-  bottomSheetData: Record<string, string>;
-  setBottomSheetData: Dispatch<SetStateAction<Record<string, string>>>;
-};
-
-export default function ElementOptionBottomSheet(
-  props: SelectBottomSheetPropsType
-) {
-  const { bottomSheetData, setBottomSheetData } = props;
+export default function ElementOptionBottomSheet() {
   const { externalList, handleExternalList } = useContext(ExternalContext);
   const { dispatch } = useContext(ElementsContext);
   const { part, handleSetPart } = useContext(PartContext);
+  const [bottomSheetData, setBottomSheetData] = useState<
+    Record<string, string>
+  >({});
 
   const handleSwitchSelectBottomSheet = () => {
     handleExternalList("element-option-element");
   };
 
   const handleSwitchUpdateElement = () => {
-    (
-      part as ElementBasicType & {
-        setState: Dispatch<SetStateAction<ElementStateType>>;
-      }
-    ).setState("modify");
+    const { setState } = part as ElementBasicType & {
+      setState: Dispatch<SetStateAction<ElementStateType>>;
+    };
+    setState("modify");
     handleSwitchSelectBottomSheet();
   };
 
