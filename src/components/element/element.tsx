@@ -93,7 +93,8 @@ function BaseElement(
   const { handleExternalList } = useContext(ExternalContext);
 
   const handleSwitchElementBottomSheet = () => {
-    handleSetPart(props);
+    const { setCompState, ...rest } = props;
+    handleSetPart({ ...rest, setState: setCompState });
     handleExternalList("element-option-element");
   };
   return (
