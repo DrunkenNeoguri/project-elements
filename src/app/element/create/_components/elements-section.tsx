@@ -4,11 +4,14 @@ import Category from "../../../../components/category/category";
 import Element from "../../../../components/element/element";
 import { CategoryBasicType } from "../../../../types/element.types";
 import { ExternalContext } from "../../../../providers/external-provider";
-import { ElementsContext } from "../../../../providers/elements-provider";
 import { PartContext } from "../../../../providers/part-provider";
 
-export default function ElementsSection() {
-  const { elements } = useContext(ElementsContext);
+type PropType = {
+  elements: CategoryBasicType[];
+};
+
+export default function ElementsSection(props: PropType) {
+  const { elements } = props;
   const { handleExternalList } = useContext(ExternalContext);
   const { handleSetPart } = useContext(PartContext);
 
