@@ -1,7 +1,6 @@
 "use client";
-import { Dispatch } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Form from "../../../../components/form/form";
-import { SetStateAction } from "jotai";
 import { TravelBasicType } from "../../../../types/travel.types";
 import Button from "../../../../components/button/button";
 
