@@ -1,12 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import ElementService from "../../../../services/element-service";
 import { useSearchParams } from "next/navigation";
 import { AuthContext } from "../../../../providers/auth-provider";
 import { ElementsContext } from "../../../../providers/elements-provider";
-import { TravelBasicType } from "../../../../types/travel.types";
 
 export default function useTravelCreate() {
-  const [travelInfo, setTravelInfo] = useState<TravelBasicType>();
   const { dispatch } = useContext(ElementsContext);
   const user = useContext(AuthContext);
   const searchParams = useSearchParams();
@@ -24,11 +22,13 @@ export default function useTravelCreate() {
           if (dataState instanceof Error || !dataState) {
             return new Error("잘못된 데이터입니다.");
           }
-          setTravelInfo(dataState.info);
 
           dispatch({
             type: "setData",
-            target: dataState.elements && Object.values(dataState.elements),
+            target: {
+              info: dataState.info,
+              elements: dataState.elements && Object.values(dataState.elements),
+            },
           });
         } catch (error) {
           // *MEMO: 에러 메시지 출력 내용 만들 것
@@ -37,6 +37,4 @@ export default function useTravelCreate() {
       getElementsData();
     }
   }, [listId, user?.uid, dispatch]);
-
-  return { travelInfo };
 }
