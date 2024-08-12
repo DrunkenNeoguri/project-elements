@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const { handleExternalList } = useContext(ExternalContext);
 
   const handleSwitchCategoryBottomSheet = () => {
-    handleExternalList("element-create-selectElementList");
+    handleExternalList("element-option-elements");
   };
 
   return (
