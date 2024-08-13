@@ -16,24 +16,25 @@ export default function ElementsSection(props: PropType) {
 
     setElements((prevElements) =>
       (prevElements as CategoryBasicType[]).map((category) => {
-        if (
-          category.categoryElements.map((element) => element.elementId === id)
-        ) {
+        const targetElement = category.categoryElements.find(
+          (element) => element.elementId === id
+        );
+
+        if (targetElement) {
           return {
             ...category,
-            categoryElements: category.categoryElements.map((element) => {
-              if (element.elementId === id) {
-                return { ...element, isChecked: !element.isChecked };
-              }
-              return element;
-            }),
+            categoryElements: category.categoryElements.map((element) =>
+              element.elementId === id
+                ? { ...element, isChecked: !element.isChecked }
+                : element
+            ),
           };
         }
+
         return category;
       })
     );
   };
-
   if (!elements) {
     return <></>;
   }
