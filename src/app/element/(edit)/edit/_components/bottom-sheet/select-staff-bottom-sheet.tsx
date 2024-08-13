@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useContext } from "react";
-import { ExternalContext } from "../../../../../providers/external-provider";
-import BottomSheet from "../../../../../components/bottom-sheet/bottom-sheet";
+import { ExternalContext } from "../../../../../../providers/external-provider";
+import BottomSheet from "../../../../../../components/bottom-sheet/bottom-sheet";
 
 type SelectBottomSheetPropsType = {
   bottomSheetData: Record<string, string>;

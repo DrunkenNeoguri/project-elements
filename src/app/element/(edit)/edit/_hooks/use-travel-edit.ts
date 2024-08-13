@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
-import ElementService from "../../../../services/element-service";
+import ElementService from "../../../../../services/element-service";
 import { useSearchParams } from "next/navigation";
-import { AuthContext } from "../../../../providers/auth-provider";
-import { ElementsContext } from "../../../../providers/elements-provider";
+import { AuthContext } from "../../../../../providers/auth-provider";
+import { ElementsContext } from "../../../../../providers/elements-provider";
 
 export default function useTravelEdit() {
   const { dispatch } = useContext(ElementsContext);

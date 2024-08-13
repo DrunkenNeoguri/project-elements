@@ -1,4 +1,4 @@
-import { TravelBasicType } from "../../../../types/travel.types";
+import { TravelBasicType } from "../../../../../types/travel.types";
 
 type ElementHeaderPropsType = Pick<
   TravelBasicType,

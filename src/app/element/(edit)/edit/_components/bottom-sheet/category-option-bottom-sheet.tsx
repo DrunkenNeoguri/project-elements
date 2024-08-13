@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
-import BottomSheet from "../../../../../components/bottom-sheet/bottom-sheet";
-import { ExternalContext } from "../../../../../providers/external-provider";
-import { PartContext } from "../../../../../providers/part-provider";
-import { ElementsContext } from "../../../../../providers/elements-provider";
-import { CategoryBasicType } from "../../../../../types/element.types";
+import BottomSheet from "../../../../../../components/bottom-sheet/bottom-sheet";
+import { ExternalContext } from "../../../../../../providers/external-provider";
+import { PartContext } from "../../../../../../providers/part-provider";
+import { ElementsContext } from "../../../../../../providers/elements-provider";
+import { CategoryBasicType } from "../../../../../../types/element.types";
 
 export default function CategoryOptionBottomSheet() {
   const { externalList, handleExternalList } = useContext(ExternalContext);
