@@ -3,6 +3,7 @@ import {
   ChangeEvent,
   Dispatch,
   FormEvent,
+  MouseEvent,
   SetStateAction,
   useContext,
   useState,
@@ -13,6 +14,7 @@ import {
   ModifyElementIcon,
   SelectedIcon,
   ThreeDotsIcon,
+  UnselectedIcon,
 } from "../../assets/icons/icons";
 import { ElementBasicType } from "../../types/element.types";
 import Input from "../input/input";
@@ -24,22 +26,19 @@ export type ElementStateType = "base" | "check" | "create" | "modify" | "new";
 
 type ElementPropsType = ElementBasicType & {
   state: ElementStateType;
+  handleCheckElement?: (e: MouseEvent<HTMLButtonElement>) => void;
 };
 
 // ?CONCERN: 케이스에 따라 쓸 수 있도록 Map 인스턴스 혹은 Map 형태로 묶어서 시도...
 // ?CONCERN: 아래와 같이 일단은 Switch로 관리해보기로.
 export default function Element(props: ElementPropsType) {
-  const { state } = props;
+  const { state, handleCheckElement } = props;
   const [compState, setCompState] = useState(state);
 
   switch (compState) {
     case "check":
       return (
-        <CheckElement
-          {...props}
-          state={compState}
-          setCompState={setCompState}
-        />
+        <CheckElement {...props} handleCheckElement={handleCheckElement} />
       );
     case "modify":
     case "create":
@@ -58,24 +57,31 @@ export default function Element(props: ElementPropsType) {
 // *MEMO: 준비물 체크 페이지용
 function CheckElement(
   props: ElementPropsType & {
-    setCompState: Dispatch<SetStateAction<ElementStateType>>;
+    handleCheckElement?: (e: MouseEvent<HTMLButtonElement>) => void;
   }
 ) {
-  const { elementName, elementColorTheme, isChecked } = props;
+  const {
+    elementId,
+    elementName,
+    elementColorTheme,
+    isChecked,
+    handleCheckElement,
+  } = props;
   const elementStyle = isChecked
     ? "bg-paletteSubColor" + elementColorTheme
     : "bg-gray";
 
   return (
     <button
+      id={elementId}
+      type="button"
       className={
         "flex items-center rounded w-full gap-2 p-2 m-0 outline-none border-none " +
         elementStyle
       }
+      onClick={handleCheckElement}
     >
-      <div>
-        <SelectedIcon />
-      </div>
+      <div>{isChecked ? <SelectedIcon /> : <UnselectedIcon />}</div>
 
       <span className="mt-[2px]">{elementName}</span>
     </button>
