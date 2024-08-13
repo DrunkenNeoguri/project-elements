@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { AuthContext } from "../../../../../providers/auth-provider";
 import { ElementsContext } from "../../../../../providers/elements-provider";
 
-export default function useTravelEdit() {
+export default function useElementEdit() {
   const { dispatch } = useContext(ElementsContext);
   const user = useContext(AuthContext);
   const searchParams = useSearchParams();
