@@ -59,18 +59,26 @@ export default function ElementsSection(props: PropType) {
             <Element
               state="new"
               elementId={`${category.categoryId}-element${
-                Math.max(
-                  ...category.categoryElements.map((element) =>
-                    parseInt(
-                      element.elementId.split("-")[1].replace("element", "")
-                    )
-                  )
-                ) + 1
+                category.categoryElements.length === 0
+                  ? 1
+                  : Math.max(
+                      ...category.categoryElements.map((element) =>
+                        parseInt(
+                          element.elementId.split("-")[1].replace("element", "")
+                        )
+                      )
+                    ) + 1
               }`}
               elementName=""
               elementColorTheme={category.categoryColorTheme}
               isChecked={false}
-              elementOrder={category.categoryElements.length + 1}
+              elementOrder={
+                Math.max(
+                  ...category.categoryElements.map(
+                    (element) => element.elementOrder
+                  )
+                ) + 1
+              }
             />
           </div>
         );
