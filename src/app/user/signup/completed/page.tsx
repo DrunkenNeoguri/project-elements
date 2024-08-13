@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import Button from "../../../../components/button/button";
+import Link from "next/link";
 
 export default function SignUpCompleted() {
   const searchParams = useSearchParams();
@@ -23,13 +23,12 @@ export default function SignUpCompleted() {
       </div>
 
       <div className="px-4 w-full my-6">
-        <Button
-          type="button"
-          colorTheme="primary"
-          onClick={() => window.close()}
+        <Link
+          className="flex justify-center items-center w-full h-11 border-none rounded border-box font-bold16 cursor-pointer bg-primary text-white"
+          href="/user/login"
         >
-          창 닫기
-        </Button>
+          로그인 페이지로 이동
+        </Link>
       </div>
     </>
   );

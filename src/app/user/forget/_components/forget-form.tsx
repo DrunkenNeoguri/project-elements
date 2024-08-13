@@ -9,8 +9,15 @@ import {
 } from "../_utils/forget.utils";
 
 export default function ForgetForm() {
-  const { forgetData, setForgetData, modalMsg, setModalMsg, router } =
-    useForgetForm();
+  const {
+    forgetData,
+    setForgetData,
+    modalMsg,
+    setModalMsg,
+    externalList,
+    handleExternalList,
+    router,
+  } = useForgetForm();
 
   const handleSubmit = async () => {
     const validityCheck = checkForgetDataTypeCheck(forgetData);
@@ -22,10 +29,17 @@ export default function ForgetForm() {
       if (forgetState === "OK") {
         return router.push("/user/forget/send");
       } else {
+        handleExternalList("forget");
         return setModalMsg(forgetState.message);
       }
     }
   };
+
+  const handleCloseModal = () => {
+    handleExternalList("login");
+    setModalMsg(undefined);
+  };
+
   return (
     <>
       <Form
@@ -51,20 +65,14 @@ export default function ForgetForm() {
         </div>
       </Form>
 
-      <Modal
-        isOpen={Boolean(modalMsg)}
-        setIsOpen={() => setModalMsg(undefined)}
-      >
+      <Modal isOpen={externalList.has("forget")} setIsOpen={handleCloseModal}>
         <Modal.Content
           colorTheme="alert"
           title="로그인 중 에러 발생"
           desc={modalMsg ?? ""}
         />
         <Modal.Icon iconType="alert" />
-        <Modal.Button
-          colorTheme="primary"
-          onClick={() => setModalMsg(undefined)}
-        >
+        <Modal.Button colorTheme="primary" onClick={handleCloseModal}>
           알겠습니다.
         </Modal.Button>
       </Modal>

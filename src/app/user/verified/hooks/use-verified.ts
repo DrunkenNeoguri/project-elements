@@ -1,9 +1,10 @@
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext } from "react";
+import { ExternalContext } from "../../../../providers/external-provider";
 
 export default function useVerified() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { externalList, handleExternalList } = useContext(ExternalContext);
   const router = useRouter();
 
-  return { isOpen, setIsOpen, router };
+  return { externalList, handleExternalList, router };
 }

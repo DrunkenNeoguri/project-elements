@@ -12,8 +12,15 @@ import {
 import Modal from "../../../../components/modal/modal";
 
 export default function SignUpForm() {
-  const { signUpData, setSignUpData, modalMsg, setModalMsg, router } =
-    useSignUpForm();
+  const {
+    signUpData,
+    setSignUpData,
+    modalMsg,
+    setModalMsg,
+    externalList,
+    handleExternalList,
+    router,
+  } = useSignUpForm();
 
   const handleSubmit = async () => {
     const validityCheck = checkSignUpDataTypeCheck(signUpData);
@@ -23,6 +30,7 @@ export default function SignUpForm() {
       if (signUpState === "OK") {
         router.push(`/user/signup/completed?email=${signUpData.email}`);
       } else {
+        handleExternalList("signup");
         setModalMsg(signUpState.message);
       }
     }
@@ -30,6 +38,11 @@ export default function SignUpForm() {
 
   const handleMoveToLoginPage = () => {
     router.push("/user/login");
+  };
+
+  const handleCloseModal = () => {
+    handleExternalList("signup");
+    setModalMsg(undefined);
   };
 
   return (
@@ -77,8 +90,18 @@ export default function SignUpForm() {
         </div>
 
         <div className="flex flex-col gap-3 mt-3">
-          <Form.Button colorTheme="primary" type="submit">
-            다음 단계로
+          <Form.Button
+            disabled={!checkSignUpDataTypeCheck(signUpData)}
+            colorTheme={
+              checkSignUpDataTypeCheck(signUpData)
+                ? "primary"
+                : "invalidReverse"
+            }
+            type="submit"
+          >
+            {checkSignUpDataTypeCheck(signUpData)
+              ? "다음 단계로"
+              : "내용을 모두 기입해주세요."}
           </Form.Button>
 
           <Form.Button
@@ -90,20 +113,14 @@ export default function SignUpForm() {
           </Form.Button>
         </div>
       </Form>
-      <Modal
-        isOpen={Boolean(modalMsg)}
-        setIsOpen={() => setModalMsg(undefined)}
-      >
+      <Modal isOpen={externalList.has("signup")} setIsOpen={handleCloseModal}>
         <Modal.Content
           colorTheme="alert"
           title="회원가입 중 에러 발생"
           desc={modalMsg ?? ""}
         />
         <Modal.Icon iconType="alert" />
-        <Modal.Button
-          colorTheme="primary"
-          onClick={() => setModalMsg(undefined)}
-        >
+        <Modal.Button colorTheme="primary" onClick={handleCloseModal}>
           알겠습니다.
         </Modal.Button>
       </Modal>

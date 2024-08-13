@@ -18,6 +18,8 @@ export default function LoginForm() {
     setModalMsg,
     rememberLogin,
     setRememberLogin,
+    externalList,
+    handleExternalList,
     router,
   } = useLoginForm();
 
@@ -30,9 +32,15 @@ export default function LoginForm() {
       if (loginState === "OK") {
         router.push("/main");
       } else {
+        handleExternalList("login");
         setModalMsg(loginState.message);
       }
     }
+  };
+
+  const handleCloseModal = () => {
+    handleExternalList("login");
+    setModalMsg(undefined);
   };
 
   return (
@@ -74,20 +82,14 @@ export default function LoginForm() {
         </Form.Button>
       </Form>
 
-      <Modal
-        isOpen={Boolean(modalMsg)}
-        setIsOpen={() => setModalMsg(undefined)}
-      >
+      <Modal isOpen={externalList.has("login")} setIsOpen={handleCloseModal}>
         <Modal.Content
           colorTheme="alert"
           title="로그인 중 에러 발생"
           desc={modalMsg ?? ""}
         />
         <Modal.Icon iconType="alert" />
-        <Modal.Button
-          colorTheme="primary"
-          onClick={() => setModalMsg(undefined)}
-        >
+        <Modal.Button colorTheme="primary" onClick={handleCloseModal}>
           알겠습니다.
         </Modal.Button>
       </Modal>

@@ -1,4 +1,4 @@
-import { MinusIcon, PlusIcon } from "../../assets/icons/icons";
+import { DecreaseIcon, IncreaseIcon } from "../../assets/icons/icons";
 
 type CounterPropType = {
   id: string;
@@ -39,6 +39,7 @@ export default function Counter(props: CounterPropType) {
   return (
     <div className="flex mt-1">
       <button
+        title="Decraase Count"
         type="button"
         onClick={handleDecrease}
         className={
@@ -46,7 +47,7 @@ export default function Counter(props: CounterPropType) {
           buttonStyles
         }
       >
-        <MinusIcon />
+        <DecreaseIcon />
       </button>
       <span
         id={id}
@@ -59,6 +60,7 @@ export default function Counter(props: CounterPropType) {
         {`${value}${measure ?? ""}`}
       </span>
       <button
+        title="Incraase Count"
         type="button"
         onClick={handleIncrease}
         className={
@@ -66,7 +68,7 @@ export default function Counter(props: CounterPropType) {
           buttonStyles
         }
       >
-        <PlusIcon />
+        <IncreaseIcon />
       </button>
     </div>
   );

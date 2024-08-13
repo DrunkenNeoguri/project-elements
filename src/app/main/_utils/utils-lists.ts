@@ -1,6 +1,6 @@
-import { TravelBasicInfoType } from "../../../types/travel.types";
+import { TravelBasicType } from "../../../types/travel.types";
 
-export const filterClosedTravelData = (list: TravelBasicInfoType[]) => {
+export const filterClosedTravelData = (list: TravelBasicType[]) => {
   const nowTime = Date.now();
 
   const closedTravelList = list.filter((travelData) => {
@@ -15,7 +15,7 @@ export const filterClosedTravelData = (list: TravelBasicInfoType[]) => {
   return [closedTravelList[0]];
 };
 
-export const filterRecentViewTravelData = (list: TravelBasicInfoType[]) => {
+export const filterRecentViewTravelData = (list: TravelBasicType[]) => {
   const userInfo = localStorage.getItem("userInfo") ?? "";
   const parseUserInfo = JSON.parse(userInfo);
 

@@ -1,6 +1,6 @@
-import { collection, doc, getDocs, writeBatch } from "firebase/firestore";
+import { collection, doc, getDocs, runTransaction } from "firebase/firestore";
 import { firestore } from "../utils/util-firebase";
-import { TravelBasicInfoType } from "../types/travel.types";
+import { TravelBasicType } from "../types/travel.types";
 import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
 import {
   basicTemplate,
@@ -11,7 +11,7 @@ import {
 class TravelService {
   static async getUserTravelList(userUid: string, keyword?: string | null) {
     try {
-      let travelList: TravelBasicInfoType[] = [];
+      let travelList: TravelBasicType[] = [];
       const docsState = await getDocs(
         collection(await firestore(), `travels`, userUid, "docs")
       );
@@ -57,7 +57,7 @@ class TravelService {
   static async postCreateNewTravel(
     userUid: string,
     useTemplate: boolean,
-    formData: TravelBasicInfoType
+    formData: TravelBasicType
   ) {
     try {
       const template = () => {
@@ -69,35 +69,29 @@ class TravelService {
       const userInfo = localStorage.getItem("userInfo") ?? "";
       const parseUserInfo = JSON.parse(userInfo);
 
-      const batch = writeBatch(await firestore());
+      await runTransaction(await firestore(), async (transaction) => {
+        await transaction.set(
+          doc(
+            collection(await firestore(), `travels`, userUid, "docs"),
+            formData.id
+          ),
+          { ...formData }
+        );
 
-      const travelsReference = doc(
-        collection(await firestore(), `travels`, userUid, "docs"),
-        formData.id
-      );
+        await transaction.set(
+          doc(
+            collection(await firestore(), `elements`, userUid, "docs"),
+            formData.id
+          ),
+          { info: { ...formData }, elements: { ...template() } }
+        );
 
-      const ListsReference = doc(
-        collection(await firestore(), `lists`, userUid, "docs"),
-        formData.id
-      );
-
-      const userReferecnce = doc(await firestore(), `users`, userUid);
-
-      await batch.set(travelsReference, {
-        ...formData,
+        await transaction.set(doc(await firestore(), `users`, userUid), {
+          ...parseUserInfo,
+          recentTravel: formData.id,
+        });
       });
 
-      await batch.set(ListsReference, {
-        ...template,
-        id: formData.id,
-      });
-
-      await batch.set(userReferecnce, {
-        ...parseUserInfo,
-        recentTravel: formData.id,
-      });
-
-      await batch.commit();
       return "OK";
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));

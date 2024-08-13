@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ExternalContext } from "../../../../providers/external-provider";
 
 // *MEMO - 네이버에서는 로그인 정보 기록이 아닌 로그인 정보 유지를 하고 있음.
 // *MEMO - 로그인 화면에서 토큰 있으면 바로 메인으로 넘어가기
@@ -10,6 +11,7 @@ export default function useLoginForm() {
   const [loginData, setLoginData] = useState<Record<string, string>>({});
   const [rememberLogin, setRememberLogin] = useState<boolean>(false);
   const [modalMsg, setModalMsg] = useState<string | undefined>();
+  const { externalList, handleExternalList } = useContext(ExternalContext);
   const router = useRouter();
 
   return {
@@ -19,6 +21,8 @@ export default function useLoginForm() {
     setModalMsg,
     rememberLogin,
     setRememberLogin,
+    externalList,
+    handleExternalList,
     router,
   };
 }

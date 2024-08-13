@@ -20,18 +20,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         return setUser(user);
       } else {
         setUser(null);
-
-        // const exceptionPaths = [
-        //   "/",
-        //   "/main",
-        //   "/travel/create",
-        //   "/template",
-        //   "/element/create",
-        // ];
-
-        // if (exceptionPaths.includes(pathname)) {
         router.push("/user/login");
-        // }
         return new Error("Authorization token is expired.");
       }
     });

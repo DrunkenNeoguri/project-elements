@@ -1,15 +1,14 @@
 "use client";
-import { Dispatch } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Form from "../../../../components/form/form";
-import { SetStateAction } from "jotai";
-import { TravelBasicInfoType } from "../../../../types/travel.types";
+import { TravelBasicType } from "../../../../types/travel.types";
 import Button from "../../../../components/button/button";
 
 type PropType = {
   handlePrevStep: () => void;
   handleNextStep: () => void;
-  travelData: TravelBasicInfoType;
-  setTravelData: Dispatch<SetStateAction<TravelBasicInfoType>>;
+  travelData: TravelBasicType;
+  setTravelData: Dispatch<SetStateAction<TravelBasicType>>;
 };
 
 export default function TravelForm({
@@ -99,7 +98,7 @@ export default function TravelForm({
 
         <div>
           <Form.Label colorTheme="white" htmlFor="travelPeriod">
-            출발 일자
+            여행 기간
           </Form.Label>
           <Form.Counter
             id="travelPeriod"
