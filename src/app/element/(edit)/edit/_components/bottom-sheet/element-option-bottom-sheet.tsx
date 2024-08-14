@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction, useContext, useState } from "react";
-import BottomSheet from "../../../../../components/bottom-sheet/bottom-sheet";
-import { ExternalContext } from "../../../../../providers/external-provider";
-import { PartContext } from "../../../../../providers/part-provider";
-import { ElementBasicType } from "../../../../../types/element.types";
-import { ElementStateType } from "../../../../../components/element/element";
-import { ElementsContext } from "../../../../../providers/elements-provider";
+import BottomSheet from "../../../../../../components/bottom-sheet/bottom-sheet";
+import { ExternalContext } from "../../../../../../providers/external-provider";
+import { PartContext } from "../../../../../../providers/part-provider";
+import { ElementBasicType } from "../../../../../../types/element.types";
+import { ElementStateType } from "../../../../../../components/element/element";
+import { ElementsContext } from "../../../../../../providers/elements-provider";
 
 export default function ElementOptionBottomSheet() {
   const { externalList, handleExternalList } = useContext(ExternalContext);

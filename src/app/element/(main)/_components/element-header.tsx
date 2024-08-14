@@ -1,12 +1,11 @@
 import { TravelBasicType } from "../../../../types/travel.types";
 
-type ElementHeaderPropsType = Pick<
-  TravelBasicType,
-  "title" | "departureAt" | "travelPeriod"
->;
-
-export default function ElementHeader(props: ElementHeaderPropsType) {
-  const { title = "", departureAt = "", travelPeriod = 0 } = props;
+export default function ElementHeader({
+  travelInfo,
+}: {
+  travelInfo: TravelBasicType;
+}) {
+  const { title = "", departureAt = "", travelPeriod = 0 } = travelInfo;
 
   const handleConvertTravelPeriod = () => {
     // ?CONCERN: util로 뺄까...?

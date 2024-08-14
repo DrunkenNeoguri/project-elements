@@ -6,11 +6,11 @@ import {
   useEffect,
   useState,
 } from "react";
-import BottomSheet from "../../../../../components/bottom-sheet/bottom-sheet";
-import { ExternalContext } from "../../../../../providers/external-provider";
-import { PartContext } from "../../../../../providers/part-provider";
-import { CategoryBasicType } from "../../../../../types/element.types";
-import { ElementsContext } from "../../../../../providers/elements-provider";
+import BottomSheet from "../../../../../../components/bottom-sheet/bottom-sheet";
+import { ExternalContext } from "../../../../../../providers/external-provider";
+import { PartContext } from "../../../../../../providers/part-provider";
+import { CategoryBasicType } from "../../../../../../types/element.types";
+import { ElementsContext } from "../../../../../../providers/elements-provider";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

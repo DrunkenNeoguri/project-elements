@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { AddIcon } from "../../../../assets/icons/icons";
-import Category from "../../../../components/category/category";
-import Element from "../../../../components/element/element";
-import { CategoryBasicType } from "../../../../types/element.types";
-import { ExternalContext } from "../../../../providers/external-provider";
-import { PartContext } from "../../../../providers/part-provider";
+import { AddIcon } from "../../../../../assets/icons/icons";
+import Category from "../../../../../components/category/category";
+import Element from "../../../../../components/element/element";
+import { CategoryBasicType } from "../../../../../types/element.types";
+import { ExternalContext } from "../../../../../providers/external-provider";
+import { PartContext } from "../../../../../providers/part-provider";
 
 type PropType = {
   elements: CategoryBasicType[];

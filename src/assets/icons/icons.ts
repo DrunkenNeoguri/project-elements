@@ -27,6 +27,8 @@ import AddIcon from "./icon-add.svg";
 import CreateCategoryIcon from "./icon-create-category.svg";
 import CreateElementIcon from "./icon-create-element.svg";
 import ModifyElementIcon from "./icon-modify-element.svg";
+import ShareIcon from "./icon_share.svg";
+import EditIcon from "./icon_edit.svg";
 
 export {
   CorrectIcon,
@@ -58,4 +60,6 @@ export {
   CreateCategoryIcon,
   CreateElementIcon,
   ModifyElementIcon,
+  ShareIcon,
+  EditIcon,
 };
