@@ -1,7 +1,6 @@
 import { CategoryBasicType } from "../../../../types/element.types";
-import Category from "../../../../components/category/category";
-import Element from "../../../../components/element/element";
-import { Dispatch, MouseEvent, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
+import CategoryAccordion from "./category-accordion";
 
 type PropType = {
   elements: CategoryBasicType[];
@@ -11,30 +10,6 @@ type PropType = {
 export default function ElementsSection(props: PropType) {
   const { elements, setElements } = props;
 
-  const handleCheckElement = (event: MouseEvent<HTMLButtonElement>) => {
-    const { id } = event.currentTarget;
-
-    setElements((prevElements) =>
-      (prevElements as CategoryBasicType[]).map((category) => {
-        const targetElement = category.categoryElements.find(
-          (element) => element.elementId === id
-        );
-
-        if (targetElement) {
-          return {
-            ...category,
-            categoryElements: category.categoryElements.map((element) =>
-              element.elementId === id
-                ? { ...element, isChecked: !element.isChecked }
-                : element
-            ),
-          };
-        }
-
-        return category;
-      })
-    );
-  };
   if (!elements) {
     return <></>;
   }
@@ -48,18 +23,7 @@ export default function ElementsSection(props: PropType) {
             id={"category" + category.categoryOrder}
             className="flex flex-col gap-3 mb-6"
           >
-            <Category data={category} state="checking" />
-
-            {category.categoryElements.map((element) => {
-              return (
-                <Element
-                  key={element.elementId}
-                  state="check"
-                  {...element}
-                  handleCheckElement={handleCheckElement}
-                />
-              );
-            })}
+            <CategoryAccordion category={category} setElements={setElements} />
           </div>
         );
       })}
