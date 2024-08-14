@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import BottomSheet from "../../../../../../components/bottom-sheet/bottom-sheet";
 import { ExternalContext } from "../../../../../../providers/external-provider";
 import { ElementsContext } from "../../../../../../providers/elements-provider";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import ElementService from "../../../../../../services/element-service";
 import { AuthContext } from "../../../../../../providers/auth-provider";
 
@@ -11,6 +11,8 @@ export default function ElementsOptionBottomSheet() {
   const { state } = useContext(ElementsContext);
   const user = useContext(AuthContext);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const listId = searchParams?.get("id");
   const [bottomSheetData, setBottomSheetData] = useState<
     Record<string, string>
   >({});
@@ -26,7 +28,7 @@ export default function ElementsOptionBottomSheet() {
   const handleUpdateTravelData = async () => {
     if (user) {
       await ElementService.postElementsData(user?.uid, state.info.id, state);
-      return router.push("/element");
+      return router.push(`/element?id=${listId}`);
     }
   };
 
