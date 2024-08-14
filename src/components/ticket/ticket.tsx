@@ -9,7 +9,7 @@ export default function Ticket(props: TravelBasicType) {
   return (
     <Link
       id={id}
-      href={`/element/edit?id=${id}`}
+      href={`/element?id=${id}`}
       className="bg-white outline-none border-none rounded-md p-0 m-0 w-full box-border overflow-hidden cursor-pointer drop-shadow-[0_4px_4px_#00000064]"
     >
       {travelType === "domestic" ? (
