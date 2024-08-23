@@ -48,7 +48,7 @@ export default function ElementsSection(props: PropType) {
             id={"category" + category.categoryOrder}
             className="flex flex-col gap-3 mb-6"
           >
-            <Category data={category} state="upserting" />
+            <Category data={category} state="edit" />
 
             {category.categoryElements.map((element) => {
               return (
