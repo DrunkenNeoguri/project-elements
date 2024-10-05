@@ -9,11 +9,16 @@ import {
   sendPasswordResetEmail,
   setPersistence,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
   verifyPasswordResetCode,
 } from "firebase/auth";
-import { firebaseAuth, firestore } from "../utils/util-firebase";
+import {
+  firebaseAuth,
+  firestore,
+  googleProvider,
+} from "../utils/util-firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
 import { AccountFormType } from "../types/user.types";
@@ -59,6 +64,44 @@ class AuthService {
 
         localStorage.setItem("userInfo", JSON.stringify(userInfo.data()));
       }
+      return "OK";
+    } catch (error) {
+      return new Error(convertUnknownTypeErrorToStringMessage(error));
+    }
+  }
+
+  static async postGoogleLoginProcess() {
+    try {
+      const googleLoginState = await signInWithPopup(
+        firebaseAuth,
+        googleProvider
+      );
+
+      if (googleLoginState != null) {
+        const userInfoDocs = await getDoc(
+          doc(await firestore(), `users`, googleLoginState.user.uid)
+        );
+        const userInfo = JSON.stringify(userInfoDocs.data());
+
+        if (userInfo == null) {
+          const currentUserData = {
+            email: googleLoginState.user.email,
+            username: googleLoginState.user.displayName,
+            createdAt: new Date().getTime(),
+            recentTravel: "",
+          };
+
+          await setDoc(
+            doc(await firestore(), `users`, googleLoginState.user.uid),
+            currentUserData
+          );
+
+          localStorage.setItem("userInfo", JSON.stringify(currentUserData));
+        } else {
+          localStorage.setItem("userInfo", JSON.stringify(userInfoDocs.data()));
+        }
+      }
+
       return "OK";
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));

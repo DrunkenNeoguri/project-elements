@@ -30,7 +30,7 @@ import ModifyElementIcon from "./icon-modify-element.svg";
 import ShareIcon from "./icon-share.svg";
 import EditIcon from "./icon-edit.svg";
 import GoogleIcon from "./icon-google.svg";
-import AppleIcon from "./icon-apple.svg";
+// import AppleIcon from "./icon-apple.svg";
 
 export {
   CorrectIcon,
@@ -65,5 +65,5 @@ export {
   ShareIcon,
   EditIcon,
   GoogleIcon,
-  AppleIcon,
+  // AppleIcon,
 };
