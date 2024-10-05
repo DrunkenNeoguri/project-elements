@@ -1,6 +1,5 @@
 "use client";
 import { GoogleIcon } from "../../../../assets/icons/icons";
-import Button from "../../../../components/button/button";
 import AuthService from "../../../../services/auth-services";
 import useLoginOauth from "../_hooks/use-login-oauth";
 
@@ -12,17 +11,27 @@ export default function LoginOauthBox() {
     if (googleLoginState === "OK") {
       router.push("/main");
     } else {
-      handleExternalList("login");
-      setModalMsg(googleLoginState.message);
+      if (googleLoginState.message !== "") {
+        handleExternalList("login");
+        setModalMsg(googleLoginState.message);
+      }
     }
   };
 
   return (
-    <div className="flex justify-center items-center gap-4">
-      <Button type="button" colorTheme="white" onClick={handleLoginWithGoogle}>
-        <GoogleIcon />
-        <span>구글 계정으로 시작하기</span>
-      </Button>
+    <div className="flex flex-col justify-center items-center gap-4 mt-auto">
+      <span className="font-light10 text-black">
+        아래의 소셜 계정으로도 이용하실 수 있어요
+      </span>
+      <div className="flex gap-4 justify-center items-center">
+        <button
+          type="button"
+          onClick={handleLoginWithGoogle}
+          className="flex justify-center items-center w-8 h-8 rounded-full border-invalid border"
+        >
+          <GoogleIcon />
+        </button>
+      </div>
     </div>
   );
 }

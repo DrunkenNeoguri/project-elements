@@ -1,9 +1,8 @@
 import LoginForm from "./_components/login-form";
 import LoginHelpBox from "./_components/login-help-box";
-import LoginLangBox from "./_components/login-lang-box";
-// import LoginOauthBox from "./_components/login-oauth-box";
+// import LoginLangBox from "./_components/login-lang-box";
+import LoginOauthBox from "./_components/login-oauth-box";
 
-// TODO: 로그인 페이지 디자인 바꾸고 배치 등 변경된 사항으로 반영할 것.
 export default function Login() {
   return (
     <>
@@ -15,8 +14,8 @@ export default function Login() {
       </div>
       <LoginForm />
       <LoginHelpBox />
-      <LoginLangBox />
-      {/* <LoginOauthBox /> */}
+      {/* <LoginLangBox /> */}
+      <LoginOauthBox />
     </>
   );
 }
