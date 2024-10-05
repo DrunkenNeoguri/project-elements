@@ -27,8 +27,10 @@ import AddIcon from "./icon-add.svg";
 import CreateCategoryIcon from "./icon-create-category.svg";
 import CreateElementIcon from "./icon-create-element.svg";
 import ModifyElementIcon from "./icon-modify-element.svg";
-import ShareIcon from "./icon_share.svg";
-import EditIcon from "./icon_edit.svg";
+import ShareIcon from "./icon-share.svg";
+import EditIcon from "./icon-edit.svg";
+import GoogleIcon from "./icon-google.svg";
+// import AppleIcon from "./icon-apple.svg";
 
 export {
   CorrectIcon,
@@ -62,4 +64,6 @@ export {
   ModifyElementIcon,
   ShareIcon,
   EditIcon,
+  GoogleIcon,
+  // AppleIcon,
 };

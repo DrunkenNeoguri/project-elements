@@ -42,4 +42,5 @@ const firebaseErrorText: Record<string, string> = {
   "auth/invalid-action-code": `인증 처리가 유효하지 않습니다.\n접속한 링크가 정확한지 재확인하시거나, 로그인 페이지로 돌아가 비밀번호 찾기를 다시 진행해주세요.`,
   "auth/too-many-requests": `계속된 요청으로 서버 부하 방지를 위해 잠시 동안 요청을 중단했습니다.\n잠시 후, 다시 시도해주세요.`,
   "auth/invalid-credential": `가입되지 않은 계정이거나 잘못 입력한 내용이 있습니다.\n\n정확하게 입력했는지 다시 한 번 확인해주세요.`,
+  "auth/popup-closed-by-user": "",
 };
