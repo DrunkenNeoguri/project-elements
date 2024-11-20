@@ -17,7 +17,7 @@ export default function RootLayout({
       </head>
       <body className="bg-[#222222] flex flex-col items-center m-0">
         <main
-          className="w-full relative bg-white overflow-scroll box-border max-w-[379px] min-h-[100vh] font-gmarketSans"
+          className="w-full relative bg-white overflow-scroll box-border max-w-[379px] min-h-[100vh] font-gmarketSans no-scrollbar overflow-y-auto"
           id="root"
         >
           <Suspense>
