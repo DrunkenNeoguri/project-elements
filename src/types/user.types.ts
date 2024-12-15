@@ -5,9 +5,17 @@ export type AccountFormType = {
   username: string;
 };
 
-export type userInfoType = {
+export type UserInfoType = {
   email: string;
   username: string;
   createdAt: number;
-  recentTravel: string;
+  recentTravel: {
+    title: string;
+    id: string;
+  };
+  upcomingTravel: {
+    title: string;
+    id: string;
+    departureAt: string;
+  };
 };
