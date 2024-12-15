@@ -22,8 +22,32 @@ import CurrencyIcon from "./icon-currency.svg";
 import ConfigIcon from "./icon-config.svg";
 import RecentlyIcon from "./icon-recently.svg";
 import UpcomingIcon from "./icon-upcoming.svg";
+import DecreaseIcon from "./icon-decrease.svg";
+import IncreaseIcon from "./icon-increase.svg";
+import SelectedIcon from "./icon-selected.svg";
+import UnselectedIcon from "./icon-unselected.svg";
+import ThreeDotsIcon from "./icon-three-dots.svg";
+import AddIcon from "./icon-add.svg";
+import CreateCategoryIcon from "./icon-create-category.svg";
+import CreateElementIcon from "./icon-create-element.svg";
+import ModifyElementIcon from "./icon-modify-element.svg";
+import ShareIcon from "./icon-share.svg";
+import EditIcon from "./icon-edit.svg";
+import GoogleIcon from "./icon-google.svg";
 
 export {
+  DecreaseIcon,
+  IncreaseIcon,
+  SelectedIcon,
+  UnselectedIcon,
+  ThreeDotsIcon,
+  AddIcon,
+  CreateCategoryIcon,
+  CreateElementIcon,
+  ModifyElementIcon,
+  ShareIcon,
+  EditIcon,
+  GoogleIcon,
   CorrectIcon,
   IncorrectIcon,
   ModalAlert,
