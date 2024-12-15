@@ -20,7 +20,7 @@ export const filterRecentViewTravelData = (list: TravelBasicType[]) => {
   const parseUserInfo = JSON.parse(userInfo);
 
   const recentViewTravelData = list.filter((travelData) => {
-    return parseUserInfo.recentTravel === travelData.id;
+    return parseUserInfo.recentTravel.id === travelData.id;
   });
 
   return recentViewTravelData;

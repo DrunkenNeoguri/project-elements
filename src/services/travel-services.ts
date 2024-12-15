@@ -88,13 +88,54 @@ class TravelService {
 
         await transaction.set(doc(await firestore(), `users`, userUid), {
           ...parseUserInfo,
-          recentTravel: formData.id,
+          recentTravel: { title: formData.title, id: formData.id },
         });
       });
 
       return "OK";
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));
+    }
+  }
+
+  static async renewalUpcomingTravelInUserData(userUid: string) {
+    try {
+      let travelList: TravelBasicType[] = [];
+      const docsState = await getDocs(
+        collection(await firestore(), `travels`, userUid, "docs")
+      );
+
+      docsState.forEach((doc) => {
+        const {
+          travelType,
+          title,
+          departureAt,
+          travelPeriod,
+          destination,
+          id,
+        } = doc.data();
+        travelList.push({
+          travelType,
+          title,
+          departureAt,
+          travelPeriod,
+          destination,
+          id,
+        });
+      });
+
+      travelList = travelList.filter(
+        (data) => Date.now() - new Date(data.departureAt).getTime() >= 0
+      );
+
+      travelList.sort(
+        (a, b) =>
+          new Date(a.departureAt).getTime() - new Date(b.departureAt).getTime()
+      );
+
+      return travelList[0];
+    } catch (error) {
+      throw new Error(convertUnknownTypeErrorToStringMessage(error));
     }
   }
 }

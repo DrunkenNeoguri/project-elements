@@ -43,7 +43,7 @@ export default class ElementService {
 
         await transaction.set(doc(await firestore(), `users`, userUid), {
           ...parseUserInfo,
-          recentTravel: data.info.id,
+          recentTravel: { title: data.info.title, id: data.info.id },
         });
       });
 
