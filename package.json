@@ -18,6 +18,8 @@
     "@svgr/webpack": "^8.1.0",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.10.4",
+    "embla-carousel-autoplay": "^8.5.1",
+    "embla-carousel-react": "^8.5.1",
     "firebase": "^10.12.3",
     "i18next": "^23.8.2",
     "lodash-es": "^4.17.21",
@@ -41,5 +43,6 @@
     "tailwindcss": "^3.4.4",
     "typescript": "^5.2.2"
   },
-  "author": "drunken_neoguri <developneoguri@gmail.com>"
+  "author": "drunken_neoguri <developneoguri@gmail.com>",
+  "packageManager": "yarn@4.5.3"
 }
