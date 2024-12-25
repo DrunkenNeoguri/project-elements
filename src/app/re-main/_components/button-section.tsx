@@ -3,7 +3,7 @@ import { RecentlyIcon, UpcomingIcon } from "../../../assets/icons/icons";
 
 export default function ButtonSection() {
   return (
-    <section className="flex gap-4 w-full">
+    <section className="flex gap-4 w-full my-6">
       <div className="flex flex-col w-1/2 gap-4">
         <button className="flex flex-col rounded-lg p-3 bg-[#C4DBFF]">
           <div className="flex flex-col gap-1 items-start w-full">
