@@ -1,24 +1,15 @@
 "use client";
-import { ReactNode, useContext } from "react";
+import { ReactNode } from "react";
 import Header from "../../components/header/header";
-import { AuthContext } from "../../providers/auth-provider.tsx";
-import { Bar } from "../../components/loader/loader.tsx";
-import Backdrop from "../../components/backdrop/backdrop.tsx";
+import AuthProvider from "../../providers/auth-provider.tsx";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  // const user = useContext(AuthContext);
-
   return (
-    <>
-      {/* {!user && (
-        <Backdrop colorTheme="loader">
-          <Bar />
-        </Backdrop>
-      )} */}
+    <AuthProvider>
       <Header activeSearch={true} useSideBar={true} />
       <section className="flex flex-col w-full justify-center items-center px-4 mt-20">
         {children}
       </section>
-    </>
+    </AuthProvider>
   );
 }
