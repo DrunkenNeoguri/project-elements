@@ -9,11 +9,11 @@ export type UserInfoType = {
   email: string;
   username: string;
   createdAt: number;
-  recentTravel: {
+  recentTravel?: {
     title: string;
     id: string;
   };
-  upcomingTravel: {
+  upcomingTravel?: {
     title: string;
     id: string;
     departureAt: string;

@@ -69,7 +69,7 @@ class AuthService {
             loginResult.user.uid
           );
 
-        if (upcomingTravel.length !== 0) {
+        if (upcomingTravel != null) {
           const renewalUserData = {
             ...userData,
             upcomingTravel: {
@@ -86,7 +86,7 @@ class AuthService {
 
           localStorage.setItem("userInfo", JSON.stringify(renewalUserData));
         } else {
-          localStorage.setItem("userInfo", JSON.stringify(userData.data()));
+          localStorage.setItem("userInfo", JSON.stringify(userData));
         }
       }
       return "OK";
@@ -113,8 +113,6 @@ class AuthService {
             email: googleLoginState.user.email,
             username: googleLoginState.user.displayName,
             createdAt: new Date().getTime(),
-            recentTravel: { title: "", id: "" },
-            upcomingTravel: { title: "", id: "", departureAt: "" },
           };
 
           await setDoc(
@@ -225,8 +223,6 @@ class AuthService {
           email: user.email,
           username: user.displayName,
           createdAt: new Date().getTime(),
-          recentTravel: { title: "", id: "" },
-          upcomingTravel: { title: "", id: "", departureAt: "" },
         });
       });
 
