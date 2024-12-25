@@ -7,6 +7,7 @@ import {
   domesticTemplate,
   foreignTemplate,
 } from "../utils/util-template";
+import { UserInfoType } from "../types/user.types";
 
 class TravelService {
   static async getUserTravelList(userUid: string, keyword?: string | null) {
@@ -67,7 +68,7 @@ class TravelService {
       };
 
       const userInfo = localStorage.getItem("userInfo") ?? "";
-      const parseUserInfo = JSON.parse(userInfo);
+      const parseUserInfo: UserInfoType = JSON.parse(userInfo);
 
       await runTransaction(await firestore(), async (transaction) => {
         await transaction.set(
@@ -86,10 +87,38 @@ class TravelService {
           { info: { ...formData }, elements: { ...template() } }
         );
 
-        await transaction.set(doc(await firestore(), `users`, userUid), {
+        const setUpcomingTravel = () => {
+          if (!parseUserInfo.upcomingTravel) {
+            return {
+              title: formData.title,
+              id: formData.id,
+              departureAt: formData.departureAt,
+            };
+          } else if (
+            new Date(parseUserInfo.upcomingTravel.departureAt).getTime() >
+            new Date(formData.departureAt).getTime()
+          ) {
+            return {
+              title: formData.title,
+              id: formData.id,
+              departureAt: formData.departureAt,
+            };
+          }
+          return { ...parseUserInfo.upcomingTravel };
+        };
+
+        const renewalUserData = {
           ...parseUserInfo,
           recentTravel: { title: formData.title, id: formData.id },
-        });
+          upcomingTravel: setUpcomingTravel(),
+        };
+
+        await transaction.set(
+          doc(await firestore(), `users`, userUid),
+          renewalUserData
+        );
+
+        await localStorage.setItem("userInfo", JSON.stringify(renewalUserData));
       });
 
       return "OK";
