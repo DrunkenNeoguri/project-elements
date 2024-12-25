@@ -27,13 +27,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       }
     });
   }, [router, pathname]);
-  {
-    /* {!user && (
-        <Backdrop colorTheme="loader">
-          <Bar />
-        </Backdrop>
-      )} */
-  }
+
   return (
     <AuthContext.Provider value={user}>
       {!user && (
