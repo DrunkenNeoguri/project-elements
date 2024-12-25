@@ -3,6 +3,8 @@
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import { useCarouselDotState } from "../_hooks/use-carousel-dot-state";
+import { useGetCarouselBanner } from "../_hooks/use-get-carousel-banner";
+import Link from "next/link";
 
 export default function CarouselBannerSection() {
   const [carouselRef, carouselApi] = useEmblaCarousel({ loop: true }, [
@@ -10,32 +12,27 @@ export default function CarouselBannerSection() {
   ]);
 
   const { selectedIndex, scrollSnaps } = useCarouselDotState(carouselApi);
+  const { banners } = useGetCarouselBanner();
 
-  const mapingTest = [
-    { id: 1, url: "https://via.placeholder.com/600/92c952" },
-    { id: 2, url: "https://via.placeholder.com/600/771796" },
-    { id: 3, url: "https://via.placeholder.com/600/24f355" },
-  ];
   return (
     <div className="flex flex-col box-border w-full my-2">
       <div className="overflow-hidden" ref={carouselRef}>
-        <div className="flex">
-          {mapingTest.map((props) => {
+        <div className="flex rounded-lg">
+          {banners.map(({ order, imageUrl, href }) => {
             return (
-              <button
-                key={props.id}
-                type="button"
+              <Link
+                key={order}
                 className="flex-[0_0_100%] flex bg-blue-500 rounded-lg aspect-[1/0.3803] overflow-hidden justify-center items-center drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+                href={href}
               >
-                <img src={props.url} />
-              </button>
+                <img src={imageUrl} />
+              </Link>
             );
           })}
         </div>
       </div>
       <div className="flex justify-center items-center w- full mt-2 gap-1">
         {scrollSnaps.map((_, index) => {
-          console.log(typeof index, typeof selectedIndex);
           return (
             <span
               key={index}
