@@ -37,6 +37,7 @@ export default function Header(props: HeaderPropType) {
     setKeyword,
     openSidebar,
     setOpenSidebar,
+    currentPath,
   } = useHeader();
 
   // dynamic css styling
@@ -47,6 +48,9 @@ export default function Header(props: HeaderPropType) {
     : "";
 
   const handleMoveToPrevPage = () => {
+    if (currentPath.indexOf("/element") !== -1) {
+      return router.replace("/main");
+    }
     return router.back();
   };
 

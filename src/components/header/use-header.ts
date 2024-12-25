@@ -61,6 +61,7 @@ export default function useHeader() {
   return {
     shadow,
     router,
+    currentPath,
     openSearch,
     setOpenSearch,
     keyword,
