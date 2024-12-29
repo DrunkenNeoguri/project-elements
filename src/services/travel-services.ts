@@ -126,7 +126,6 @@ class TravelService {
       return new Error(convertUnknownTypeErrorToStringMessage(error));
     }
   }
-
   static async renewalUpcomingTravelInUserData(userUid: string) {
     try {
       let travelList: TravelBasicType[] = [];
@@ -154,7 +153,7 @@ class TravelService {
       });
 
       travelList = travelList.filter(
-        (data) => Date.now() - new Date(data.departureAt).getTime() >= 0
+        (data) => new Date(data.departureAt).getTime() - Date.now() >= 0
       );
 
       travelList.sort(
