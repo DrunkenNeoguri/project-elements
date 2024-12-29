@@ -22,6 +22,7 @@ import {
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
 import { AccountFormType } from "../types/user.types";
+import TravelService from "./travel-services";
 
 // *MEMO: 문제 없이 200일 시, 예외를 제외하고 return "OK";
 class AuthService {
@@ -58,11 +59,35 @@ class AuthService {
           );
         }
 
-        const userInfo = await getDoc(
-          doc(await firestore(), `users`, loginResult.user.uid)
+        const userDataResponse = await getDoc(
+          doc(await firestore(), "users", loginResult.user.uid)
         );
 
-        localStorage.setItem("userInfo", JSON.stringify(userInfo.data()));
+        const userData = userDataResponse.data();
+        const upcomingTravel =
+          await TravelService.renewalUpcomingTravelInUserData(
+            loginResult.user.uid
+          );
+
+        if (upcomingTravel != null) {
+          const renewalUserData = {
+            ...userData,
+            upcomingTravel: {
+              title: upcomingTravel.title,
+              id: upcomingTravel.id,
+              departureAt: upcomingTravel.departureAt,
+            },
+          };
+
+          await setDoc(
+            doc(await firestore(), `users`, loginResult.user.uid),
+            renewalUserData
+          );
+
+          localStorage.setItem("userInfo", JSON.stringify(renewalUserData));
+        } else {
+          localStorage.setItem("userInfo", JSON.stringify(userData));
+        }
       }
       return "OK";
     } catch (error) {
@@ -88,7 +113,6 @@ class AuthService {
             email: googleLoginState.user.email,
             username: googleLoginState.user.displayName,
             createdAt: new Date().getTime(),
-            recentTravel: "",
           };
 
           await setDoc(
@@ -199,7 +223,6 @@ class AuthService {
           email: user.email,
           username: user.displayName,
           createdAt: new Date().getTime(),
-          recentTravel: "",
         });
       });
 

@@ -3,6 +3,8 @@ import { ReactNode, createContext, useEffect, useState } from "react";
 import { firebaseAuth } from "../utils/util-firebase";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { usePathname, useRouter } from "next/navigation";
+import Backdrop from "../components/backdrop/backdrop";
+import { Bar } from "../components/loader/loader";
 
 type AuthContextType = User | null;
 
@@ -26,5 +28,14 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     });
   }, [router, pathname]);
 
-  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={user}>
+      {!user && (
+        <Backdrop colorTheme="loader">
+          <Bar />
+        </Backdrop>
+      )}
+      {children}
+    </AuthContext.Provider>
+  );
 }
