@@ -96,7 +96,7 @@ export default function Header(props: HeaderPropType) {
         <div className="h-full w-full flex justify-between items-center">
           {activePrev && (
             <button
-              className={"w-8 h-8 bg-transparent mr-auto ml-0 " + addPrevCursor}
+              className={"w-8 h-8 bg-transparent ml-0 " + addPrevCursor}
               disabled={!activePrev}
               onClick={handleMoveToPrevPage}
             >
