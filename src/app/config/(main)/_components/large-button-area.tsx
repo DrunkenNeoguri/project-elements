@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { HelpTalkIcon, NoticeIcon } from "../../../assets/icons/icons";
+import { HelpTalkIcon, NoticeIcon } from "../../../../assets/icons/icons";
 
 export default function LargeButtonArea() {
   return (
