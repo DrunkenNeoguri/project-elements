@@ -11,6 +11,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updatePassword,
   updateProfile,
   verifyPasswordResetCode,
 } from "firebase/auth";
@@ -21,7 +22,7 @@ import {
 } from "../utils/util-firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
-import { AccountFormType } from "../types/user.types";
+import { AccountFormType, UserInfoType } from "../types/user.types";
 import TravelService from "./travel-services";
 
 // *MEMO: 문제 없이 200일 시, 예외를 제외하고 return "OK";
@@ -199,6 +200,56 @@ class AuthService {
     }
   }
 
+  static async updatePasswordProcess(newPassword: string) {
+    try {
+      const auth = firebaseAuth;
+      const currentUser = auth.currentUser;
+
+      if (currentUser) {
+        await updatePassword(currentUser, newPassword);
+        return "OK";
+      } else {
+        throw new Error("비밀번호를 변경할 수 없습니다.");
+      }
+    } catch (error) {
+      return new Error(convertUnknownTypeErrorToStringMessage(error));
+    }
+  }
+
+  static async updateProfileProcess(username: string) {
+    try {
+      const auth = firebaseAuth;
+      const currentUser = auth.currentUser;
+      const userData = JSON.parse(
+        localStorage.getItem("userInfo") as string
+      ) as UserInfoType;
+
+      if (currentUser) {
+        await updateProfile(currentUser, {
+          displayName: username,
+        });
+
+        const newUserProfile = {
+          ...userData,
+          username,
+        };
+
+        await setDoc(
+          doc(await firestore(), `users`, currentUser.uid),
+          newUserProfile
+        );
+
+        localStorage.setItem("userInfo", JSON.stringify(newUserProfile));
+
+        return "OK";
+      } else {
+        throw new Error("프로필을 수정할 수 없습니다.");
+      }
+    } catch (error) {
+      return new Error(convertUnknownTypeErrorToStringMessage(error));
+    }
+  }
+
   static async updateAccountVerification(
     actionCode: string | null | undefined
   ) {
@@ -238,6 +289,27 @@ class AuthService {
       return "OK";
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));
+    }
+  }
+
+  static async postUserCheckProcessByLoginUser(
+    formData: Pick<AccountFormType, "password">
+  ) {
+    try {
+      const auth = firebaseAuth;
+      auth.languageCode = "ko";
+
+      await signInWithEmailAndPassword(
+        auth,
+        auth.currentUser?.email as string,
+        formData.password
+      );
+
+      return "OK";
+    } catch (error) {
+      return new Error(
+        "입력하신 계정의 비밀번호와 다릅니다. 다시 한 번 확인해주세요."
+      );
     }
   }
 }
