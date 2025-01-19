@@ -1,47 +1,59 @@
 "use client";
-import { useState } from "react";
-import Form from "../../../../../../../components/form/form";
-import { changePasswordErrorMsg } from "../../../../../../user/login/_utils/login.utils";
-import { changeConfirmPasswordErrorMsg } from "../../../../../../user/reset/_utils/reset.utils";
 
-// import Form from "../../../../../components/form/form";
-// import {
-//   changeConfirmPasswordErrorMsg,
-//   changePasswordErrorMsg,
-// } from "../_utils/reset.utils";
+import { useContext, useState } from "react";
+import Form from "../../../../../../../components/form/form";
+import {
+  changePasswordErrorMsg,
+  checkPasswordDataTypeCheck,
+} from "../../../../../../user/login/_utils/login.utils";
+import {
+  changeConfirmPasswordErrorMsg,
+  checkResetDataTypeCheck,
+} from "../../../../../../user/reset/_utils/reset.utils";
+import Modal from "../../../../../../../components/modal/modal";
+import { ExternalContext } from "../../../../../../../providers/external-provider";
+import { useRouter } from "next/navigation";
+import AuthService from "../../../../../../../services/auth-services";
 
 export default function ChangeForm() {
-  const [resetData, setResetData] = useState<Record<string, string>>({});
+  const [formData, setFormData] = useState<Record<string, string>>({});
+  const [modalMsg, setModalMsg] = useState<string | undefined>();
+  const { externalList, handleExternalList } = useContext(ExternalContext);
+  const router = useRouter();
 
-  const handleSubmit = async () => {
-    // const validityCheck = checkResetDataTypeCheck(resetData);
-    // if (validityCheck) {
-    //   const resetState = await AuthService.postResetPasswordProcess(
-    //     "actionCode",
-    //     resetData
-    //   );
-    //   if (resetState === "OK") {
-    //     return router.push("/user/reset/completed");
-    //   } else {
-    //     handleExternalList("reset");
-    //     return setModalMsg(resetState.message);
-    //   }
-    // }
+  const handleOnSubmit = async () => {
+    const validityCheck = checkResetDataTypeCheck(formData);
+    if (validityCheck) {
+      const changeState = await AuthService.updatePasswordProcess(
+        formData.password
+      );
+      if (changeState === "OK") {
+        return router.push("/config");
+      } else {
+        handleExternalList("changePassword");
+        return setModalMsg(changeState.message);
+      }
+    }
+  };
+
+  const handleModalClose = () => {
+    externalList.delete("changePassword");
+    setModalMsg(undefined);
   };
 
   return (
     <>
       <Form
-        onSubmit={handleSubmit}
-        formData={resetData}
-        setFormData={setResetData}
+        onSubmit={handleOnSubmit}
+        formData={formData}
+        setFormData={setFormData}
         styles="px-4"
       >
         <div className="flex flex-col mb-3">
           <Form.Label htmlFor="password">새 비밀번호</Form.Label>
           <Form.Input id="password" type="password" />
           <Form.ErrorText>
-            {changePasswordErrorMsg(resetData.password)}
+            {changePasswordErrorMsg(formData.password)}
           </Form.ErrorText>
         </div>
 
@@ -50,16 +62,37 @@ export default function ChangeForm() {
           <Form.Input id="confirmPassword" type="password" />
           <Form.ErrorText>
             {changeConfirmPasswordErrorMsg(
-              resetData.password,
-              resetData.confirmPassword
+              formData.password,
+              formData.confirmPassword
             )}
           </Form.ErrorText>
         </div>
-
-        <Form.Button colorTheme="primary" type="submit" styles="mt-3">
-          새 비밀번호로 변경
-        </Form.Button>
       </Form>
+      <footer className="mt-auto mb-0 p-4 fixed bottom-0 max-w-[379px] w-full bg-white">
+        <Form.Button
+          type="submit"
+          onClick={handleOnSubmit}
+          colorTheme={
+            checkPasswordDataTypeCheck(formData) ? "primary" : "invalidReverse"
+          }
+        >
+          비밀번호 변경
+        </Form.Button>
+      </footer>
+      <Modal
+        isOpen={externalList.has("changePassword")}
+        setIsOpen={handleModalClose}
+      >
+        <Modal.Content
+          colorTheme="alert"
+          title="비밀번호 변경 중 에러 발생"
+          desc={modalMsg ?? ""}
+        />
+        <Modal.Icon iconType="alert" />
+        <Modal.Button colorTheme="primary" onClick={handleModalClose}>
+          창 닫기
+        </Modal.Button>
+      </Modal>
     </>
   );
 }

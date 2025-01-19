@@ -9,7 +9,7 @@ export default function ListButtonSection() {
           <li className="py-2">
             <Link
               className="font-medium16 text-black w-full"
-              href="/config/user/edit"
+              href="/config/user/verification?access=edit"
             >
               내 정보 수정
             </Link>
@@ -17,7 +17,7 @@ export default function ListButtonSection() {
           <li className="py-2">
             <Link
               className="font-medium16 text-black w-full"
-              href="/config/user/verification"
+              href="/config/user/verification?access=change"
             >
               비밀번호 변경
             </Link>
@@ -25,7 +25,7 @@ export default function ListButtonSection() {
           <li className="py-2">
             <Link
               className="font-medium16 text-black w-full"
-              href="/config/user/signout"
+              href="/config/user/verification?access=signout"
             >
               회원 탈퇴
             </Link>
