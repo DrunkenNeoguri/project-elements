@@ -22,11 +22,11 @@ export default function VerificationForm() {
     const validityCheck = checkPasswordDataTypeCheck(formData);
 
     if (validityCheck) {
-      const loginState = await AuthService.postUserCheckProcessByLoginUser(
+      const verifiedState = await AuthService.postUserCheckProcessByLoginUser(
         formData
       );
 
-      if (loginState === "OK") {
+      if (verifiedState === "OK") {
         const access = searchParams.get("access");
         switch (access) {
           case "change":
@@ -40,7 +40,7 @@ export default function VerificationForm() {
         }
       } else {
         handleExternalList("userCheck");
-        setModalMsg(loginState.message);
+        setModalMsg(verifiedState.message);
       }
     }
   };

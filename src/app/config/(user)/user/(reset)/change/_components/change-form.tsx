@@ -24,14 +24,14 @@ export default function ChangeForm() {
   const handleOnSubmit = async () => {
     const validityCheck = checkResetDataTypeCheck(formData);
     if (validityCheck) {
-      const changeState = await AuthService.updatePasswordProcess(
+      const changePasswordState = await AuthService.updatePasswordProcess(
         formData.password
       );
-      if (changeState === "OK") {
+      if (changePasswordState === "OK") {
         return router.push("/config");
       } else {
         handleExternalList("changePassword");
-        return setModalMsg(changeState.message);
+        return setModalMsg(changePasswordState.message);
       }
     }
   };
