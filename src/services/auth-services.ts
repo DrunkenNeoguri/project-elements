@@ -4,6 +4,7 @@ import {
   browserSessionPersistence,
   confirmPasswordReset,
   createUserWithEmailAndPassword,
+  deleteUser,
   onAuthStateChanged,
   sendEmailVerification,
   sendPasswordResetEmail,
@@ -20,7 +21,14 @@ import {
   firestore,
   googleProvider,
 } from "../utils/util-firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  runTransaction,
+  setDoc,
+} from "firebase/firestore";
 import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
 import { AccountFormType, UserInfoType } from "../types/user.types";
 import TravelService from "./travel-services";
@@ -310,6 +318,74 @@ class AuthService {
       return new Error(
         "입력하신 계정의 비밀번호와 다릅니다. 다시 한 번 확인해주세요."
       );
+    }
+  }
+
+  static async postSignOutProcess(opinion?: string) {
+    try {
+      const auth = firebaseAuth;
+      const currentUser = auth.currentUser;
+      const currentUserUid = auth.currentUser?.uid as string;
+
+      if (currentUser) {
+        await runTransaction(await firestore(), async (transaction) => {
+          await deleteUser(currentUser);
+          await localStorage.removeItem("userInfo");
+
+          const database = await firestore();
+
+          (
+            await getDocs(
+              collection(database, "travels", currentUserUid, "docs")
+            )
+          ).forEach(async (data) => {
+            await transaction.delete(
+              doc(
+                collection(
+                  await firestore(),
+                  "travels",
+                  currentUserUid,
+                  "docs"
+                ),
+                data.id
+              )
+            );
+          });
+
+          (
+            await getDocs(
+              collection(database, "elements", currentUserUid, "docs")
+            )
+          ).forEach(async (data) => {
+            await transaction.delete(
+              doc(
+                collection(
+                  await firestore(),
+                  "elements",
+                  currentUserUid,
+                  "docs"
+                ),
+                data.id
+              )
+            );
+          });
+
+          await transaction.delete(
+            doc(await firestore(), "users", currentUserUid)
+          );
+        });
+      }
+
+      if (opinion) {
+        await setDoc(doc(await firestore(), `opinions`, currentUserUid), {
+          opinion,
+        });
+      }
+
+      return "OK";
+    } catch (error) {
+      console.log(error);
+      return new Error(convertUnknownTypeErrorToStringMessage(error));
     }
   }
 }

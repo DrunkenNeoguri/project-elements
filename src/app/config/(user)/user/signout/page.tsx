@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import {
   CheckedIcon,
   ModalAlert,
@@ -9,17 +9,47 @@ import {
 } from "../../../../../assets/icons/icons";
 import Button from "../../../../../components/button/button";
 import Link from "next/link";
+import AuthService from "../../../../../services/auth-services";
+import { useRouter } from "next/navigation";
+import { ExternalContext } from "../../../../../providers/external-provider";
+import Modal from "../../../../../components/modal/modal";
 
 export default function SignOut() {
   const [agreeState, setAgreeState] = useState<boolean>(false);
+  const [opinion, setOpinion] = useState<string>();
+  const [modalMsg, setModalMsg] = useState<string | undefined>();
+  const { externalList, handleExternalList } = useContext(ExternalContext);
+  const router = useRouter();
 
   const handleToggleAgreeStateByClick = () => {
     setAgreeState(!agreeState);
   };
 
+  const handleOnChangeTextArea = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setOpinion(event.currentTarget.value);
+  };
+
+  const handleOnSubmit = async () => {
+    if (agreeState) {
+      const signOutState = await AuthService.postSignOutProcess(opinion);
+
+      if (signOutState === "OK") {
+        return router.push("/user/login");
+      } else {
+        handleExternalList("signOut");
+        setModalMsg(signOutState.message);
+      }
+    }
+  };
+
+  const handleModalClose = () => {
+    externalList.delete("signOut");
+    setModalMsg(undefined);
+  };
+
   return (
     <>
-      <form className="flex flex-col box-border px-4">
+      <form className="flex flex-col box-border px-4" onSubmit={handleOnSubmit}>
         <div className="flex flex-col w-full break-keep">
           <h2 className="font-bold24 text-black">체크인백을 탈퇴하시겠어요?</h2>
           <div className="flex flex-col pt-6">
@@ -79,6 +109,8 @@ export default function SignOut() {
             의견은 더 좋은 체크인백을 만들기 위해 참고하겠습니다.
           </span>
           <textarea
+            value={opinion}
+            onChange={handleOnChangeTextArea}
             className="bg-invalidLight w-full font-medium16 text-black border rounded m-0 outline-none box-border p-3 mt-1 border-black h-36 resize-none"
             placeholder="탈퇴하시는 이유나 개선됐으면 하는 점을 알려주세요. (선택)"
           />
@@ -91,10 +123,29 @@ export default function SignOut() {
         >
           취소
         </Link>
-        <Button type="submit" colorTheme={agreeState ? "primary" : "invalid"}>
+        <Button
+          type="submit"
+          colorTheme={agreeState ? "primary" : "invalid"}
+          onClick={handleOnSubmit}
+        >
           탈퇴
         </Button>
       </footer>
+      <Modal isOpen={externalList.has("signOut")} setIsOpen={handleModalClose}>
+        <Modal.Content
+          colorTheme="alert"
+          title="회원 탈퇴 중 에러 발생"
+          desc={modalMsg ?? ""}
+        />
+        <Modal.Icon iconType="alert" />
+        <Modal.Button
+          type="button"
+          colorTheme="primary"
+          onClick={handleModalClose}
+        >
+          창 닫기
+        </Modal.Button>
+      </Modal>
     </>
   );
 }
