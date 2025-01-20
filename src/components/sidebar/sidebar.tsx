@@ -1,11 +1,9 @@
 "use client";
 import {
   ConfigIcon,
-  CurrencyIcon,
   DocsSearchIcon,
   FolderIcon,
   HamburgerIcon,
-  NewsIcon,
 } from "../../assets/icons/icons";
 import Link from "next/link";
 import AuthService from "../../services/auth-services";
@@ -14,6 +12,7 @@ import { useRouter } from "next/navigation";
 
 export default function SideBar({ onClick }: { onClick: () => void }) {
   const router = useRouter();
+  const userInfo = localStorage.getItem("userInfo");
 
   const handleLogOutAccount = async () => {
     document.body.style.overflow = "";
@@ -37,10 +36,19 @@ export default function SideBar({ onClick }: { onClick: () => void }) {
   //   fill: ${colors.black};
   // }
 
+  if (!userInfo) {
+    return;
+  }
+
   return (
     <nav className="bg-primary flex flex-col rounded-l-xl pt-[22px] pb-6 pr-4 pl-6 w-[calc(100%-64px)] h-[100vh] z-50 b-0 r-0 box-border absolute right-0 overflow-hidden font-gmarketSans drop-shadow-[-8px_0_4px_#00000064]">
-      <div className="flex justify-between items-center mb-6">
-        <h3 className="font-bold20 text-white p-0 m-0">준비물 챙겼어?</h3>
+      <div className="flex justify-between items-start mb-8">
+        <div className="flex flex-col">
+          <span className="font-medium20 text-white p-0 m-0">
+            {JSON.parse(userInfo).username} 님,
+          </span>
+          <span className="font-medium20 text-white p-0 m-0">반가워요!</span>
+        </div>
         <button
           title="사이드바 닫기"
           className="bg-transparent text-white p-0 m-0 border-none outline-none box-border cursor-pointer"
@@ -62,13 +70,13 @@ export default function SideBar({ onClick }: { onClick: () => void }) {
       <div className="bg-white w-full h-[2px] rounded-lg mt-6 mb-8" />
       <div className="flex flex-col items-start gap-9 p-0 w-full h-[calc(100%-180px)] mb-auto">
         <Link
-          href="/manage"
+          href="/mylist"
           className="bg-transparent flex items-center gap-3 font-bold20 text-white border-none rounded outline-none w-full box-border h-11 cursor-pointer"
         >
           <div className="w-6 h-6">
             <FolderIcon />
           </div>
-          <span className="mt-1">여행 리스트 관리</span>
+          <span className="mt-1">내 여행 리스트</span>
         </Link>
 
         <Link
@@ -79,26 +87,6 @@ export default function SideBar({ onClick }: { onClick: () => void }) {
             <DocsSearchIcon />
           </div>
           <span className="mt-1">템플릿 찾기</span>
-        </Link>
-
-        <Link
-          href="/currency"
-          className="bg-transparent flex items-center gap-3 font-bold20 text-white border-none rounded outline-none w-full box-border h-11 cursor-pointer"
-        >
-          <div className="w-6 h-6">
-            <CurrencyIcon />
-          </div>
-          <span className="mt-1">환율 정보</span>
-        </Link>
-
-        <Link
-          href="/news"
-          className="bg-transparent flex items-center gap-3 font-bold20 text-white border-none rounded outline-none w-full box-border h-11 cursor-pointer"
-        >
-          <div className="w-6 h-6">
-            <NewsIcon />
-          </div>
-          <span className="mt-1">여행 뉴스</span>
         </Link>
 
         <Link
