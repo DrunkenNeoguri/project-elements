@@ -1,16 +1,13 @@
 import Link from "next/link";
 import NoticeClip from "./notice-clip";
+import { NoticeTitle } from "../../../types/option.types";
 
-interface Props {
-  title: string;
-  clipType: "이벤트" | "매거진" | "공지";
-  createdAt: string;
-}
+interface Props extends NoticeTitle {}
 
-export default function NoticeItem({ title, clipType, createdAt }: Props) {
+export default function NoticeItem({ id, title, clipType, createdAt }: Props) {
   return (
     <li className="flex flex-col w-full mt-4 mb-2">
-      <Link href="/">
+      <Link href={`/notice/${id}`}>
         <div className="flex gap-2 justify-start items-center">
           <NoticeClip clipType={clipType} />
           <p className="font-medium mt-[3px] text-sm whitespace-nowrap max-w-[292px] truncate">

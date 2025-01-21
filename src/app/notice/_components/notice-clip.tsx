@@ -1,5 +1,7 @@
+import { NoticeClipType } from "../../../types/option.types";
+
 interface Props {
-  clipType?: "이벤트" | "매거진" | "공지";
+  clipType?: NoticeClipType;
 }
 
 export default function NoticeClip({ clipType = "공지" }: Props) {
@@ -12,7 +14,7 @@ export default function NoticeClip({ clipType = "공지" }: Props) {
   return (
     <div
       className={
-        "flex min-w-12 min-h-4 box-border rounded-full justify-center items-center border-primaryDeep border " +
+        "flex min-w-12 min-h-4 box-border rounded-full justify-center items-center border " +
         clipStyleType[clipType]
       }
     >
