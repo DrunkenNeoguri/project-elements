@@ -39,7 +39,7 @@ export default function CarouselBannerSection() {
               className={
                 "h-1 rounded-full transition-all ease-in-out duration-500" +
                 `${
-                  index === selectedIndex ? " w-4 bg-blue-500" : " w-1 bg-grey"
+                  index === selectedIndex ? " w-4 bg-blue-500" : " w-1 bg-gray"
                 }`
               }
             />
