@@ -50,11 +50,11 @@ export default function ElementsOptionBottomSheet() {
           <BottomSheet.Select onClick={handleSwitchTravelInfoBottomSheet}>
             여행 정보 수정
           </BottomSheet.Select>
-          <div className="h-[1px] w-full bg-gray" />
+          <div className="h-[1px] w-full bg-grey" />
           <BottomSheet.Select onClick={handleUpdateTravelData}>
             준비물 목록 저장
           </BottomSheet.Select>
-          <div className="h-[1px] w-full bg-gray" />
+          <div className="h-[1px] w-full bg-grey" />
           <BottomSheet.Select
             colorTheme="warning"
             onClick={handleDeleteTravelData}

@@ -47,7 +47,7 @@ export default function CategoryOptionBottomSheet() {
 
           {state.elements.length > 1 && (
             <>
-              <div className="h-[1px] w-full bg-gray" />
+              <div className="h-[1px] w-full bg-grey" />
               <BottomSheet.Select
                 colorTheme="warning"
                 onClick={handleDeleteCategory}

@@ -69,7 +69,7 @@ function CheckElement(
   } = props;
   const elementStyle = isChecked
     ? "bg-paletteSubColor" + elementColorTheme
-    : "bg-gray";
+    : "bg-grey";
 
   return (
     <button
@@ -106,7 +106,7 @@ function BaseElement(
   return (
     <div
       className={
-        "flex items-center rounded w-full gap-2 p-2 m-0 outline-none border-none bg-gray"
+        "flex items-center rounded w-full gap-2 p-2 m-0 outline-none border-none bg-grey"
       }
     >
       <span className="mt-[2px] ml-1">{elementName}</span>
@@ -175,7 +175,7 @@ function EditElement(
 
   return (
     <form
-      className="flex bg-gray rounded-lg w-full gap-2 p-2 m-0"
+      className="flex bg-grey rounded-lg w-full gap-2 p-2 m-0"
       onSubmit={onSubmit}
     >
       <Input
