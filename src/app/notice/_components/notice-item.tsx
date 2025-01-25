@@ -1,8 +1,8 @@
 import Link from "next/link";
 import NoticeClip from "./notice-clip";
-import { NoticeTitle } from "../../../types/option.types";
+import { Notice } from "../../../types/option.types";
 
-interface Props extends NoticeTitle {}
+interface Props extends Notice {}
 
 export default function NoticeItem({ id, title, clipType, createdAt }: Props) {
   return (
