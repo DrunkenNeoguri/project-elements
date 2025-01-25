@@ -1,7 +1,7 @@
 import { firestore } from "../utils/util-firebase";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
-import { Banner, Notice, NoticeTitle } from "../types/option.types";
+import { Banner, Notice } from "../types/option.types";
 
 // *MEMO: 문제 없이 200일 시, 예외를 제외하고 return "OK";
 class OptionService {
@@ -26,10 +26,10 @@ class OptionService {
       ).docs.map((doc) => doc.data() as Notice);
 
       const noticeList = docsState
-        .map((doc) => doc.noticeTitle)
+        .map((doc) => doc)
         .sort((a, b) => Number(a.id) - Number(b.id));
 
-      return (noticeList ?? []) as NoticeTitle[];
+      return (noticeList ?? []) as Notice[];
     } catch (error) {
       throw new Error(convertUnknownTypeErrorToStringMessage(error));
     }
@@ -41,9 +41,7 @@ class OptionService {
         await getDocs(collection(await firestore(), "notices"))
       ).docs.map((doc) => doc.data() as Notice);
 
-      const noticeList = docsState.sort(
-        (a, b) => Number(a.noticeTitle.id) - Number(b.noticeTitle.id)
-      );
+      const noticeList = docsState.sort((a, b) => Number(a.id) - Number(b.id));
 
       return (noticeList ?? []) as Notice[];
     } catch (error) {
