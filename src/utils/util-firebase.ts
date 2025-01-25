@@ -14,10 +14,19 @@ const firebaseConfig = {
 };
 
 const firebase = initializeApp(firebaseConfig);
+
 export const googleProvider = new GoogleAuthProvider();
+
 export const firebaseAuth = getAuth(firebase);
+
 export async function firestore() {
   const { getFirestore } = await import("firebase/firestore");
   return getFirestore(firebase);
 }
+
+export async function firebaseStorage() {
+  const { getStorage } = await import("firebase/storage");
+  return getStorage(firebase);
+}
+
 // export const firebaseAnalytics = getAnalytics(firebase);
