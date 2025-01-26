@@ -1,8 +1,9 @@
 "use client";
 import { RoundDot } from "../../components/loader/loader";
 import { UndoIcon } from "../../assets/icons/icons";
-import Ticket from "../../components/ticket/ticket";
 import useSearch from "./_hooks/use-search";
+import TransportTicket from "../../components/ticket/transport-ticket";
+import BoardingPassTicket from "../../components/ticket/boarding-pass";
 
 export default function MainSearch() {
   const { list, router, keyword } = useSearch();
@@ -42,7 +43,11 @@ export default function MainSearch() {
           </section>
         ) : (
           list?.map((ticket) => {
-            return <Ticket key={ticket.id} {...ticket} />;
+            return ticket.travelType === "domestic" ? (
+              <TransportTicket key={ticket.id} {...ticket} />
+            ) : (
+              <BoardingPassTicket key={ticket.id} {...ticket} />
+            );
           })
         )}
       </div>
