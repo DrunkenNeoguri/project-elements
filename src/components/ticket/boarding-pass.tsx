@@ -1,60 +1,21 @@
 "use client";
-import QRCodeStyling from "qr-code-styling";
-import { useEffect, useRef, useState } from "react";
 import { TravelBasicType } from "../../types/travel.types";
 import Link from "next/link";
+import useGetBarcode from "./hooks/use-get-barcode";
+import { ForeignIcon } from "../../assets/icons/icons";
 
 export default function BoardingPassTicket(props: TravelBasicType) {
   const { id, title, departureAt, destination, travelPeriod } = props;
 
-  const divRef = useRef<HTMLDivElement>(null);
-  const [qrCode, setQrCode] = useState<QRCodeStyling>();
-
-  // ?CONCERN: 의존성 에러를 줄이면서 깔끔하게 할 수 있는 방법이 뭔지 생각 필요.. useEffectOnce 같은 코드 참고해보자,
-  useEffect(() => {
-    setQrCode(
-      new QRCodeStyling({
-        width: 100,
-        height: 100,
-        data: `/element?id=${id}`,
-        image: "https://localhost:3000/icon-foreign.svg",
-        dotsOptions: {
-          color: "#FFFFFF",
-          type: "rounded",
-        },
-        cornersSquareOptions: {
-          type: "extra-rounded",
-          color: "#FFFFFF",
-        },
-        cornersDotOptions: {
-          color: "#FFFFFF",
-          type: "square",
-        },
-        backgroundOptions: {
-          color: "#1E90FF",
-        },
-        imageOptions: {
-          crossOrigin: "anonymous",
-          imageSize: 0.3,
-          margin: 2,
-        },
-      })
-    );
-  }, [id]);
-
-  useEffect(() => {
-    if (divRef.current) {
-      qrCode?.append(divRef.current);
-    }
-  }, [qrCode, divRef]);
+  const { barcodeRef } = useGetBarcode(id, "foreign");
 
   return (
     <Link
       id={id}
       href={`/element?id=${id}`}
-      className="flex max-w-[328px] w-full bg-[#F4F4F4] rounded gap-3 cursor-pointer drop-shadow-[0_4px_4px_#00000064]"
+      className="flex min-w-[328px] w-full bg-[#F4F4F4] rounded gap-3 cursor-pointer drop-shadow-[0_4px_4px_#00000064]"
     >
-      <div className="bg-primary text-white flex min-w-[22px] rounded-l">
+      <div className="bg-primary text-white flex min-w-[22px] w-[22px] rounded-l items-center justify-center">
         <span className="font-medium text-[8px] leading-[12px] -rotate-90">
           CHECKINBAG AIRLINE
         </span>
@@ -82,9 +43,10 @@ export default function BoardingPassTicket(props: TravelBasicType) {
         </div>
       </div>
 
-      <div className="bg-primary text-white flex flex-col justify-start items-center min-w-[88px] gap-[10px] ml-auto mr-0 my-2 rounded-l p-2">
-        <span className="font-medium10 text-left">BOARDING PASS</span>
-        <div className="w-12 h-12" ref={divRef} />
+      <div className="bg-primary text-white flex flex-col justify-between items-center min-w-[88px] ml-auto mr-0 my-2 rounded-l p-2">
+        <ForeignIcon width={24} height={24} />
+        <span className="font-medium10 text-center">BOARDING PASS</span>
+        <svg ref={barcodeRef} />
       </div>
     </Link>
   );
