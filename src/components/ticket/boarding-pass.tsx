@@ -15,7 +15,7 @@ export default function BoardingPassTicket(props: TravelBasicType) {
       href={`/element?id=${id}`}
       className="flex min-w-[328px] w-full bg-[#F4F4F4] rounded gap-3 cursor-pointer drop-shadow-[0_4px_4px_#00000064]"
     >
-      <div className="bg-primary text-white flex min-w-[22px] w-[22px] rounded-l items-center justify-center">
+      <div className="bg-primary text-white flex min-w-[22px] w-[22px] whitespace-nowrap rounded-l items-center justify-center">
         <span className="font-medium text-[8px] leading-[12px] -rotate-90">
           CHECKINBAG AIRLINE
         </span>
