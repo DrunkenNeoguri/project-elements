@@ -12,7 +12,7 @@ export default function NotFound() {
 
   return (
     <>
-      <Header activePrev={true} />
+      <Header activePrev />
       <section className="flex flex-col items-center gap-6 pt-0 pb-6 px-4 mt-36 w-full box-border">
         <img
           src="/images/img-not-found.webp"
