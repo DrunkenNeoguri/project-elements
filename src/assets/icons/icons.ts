@@ -36,6 +36,8 @@ import EditIcon from "./icon-edit.svg";
 import GoogleIcon from "./icon-google.svg";
 import HelpTalkIcon from "./icon-help-talk.svg";
 import NoticeIcon from "./icon-notice.svg";
+import CloseIcon from "./icon-close.svg";
+import ClockIcon from "./icon-clock.svg";
 
 export {
   DecreaseIcon,
@@ -76,4 +78,6 @@ export {
   UpcomingIcon,
   HelpTalkIcon,
   NoticeIcon,
+  CloseIcon,
+  ClockIcon,
 };
