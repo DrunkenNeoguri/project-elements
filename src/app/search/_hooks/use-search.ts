@@ -7,8 +7,8 @@ import { AuthContext } from "../../../providers/auth-provider";
 export default function useSearch() {
   const [list, setList] = useState<TravelBasicType[]>();
   const user = useContext(AuthContext);
-  const searchParams = useSearchParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const keyword = searchParams?.get("keyword") ?? null;
 
@@ -29,5 +29,5 @@ export default function useSearch() {
     getTravelList();
   }, [user, user?.uid, setList, keyword]);
 
-  return { list, router, keyword };
+  return { list, keyword, router };
 }

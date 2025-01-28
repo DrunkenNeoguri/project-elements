@@ -5,7 +5,7 @@ import AuthProvider from "../../providers/auth-provider";
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <AuthProvider>
-      <Header activeSearch={true} useSideBar={true} />
+      <Header activePrev activeSearch />
       <section className="flex flex-col w-full justify-center items-center mt-[72px]">
         {children}
       </section>
