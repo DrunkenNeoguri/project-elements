@@ -9,6 +9,7 @@ import {
 import useHeader from "./use-header";
 import SideBar from "../sidebar/sidebar";
 import Portal from "../portal/portal";
+import Link from "next/link";
 
 type HeaderPropType = {
   activePrev?: boolean;
@@ -31,8 +32,6 @@ export default function Header(props: HeaderPropType) {
   const {
     shadow,
     router,
-    openSearch,
-    setOpenSearch,
     keyword,
     setKeyword,
     openSidebar,
@@ -47,15 +46,12 @@ export default function Header(props: HeaderPropType) {
     ? "drop-shadow-[0px_4px_4px_#00000064] ease-in-out duration-[200ms]"
     : "";
 
-  const handleMoveToPrevPage = () => {
-    if (currentPath.indexOf("/element") !== -1) {
-      return router.replace("/main");
-    }
-    return router.back();
-  };
+  // condition check
+  const isCurrentPathElement = currentPath.indexOf("/element") !== -1;
+  const isCurrentPathSearch = currentPath.indexOf("/search") !== -1;
 
-  const handleSwitchSearch = () => {
-    return setOpenSearch(!openSearch);
+  const handleMoveToPrevPage = () => {
+    return isCurrentPathElement ? router.replace("/main") : router.back();
   };
 
   const handleChangeKeyword = (e: ChangeEvent<HTMLInputElement>) => {
@@ -75,10 +71,9 @@ export default function Header(props: HeaderPropType) {
   };
 
   const handleSearchButton = () => {
-    if (!keyword || keyword.trim() === "") {
-      return handleSwitchSearch();
-    }
-    return router.push(`/search?keyword=${keyword}`);
+    return keyword && keyword.trim() !== ""
+      ? router.push(`/search?keyword=${keyword}`)
+      : null;
   };
 
   const sidebarBgStyle = openSidebar
@@ -111,10 +106,10 @@ export default function Header(props: HeaderPropType) {
           )}
 
           {activeSearch &&
-            (openSearch ? (
-              <form className="w-full mr-2" onSubmit={handleSearchKeyword}>
+            (isCurrentPathSearch ? (
+              <form className="w-full ml-4" onSubmit={handleSearchKeyword}>
                 <input
-                  className="bg-invalidLight w-full font-medium16 text-black border rounded m-0 outline-none box-border py-2 pl-4 pr-10 border-black relative"
+                  className="bg-invalidLight w-full h-10 font-medium16 text-black border border-invalid rounded m-0 outline-none box-border py-[10px] pl-3 pr-9 relative"
                   value={keyword}
                   onChange={handleChangeKeyword}
                 />
@@ -122,19 +117,19 @@ export default function Header(props: HeaderPropType) {
                   type="button"
                   title="관련 내용 검색"
                   onClick={handleSearchButton}
-                  className="w-8 h-8 bg-transparent mr-0 ml-auto cursor-pointer absolute top-5 right-[56px]"
+                  className="w-8 h-8 bg-transparent mr-0 ml-auto cursor-pointer absolute top-5 right-5"
                 >
                   <ActiveSearchIcon />
                 </button>
               </form>
             ) : (
-              <button
+              <Link
                 title="검색창 열기"
-                className="w-8 h-8 bg-transparent mr-2 ml-auto cursor-pointer"
-                onClick={handleSwitchSearch}
+                className="w-8 h-8 bg-transparent mr-3 ml-auto cursor-pointer"
+                href="/search"
               >
                 <SearchIcon />
-              </button>
+              </Link>
             ))}
 
           {actionButton}
