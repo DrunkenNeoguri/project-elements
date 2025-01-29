@@ -59,7 +59,10 @@ export default function ButtonSection() {
           </div>
         </Link>
       </div>
-      <button className="flex flex-col rounded-lg p-3 bg-[#69af5433] w-1/2">
+      <Link
+        href="/search/mylist"
+        className="flex flex-col rounded-lg p-3 bg-[#69af5433] w-1/2"
+      >
         <div className="flex flex-col gap-1 items-start h-full">
           <span className="font-bold14">내 여행 찾기</span>
           <span className="font-medium12 text-left">
@@ -72,7 +75,7 @@ export default function ButtonSection() {
             alt=""
           />
         </div>
-      </button>
+      </Link>
     </section>
   );
 }

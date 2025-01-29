@@ -70,7 +70,7 @@ export default function SideBar({ onClick }: { onClick: () => void }) {
       <div className="bg-white w-full h-[2px] rounded-lg mt-6 mb-8" />
       <div className="flex flex-col items-start gap-9 p-0 w-full h-[calc(100%-180px)] mb-auto">
         <Link
-          href="/mylist"
+          href="/search/mylist"
           className="bg-transparent flex items-center gap-3 font-bold20 text-white border-none rounded outline-none w-full box-border h-11 cursor-pointer"
         >
           <div className="w-6 h-6">
