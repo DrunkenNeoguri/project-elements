@@ -1,15 +1,11 @@
 "use client";
-import { ChangeEvent, FormEvent, ReactNode } from "react";
-import {
-  ActiveSearchIcon,
-  HamburgerIcon,
-  PrevIcon,
-  SearchIcon,
-} from "../../assets/icons/icons";
+import { ReactNode } from "react";
+import { HamburgerIcon, PrevIcon, SearchIcon } from "../../assets/icons/icons";
 import useHeader from "./use-header";
 import SideBar from "../sidebar/sidebar";
 import Portal from "../portal/portal";
 import Link from "next/link";
+import { SearchFormField } from "./components/search-form-field";
 
 type HeaderPropType = {
   activePrev?: boolean;
@@ -29,19 +25,10 @@ export default function Header(props: HeaderPropType) {
     actionButton,
     title,
   } = props;
-  const {
-    shadow,
-    router,
-    keyword,
-    setKeyword,
-    openSidebar,
-    setOpenSidebar,
-    currentPath,
-  } = useHeader();
+  const { shadow, router, openSidebar, setOpenSidebar, currentPath } =
+    useHeader();
 
   // dynamic css styling
-  const addPrevCursor = activePrev ? "cursor-pointer" : "cursor-default";
-  const addSideBarCursor = useSideBar ? "cursor-pointer" : "cursor-default";
   const addViewShadow = shadow
     ? "drop-shadow-[0px_4px_4px_#00000064] ease-in-out duration-[200ms]"
     : "";
@@ -54,26 +41,10 @@ export default function Header(props: HeaderPropType) {
     return isCurrentPathElement ? router.replace("/main") : router.back();
   };
 
-  const handleChangeKeyword = (e: ChangeEvent<HTMLInputElement>) => {
-    return setKeyword(e.currentTarget.value);
-  };
-
   const handleSwitchSidebar = () => {
     document.body.style.overflow =
       document.body.style.overflow !== "hidden" ? "hidden" : "auto";
     return setOpenSidebar(!openSidebar);
-  };
-
-  const handleSearchKeyword = (e: FormEvent) => {
-    e.preventDefault();
-    document.body.style.overflow === "auto";
-    return router.push(`/search?keyword=${keyword}`);
-  };
-
-  const handleSearchButton = () => {
-    return keyword && keyword.trim() !== ""
-      ? router.push(`/search?keyword=${keyword}`)
-      : null;
   };
 
   const sidebarBgStyle = openSidebar
@@ -89,14 +60,15 @@ export default function Header(props: HeaderPropType) {
         }
       >
         <div className="h-full w-full flex justify-between items-center">
-          {activePrev && (
+          {activePrev ? (
             <button
-              className={"w-8 h-8 bg-transparent ml-0 " + addPrevCursor}
-              disabled={!activePrev}
+              className="w-8 h-8 bg-transparent ml-0 cursor-pointer"
               onClick={handleMoveToPrevPage}
             >
-              {activePrev && <PrevIcon />}
+              <PrevIcon />
             </button>
+          ) : (
+            <div className="bg-transparent w-8 h-8" />
           )}
 
           {title && (
@@ -107,21 +79,7 @@ export default function Header(props: HeaderPropType) {
 
           {activeSearch &&
             (isCurrentPathSearch ? (
-              <form className="w-full ml-4" onSubmit={handleSearchKeyword}>
-                <input
-                  className="bg-invalidLight w-full h-10 font-medium16 text-black border border-invalid rounded m-0 outline-none box-border py-[10px] pl-3 pr-9 relative"
-                  value={keyword}
-                  onChange={handleChangeKeyword}
-                />
-                <button
-                  type="button"
-                  title="관련 내용 검색"
-                  onClick={handleSearchButton}
-                  className="w-8 h-8 bg-transparent mr-0 ml-auto cursor-pointer absolute top-5 right-5"
-                >
-                  <ActiveSearchIcon />
-                </button>
-              </form>
+              <SearchFormField />
             ) : (
               <Link
                 title="검색창 열기"
@@ -134,18 +92,16 @@ export default function Header(props: HeaderPropType) {
 
           {actionButton}
 
-          {useSideBar && (
+          {useSideBar ? (
             <button
               title="사이드바 열기"
-              className={
-                "w-8 h-8 bg-transparent mr-0 ml-0 cursor-pointer pb-1 " +
-                addSideBarCursor
-              }
-              disabled={!useSideBar}
+              className="bg-transparent mr-0 ml-0 cursor-pointer"
               onClick={handleSwitchSidebar}
             >
               <HamburgerIcon />
             </button>
+          ) : (
+            <div className="bg-transparent w-8 h-8" />
           )}
         </div>
       </header>
