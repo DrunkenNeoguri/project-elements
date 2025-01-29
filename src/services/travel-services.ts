@@ -10,7 +10,7 @@ import {
 import { UserInfoType } from "../types/user.types";
 
 class TravelService {
-  static async getUserTravelList(userUid: string, keyword?: string | null) {
+  static async getUserTravelList(userUid: string, keyword?: string) {
     try {
       let travelList: TravelBasicType[] = [];
       const docsState = await getDocs(
