@@ -4,10 +4,10 @@ import { UndoIcon } from "../../../../assets/icons/icons";
 import { RoundDot } from "../../../../components/loader/loader";
 import BoardingPassTicket from "../../../../components/ticket/boarding-pass";
 import TransportTicket from "../../../../components/ticket/transport-ticket";
-import useSearch from "../_hooks/use-search";
+import useGetUserTravelList from "../../../../hooks/use-get-user-travel-list";
 
 export default function SearchResultSection() {
-  const { list, keyword, router } = useSearch();
+  const { list, keyword, router } = useGetUserTravelList();
 
   const handleOnClick = () => {
     return router.replace("/search");

@@ -2,10 +2,10 @@
 import { RoundDot } from "../../../../components/loader/loader";
 import BoardingPassTicket from "../../../../components/ticket/boarding-pass";
 import TransportTicket from "../../../../components/ticket/transport-ticket";
-import useSearch from "../_hooks/use-search";
+import useGetUserTravelList from "../../../../hooks/use-get-user-travel-list";
 
 export default function MyTravelListSection() {
-  const { list } = useSearch();
+  const { list } = useGetUserTravelList();
 
   if (!list) {
     return (
