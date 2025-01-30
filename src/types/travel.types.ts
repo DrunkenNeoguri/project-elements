@@ -1,8 +1,10 @@
 export type TravelBasicType = {
   id: string;
-  travelType: "domestic" | "foreign";
+  travelType: TravelType;
   title: string;
   departureAt: string;
   travelPeriod: number;
   destination: string;
 };
+
+export type TravelType = "domestic" | "foreign";

@@ -8,7 +8,10 @@ import {
 } from "react";
 import { ExternalContext } from "../../../../../../providers/external-provider";
 import { ElementsContext } from "../../../../../../providers/elements-provider";
-import { TravelBasicType } from "../../../../../../types/travel.types";
+import {
+  TravelBasicType,
+  TravelType,
+} from "../../../../../../types/travel.types";
 import BottomSheet from "../../../../../../components/bottom-sheet/bottom-sheet";
 import ElementService from "../../../../../../services/element-service";
 import { AuthContext } from "../../../../../../providers/auth-provider";
@@ -88,8 +91,8 @@ export default function EditTravelInfoBottomSheet() {
     }
   };
 
-  const handleSwitchTravelType = (type: "foreign" | "domestic") => {
-    setTravelInfo({ ...(travelInfo as TravelBasicType), travelType: type });
+  const handleSwitchTravelType = (travelType: TravelType) => {
+    setTravelInfo({ ...(travelInfo as TravelBasicType), travelType });
   };
 
   const domesticButtonStyle =

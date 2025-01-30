@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import Button from "../../../../components/button/button";
 import { Dispatch, SetStateAction } from "react";
-import { TravelBasicType } from "../../../../types/travel.types";
+import { TravelBasicType, TravelType } from "../../../../types/travel.types";
 
 type PropType = {
   handleNextStep: () => void;
@@ -19,7 +19,7 @@ export default function SelectSection({
     return router.push("/main");
   };
 
-  const handleMoveToNextStep = (travelType: "domestic" | "foreign") => {
+  const handleMoveToNextStep = (travelType: TravelType) => {
     setTravelData((prev) => ({ ...prev, travelType }));
     handleNextStep();
   };

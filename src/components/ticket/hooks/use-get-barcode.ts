@@ -1,10 +1,8 @@
 import { useEffect, useRef } from "react";
 import JsBarcode from "jsbarcode";
+import { TravelType } from "../../../types/travel.types";
 
-export default function useGetBarcode(
-  id: string,
-  type: "domestic" | "foreign"
-) {
+export default function useGetBarcode(id: string, type: TravelType) {
   const barcodeRef = useRef(null);
 
   useEffect(() => {
