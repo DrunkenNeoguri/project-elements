@@ -6,10 +6,6 @@ import { useMemo } from "react";
 import { useGetCurrentKeywordList } from "../_hooks/use-get-current-keyword-list";
 
 export default function SearchDefaultSection() {
-  const isViewDeleteAllSearchKeyword = () => {
-    return true;
-  };
-
   const { searchKeywordList, removeSearchKeyword, removeAllSearchKeyword } =
     useGetCurrentKeywordList();
   const { banners } = useGetCarouselBanner();
@@ -28,9 +24,7 @@ export default function SearchDefaultSection() {
           {hasSearchKeywordInList ? (
             <button
               type="button"
-              className={
-                "font-medium12 text-invalid " + isViewDeleteAllSearchKeyword
-              }
+              className={"font-medium12 text-invalid"}
               onClick={removeAllSearchKeyword}
             >
               전체 삭제
