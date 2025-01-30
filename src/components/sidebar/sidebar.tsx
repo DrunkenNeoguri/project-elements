@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 export default function SideBar({ onClick }: { onClick: () => void }) {
   const router = useRouter();
   const userInfo = localStorage.getItem("userInfo");
+  const username = userInfo && JSON.parse(userInfo).username;
 
   const handleLogOutAccount = async () => {
     document.body.style.overflow = "";
@@ -36,7 +37,7 @@ export default function SideBar({ onClick }: { onClick: () => void }) {
   //   fill: ${colors.black};
   // }
 
-  if (!userInfo) {
+  if (!userInfo || !username) {
     return;
   }
 
@@ -45,7 +46,7 @@ export default function SideBar({ onClick }: { onClick: () => void }) {
       <div className="flex justify-between items-start mb-8">
         <div className="flex flex-col">
           <span className="font-medium20 text-white p-0 m-0">
-            {JSON.parse(userInfo).username} 님,
+            {username} 님,
           </span>
           <span className="font-medium20 text-white p-0 m-0">반가워요!</span>
         </div>
