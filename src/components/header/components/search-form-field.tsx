@@ -17,19 +17,22 @@ export function SearchFormField() {
     return setKeyword(e.currentTarget.value);
   };
 
+  const addKeywordInListAndMoveToPage = () => {
+    addSearchKeyword(keyword);
+    return router.push(`/search?keyword=${keyword}`);
+  };
+
   const handleSearchKeyword = (e: FormEvent) => {
     e.preventDefault();
     if (isNotBlinkKeyword) {
-      document.body.style.overflow === "auto";
-      addSearchKeyword(keyword);
-      return router.push(`/search?keyword=${keyword}`);
+      document.body.style.overflow = "auto";
+      addKeywordInListAndMoveToPage();
     }
   };
 
   const handleSearchButton = () => {
     if (isNotBlinkKeyword) {
-      addSearchKeyword(keyword);
-      return router.push(`/search?keyword=${keyword}`);
+      addKeywordInListAndMoveToPage();
     }
   };
 
