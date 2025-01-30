@@ -26,9 +26,14 @@ export default function ElementsOptionBottomSheet() {
   };
 
   const handleUpdateTravelData = async () => {
-    if (user) {
-      await ElementService.postElementsData(user?.uid, state.info.id, state);
-      return router.push(`/element?id=${listId}`);
+    try {
+      if (user) {
+        await ElementService.postElementsData(user?.uid, state.info.id, state);
+        return router.push(`/element?id=${listId}`);
+      }
+    } catch (error) {
+      // TODO: 차후 Sentry, 에러 메시지 toast / 현재는 현상 유지
+      return;
     }
   };
 
