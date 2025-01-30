@@ -41,8 +41,14 @@ export default function SearchResultSection() {
       <div className="flex flex-col gap-4">
         {list.length === 0 ? (
           <section>
-            <img src="/images/img-search-result-empty.webp" alt="" />
-            <p>{`검색 결과, 해당하는 여행 계획이 없어요.\n다른 단어로 다시 검색해보시겠어요?`}</p>
+            <img
+              src="/images/img-search-result-empty.webp"
+              alt="여행 리스트가 비어있음을 안내하는 이미지"
+            />
+            <p className="whitespace-pre-line">
+              검색 결과, 해당하는 여행 계획이 없어요. 다른 단어로 다시
+              검색해보시겠어요?
+            </p>
           </section>
         ) : (
           list?.map((ticket) => {
