@@ -73,10 +73,12 @@ export default function SearchDefaultSection() {
             className="flex-[0_0_100%] flex bg-blue-500 rounded-lg aspect-[1/0.3803] overflow-hidden justify-center items-center drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
             href={banner.href}
           >
-            <img src={banner.imageUrl} />
+            <img src={banner.imageUrl} alt="프로모션 배너" />
           </Link>
         </div>
       )}
     </section>
   );
 }
+
+// TODO: 배너 관련 alt 메세지 값을 추가하고 반영하도록 추후 개선 진행.
