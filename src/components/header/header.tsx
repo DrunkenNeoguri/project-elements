@@ -64,11 +64,13 @@ export default function Header(props: HeaderPropType) {
             <button
               className="w-8 h-8 bg-transparent ml-0 cursor-pointer"
               onClick={handleMoveToPrevPage}
+              aria-label="이전 페이지로 이동"
+              type="button"
             >
               <PrevIcon />
             </button>
           ) : (
-            <div className="bg-transparent w-8 h-8" />
+            <div className="bg-transparent w-8 h-8" aria-hidden="true" />
           )}
 
           {title && (
@@ -101,7 +103,7 @@ export default function Header(props: HeaderPropType) {
               <HamburgerIcon />
             </button>
           ) : (
-            <div className="bg-transparent w-8 h-8" />
+            <div className="bg-transparent w-8 h-8" aria-hidden="true" />
           )}
         </div>
       </header>
