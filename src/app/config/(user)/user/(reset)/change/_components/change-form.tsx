@@ -51,7 +51,13 @@ export default function ChangeForm() {
       >
         <div className="flex flex-col mb-3">
           <Form.Label htmlFor="password">새 비밀번호</Form.Label>
-          <Form.Input id="password" type="password" />
+          <Form.Input
+            id="password"
+            type="password"
+            minLength={8}
+            maxLength={20}
+            required
+          />
           <Form.ErrorText>
             {changePasswordErrorMsg(formData.password)}
           </Form.ErrorText>
@@ -59,7 +65,13 @@ export default function ChangeForm() {
 
         <div className="flex flex-col mb-3">
           <Form.Label htmlFor="confirmPassword">새 비밀번호 재확인</Form.Label>
-          <Form.Input id="confirmPassword" type="password" />
+          <Form.Input
+            id="confirmPassword"
+            type="password"
+            minLength={8}
+            maxLength={20}
+            required
+          />
           <Form.ErrorText>
             {changeConfirmPasswordErrorMsg(
               formData.password,
