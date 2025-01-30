@@ -16,7 +16,13 @@ export default function SearchResultSection() {
   if (!list) {
     return (
       <section className="flex flex-col w-full pt-16 pb-6 px-0 box-border">
-        <RoundDot />
+        <div
+          role="alert"
+          aria-busy="true"
+          aria-label="검색 결과를 불러오는 중입니다"
+        >
+          <RoundDot />
+        </div>
       </section>
     );
   }
