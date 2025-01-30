@@ -22,6 +22,7 @@ export default async function NoticeArticle({
   const noticeArticle = await OptionService.getNoticeOneArticle(articleId);
 
   if (noticeArticle == null) {
+    // TODO: 페이지 진입 등이 잘못됐을 시, SSG인 점을 고려해서 차후 별도 기사 없음 페이지 노출 필요
     return;
   }
 
