@@ -17,7 +17,7 @@ export default function useGetBarcode(id: string, type: TravelType) {
         displayValue: false,
       });
     }
-  }, [id]);
+  }, [id, type]);
 
   return { barcodeRef };
 }
