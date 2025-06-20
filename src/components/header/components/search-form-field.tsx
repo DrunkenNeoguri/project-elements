@@ -19,7 +19,7 @@ export function SearchFormField() {
 
   const addKeywordInListAndMoveToPage = () => {
     addSearchKeyword(keyword);
-    return router.push(`/search?keyword=${keyword}`);
+    return router.push(`/search?keyword=${encodeURIComponent(keyword)}`);
   };
 
   const handleSearchKeyword = (e: FormEvent) => {
