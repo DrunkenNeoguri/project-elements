@@ -19,16 +19,17 @@ class OptionService {
     }
   }
 
+  private static async getNoticesBase() {
+    const docsState = (
+      await getDocs(collection(await firestore(), "notices"))
+    ).docs.map((doc) => doc.data() as Notice);
+
+    return docsState.sort((a, b) => Number(a.id) - Number(b.id));
+  }
+
   static async getNoticeItemList() {
     try {
-      const docsState = (
-        await getDocs(collection(await firestore(), "notices"))
-      ).docs.map((doc) => doc.data() as Notice);
-
-      const noticeList = docsState
-        .map((doc) => doc)
-        .sort((a, b) => Number(a.id) - Number(b.id));
-
+      const noticeList = await this.getNoticesBase();
       return (noticeList ?? []) as Notice[];
     } catch (error) {
       throw new Error(convertUnknownTypeErrorToStringMessage(error));
@@ -37,12 +38,7 @@ class OptionService {
 
   static async getNoticeArticles() {
     try {
-      const docsState = (
-        await getDocs(collection(await firestore(), "notices"))
-      ).docs.map((doc) => doc.data() as Notice);
-
-      const noticeList = docsState.sort((a, b) => Number(a.id) - Number(b.id));
-
+      const noticeList = await this.getNoticesBase();
       return (noticeList ?? []) as Notice[];
     } catch (error) {
       console.log(error);
