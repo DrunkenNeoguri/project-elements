@@ -21,3 +21,9 @@ export const usernameInvalidErrorMsg =
 
 export const unknownErrorMessage =
   "The error is unknown. Please let me know under what circumstances it occurred and provide detailed information to this email(developneoguri@gmail.com).";
+
+export const NOTICE_CLIP_STYLES = {
+  이벤트: "border-primaryDeep text-primaryDeep",
+  매거진: "border-secondary text-secondary",
+  공지: "border-notice text-notice", // tailwind.config.js에 notice 색상 추가 필요
+} as const;
