@@ -23,7 +23,6 @@ export default function ArticleBody({ article, href }: Props) {
       >
         {article}
       </Markdown>
-      <Markdown remarkPlugins={[remarkGfm]}>{`${article}`}</Markdown>
       {href ? (
         <Link
           href={href}
