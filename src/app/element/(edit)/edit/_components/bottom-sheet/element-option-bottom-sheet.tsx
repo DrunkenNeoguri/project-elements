@@ -56,11 +56,11 @@ export default function ElementOptionBottomSheet() {
           {/* <BottomSheet.Select onClick={handleSwitchSelectStaffBottomSheet}>
             담당자 지정
           </BottomSheet.Select>
-          <div className="h-[1px] w-full bg-gray" /> */}
+          <div className="h-[1px] w-full bg-grey" /> */}
           <BottomSheet.Select onClick={handleSwitchUpdateElement}>
             준비물 수정
           </BottomSheet.Select>
-          <div className="h-[1px] w-full bg-gray" />
+          <div className="h-[1px] w-full bg-grey" />
           <BottomSheet.Select
             colorTheme="warning"
             onClick={handleSwitchDeleteElement}

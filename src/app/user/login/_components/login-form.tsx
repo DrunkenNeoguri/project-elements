@@ -72,7 +72,11 @@ export default function LoginForm() {
           className="bg-transparent flex gap-1 border-none outline-none p-0 m-0 mr-auto w-auto cursor-pointer mb-6"
           onClick={() => setRememberLogin(!rememberLogin)}
         >
-          {rememberLogin ? <CheckedIcon /> : <UnCheckedIcon />}
+          {rememberLogin ? (
+            <CheckedIcon width={12} height={12} />
+          ) : (
+            <UnCheckedIcon width={12} height={12} />
+          )}
           <span className="font-medium10 text-black w-auto">
             로그인 상태 유지
           </span>

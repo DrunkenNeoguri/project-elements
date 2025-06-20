@@ -34,6 +34,10 @@ import ModifyElementIcon from "./icon-modify-element.svg";
 import ShareIcon from "./icon-share.svg";
 import EditIcon from "./icon-edit.svg";
 import GoogleIcon from "./icon-google.svg";
+import HelpTalkIcon from "./icon-help-talk.svg";
+import NoticeIcon from "./icon-notice.svg";
+import CloseIcon from "./icon-close.svg";
+import ClockIcon from "./icon-clock.svg";
 
 export {
   DecreaseIcon,
@@ -72,4 +76,8 @@ export {
   ConfigIcon,
   RecentlyIcon,
   UpcomingIcon,
+  HelpTalkIcon,
+  NoticeIcon,
+  CloseIcon,
+  ClockIcon,
 };

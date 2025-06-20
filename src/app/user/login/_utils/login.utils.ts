@@ -6,6 +6,7 @@ import {
   passwordInvalidErrorMsg,
   passwordRegExp,
 } from "../../../../utils/util-constants";
+import { changeUsernameErrorMsg } from "../../signup/_utils/signup.utils";
 
 export const changeEmailErrorMsg = (email?: string) => {
   if (!email) {
@@ -54,5 +55,25 @@ export function checkLoginDataTypeCheck(
   ) {
     return false;
   }
+  return true;
+}
+
+export function checkPasswordDataTypeCheck(
+  formData: Record<string, string>
+): formData is Pick<AccountFormType, "password"> {
+  if (changePasswordErrorMsg(formData.password) !== undefined) {
+    return false;
+  }
+
+  return true;
+}
+
+export function checkUsernameDataTypeCheck(
+  formData: Record<string, string>
+): formData is Pick<AccountFormType, "username"> {
+  if (changeUsernameErrorMsg(formData.username) !== undefined) {
+    return false;
+  }
+
   return true;
 }

@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
 import { throttle } from "lodash-es";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function useHeader() {
   // const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const currentPath = usePathname();
   const isMainPath =
     currentPath === "/main" || currentPath === "/" ? false : true;
-  const searchParams = useSearchParams();
-  const currentKeyword = searchParams?.get("keyword");
 
-  const [openSearch, setOpenSearch] = useState<boolean>(
-    currentKeyword ? true : false
-  );
-  const [keyword, setKeyword] = useState<string>(currentKeyword ?? "");
   const [shadow, setShadow] = useState(isMainPath);
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
 
@@ -62,10 +56,6 @@ export default function useHeader() {
     shadow,
     router,
     currentPath,
-    openSearch,
-    setOpenSearch,
-    keyword,
-    setKeyword,
     openSidebar,
     setOpenSidebar,
   };

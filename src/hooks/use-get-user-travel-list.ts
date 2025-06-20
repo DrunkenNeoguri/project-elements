@@ -1,16 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import { TravelBasicType } from "../../../types/travel.types";
-import TravelService from "../../../services/travel-services";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AuthContext } from "../../../providers/auth-provider";
+import { TravelBasicType } from "../types/travel.types";
+import { AuthContext } from "../providers/auth-provider";
+import TravelService from "../services/travel-services";
 
-export default function useSearch() {
+export default function useGetUserTravelList() {
   const [list, setList] = useState<TravelBasicType[]>();
   const user = useContext(AuthContext);
-  const searchParams = useSearchParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const keyword = searchParams?.get("keyword") ?? null;
+  const keyword = searchParams?.get("keyword") ?? undefined;
 
   useEffect(() => {
     if (!user || !user?.uid) {
@@ -29,5 +29,5 @@ export default function useSearch() {
     getTravelList();
   }, [user, user?.uid, setList, keyword]);
 
-  return { list, router, keyword };
+  return { list, keyword, router };
 }

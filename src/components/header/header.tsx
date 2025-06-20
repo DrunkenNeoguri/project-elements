@@ -1,14 +1,11 @@
 "use client";
-import { ChangeEvent, FormEvent, ReactNode } from "react";
-import {
-  ActiveSearchIcon,
-  HamburgerIcon,
-  PrevIcon,
-  SearchIcon,
-} from "../../assets/icons/icons";
+import { ReactNode } from "react";
+import { HamburgerIcon, PrevIcon, SearchIcon } from "../../assets/icons/icons";
 import useHeader from "./use-header";
 import SideBar from "../sidebar/sidebar";
 import Portal from "../portal/portal";
+import Link from "next/link";
+import { SearchFormField } from "./components/search-form-field";
 
 type HeaderPropType = {
   activePrev?: boolean;
@@ -28,57 +25,25 @@ export default function Header(props: HeaderPropType) {
     actionButton,
     title,
   } = props;
-  const {
-    shadow,
-    router,
-    openSearch,
-    setOpenSearch,
-    keyword,
-    setKeyword,
-    openSidebar,
-    setOpenSidebar,
-    currentPath,
-  } = useHeader();
+  const { shadow, router, openSidebar, setOpenSidebar, currentPath } =
+    useHeader();
 
   // dynamic css styling
-  const addPrevCursor = activePrev ? "cursor-pointer" : "cursor-default";
-  const addSideBarCursor = useSideBar ? "cursor-pointer" : "cursor-default";
   const addViewShadow = shadow
     ? "drop-shadow-[0px_4px_4px_#00000064] ease-in-out duration-[200ms]"
     : "";
 
+  // condition check
+  const isCurrentPathElement = currentPath.startsWith("/element");
+  const isCurrentPathSearch = currentPath.startsWith("/search");
   const handleMoveToPrevPage = () => {
-    if (currentPath.indexOf("/element") !== -1) {
-      return router.replace("/main");
-    }
-    return router.back();
-  };
-
-  const handleSwitchSearch = () => {
-    return setOpenSearch(!openSearch);
-  };
-
-  const handleChangeKeyword = (e: ChangeEvent<HTMLInputElement>) => {
-    return setKeyword(e.currentTarget.value);
+    return isCurrentPathElement ? router.replace("/main") : router.back();
   };
 
   const handleSwitchSidebar = () => {
     document.body.style.overflow =
       document.body.style.overflow !== "hidden" ? "hidden" : "auto";
     return setOpenSidebar(!openSidebar);
-  };
-
-  const handleSearchKeyword = (e: FormEvent) => {
-    e.preventDefault();
-    document.body.style.overflow === "auto";
-    return router.push(`/search?keyword=${keyword}`);
-  };
-
-  const handleSearchButton = () => {
-    if (!keyword || keyword.trim() === "") {
-      return handleSwitchSearch();
-    }
-    return router.push(`/search?keyword=${keyword}`);
   };
 
   const sidebarBgStyle = openSidebar
@@ -94,14 +59,17 @@ export default function Header(props: HeaderPropType) {
         }
       >
         <div className="h-full w-full flex justify-between items-center">
-          {activePrev && (
+          {activePrev ? (
             <button
-              className={"w-8 h-8 bg-transparent mr-auto ml-0 " + addPrevCursor}
-              disabled={!activePrev}
+              className="w-8 h-8 bg-transparent ml-0 cursor-pointer"
               onClick={handleMoveToPrevPage}
+              aria-label="이전 페이지로 이동"
+              type="button"
             >
-              {activePrev && <PrevIcon />}
+              <PrevIcon />
             </button>
+          ) : (
+            <div className="bg-transparent w-8 h-8" aria-hidden="true" />
           )}
 
           {title && (
@@ -111,46 +79,30 @@ export default function Header(props: HeaderPropType) {
           )}
 
           {activeSearch &&
-            (openSearch ? (
-              <form className="w-full mr-2" onSubmit={handleSearchKeyword}>
-                <input
-                  className="bg-invalidLight w-full font-medium16 text-black border rounded m-0 outline-none box-border py-2 pl-4 pr-10 border-black relative"
-                  value={keyword}
-                  onChange={handleChangeKeyword}
-                />
-                <button
-                  type="button"
-                  title="관련 내용 검색"
-                  onClick={handleSearchButton}
-                  className="w-8 h-8 bg-transparent mr-0 ml-auto cursor-pointer absolute top-5 right-[56px]"
-                >
-                  <ActiveSearchIcon />
-                </button>
-              </form>
+            (isCurrentPathSearch ? (
+              <SearchFormField />
             ) : (
-              <button
+              <Link
                 title="검색창 열기"
-                className="w-8 h-8 bg-transparent mr-2 ml-auto cursor-pointer"
-                onClick={handleSwitchSearch}
+                className="w-8 h-8 bg-transparent mr-3 ml-auto cursor-pointer"
+                href="/search"
               >
                 <SearchIcon />
-              </button>
+              </Link>
             ))}
 
           {actionButton}
 
-          {useSideBar && (
+          {useSideBar ? (
             <button
               title="사이드바 열기"
-              className={
-                "w-8 h-8 bg-transparent mr-0 ml-0 cursor-pointer pb-1 " +
-                addSideBarCursor
-              }
-              disabled={!useSideBar}
+              className="bg-transparent mr-0 ml-0 cursor-pointer"
               onClick={handleSwitchSidebar}
             >
               <HamburgerIcon />
             </button>
+          ) : (
+            <div className="bg-transparent w-8 h-8" aria-hidden="true" />
           )}
         </div>
       </header>

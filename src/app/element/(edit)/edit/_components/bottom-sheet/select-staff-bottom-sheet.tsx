@@ -26,19 +26,19 @@ export default function SelectStaffBottomSheet(
       >
         <div className="flex flex-col items-start w-full px-4 my-3 overflow-scroll">
           <BottomSheet.Select>담당자 A</BottomSheet.Select>
-          <div className="h-[1px] w-full bg-gray" />
+          <div className="h-[1px] w-full bg-grey" />
           <BottomSheet.Select>담당자 B</BottomSheet.Select>
-          <div className="h-[1px] w-full bg-gray" />{" "}
+          <div className="h-[1px] w-full bg-grey" />
           <BottomSheet.Select>담당자 C</BottomSheet.Select>
-          <div className="h-[1px] w-full bg-gray" />{" "}
+          <div className="h-[1px] w-full bg-grey" />
           <BottomSheet.Select>담당자 D</BottomSheet.Select>
-          <div className="h-[1px] w-full bg-gray" />{" "}
+          <div className="h-[1px] w-full bg-grey" />
           <BottomSheet.Select>담당자 E</BottomSheet.Select>
-          <div className="h-[1px] w-full bg-gray" />{" "}
+          <div className="h-[1px] w-full bg-grey" />
           <BottomSheet.Select>담당자 F</BottomSheet.Select>
-          <div className="h-[1px] w-full bg-gray" />{" "}
+          <div className="h-[1px] w-full bg-grey" />
           <BottomSheet.Select>담당자 G</BottomSheet.Select>
-          <div className="h-[1px] w-full bg-gray" />
+          <div className="h-[1px] w-full bg-grey" />
         </div>
       </BottomSheet>
     )

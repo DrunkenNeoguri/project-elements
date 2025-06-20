@@ -26,9 +26,14 @@ export default function ElementsOptionBottomSheet() {
   };
 
   const handleUpdateTravelData = async () => {
-    if (user) {
-      await ElementService.postElementsData(user?.uid, state.info.id, state);
-      return router.push(`/element?id=${listId}`);
+    try {
+      if (user) {
+        await ElementService.postElementsData(user?.uid, state.info.id, state);
+        return router.push(`/element?id=${listId}`);
+      }
+    } catch (error) {
+      // TODO: 차후 Sentry, 에러 메시지 toast / 현재는 현상 유지
+      return;
     }
   };
 
@@ -50,11 +55,11 @@ export default function ElementsOptionBottomSheet() {
           <BottomSheet.Select onClick={handleSwitchTravelInfoBottomSheet}>
             여행 정보 수정
           </BottomSheet.Select>
-          <div className="h-[1px] w-full bg-gray" />
+          <div className="h-[1px] w-full bg-grey" />
           <BottomSheet.Select onClick={handleUpdateTravelData}>
             준비물 목록 저장
           </BottomSheet.Select>
-          <div className="h-[1px] w-full bg-gray" />
+          <div className="h-[1px] w-full bg-grey" />
           <BottomSheet.Select
             colorTheme="warning"
             onClick={handleDeleteTravelData}
