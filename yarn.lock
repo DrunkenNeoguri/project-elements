@@ -1586,7 +1586,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.29.0":
+"@eslint/js@npm:9.29.0, @eslint/js@npm:^9.29.0":
   version: 9.29.0
   resolution: "@eslint/js@npm:9.29.0"
   checksum: 10c0/d0ccf37063fa27a3fae9347cb044f84ca10b5a2fa19ffb2b3fedf3b96843ac1ff359ea9f0ab0e80f2f16fda4cb0dc61ea0fed0375090f050fe0a029e7d6de3a3
@@ -2802,7 +2802,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^8.34.1":
+"@typescript-eslint/eslint-plugin@npm:8.34.1, @typescript-eslint/eslint-plugin@npm:^8.34.1":
   version: 8.34.1
   resolution: "@typescript-eslint/eslint-plugin@npm:8.34.1"
   dependencies:
@@ -2823,7 +2823,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^8.34.1":
+"@typescript-eslint/parser@npm:8.34.1, @typescript-eslint/parser@npm:^8.34.1":
   version: 8.34.1
   resolution: "@typescript-eslint/parser@npm:8.34.1"
   dependencies:
@@ -7041,6 +7041,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "project-elements@workspace:."
   dependencies:
+    "@eslint/js": "npm:^9.29.0"
     "@next/bundle-analyzer": "npm:^14.2.5"
     "@svgr/webpack": "npm:^8.1.0"
     "@types/lodash-es": "npm:^4.17.12"
@@ -7074,6 +7075,7 @@ __metadata:
     remark-gfm: "npm:^4.0.0"
     tailwindcss: "npm:^3.4.4"
     typescript: "npm:^5.2.2"
+    typescript-eslint: "npm:^8.34.1"
   languageName: unknown
   linkType: soft
 
@@ -8214,6 +8216,20 @@ __metadata:
     possible-typed-array-names: "npm:^1.0.0"
     reflect.getprototypeof: "npm:^1.0.6"
   checksum: 10c0/e38f2ae3779584c138a2d8adfa8ecf749f494af3cd3cdafe4e688ce51418c7d2c5c88df1bd6be2bbea099c3f7cea58c02ca02ed438119e91f162a9de23f61295
+  languageName: node
+  linkType: hard
+
+"typescript-eslint@npm:^8.34.1":
+  version: 8.34.1
+  resolution: "typescript-eslint@npm:8.34.1"
+  dependencies:
+    "@typescript-eslint/eslint-plugin": "npm:8.34.1"
+    "@typescript-eslint/parser": "npm:8.34.1"
+    "@typescript-eslint/utils": "npm:8.34.1"
+  peerDependencies:
+    eslint: ^8.57.0 || ^9.0.0
+    typescript: ">=4.8.4 <5.9.0"
+  checksum: 10c0/6de5d2ce180d1609a8a5383557a2787f17620ebc9a4d84fba9d9240db8005cc3084a7840ebafe532fba9970fe12822ee415615041f3527334fdfc45c411d35b6
   languageName: node
   linkType: hard
 
