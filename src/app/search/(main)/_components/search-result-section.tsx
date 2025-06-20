@@ -10,7 +10,11 @@ export default function SearchResultSection() {
   const { list, keyword, router } = useGetUserTravelList();
 
   const handleOnClick = () => {
-    return router.replace("/search");
+    try {
+      return router.replace("/search");
+    } catch (error) {
+      // TODO: 차후에 Sentry 등 배치해서 에러 트래킹 수정 필요.
+    }
   };
 
   if (!list) {
