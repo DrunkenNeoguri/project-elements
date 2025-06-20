@@ -26,6 +26,19 @@ export default [
     rules: {
       semi: ['error', 'always'],
       camelcase: ['error', { properties: 'always' }],
+      '@typescript-eslint/ban-types': [
+        'error',
+        {
+          types: {
+            unknown: {
+              message: 'unknown 타입 사용 금지',
+            },
+            any: {
+              message: 'any 타입 사용 금지',
+            },
+          },
+        },
+      ],
       '@typescript-eslint/naming-convention': [
         'error',
         {
