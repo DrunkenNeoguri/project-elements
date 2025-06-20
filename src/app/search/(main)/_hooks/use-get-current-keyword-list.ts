@@ -4,9 +4,23 @@ export function useGetCurrentKeywordList() {
   const [searchKeywordList, setSearchKeywordList] = useState<Array<string>>([]);
 
   const addSearchKeyword = (keyword: string) => {
+    const trimmedKeyword = keyword.trim();
+    if (searchKeywordList.includes(trimmedKeyword)) {
+      const filteredList = searchKeywordList.filter(
+        (keyword) => keyword !== trimmedKeyword
+      );
+      const renewalSearchKeywordList = [trimmedKeyword, ...filteredList];
+      localStorage.setItem(
+        "currentKeywordList",
+        JSON.stringify(renewalSearchKeywordList)
+      );
+      setSearchKeywordList(renewalSearchKeywordList);
+      return;
+    }
+
     const renewalSearchKeywordList: Array<string> = [
       ...searchKeywordList,
-      keyword,
+      trimmedKeyword,
     ];
 
     if (renewalSearchKeywordList.length > 5) {
