@@ -1,6 +1,6 @@
 "use client";
 import { RoundDot } from "../../../../components/loader/loader";
-import BoardingPassTicket from "../../../../components/ticket/boarding-pass";
+import BoardingPass from "../../../../components/ticket/boarding-pass";
 import TransportTicket from "../../../../components/ticket/transport-ticket";
 import useGetUserTravelList from "../../../../hooks/use-get-user-travel-list";
 
@@ -28,7 +28,7 @@ export default function MyTravelListSection() {
             return ticket.travelType === "domestic" ? (
               <TransportTicket key={ticket.id} {...ticket} />
             ) : (
-              <BoardingPassTicket key={ticket.id} {...ticket} />
+              <BoardingPass key={ticket.id} {...ticket} />
             );
           })
         )}
