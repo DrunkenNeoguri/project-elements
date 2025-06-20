@@ -1,14 +1,14 @@
-"use client";
-import { CheckedIcon, UnCheckedIcon } from "../../../../assets/icons/icons";
-import Form from "../../../../components/form/form";
-import Modal from "../../../../components/modal/modal";
-import AuthService from "../../../../services/auth-services";
-import useLoginForm from "../_hooks/use-login-form";
+'use client';
+import { CheckedIcon, UnCheckedIcon } from '../../../../assets/icons/icons';
+import Form from '../../../../components/form/form';
+import Modal from '../../../../components/modal/modal';
+import AuthService from '../../../../services/auth-services';
+import useLoginForm from '../_hooks/use-login-form';
 import {
   changeEmailErrorMsg,
   changePasswordErrorMsg,
   checkLoginDataTypeCheck,
-} from "../_utils/login.utils";
+} from '../_utils/login.utils';
 
 export default function LoginForm() {
   const {
@@ -29,42 +29,33 @@ export default function LoginForm() {
     if (validityCheck) {
       await AuthService.updateAccountPersistenceState(rememberLogin);
       const loginState = await AuthService.postLoginProcess(loginData);
-      if (loginState === "OK") {
-        router.push("/main");
+      if (loginState === 'OK') {
+        router.push('/main');
       } else {
-        handleExternalList("login");
+        handleExternalList('login');
         setModalMsg(loginState.message);
       }
     }
   };
 
   const handleCloseModal = () => {
-    handleExternalList("login");
+    handleExternalList('login');
     setModalMsg(undefined);
   };
 
   return (
     <>
-      <Form
-        onSubmit={handleSubmit}
-        formData={loginData}
-        setFormData={setLoginData}
-        styles="px-4"
-      >
+      <Form onSubmit={handleSubmit} formData={loginData} setFormData={setLoginData} styles="px-4">
         <div className="flex flex-col mb-3">
           <Form.Label htmlFor="email">이메일 주소</Form.Label>
           <Form.Input id="email" type="email" />
-          <Form.ErrorText>
-            {changeEmailErrorMsg(loginData.email)}
-          </Form.ErrorText>
+          <Form.ErrorText>{changeEmailErrorMsg(loginData.email)}</Form.ErrorText>
         </div>
 
         <div className="flex flex-col mb-3">
           <Form.Label htmlFor="password">비밀번호</Form.Label>
           <Form.Input id="password" type="password" />
-          <Form.ErrorText>
-            {changePasswordErrorMsg(loginData.password)}
-          </Form.ErrorText>
+          <Form.ErrorText>{changePasswordErrorMsg(loginData.password)}</Form.ErrorText>
         </div>
 
         <button
@@ -77,21 +68,15 @@ export default function LoginForm() {
           ) : (
             <UnCheckedIcon width={12} height={12} />
           )}
-          <span className="font-medium10 text-black w-auto">
-            로그인 상태 유지
-          </span>
+          <span className="font-medium10 text-black w-auto">로그인 상태 유지</span>
         </button>
         <Form.Button colorTheme="primary" type="submit">
           로그인
         </Form.Button>
       </Form>
 
-      <Modal isOpen={externalList.has("login")} setIsOpen={handleCloseModal}>
-        <Modal.Content
-          colorTheme="alert"
-          title="로그인 중 에러 발생"
-          desc={modalMsg ?? ""}
-        />
+      <Modal isOpen={externalList.has('login')} setIsOpen={handleCloseModal}>
+        <Modal.Content colorTheme="alert" title="로그인 중 에러 발생" desc={modalMsg ?? ''} />
         <Modal.Icon iconType="alert" />
         <Modal.Button colorTheme="primary" onClick={handleCloseModal}>
           알겠습니다.

@@ -1,9 +1,9 @@
-import { DecreaseIcon, IncreaseIcon } from "../../assets/icons/icons";
+import { DecreaseIcon, IncreaseIcon } from '../../assets/icons/icons';
 
 type CounterPropType = {
   id: string;
   value: number;
-  colorTheme: "black" | "white";
+  colorTheme: 'black' | 'white';
   increaseFunc: () => void;
   decreaseFunc: () => void;
   measure?: string;
@@ -15,7 +15,7 @@ export default function Counter(props: CounterPropType) {
   const {
     id,
     value,
-    colorTheme = "black",
+    colorTheme = 'black',
     measure,
     increaseFunc,
     decreaseFunc,
@@ -24,8 +24,8 @@ export default function Counter(props: CounterPropType) {
   } = props;
 
   const spanTheme = {
-    black: "border-black ",
-    white: "border-white ",
+    black: 'border-black ',
+    white: 'border-white ',
   };
 
   const handleIncrease = () => {
@@ -43,7 +43,7 @@ export default function Counter(props: CounterPropType) {
         type="button"
         onClick={handleDecrease}
         className={
-          "bg-primary flex justify-center items-center font-medium12 text-primary border-none outline-none p-0 m-0 w-full max-w-[60px] h-11 rounded-l cursor-pointer drop-shadow-[1px_0_1px_#00000064] " +
+          'bg-primary flex justify-center items-center font-medium12 text-primary border-none outline-none p-0 m-0 w-full max-w-[60px] h-11 rounded-l cursor-pointer drop-shadow-[1px_0_1px_#00000064] ' +
           buttonStyles
         }
       >
@@ -52,19 +52,19 @@ export default function Counter(props: CounterPropType) {
       <span
         id={id}
         className={
-          "bg-invalidLight flex justify-center items-center font-medium16 text-black w-full m-0 outline-none box-border border " +
+          'bg-invalidLight flex justify-center items-center font-medium16 text-black w-full m-0 outline-none box-border border ' +
           spanTheme[colorTheme] +
           viewStyles
         }
       >
-        {`${value}${measure ?? ""}`}
+        {`${value}${measure ?? ''}`}
       </span>
       <button
         title="Incraase Count"
         type="button"
         onClick={handleIncrease}
         className={
-          "bg-primary flex justify-center items-center font-medium12 text-primary border-none outline-none p-0 m-0 w-full max-w-[60px] h-11 rounded-r cursor-pointer drop-shadow-[-1px_0_1px_#00000064] " +
+          'bg-primary flex justify-center items-center font-medium12 text-primary border-none outline-none p-0 m-0 w-full max-w-[60px] h-11 rounded-r cursor-pointer drop-shadow-[-1px_0_1px_#00000064] ' +
           buttonStyles
         }
       >

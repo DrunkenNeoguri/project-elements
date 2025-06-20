@@ -19,12 +19,12 @@
 - 어느 쪽으로 여행을 준비하고 계신가요? 원하시는 여행에 맞춰 미리 템플릿을 제공해드립니다.
 - 다녀온 여행들의 준비물은 내 리스트에 차곡차곡. 언제든지 다시 꺼내서 볼 수 있어요!
 - 다른 사람들에게 작성했던 준비물 리스트를 공유하고 싶다고요?
-공유 기능을 통해 타인의 준비물을 내 세팅에 반영할 수 있어요!
+  공유 기능을 통해 타인의 준비물을 내 세팅에 반영할 수 있어요!
 - 다른 사람들과 여행을 함께 준비하고 계신가요?
-모두가 같이 공유할 수 있도록 여행 준비물을 그룹에 초대할 수 있어요!  
-(해당 기능은 추가 예정입니다.)
+  모두가 같이 공유할 수 있도록 여행 준비물을 그룹에 초대할 수 있어요!  
+  (해당 기능은 추가 예정입니다.)
 - 여행 중 지출 기록을 남기실 수 있도록, 각 여행의 화폐에 맞게 가계부를 남길 수 있어요.  
-(해당 기능은 추가 예정입니다.)
+  (해당 기능은 추가 예정입니다.)
 
 ---
 
@@ -37,29 +37,31 @@
 ## 🏗️ 기술 스택 / 아키텍쳐
 
 - **Base**
-    - [JavaScript](https://developer.mozilla.org/ko/docs/Web/JavaScript), [TypeScript](https://www.typescriptlang.org/)
+  - [JavaScript](https://developer.mozilla.org/ko/docs/Web/JavaScript), [TypeScript](https://www.typescriptlang.org/)
 - **Frontend**
-    - [React](https://ko.react.dev/)
-    - [Next.js 13](https://nextjs.org/)
-    - [tailwind CSS](https://tailwindcss.com/)
-    - [Context API (React)](https://ko.react.dev/reference/react/createContext)
-    - [i18next](https://www.i18next.com/)
-    - [~~Vite~~](https://ko.vitejs.dev/)
-    - [~~styled-components~~](https://styled-components.com/)
-    - [~~Jotai~~](https://jotai.org/)
-    - [~~TanStack-Query (React-Query)~~](https://tanstack.com/query/latest)
+  - [React](https://ko.react.dev/)
+  - [Next.js 13](https://nextjs.org/)
+  - [tailwind CSS](https://tailwindcss.com/)
+  - [Context API (React)](https://ko.react.dev/reference/react/createContext)
+  - [i18next](https://www.i18next.com/)
+  - [~~Vite~~](https://ko.vitejs.dev/)
+  - [~~styled-components~~](https://styled-components.com/)
+  - [~~Jotai~~](https://jotai.org/)
+  - [~~TanStack-Query (React-Query)~~](https://tanstack.com/query/latest)
 - **Backend | CI/CD**
-    - [Firebase v9](https://console.firebase.google.com/u/0/)
-    - [vercel](https://vercel.com/)
+  - [Firebase v9](https://console.firebase.google.com/u/0/)
+  - [vercel](https://vercel.com/)
+
 ---
 
 ## ℹ️ 프로젝트 정보
+
 [🎨 디자인 문서 (Figma)](https://www.figma.com/design/p7uM1yZSHFh05LIsu5L0tj/%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=12-45)  
 [🪲 버그(이슈) 보고](https://github.com/DrunkenNeoguri/project-elements/issues)  
-[📋 프로젝트 개발 현황](https://github.com/users/DrunkenNeoguri/projects/3)  
+[📋 프로젝트 개발 현황](https://github.com/users/DrunkenNeoguri/projects/3)
 
 [🔗 API 명세](https://www.notion.so/509a0f3794df4e4eb86d37d656815cd2?pvs=21)  
 [🌉 브랜치 관리](https://www.notion.so/d201b2203f464c0a8f54a451de78873a?pvs=21)  
 [✅ Commit, Pull Request 규칙](https://develop-neoguri.notion.site/Commit-Pull-Request-0dccba0c20e643829fdc1d309315100a)  
 [✏️ Github Project & Issue 규칙](https://develop-neoguri.notion.site/Github-Project-Issue-c212ec456e5a4a35a434ad41a2a1160e)  
-[⚠️ 코드 컨벤션](https://develop-neoguri.notion.site/f4539d2ffff84eddaed3cf2994652770)  
+[⚠️ 코드 컨벤션](https://develop-neoguri.notion.site/f4539d2ffff84eddaed3cf2994652770)

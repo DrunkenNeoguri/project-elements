@@ -1,4 +1,4 @@
-import ChangeForm from "./_components/change-form";
+import ChangeForm from './_components/change-form';
 
 export default function ResetChange() {
   return (

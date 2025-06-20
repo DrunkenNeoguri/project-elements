@@ -1,4 +1,4 @@
-import ForgetForm from "./_components/forget-form";
+import ForgetForm from './_components/forget-form';
 
 export default function Forget() {
   return (

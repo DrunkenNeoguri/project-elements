@@ -1,7 +1,7 @@
-import LoginForm from "./_components/login-form";
-import LoginHelpBox from "./_components/login-help-box";
+import LoginForm from './_components/login-form';
+import LoginHelpBox from './_components/login-help-box';
 // import LoginLangBox from "./_components/login-lang-box";
-import LoginOauthBox from "./_components/login-oauth-box";
+import LoginOauthBox from './_components/login-oauth-box';
 
 export default function Login() {
   return (

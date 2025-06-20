@@ -1,28 +1,26 @@
-import { Dispatch, SetStateAction, useContext, useState } from "react";
-import BottomSheet from "../../../../../../components/bottom-sheet/bottom-sheet";
-import { ExternalContext } from "../../../../../../providers/external-provider";
-import { PartContext } from "../../../../../../providers/part-provider";
-import { ElementBasicType } from "../../../../../../types/element.types";
-import { ElementStateType } from "../../../../../../components/element/element";
-import { ElementsContext } from "../../../../../../providers/elements-provider";
+import { Dispatch, SetStateAction, useContext, useState } from 'react';
+import BottomSheet from '../../../../../../components/bottom-sheet/bottom-sheet';
+import { ExternalContext } from '../../../../../../providers/external-provider';
+import { PartContext } from '../../../../../../providers/part-provider';
+import { ElementBasicType } from '../../../../../../types/element.types';
+import { ElementStateType } from '../../../../../../components/element/element';
+import { ElementsContext } from '../../../../../../providers/elements-provider';
 
 export default function ElementOptionBottomSheet() {
   const { externalList, handleExternalList } = useContext(ExternalContext);
   const { dispatch } = useContext(ElementsContext);
   const { part, handleSetPart } = useContext(PartContext);
-  const [bottomSheetData, setBottomSheetData] = useState<
-    Record<string, string>
-  >({});
+  const [bottomSheetData, setBottomSheetData] = useState<Record<string, string>>({});
 
   const handleSwitchSelectBottomSheet = () => {
-    handleExternalList("element-option-element");
+    handleExternalList('element-option-element');
   };
 
   const handleSwitchUpdateElement = () => {
     const { setState } = part as ElementBasicType & {
       setState: Dispatch<SetStateAction<ElementStateType>>;
     };
-    setState("modify");
+    setState('modify');
     handleSwitchSelectBottomSheet();
   };
 
@@ -32,11 +30,11 @@ export default function ElementOptionBottomSheet() {
       setState: Dispatch<SetStateAction<ElementStateType>>;
     };
     dispatch({
-      type: "deleteElement",
+      type: 'deleteElement',
       target: { ...rest },
     });
     handleSwitchSelectBottomSheet();
-    setState("base");
+    setState('base');
     handleSetPart(null);
   };
 
@@ -46,7 +44,7 @@ export default function ElementOptionBottomSheet() {
   // };
 
   return (
-    externalList.has("element-option-element") && (
+    externalList.has('element-option-element') && (
       <BottomSheet
         bottomSheetData={bottomSheetData}
         setBottomSheetData={setBottomSheetData}
@@ -57,14 +55,9 @@ export default function ElementOptionBottomSheet() {
             담당자 지정
           </BottomSheet.Select>
           <div className="h-[1px] w-full bg-grey" /> */}
-          <BottomSheet.Select onClick={handleSwitchUpdateElement}>
-            준비물 수정
-          </BottomSheet.Select>
+          <BottomSheet.Select onClick={handleSwitchUpdateElement}>준비물 수정</BottomSheet.Select>
           <div className="h-[1px] w-full bg-grey" />
-          <BottomSheet.Select
-            colorTheme="warning"
-            onClick={handleSwitchDeleteElement}
-          >
+          <BottomSheet.Select colorTheme="warning" onClick={handleSwitchDeleteElement}>
             준비물 삭제
           </BottomSheet.Select>
         </div>

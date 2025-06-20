@@ -1,5 +1,5 @@
-import Link from "next/link";
-import Button from "../../../../components/button/button";
+import Link from 'next/link';
+import Button from '../../../../components/button/button';
 
 export default function ForgetSend() {
   return (

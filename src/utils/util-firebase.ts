@@ -1,6 +1,6 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { GoogleAuthProvider } from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { GoogleAuthProvider } from 'firebase/auth';
 // import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
@@ -21,19 +21,19 @@ export const firebaseAuth = getAuth(firebase);
 
 export async function firestore() {
   try {
-    const { getFirestore } = await import("firebase/firestore");
+    const { getFirestore } = await import('firebase/firestore');
     return getFirestore(firebase);
   } catch (error) {
-    throw new Error("Firestore Load Error: Firestore를 불러올 수 없습니다.");
+    throw new Error('Firestore Load Error: Firestore를 불러올 수 없습니다.');
   }
 }
 
 export async function firebaseStorage() {
   try {
-    const { getStorage } = await import("firebase/storage");
+    const { getStorage } = await import('firebase/storage');
     return getStorage(firebase);
   } catch (error) {
-    throw new Error("Storage Load Error: Storage를 불러올 수 없습니다.");
+    throw new Error('Storage Load Error: Storage를 불러올 수 없습니다.');
   }
 }
 

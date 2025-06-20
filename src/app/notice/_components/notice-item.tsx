@@ -1,6 +1,6 @@
-import Link from "next/link";
-import NoticeClip from "./notice-clip";
-import { Notice } from "../../../types/option.types";
+import Link from 'next/link';
+import NoticeClip from './notice-clip';
+import { Notice } from '../../../types/option.types';
 
 interface Props extends Notice {}
 
@@ -14,9 +14,7 @@ export default function NoticeItem({ id, title, clipType, createdAt }: Props) {
             {title}
           </p>
         </div>
-        <span className="font-light10 text-invalid ml-0 mr-auto">
-          {createdAt}
-        </span>
+        <span className="font-light10 text-invalid ml-0 mr-auto">{createdAt}</span>
       </Link>
     </li>
   );

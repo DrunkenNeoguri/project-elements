@@ -8,4 +8,4 @@ export type Notice = {
   href?: string;
 };
 
-export type NoticeClipType = "공지" | "이벤트" | "매거진";
+export type NoticeClipType = '공지' | '이벤트' | '매거진';

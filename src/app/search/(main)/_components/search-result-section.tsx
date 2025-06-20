@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { UndoIcon } from "../../../../assets/icons/icons";
-import { RoundDot } from "../../../../components/loader/loader";
-import BoardingPass from "../../../../components/ticket/boarding-pass";
-import TransportTicket from "../../../../components/ticket/transport-ticket";
-import useGetUserTravelList from "../../../../hooks/use-get-user-travel-list";
+import { UndoIcon } from '../../../../assets/icons/icons';
+import { RoundDot } from '../../../../components/loader/loader';
+import BoardingPass from '../../../../components/ticket/boarding-pass';
+import TransportTicket from '../../../../components/ticket/transport-ticket';
+import useGetUserTravelList from '../../../../hooks/use-get-user-travel-list';
 
 export default function SearchResultSection() {
   const { list, keyword, router } = useGetUserTravelList();
 
   const handleOnClick = () => {
     try {
-      return router.replace("/search");
+      return router.replace('/search');
     } catch (error) {
       // TODO: 차후에 Sentry 등 배치해서 에러 트래킹 수정 필요.
     }
@@ -20,11 +20,7 @@ export default function SearchResultSection() {
   if (!list) {
     return (
       <section className="flex flex-col w-full pt-16 pb-6 px-0 box-border">
-        <div
-          role="alert"
-          aria-busy="true"
-          aria-label="검색 결과를 불러오는 중입니다"
-        >
+        <div role="alert" aria-busy="true" aria-label="검색 결과를 불러오는 중입니다">
           <RoundDot />
         </div>
       </section>
@@ -59,13 +55,12 @@ export default function SearchResultSection() {
               loading="lazy"
             />
             <p className="whitespace-pre-line">
-              검색 결과, 해당하는 여행 계획이 없어요. 다른 단어로 다시
-              검색해보시겠어요?
+              검색 결과, 해당하는 여행 계획이 없어요. 다른 단어로 다시 검색해보시겠어요?
             </p>
           </section>
         ) : (
-          list.map((ticket) => {
-            return ticket.travelType === "domestic" ? (
+          list.map(ticket => {
+            return ticket.travelType === 'domestic' ? (
               <TransportTicket key={ticket.id} {...ticket} />
             ) : (
               <BoardingPass key={ticket.id} {...ticket} />

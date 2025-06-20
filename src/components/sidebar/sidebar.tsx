@@ -1,15 +1,10 @@
-"use client";
-import {
-  ConfigIcon,
-  DocsSearchIcon,
-  FolderIcon,
-  HamburgerIcon,
-} from "../../assets/icons/icons";
-import Link from "next/link";
-import AuthService from "../../services/auth-services";
-import Button from "../button/button";
-import { useRouter } from "next/navigation";
-import { localStorageHandlers } from "../../utils/util-local-storage";
+'use client';
+import { ConfigIcon, DocsSearchIcon, FolderIcon, HamburgerIcon } from '../../assets/icons/icons';
+import Link from 'next/link';
+import AuthService from '../../services/auth-services';
+import Button from '../button/button';
+import { useRouter } from 'next/navigation';
+import { localStorageHandlers } from '../../utils/util-local-storage';
 
 export default function SideBar({ onClick }: { onClick: () => void }) {
   const router = useRouter();
@@ -18,16 +13,16 @@ export default function SideBar({ onClick }: { onClick: () => void }) {
   const username = userInfo?.username;
 
   const handleLogOutAccount = async () => {
-    document.body.style.overflow = "";
+    document.body.style.overflow = '';
     const logOutState = await AuthService.postLogOutProcess();
-    if (logOutState === "OK") {
-      return router.push("/user/login");
+    if (logOutState === 'OK') {
+      return router.push('/user/login');
     }
   };
 
   const handleMoveToTravelCreate = () => {
-    document.body.style.overflow = "";
-    return router.push("/travel/create");
+    document.body.style.overflow = '';
+    return router.push('/travel/create');
   };
 
   // ?CONCERN: Button Hover 효과 구현 어떻게 할지 고민..
@@ -47,9 +42,7 @@ export default function SideBar({ onClick }: { onClick: () => void }) {
     <nav className="bg-primary flex flex-col rounded-l-xl py-6 pr-4 pl-6 w-[calc(100%-64px)] h-[100vh] z-50 b-0 r-0 box-border absolute right-0 overflow-hidden font-gmarketSans drop-shadow-[-8px_0_4px_#00000064]">
       <div className="flex justify-between items-start mb-8">
         <div className="flex flex-col">
-          <span className="font-medium20 text-white p-0 m-0">
-            {username} 님,
-          </span>
+          <span className="font-medium20 text-white p-0 m-0">{username} 님,</span>
           <span className="font-medium20 text-white p-0 m-0">반가워요!</span>
         </div>
         <button

@@ -1,28 +1,13 @@
-"use client";
-import {
-  Dispatch,
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-} from "react";
-import {
-  CategoryBasicType,
-  ElementBasicType,
-  ElementsBasicType,
-} from "../types/element.types";
-import { AuthContext } from "./auth-provider";
-import { TravelBasicType } from "../types/travel.types";
-import ElementService from "../services/element-service";
+'use client';
+import { Dispatch, ReactNode, createContext, useContext, useEffect, useReducer } from 'react';
+import { CategoryBasicType, ElementBasicType, ElementsBasicType } from '../types/element.types';
+import { AuthContext } from './auth-provider';
+import { TravelBasicType } from '../types/travel.types';
+import ElementService from '../services/element-service';
 
 type ElementsReducerActionType = {
   type: string;
-  target:
-    | ElementsBasicType
-    | CategoryBasicType
-    | ElementBasicType
-    | TravelBasicType;
+  target: ElementsBasicType | CategoryBasicType | ElementBasicType | TravelBasicType;
 };
 
 type ElementsContextType = {
@@ -33,12 +18,12 @@ type ElementsContextType = {
 export const ElementsContext = createContext<ElementsContextType>({
   state: {
     info: {
-      id: "",
-      travelType: "domestic",
-      title: "",
-      departureAt: "",
+      id: '',
+      travelType: 'domestic',
+      title: '',
+      departureAt: '',
       travelPeriod: 0,
-      destination: "",
+      destination: '',
     },
     elements: [],
   },
@@ -47,27 +32,23 @@ export const ElementsContext = createContext<ElementsContextType>({
 
 const elementsReducer = (
   state: ElementsBasicType,
-  action: ElementsReducerActionType
+  action: ElementsReducerActionType,
 ): ElementsBasicType => {
   switch (action.type) {
-    case "createElement":
+    case 'createElement':
       return {
         ...state,
-        elements: state.elements.map((category) => {
+        elements: state.elements.map(category => {
           const currentElement = action.target as ElementBasicType;
-          const categoryId = currentElement.elementId.split("-")[0];
+          const categoryId = currentElement.elementId.split('-')[0];
           if (category.categoryId === categoryId) {
             if (
-              category.categoryElements.findIndex(
-                (element) => element.elementId === categoryId
-              ) === -1
+              category.categoryElements.findIndex(element => element.elementId === categoryId) ===
+              -1
             ) {
               return {
                 ...category,
-                categoryElements: [
-                  ...category.categoryElements,
-                  currentElement,
-                ],
+                categoryElements: [...category.categoryElements, currentElement],
               };
             }
           }
@@ -75,17 +56,17 @@ const elementsReducer = (
         }),
       };
 
-    case "updateElement":
+    case 'updateElement':
       return {
         ...state,
-        elements: state.elements.map((category) => {
+        elements: state.elements.map(category => {
           const currentElement = action.target as ElementBasicType;
-          const categoryId = currentElement.elementId.split("-")[0];
+          const categoryId = currentElement.elementId.split('-')[0];
 
           if (category.categoryId === categoryId) {
             return {
               ...category,
-              categoryElements: category.categoryElements.map((element) => {
+              categoryElements: category.categoryElements.map(element => {
                 if (element.elementId === currentElement.elementId) {
                   return { ...element, ...currentElement };
                 }
@@ -98,17 +79,17 @@ const elementsReducer = (
         }),
       };
 
-    case "deleteElement":
+    case 'deleteElement':
       return {
         ...state,
-        elements: state.elements.map((category) => {
+        elements: state.elements.map(category => {
           const currentElement = action.target as ElementBasicType;
-          const categoryId = currentElement.elementId.split("-")[0];
+          const categoryId = currentElement.elementId.split('-')[0];
           if (category.categoryId === categoryId) {
             return {
               ...category,
               categoryElements: category.categoryElements.filter(
-                (element) => element.elementId !== currentElement.elementId
+                element => element.elementId !== currentElement.elementId,
               ),
             };
           }
@@ -116,12 +97,10 @@ const elementsReducer = (
         }),
       };
 
-    case "createCategory":
+    case 'createCategory':
       if (
         state.elements.findIndex(
-          (category) =>
-            category.categoryId ===
-            (action.target as CategoryBasicType).categoryId
+          category => category.categoryId === (action.target as CategoryBasicType).categoryId,
         ) === -1
       ) {
         return {
@@ -131,10 +110,10 @@ const elementsReducer = (
       }
       return state;
 
-    case "updateCategory":
+    case 'updateCategory':
       return {
         ...state,
-        elements: state.elements.map((category) => {
+        elements: state.elements.map(category => {
           const currentCategory = action.target as CategoryBasicType;
           if (category.categoryId === currentCategory.categoryId) {
             return currentCategory;
@@ -143,34 +122,32 @@ const elementsReducer = (
         }),
       };
 
-    case "deleteCategory":
+    case 'deleteCategory':
       return {
         ...state,
         elements: state.elements.filter(
-          (category) =>
-            category.categoryId !==
-            (action.target as CategoryBasicType).categoryId
+          category => category.categoryId !== (action.target as CategoryBasicType).categoryId,
         ),
       };
 
-    case "updateTravelInfo":
+    case 'updateTravelInfo':
       return {
         ...state,
         info: action.target as TravelBasicType,
       };
 
-    case "setData":
+    case 'setData':
       return action.target as ElementsBasicType;
 
-    case "clearData":
+    case 'clearData':
       return {
         info: {
-          id: "",
-          travelType: "domestic",
-          title: "",
-          departureAt: "",
+          id: '',
+          travelType: 'domestic',
+          title: '',
+          departureAt: '',
           travelPeriod: 0,
-          destination: "",
+          destination: '',
         },
         elements: [],
       };
@@ -183,12 +160,12 @@ const elementsReducer = (
 export default function ElementProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(elementsReducer, {
     info: {
-      id: "",
-      travelType: "domestic",
-      title: "",
-      departureAt: "",
+      id: '',
+      travelType: 'domestic',
+      title: '',
+      departureAt: '',
       travelPeriod: 0,
-      destination: "",
+      destination: '',
     },
     elements: [],
   });
@@ -211,8 +188,6 @@ export default function ElementProvider({ children }: { children: ReactNode }) {
   }, [state, user]);
 
   return (
-    <ElementsContext.Provider value={{ state, dispatch }}>
-      {children}
-    </ElementsContext.Provider>
+    <ElementsContext.Provider value={{ state, dispatch }}>{children}</ElementsContext.Provider>
   );
 }

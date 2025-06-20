@@ -1,6 +1,6 @@
-"use client";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+'use client';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 export default function SignUpCompleted() {
   const searchParams = useSearchParams();
@@ -17,9 +17,7 @@ export default function SignUpCompleted() {
       <div className="flex flex-col gap-2 box-border mx-0 px-4 w-full">
         <span className="font-bold12 text-black">작성해주신 이메일 주소</span>
 
-        <span className="font-medium16 text-black underline">
-          {searchParams?.get("email")}
-        </span>
+        <span className="font-medium16 text-black underline">{searchParams?.get('email')}</span>
       </div>
 
       <div className="px-4 w-full my-6">

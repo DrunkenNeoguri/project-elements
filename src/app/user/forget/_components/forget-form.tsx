@@ -1,12 +1,9 @@
-"use client";
-import Form from "../../../../components/form/form";
-import Modal from "../../../../components/modal/modal";
-import AuthService from "../../../../services/auth-services";
-import useForgetForm from "../_hooks/use-forget-form";
-import {
-  changeEmailErrorMsg,
-  checkForgetDataTypeCheck,
-} from "../_utils/forget.utils";
+'use client';
+import Form from '../../../../components/form/form';
+import Modal from '../../../../components/modal/modal';
+import AuthService from '../../../../services/auth-services';
+import useForgetForm from '../_hooks/use-forget-form';
+import { changeEmailErrorMsg, checkForgetDataTypeCheck } from '../_utils/forget.utils';
 
 export default function ForgetForm() {
   const {
@@ -23,37 +20,28 @@ export default function ForgetForm() {
     const validityCheck = checkForgetDataTypeCheck(forgetData);
 
     if (validityCheck) {
-      const forgetState = await AuthService.postForgetPasswordProcess(
-        forgetData
-      );
-      if (forgetState === "OK") {
-        return router.push("/user/forget/send");
+      const forgetState = await AuthService.postForgetPasswordProcess(forgetData);
+      if (forgetState === 'OK') {
+        return router.push('/user/forget/send');
       } else {
-        handleExternalList("forget");
+        handleExternalList('forget');
         return setModalMsg(forgetState.message);
       }
     }
   };
 
   const handleCloseModal = () => {
-    handleExternalList("login");
+    handleExternalList('login');
     setModalMsg(undefined);
   };
 
   return (
     <>
-      <Form
-        onSubmit={handleSubmit}
-        formData={forgetData}
-        setFormData={setForgetData}
-        styles="px-4"
-      >
+      <Form onSubmit={handleSubmit} formData={forgetData} setFormData={setForgetData} styles="px-4">
         <div className="flex flex-col mb-3">
           <Form.Label htmlFor="email">이메일 주소</Form.Label>
           <Form.Input id="email" type="email" />
-          <Form.ErrorText>
-            {changeEmailErrorMsg(forgetData.email)}
-          </Form.ErrorText>
+          <Form.ErrorText>{changeEmailErrorMsg(forgetData.email)}</Form.ErrorText>
         </div>
 
         <div className="flex flex-col gap-3 mt-3">
@@ -65,12 +53,8 @@ export default function ForgetForm() {
         </div>
       </Form>
 
-      <Modal isOpen={externalList.has("forget")} setIsOpen={handleCloseModal}>
-        <Modal.Content
-          colorTheme="alert"
-          title="로그인 중 에러 발생"
-          desc={modalMsg ?? ""}
-        />
+      <Modal isOpen={externalList.has('forget')} setIsOpen={handleCloseModal}>
+        <Modal.Content colorTheme="alert" title="로그인 중 에러 발생" desc={modalMsg ?? ''} />
         <Modal.Icon iconType="alert" />
         <Modal.Button colorTheme="primary" onClick={handleCloseModal}>
           알겠습니다.

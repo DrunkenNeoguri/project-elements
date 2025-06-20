@@ -1,17 +1,17 @@
-"use client";
-import Button from "../../../components/button/button";
-import Modal from "../../../components/modal/modal";
-import useVerified from "./hooks/use-verified";
+'use client';
+import Button from '../../../components/button/button';
+import Modal from '../../../components/modal/modal';
+import useVerified from './hooks/use-verified';
 
 export default function Verified() {
   const { externalList, handleExternalList, router } = useVerified();
 
   const handleMoveToLoginPage = () => {
-    return router.push("/user/login");
+    return router.push('/user/login');
   };
 
   const handleSwitchModal = () => {
-    handleExternalList("verified");
+    handleExternalList('verified');
   };
 
   return (
@@ -32,24 +32,13 @@ export default function Verified() {
       </div>
 
       <div className="px-4">
-        <Button
-          colorTheme="primary"
-          type="button"
-          onClick={handleMoveToLoginPage}
-        >
+        <Button colorTheme="primary" type="button" onClick={handleMoveToLoginPage}>
           메인 화면으로 이동
         </Button>
       </div>
 
-      <Modal
-        isOpen={externalList.has("verified")}
-        setIsOpen={handleSwitchModal}
-      >
-        <Modal.Content
-          colorTheme="alert"
-          title="본인 인증 중 에러 발생"
-          desc=""
-        />
+      <Modal isOpen={externalList.has('verified')} setIsOpen={handleSwitchModal}>
+        <Modal.Content colorTheme="alert" title="본인 인증 중 에러 발생" desc="" />
         <Modal.Icon iconType="alert" />
         <Modal.Button colorTheme="primary" onClick={handleSwitchModal}>
           로그인 페이지로 돌아가기

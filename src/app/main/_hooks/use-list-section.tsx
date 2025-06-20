@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import TravelService from "../../../services/travel-services";
-import { TravelBasicType } from "../../../types/travel.types";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from 'react';
+import TravelService from '../../../services/travel-services';
+import { TravelBasicType } from '../../../types/travel.types';
+import { useRouter } from 'next/navigation';
 
 export default function useListSection(uid?: string) {
   const [list, setList] = useState<TravelBasicType[]>();

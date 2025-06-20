@@ -1,5 +1,5 @@
-"use client";
-import { createContext, PropsWithChildren, useState } from "react";
+'use client';
+import { createContext, PropsWithChildren, useState } from 'react';
 
 type ExternalContextType = {
   externalList: Set<string>;
@@ -17,19 +17,19 @@ export default function ExternalProvider(props: PropsWithChildren) {
 
   const handleExternalList = (newKey: string) => {
     if (externalList.has(newKey)) {
-      setExternalList((prev) => {
+      setExternalList(prev => {
         const newExternalList = new Set(prev);
         newExternalList.delete(newKey);
 
         if (newExternalList.size === 0) {
-          document.body.style.overflow = "auto";
+          document.body.style.overflow = 'auto';
         }
 
         return newExternalList;
       });
     } else {
-      document.body.style.overflow = "hidden";
-      setExternalList((prev) => new Set(prev).add(newKey));
+      document.body.style.overflow = 'hidden';
+      setExternalList(prev => new Set(prev).add(newKey));
     }
   };
 

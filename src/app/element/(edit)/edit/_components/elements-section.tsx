@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import { AddIcon } from "../../../../../assets/icons/icons";
-import Category from "../../../../../components/category/category";
-import Element from "../../../../../components/element/element";
-import { CategoryBasicType } from "../../../../../types/element.types";
-import { ExternalContext } from "../../../../../providers/external-provider";
-import { PartContext } from "../../../../../providers/part-provider";
+import { useContext } from 'react';
+import { AddIcon } from '../../../../../assets/icons/icons';
+import Category from '../../../../../components/category/category';
+import Element from '../../../../../components/element/element';
+import { CategoryBasicType } from '../../../../../types/element.types';
+import { ExternalContext } from '../../../../../providers/external-provider';
+import { PartContext } from '../../../../../providers/part-provider';
 
 type PropType = {
   elements: CategoryBasicType[];
@@ -17,26 +17,25 @@ export default function ElementsSection(props: PropType) {
 
   const handleSwitchCategoryBottomSheet = () => {
     handleSetPart({
-      categoryName: "",
+      categoryName: '',
       categoryId:
-        "category" +
+        'category' +
         (Math.max(
-          ...elements.map((category) =>
+          ...elements.map(category =>
             parseInt(
               category.categoryId.substring(
-                category.categoryId.indexOf("y") + 1,
-                category.categoryId.length
-              )
-            )
-          )
+                category.categoryId.indexOf('y') + 1,
+                category.categoryId.length,
+              ),
+            ),
+          ),
         ) +
           1),
-      categoryColorTheme: "01",
-      categoryOrder:
-        Math.max(...elements.map((categoty) => categoty.categoryOrder)) + 1,
+      categoryColorTheme: '01',
+      categoryOrder: Math.max(...elements.map(categoty => categoty.categoryOrder)) + 1,
       categoryElements: [],
     });
-    handleExternalList("element-create-category");
+    handleExternalList('element-create-category');
   };
 
   return (
@@ -45,15 +44,13 @@ export default function ElementsSection(props: PropType) {
         return (
           <div
             key={category.categoryId}
-            id={"category" + category.categoryOrder}
+            id={'category' + category.categoryOrder}
             className="flex flex-col gap-3 mb-6"
           >
             <Category data={category} state="edit" />
 
-            {category.categoryElements.map((element) => {
-              return (
-                <Element key={element.elementId} state="base" {...element} />
-              );
+            {category.categoryElements.map(element => {
+              return <Element key={element.elementId} state="base" {...element} />;
             })}
 
             <Element
@@ -62,22 +59,16 @@ export default function ElementsSection(props: PropType) {
                 category.categoryElements.length === 0
                   ? 1
                   : Math.max(
-                      ...category.categoryElements.map((element) =>
-                        parseInt(
-                          element.elementId.split("-")[1].replace("element", "")
-                        )
-                      )
+                      ...category.categoryElements.map(element =>
+                        parseInt(element.elementId.split('-')[1].replace('element', '')),
+                      ),
                     ) + 1
               }`}
               elementName=""
               elementColorTheme={category.categoryColorTheme}
               isChecked={false}
               elementOrder={
-                Math.max(
-                  ...category.categoryElements.map(
-                    (element) => element.elementOrder
-                  )
-                ) + 1
+                Math.max(...category.categoryElements.map(element => element.elementOrder)) + 1
               }
             />
           </div>

@@ -1,9 +1,6 @@
-import { UserInfoType } from "../types/user.types";
+import { UserInfoType } from '../types/user.types';
 
-export function getLocalStorageItem<T>(
-  key: string,
-  defaultValue: T | null = null
-): T | null {
+export function getLocalStorageItem<T>(key: string, defaultValue: T | null = null): T | null {
   try {
     const item = localStorage.getItem(key);
     if (item === null) {
@@ -35,18 +32,18 @@ export function removeLocalStorageItem(key: string): boolean {
 
 export const localStorageHandlers = {
   getUserInfo(): UserInfoType | null {
-    return getLocalStorageItem<UserInfoType>("userInfo");
+    return getLocalStorageItem<UserInfoType>('userInfo');
   },
 
   setUserInfo(userInfo: UserInfoType): boolean {
-    return setLocalStorageItem("userInfo", userInfo);
+    return setLocalStorageItem('userInfo', userInfo);
   },
 
   getCurrentKeywordList(): string[] | null {
-    return getLocalStorageItem<string[]>("currentKeywordList", []);
+    return getLocalStorageItem<string[]>('currentKeywordList', []);
   },
 
   setCurrentKeywordList(keywords: string[]): boolean {
-    return setLocalStorageItem("currentKeywordList", keywords);
+    return setLocalStorageItem('currentKeywordList', keywords);
   },
 };

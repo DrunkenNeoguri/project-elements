@@ -1,18 +1,18 @@
-"use client";
-import { GoogleIcon } from "../../../../assets/icons/icons";
-import AuthService from "../../../../services/auth-services";
-import useLoginOauth from "../_hooks/use-login-oauth";
+'use client';
+import { GoogleIcon } from '../../../../assets/icons/icons';
+import AuthService from '../../../../services/auth-services';
+import useLoginOauth from '../_hooks/use-login-oauth';
 
 export default function LoginOauthBox() {
   const { router, handleExternalList, setModalMsg } = useLoginOauth();
 
   const handleLoginWithGoogle = async () => {
     const googleLoginState = await AuthService.postGoogleLoginProcess();
-    if (googleLoginState === "OK") {
-      router.push("/main");
+    if (googleLoginState === 'OK') {
+      router.push('/main');
     } else {
-      if (googleLoginState.message !== "") {
-        handleExternalList("login");
+      if (googleLoginState.message !== '') {
+        handleExternalList('login');
         setModalMsg(googleLoginState.message);
       }
     }
@@ -20,9 +20,7 @@ export default function LoginOauthBox() {
 
   return (
     <div className="flex flex-col justify-center items-center gap-4 mt-auto">
-      <span className="font-light10 text-black">
-        아래의 소셜 계정으로도 이용하실 수 있어요
-      </span>
+      <span className="font-light10 text-black">아래의 소셜 계정으로도 이용하실 수 있어요</span>
       <div className="flex gap-4 justify-center items-center">
         <button
           type="button"

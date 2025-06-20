@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { TravelBasicType } from "../../types/travel.types";
-import useGetBarcode from "./hooks/use-get-barcode";
-import { ReactNode } from "react";
+import Link from 'next/link';
+import { TravelBasicType } from '../../types/travel.types';
+import useGetBarcode from './hooks/use-get-barcode';
+import { ReactNode } from 'react';
 
 interface TicketTemplateProps {
-  type: "domestic" | "foreign";
+  type: 'domestic' | 'foreign';
   backgroundColor: string;
   icon: ReactNode;
   label: string;
@@ -13,20 +13,10 @@ interface TicketTemplateProps {
   ticketAlign: string;
 }
 
-export function TicketTemplate(
-  props: TravelBasicType & { templateConfig: TicketTemplateProps }
-) {
-  const { id, title, departureAt, destination, travelPeriod, templateConfig } =
-    props;
-  const {
-    backgroundColor,
-    type,
-    icon,
-    label,
-    labelStyle,
-    ticketAlign,
-    ticketType,
-  } = templateConfig;
+export function TicketTemplate(props: TravelBasicType & { templateConfig: TicketTemplateProps }) {
+  const { id, title, departureAt, destination, travelPeriod, templateConfig } = props;
+  const { backgroundColor, type, icon, label, labelStyle, ticketAlign, ticketType } =
+    templateConfig;
 
   const { barcodeRef } = useGetBarcode(id, type);
 

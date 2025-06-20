@@ -1,6 +1,6 @@
-import { Fragment } from "react";
-import OptionService from "../../services/option-services";
-import NoticeItem from "./_components/notice-item";
+import { Fragment } from 'react';
+import OptionService from '../../services/option-services';
+import NoticeItem from './_components/notice-item';
 
 export default async function Notice() {
   try {
@@ -14,7 +14,7 @@ export default async function Notice() {
               <NoticeItem
                 id={id}
                 title={title}
-                clipType={clipType as "이벤트" | "공지" | "매거진"}
+                clipType={clipType as '이벤트' | '공지' | '매거진'}
                 createdAt={createdAt}
               />
               <div className="h-[1px] w-full bg-grey" />

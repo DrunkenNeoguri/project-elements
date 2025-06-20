@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { useContext, useState } from "react";
-import Form from "../../../../../../../components/form/form";
+import { useContext, useState } from 'react';
+import Form from '../../../../../../../components/form/form';
 import {
   changePasswordErrorMsg,
   checkPasswordDataTypeCheck,
-} from "../../../../../../user/login/_utils/login.utils";
+} from '../../../../../../user/login/_utils/login.utils';
 import {
   changeConfirmPasswordErrorMsg,
   checkResetDataTypeCheck,
-} from "../../../../../../user/reset/_utils/reset.utils";
-import Modal from "../../../../../../../components/modal/modal";
-import { ExternalContext } from "../../../../../../../providers/external-provider";
-import { useRouter } from "next/navigation";
-import AuthService from "../../../../../../../services/auth-services";
+} from '../../../../../../user/reset/_utils/reset.utils';
+import Modal from '../../../../../../../components/modal/modal';
+import { ExternalContext } from '../../../../../../../providers/external-provider';
+import { useRouter } from 'next/navigation';
+import AuthService from '../../../../../../../services/auth-services';
 
 export default function ChangeForm() {
   const [formData, setFormData] = useState<Record<string, string>>({});
@@ -24,31 +24,24 @@ export default function ChangeForm() {
   const handleOnSubmit = async () => {
     const validityCheck = checkResetDataTypeCheck(formData);
     if (validityCheck) {
-      const changePasswordState = await AuthService.updatePasswordProcess(
-        formData.password
-      );
-      if (changePasswordState === "OK") {
-        return router.push("/config");
+      const changePasswordState = await AuthService.updatePasswordProcess(formData.password);
+      if (changePasswordState === 'OK') {
+        return router.push('/config');
       } else {
-        handleExternalList("changePassword");
+        handleExternalList('changePassword');
         return setModalMsg(changePasswordState.message);
       }
     }
   };
 
   const handleModalClose = () => {
-    externalList.delete("changePassword");
+    externalList.delete('changePassword');
     setModalMsg(undefined);
   };
 
   return (
     <>
-      <Form
-        onSubmit={handleOnSubmit}
-        formData={formData}
-        setFormData={setFormData}
-        styles="px-4"
-      >
+      <Form onSubmit={handleOnSubmit} formData={formData} setFormData={setFormData} styles="px-4">
         <div className="flex flex-col mb-3">
           <Form.Label htmlFor="password">새 비밀번호</Form.Label>
           <Form.Input
@@ -59,9 +52,7 @@ export default function ChangeForm() {
             maxLength={20}
             required
           />
-          <Form.ErrorText>
-            {changePasswordErrorMsg(formData.password)}
-          </Form.ErrorText>
+          <Form.ErrorText>{changePasswordErrorMsg(formData.password)}</Form.ErrorText>
         </div>
 
         <div className="flex flex-col mb-3">
@@ -75,10 +66,7 @@ export default function ChangeForm() {
             required
           />
           <Form.ErrorText>
-            {changeConfirmPasswordErrorMsg(
-              formData.password,
-              formData.confirmPassword
-            )}
+            {changeConfirmPasswordErrorMsg(formData.password, formData.confirmPassword)}
           </Form.ErrorText>
         </div>
       </Form>
@@ -86,21 +74,16 @@ export default function ChangeForm() {
         <Form.Button
           type="submit"
           onClick={handleOnSubmit}
-          colorTheme={
-            checkPasswordDataTypeCheck(formData) ? "primary" : "invalidReverse"
-          }
+          colorTheme={checkPasswordDataTypeCheck(formData) ? 'primary' : 'invalidReverse'}
         >
           비밀번호 변경
         </Form.Button>
       </footer>
-      <Modal
-        isOpen={externalList.has("changePassword")}
-        setIsOpen={handleModalClose}
-      >
+      <Modal isOpen={externalList.has('changePassword')} setIsOpen={handleModalClose}>
         <Modal.Content
           colorTheme="alert"
           title="비밀번호 변경 중 에러 발생"
-          desc={modalMsg ?? ""}
+          desc={modalMsg ?? ''}
         />
         <Modal.Icon iconType="alert" />
         <Modal.Button colorTheme="primary" onClick={handleModalClose}>

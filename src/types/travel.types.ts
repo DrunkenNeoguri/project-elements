@@ -7,4 +7,4 @@ export type TravelBasicType = {
   destination: string;
 };
 
-export type TravelType = "domestic" | "foreign";
+export type TravelType = 'domestic' | 'foreign';

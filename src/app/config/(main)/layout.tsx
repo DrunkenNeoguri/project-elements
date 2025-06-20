@@ -1,7 +1,7 @@
-"use client";
-import { ReactNode } from "react";
-import AuthProvider from "../../../providers/auth-provider";
-import Header from "../../../components/header/header";
+'use client';
+import { ReactNode } from 'react';
+import AuthProvider from '../../../providers/auth-provider';
+import Header from '../../../components/header/header';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (

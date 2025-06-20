@@ -1,11 +1,11 @@
-"use client";
-import { ReactNode } from "react";
-import { HamburgerIcon, PrevIcon, SearchIcon } from "../../assets/icons/icons";
-import useHeader from "./use-header";
-import SideBar from "../sidebar/sidebar";
-import Portal from "../portal/portal";
-import Link from "next/link";
-import { SearchFormField } from "./components/search-form-field";
+'use client';
+import { ReactNode } from 'react';
+import { HamburgerIcon, PrevIcon, SearchIcon } from '../../assets/icons/icons';
+import useHeader from './use-header';
+import SideBar from '../sidebar/sidebar';
+import Portal from '../portal/portal';
+import Link from 'next/link';
+import { SearchFormField } from './components/search-form-field';
 
 type HeaderPropType = {
   activePrev?: boolean;
@@ -25,36 +25,34 @@ export default function Header(props: HeaderPropType) {
     actionButton,
     title,
   } = props;
-  const { shadow, router, openSidebar, setOpenSidebar, currentPath } =
-    useHeader();
+  const { shadow, router, openSidebar, setOpenSidebar, currentPath } = useHeader();
 
   // dynamic css styling
   const addViewShadow = shadow
-    ? "drop-shadow-[0px_4px_4px_#00000064] ease-in-out duration-[200ms]"
-    : "";
+    ? 'drop-shadow-[0px_4px_4px_#00000064] ease-in-out duration-[200ms]'
+    : '';
 
   // condition check
-  const isCurrentPathElement = currentPath.startsWith("/element");
-  const isCurrentPathSearch = currentPath.startsWith("/search");
+  const isCurrentPathElement = currentPath.startsWith('/element');
+  const isCurrentPathSearch = currentPath.startsWith('/search');
   const handleMoveToPrevPage = () => {
-    return isCurrentPathElement ? router.replace("/main") : router.back();
+    return isCurrentPathElement ? router.replace('/main') : router.back();
   };
 
   const handleSwitchSidebar = () => {
-    document.body.style.overflow =
-      document.body.style.overflow !== "hidden" ? "hidden" : "auto";
+    document.body.style.overflow = document.body.style.overflow !== 'hidden' ? 'hidden' : 'auto';
     return setOpenSidebar(!openSidebar);
   };
 
   const sidebarBgStyle = openSidebar
-    ? "opacity-1 animate-[fadeIn_0.2s]"
-    : "opacity-0 animate-[fadeOut_0.2s]";
+    ? 'opacity-1 animate-[fadeIn_0.2s]'
+    : 'opacity-0 animate-[fadeOut_0.2s]';
 
   return (
     <>
       <header
         className={
-          "w-full h-[72px] p-4 bg-primaryDeep text-white rounded-b-xl fixed max-w-[379px] z-40 top-0" +
+          'w-full h-[72px] p-4 bg-primaryDeep text-white rounded-b-xl fixed max-w-[379px] z-40 top-0' +
           addViewShadow
         }
       >
@@ -72,11 +70,7 @@ export default function Header(props: HeaderPropType) {
             <div className="bg-transparent w-8 h-8" aria-hidden="true" />
           )}
 
-          {title && (
-            <h1 className="font-medium24 text-white ml-auto mr-auto">
-              {title}
-            </h1>
-          )}
+          {title && <h1 className="font-medium24 text-white ml-auto mr-auto">{title}</h1>}
 
           {activeSearch &&
             (isCurrentPathSearch ? (
@@ -109,10 +103,7 @@ export default function Header(props: HeaderPropType) {
       {openSidebar && (
         <Portal container={document.body}>
           <div
-            className={
-              "max-w-[379px] h-[100vh] w-full bg-shadowModal fixed z-50 " +
-              sidebarBgStyle
-            }
+            className={'max-w-[379px] h-[100vh] w-full bg-shadowModal fixed z-50 ' + sidebarBgStyle}
           >
             <SideBar onClick={handleSwitchSidebar} />
           </div>

@@ -1,24 +1,19 @@
-import { TravelBasicType } from "../../../../types/travel.types";
+import { TravelBasicType } from '../../../../types/travel.types';
 
-export default function ElementHeader({
-  travelInfo,
-}: {
-  travelInfo: TravelBasicType;
-}) {
-  const { title = "", departureAt = "", travelPeriod = 0 } = travelInfo;
+export default function ElementHeader({ travelInfo }: { travelInfo: TravelBasicType }) {
+  const { title = '', departureAt = '', travelPeriod = 0 } = travelInfo;
 
   const handleConvertTravelPeriod = () => {
     // ?CONCERN: util로 뺄까...?
-    const [departureYear, departureMonth, departureDay] =
-      departureAt.split("-");
+    const [departureYear, departureMonth, departureDay] = departureAt.split('-');
 
     const lastDate = new Date(departureAt);
     lastDate.setDate(lastDate.getDate() + (travelPeriod - 1));
 
     const [arrivalYear, arrivalMonth, arrivalDay] = [
       lastDate.getFullYear(),
-      String(lastDate.getMonth() + 1).padStart(2, "0"),
-      String(lastDate.getDate()).padStart(2, "0"),
+      String(lastDate.getMonth() + 1).padStart(2, '0'),
+      String(lastDate.getDate()).padStart(2, '0'),
     ];
 
     return `${departureYear}. ${departureMonth}. ${departureDay}. ~ ${arrivalYear}. ${arrivalMonth}. ${arrivalDay}. `;

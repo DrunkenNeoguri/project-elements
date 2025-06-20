@@ -1,5 +1,5 @@
-import LargeButtonArea from "./_components/large-button-area";
-import ListButtonSection from "./_components/list-button-section";
+import LargeButtonArea from './_components/large-button-area';
+import ListButtonSection from './_components/list-button-section';
 
 export default function Config() {
   return (

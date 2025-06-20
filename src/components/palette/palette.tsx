@@ -1,6 +1,6 @@
-"use client";
-import { MouseEvent, useContext } from "react";
-import { BottomSheetContext } from "../bottom-sheet/bottom-sheet";
+'use client';
+import { MouseEvent, useContext } from 'react';
+import { BottomSheetContext } from '../bottom-sheet/bottom-sheet';
 
 export default function Palette() {
   const bottomSheetContext = useContext(BottomSheetContext);
@@ -12,16 +12,13 @@ export default function Palette() {
 
   const handleSelectedColor = (palatteColor: string) =>
     bottomSheetData.categoryColorTheme === palatteColor
-      ? "border-2 border-primary"
-      : "border-2 border-white";
+      ? 'border-2 border-primary'
+      : 'border-2 border-white';
 
   const handleChageCategoryColor = (e: MouseEvent<HTMLButtonElement>) => {
     handleBottomSheetData(
-      "categoryColorTheme",
-      e.currentTarget.id.substring(
-        e.currentTarget.id.length - 2,
-        e.currentTarget.id.length
-      )
+      'categoryColorTheme',
+      e.currentTarget.id.substring(e.currentTarget.id.length - 2, e.currentTarget.id.length),
     );
   };
 
@@ -33,8 +30,7 @@ export default function Palette() {
           type="button"
           id="paletteColor01"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor01 " +
-            handleSelectedColor("01")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor01 ' + handleSelectedColor('01')
           }
           onClick={handleChageCategoryColor}
         />
@@ -43,8 +39,7 @@ export default function Palette() {
           type="button"
           id="paletteColor02"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor02 " +
-            handleSelectedColor("02")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor02 ' + handleSelectedColor('02')
           }
           onClick={handleChageCategoryColor}
         />
@@ -53,8 +48,7 @@ export default function Palette() {
           type="button"
           id="paletteColor03"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor03 " +
-            handleSelectedColor("03")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor03 ' + handleSelectedColor('03')
           }
           onClick={handleChageCategoryColor}
         />
@@ -63,8 +57,7 @@ export default function Palette() {
           type="button"
           id="paletteColor04"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor04 " +
-            handleSelectedColor("04")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor04 ' + handleSelectedColor('04')
           }
           onClick={handleChageCategoryColor}
         />
@@ -73,8 +66,7 @@ export default function Palette() {
           type="button"
           id="paletteColor05"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor05 " +
-            handleSelectedColor("05")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor05 ' + handleSelectedColor('05')
           }
           onClick={handleChageCategoryColor}
         />
@@ -83,8 +75,7 @@ export default function Palette() {
           type="button"
           id="paletteColor06"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor06 " +
-            handleSelectedColor("06")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor06 ' + handleSelectedColor('06')
           }
           onClick={handleChageCategoryColor}
         />
@@ -93,8 +84,7 @@ export default function Palette() {
           type="button"
           id="paletteColor07"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor07 " +
-            handleSelectedColor("07")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor07 ' + handleSelectedColor('07')
           }
           onClick={handleChageCategoryColor}
         />
@@ -105,8 +95,7 @@ export default function Palette() {
           type="button"
           id="paletteColor08"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor08 " +
-            handleSelectedColor("08")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor08 ' + handleSelectedColor('08')
           }
           onClick={handleChageCategoryColor}
         />
@@ -115,8 +104,7 @@ export default function Palette() {
           type="button"
           id="paletteColor09"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor09 " +
-            handleSelectedColor("09")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor09 ' + handleSelectedColor('09')
           }
           onClick={handleChageCategoryColor}
         />
@@ -125,8 +113,7 @@ export default function Palette() {
           type="button"
           id="paletteColor10"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor10 " +
-            handleSelectedColor("10")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor10 ' + handleSelectedColor('10')
           }
           onClick={handleChageCategoryColor}
         />
@@ -135,8 +122,7 @@ export default function Palette() {
           type="button"
           id="paletteColor11"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor11 " +
-            handleSelectedColor("11")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor11 ' + handleSelectedColor('11')
           }
           onClick={handleChageCategoryColor}
         />
@@ -145,8 +131,7 @@ export default function Palette() {
           type="button"
           id="paletteColor12"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor12 " +
-            handleSelectedColor("12")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor12 ' + handleSelectedColor('12')
           }
           onClick={handleChageCategoryColor}
         />
@@ -155,8 +140,7 @@ export default function Palette() {
           type="button"
           id="paletteColor13"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor13 " +
-            handleSelectedColor("13")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor13 ' + handleSelectedColor('13')
           }
           onClick={handleChageCategoryColor}
         />
@@ -165,8 +149,8 @@ export default function Palette() {
           type="button"
           id="paletteColor14"
           className={
-            "w-8 h-8 rounded-full outline-none bg-paletteColor14 " +
-            handleSelectedColor("paletteColor14")
+            'w-8 h-8 rounded-full outline-none bg-paletteColor14 ' +
+            handleSelectedColor('paletteColor14')
           }
           onClick={handleChageCategoryColor}
         />

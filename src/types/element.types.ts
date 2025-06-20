@@ -1,4 +1,4 @@
-import { TravelBasicType } from "./travel.types";
+import { TravelBasicType } from './travel.types';
 
 export type ElementBasicType = {
   elementName: string;

@@ -1,13 +1,13 @@
-import { collection, doc, getDoc, runTransaction } from "firebase/firestore";
-import { firestore } from "../utils/util-firebase";
-import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
-import { ElementsBasicType } from "../types/element.types";
+import { collection, doc, getDoc, runTransaction } from 'firebase/firestore';
+import { firestore } from '../utils/util-firebase';
+import { convertUnknownTypeErrorToStringMessage } from '../utils/util-convert';
+import { ElementsBasicType } from '../types/element.types';
 
 export default class ElementService {
   static async getElementsData(userUid: string, id: string) {
     try {
       const elementsState = await getDoc(
-        doc(collection(await firestore(), `elements`, userUid, "docs"), id)
+        doc(collection(await firestore(), `elements`, userUid, 'docs'), id),
       );
 
       if (elementsState instanceof Error) {
@@ -21,24 +21,20 @@ export default class ElementService {
     }
   }
 
-  static async postElementsData(
-    userUid: string,
-    id: string,
-    data: ElementsBasicType
-  ) {
+  static async postElementsData(userUid: string, id: string, data: ElementsBasicType) {
     try {
-      const userInfo = localStorage.getItem("userInfo") ?? "";
+      const userInfo = localStorage.getItem('userInfo') ?? '';
       const parseUserInfo = JSON.parse(userInfo);
 
-      await runTransaction(await firestore(), async (transaction) => {
+      await runTransaction(await firestore(), async transaction => {
         await transaction.set(
-          doc(collection(await firestore(), `elements`, userUid, "docs"), id),
-          data
+          doc(collection(await firestore(), `elements`, userUid, 'docs'), id),
+          data,
         );
 
         await transaction.set(
-          doc(collection(await firestore(), `travels`, userUid, "docs"), id),
-          data.info
+          doc(collection(await firestore(), `travels`, userUid, 'docs'), id),
+          data.info,
         );
 
         await transaction.set(doc(await firestore(), `users`, userUid), {
@@ -47,7 +43,7 @@ export default class ElementService {
         });
       });
 
-      return "OK";
+      return 'OK';
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));
     }
@@ -55,17 +51,17 @@ export default class ElementService {
 
   static async deleteElementsData(userUid: string, id: string) {
     try {
-      await runTransaction(await firestore(), async (transaction) => {
+      await runTransaction(await firestore(), async transaction => {
         await transaction.delete(
-          doc(collection(await firestore(), `elements`, userUid, "docs"), id)
+          doc(collection(await firestore(), `elements`, userUid, 'docs'), id),
         );
 
         await transaction.delete(
-          doc(collection(await firestore(), `travels`, userUid, "docs"), id)
+          doc(collection(await firestore(), `travels`, userUid, 'docs'), id),
         );
       });
 
-      return "OK";
+      return 'OK';
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));
     }

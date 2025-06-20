@@ -1,6 +1,6 @@
-import Link from "next/link";
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import Link from 'next/link';
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface Props {
   article: string;
@@ -14,7 +14,7 @@ export default function ArticleBody({ article, href }: Props) {
         remarkPlugins={[remarkGfm]}
         components={{
           a: ({ node, ...props }) => {
-            if (props.href?.startsWith("http")) {
+            if (props.href?.startsWith('http')) {
               return <a {...props} target="_blank" rel="noopener noreferrer" />;
             }
             return <a {...props} />;

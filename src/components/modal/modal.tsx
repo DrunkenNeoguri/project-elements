@@ -1,14 +1,9 @@
-import { PropsWithChildren, createContext } from "react";
-import {
-  ModalAlert,
-  ModalChecked,
-  ModalConfirm,
-  ModalInfo,
-} from "../../assets/icons/icons";
-import { Bar } from "../loader/loader";
-import Portal from "../portal/portal";
-import Button from "../button/button";
-import Backdrop from "../backdrop/backdrop";
+import { PropsWithChildren, createContext } from 'react';
+import { ModalAlert, ModalChecked, ModalConfirm, ModalInfo } from '../../assets/icons/icons';
+import { Bar } from '../loader/loader';
+import Portal from '../portal/portal';
+import Button from '../button/button';
+import Backdrop from '../backdrop/backdrop';
 
 // Modal Context API
 type ModalContextType = {
@@ -44,7 +39,7 @@ function Modal(props: ModalPropType) {
 
 // content
 type ContentType = {
-  colorTheme: "alert" | "info" | "confirm" | "checked";
+  colorTheme: 'alert' | 'info' | 'confirm' | 'checked';
   title: string;
   desc: string;
 };
@@ -53,13 +48,13 @@ function Content(props: ContentType) {
   const { title, desc, colorTheme } = props;
 
   const titleTheme = {
-    alert: "text-error",
-    info: "text-primary",
-    confirm: "text-primary",
-    checked: "text-secondary",
+    alert: 'text-error',
+    info: 'text-primary',
+    confirm: 'text-primary',
+    checked: 'text-secondary',
   };
 
-  const titleStyle = "font-bold18 p-0 m-0 mb-1 " + titleTheme[colorTheme];
+  const titleStyle = 'font-bold18 p-0 m-0 mb-1 ' + titleTheme[colorTheme];
 
   return (
     <>
@@ -72,11 +67,7 @@ function Content(props: ContentType) {
 }
 
 // icon
-function Icon({
-  iconType,
-}: {
-  iconType: "alert" | "info" | "confirm" | "checked";
-}) {
+function Icon({ iconType }: { iconType: 'alert' | 'info' | 'confirm' | 'checked' }) {
   const iconList = {
     alert: <ModalAlert />,
     info: <ModalInfo />,

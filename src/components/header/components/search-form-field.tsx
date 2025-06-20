@@ -1,17 +1,17 @@
-import { useRouter, useSearchParams } from "next/navigation";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { ActiveSearchIcon } from "../../../assets/icons/icons";
-import { useGetCurrentKeywordList } from "../../../app/search/(main)/_hooks/use-get-current-keyword-list";
+import { useRouter, useSearchParams } from 'next/navigation';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { ActiveSearchIcon } from '../../../assets/icons/icons';
+import { useGetCurrentKeywordList } from '../../../app/search/(main)/_hooks/use-get-current-keyword-list';
 
 export function SearchFormField() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const currentKeyword = searchParams?.get("keyword");
+  const currentKeyword = searchParams?.get('keyword');
 
-  const [keyword, setKeyword] = useState<string>(currentKeyword ?? "");
+  const [keyword, setKeyword] = useState<string>(currentKeyword ?? '');
   const { addSearchKeyword } = useGetCurrentKeywordList();
 
-  const isNotBlinkKeyword = keyword && keyword.trim() !== "";
+  const isNotBlinkKeyword = keyword && keyword.trim() !== '';
 
   const handleChangeKeyword = (e: ChangeEvent<HTMLInputElement>) => {
     return setKeyword(e.currentTarget.value);
@@ -25,7 +25,7 @@ export function SearchFormField() {
   const handleSearchKeyword = (e: FormEvent) => {
     e.preventDefault();
     if (isNotBlinkKeyword) {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = 'auto';
       addKeywordInListAndMoveToPage();
     }
   };

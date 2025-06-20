@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
-import { throttle } from "lodash-es";
-import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from 'react';
+import { throttle } from 'lodash-es';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function useHeader() {
   // const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const currentPath = usePathname();
-  const isMainPath =
-    currentPath === "/main" || currentPath === "/" ? false : true;
+  const isMainPath = currentPath === '/main' || currentPath === '/' ? false : true;
 
   const [shadow, setShadow] = useState(isMainPath);
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
@@ -40,15 +39,8 @@ export default function useHeader() {
         return setShadow(window.scrollY > 164 === true);
       };
 
-      window.addEventListener(
-        "scroll",
-        throttle(toggleActivateHeaderShadow, 500)
-      );
-      return () =>
-        window.removeEventListener(
-          "scroll",
-          throttle(toggleActivateHeaderShadow, 500)
-        );
+      window.addEventListener('scroll', throttle(toggleActivateHeaderShadow, 500));
+      return () => window.removeEventListener('scroll', throttle(toggleActivateHeaderShadow, 500));
     }
   }, [currentPath]);
 

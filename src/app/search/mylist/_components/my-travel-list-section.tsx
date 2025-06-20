@@ -1,8 +1,8 @@
-"use client";
-import { RoundDot } from "../../../../components/loader/loader";
-import BoardingPass from "../../../../components/ticket/boarding-pass";
-import TransportTicket from "../../../../components/ticket/transport-ticket";
-import useGetUserTravelList from "../../../../hooks/use-get-user-travel-list";
+'use client';
+import { RoundDot } from '../../../../components/loader/loader';
+import BoardingPass from '../../../../components/ticket/boarding-pass';
+import TransportTicket from '../../../../components/ticket/transport-ticket';
+import useGetUserTravelList from '../../../../hooks/use-get-user-travel-list';
 
 export default function MyTravelListSection() {
   const { list } = useGetUserTravelList();
@@ -24,8 +24,8 @@ export default function MyTravelListSection() {
             <p>{`등록하신 여행이 없는 것 같아요.\n여행 계획을 준비중이시라면 여행 리스트를 등록해보시는 건 어떨까요?`}</p>
           </section>
         ) : (
-          list?.map((ticket) => {
-            return ticket.travelType === "domestic" ? (
+          list?.map(ticket => {
+            return ticket.travelType === 'domestic' ? (
               <TransportTicket key={ticket.id} {...ticket} />
             ) : (
               <BoardingPass key={ticket.id} {...ticket} />

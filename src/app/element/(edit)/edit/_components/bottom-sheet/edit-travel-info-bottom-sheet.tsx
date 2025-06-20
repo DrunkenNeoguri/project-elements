@@ -1,20 +1,10 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { ExternalContext } from "../../../../../../providers/external-provider";
-import { ElementsContext } from "../../../../../../providers/elements-provider";
-import {
-  TravelBasicType,
-  TravelType,
-} from "../../../../../../types/travel.types";
-import BottomSheet from "../../../../../../components/bottom-sheet/bottom-sheet";
-import ElementService from "../../../../../../services/element-service";
-import { AuthContext } from "../../../../../../providers/auth-provider";
+import { ChangeEvent, Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
+import { ExternalContext } from '../../../../../../providers/external-provider';
+import { ElementsContext } from '../../../../../../providers/elements-provider';
+import { TravelBasicType, TravelType } from '../../../../../../types/travel.types';
+import BottomSheet from '../../../../../../components/bottom-sheet/bottom-sheet';
+import ElementService from '../../../../../../services/element-service';
+import { AuthContext } from '../../../../../../providers/auth-provider';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -25,17 +15,17 @@ export default function EditTravelInfoBottomSheet() {
 
   const [travelInfo, setTravelInfo] = useState<TravelBasicType>(
     state?.info ?? {
-      id: "",
-      travelType: "domestic",
-      title: "",
-      departureAt: "",
+      id: '',
+      travelType: 'domestic',
+      title: '',
+      departureAt: '',
       travelPeriod: 0,
-      destination: "",
-    }
+      destination: '',
+    },
   );
 
   const handleSwitchCategoryBottomSheet = () => {
-    handleExternalList("element-update-travel-info");
+    handleExternalList('element-update-travel-info');
   };
 
   const handleUpdataTravelInfo = async () => {
@@ -43,9 +33,9 @@ export default function EditTravelInfoBottomSheet() {
       return;
     }
 
-    if (externalList.has("element-update-travel-info")) {
+    if (externalList.has('element-update-travel-info')) {
       dispatch({
-        type: "updateTravelInfo",
+        type: 'updateTravelInfo',
         target: travelInfo as TravelBasicType,
       });
 
@@ -55,7 +45,7 @@ export default function EditTravelInfoBottomSheet() {
       });
     }
     handleSwitchCategoryBottomSheet();
-    handleExternalList("element-option-elements");
+    handleExternalList('element-option-elements');
   };
 
   const handleChangeCategoryName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +54,7 @@ export default function EditTravelInfoBottomSheet() {
   };
 
   useEffect(() => {
-    if (externalList.has("element-update-travel-info")) {
+    if (externalList.has('element-update-travel-info')) {
       setTravelInfo(state?.info as TravelBasicType);
     }
   }, [state?.info, externalList]);
@@ -75,7 +65,7 @@ export default function EditTravelInfoBottomSheet() {
 
   const handleIncraesePeriod = () => {
     if (travelInfo.travelPeriod >= 0) {
-      setTravelInfo((prev) => ({
+      setTravelInfo(prev => ({
         ...prev,
         travelPeriod: travelInfo.travelPeriod + 1,
       }));
@@ -84,7 +74,7 @@ export default function EditTravelInfoBottomSheet() {
 
   const handleDecraesePeriod = () => {
     if (travelInfo.travelPeriod > 0) {
-      setTravelInfo((prev) => ({
+      setTravelInfo(prev => ({
         ...prev,
         travelPeriod: travelInfo.travelPeriod - 1,
       }));
@@ -96,22 +86,16 @@ export default function EditTravelInfoBottomSheet() {
   };
 
   const domesticButtonStyle =
-    travelInfo.travelType !== "domestic"
-      ? "border-r-2 border-y-2 border-shadowModal"
-      : "";
+    travelInfo.travelType !== 'domestic' ? 'border-r-2 border-y-2 border-shadowModal' : '';
 
   const foreignButtonStyle =
-    travelInfo.travelType !== "foreign"
-      ? "border-l-2 border-y-2 border-shadowModal"
-      : "";
+    travelInfo.travelType !== 'foreign' ? 'border-l-2 border-y-2 border-shadowModal' : '';
 
   return (
-    externalList.has("element-update-travel-info") && (
+    externalList.has('element-update-travel-info') && (
       <BottomSheet
         bottomSheetData={travelInfo as Record<string, any>}
-        setBottomSheetData={
-          setTravelInfo as Dispatch<SetStateAction<Record<string, any>>>
-        }
+        setBottomSheetData={setTravelInfo as Dispatch<SetStateAction<Record<string, any>>>}
         onClose={handleSwitchCategoryBottomSheet}
       >
         <h3 className="font-bold16 px-4">여행 정보 수정</h3>
@@ -120,24 +104,16 @@ export default function EditTravelInfoBottomSheet() {
           <BottomSheet.Label htmlFor="title">여행 종류</BottomSheet.Label>
           <div className="flex">
             <BottomSheet.Button
-              styles={"rounded-l rounded-r-none " + foreignButtonStyle}
-              colorTheme={
-                travelInfo.travelType === "foreign"
-                  ? "primary"
-                  : "primaryReverse"
-              }
-              onClick={() => handleSwitchTravelType("foreign")}
+              styles={'rounded-l rounded-r-none ' + foreignButtonStyle}
+              colorTheme={travelInfo.travelType === 'foreign' ? 'primary' : 'primaryReverse'}
+              onClick={() => handleSwitchTravelType('foreign')}
             >
               해외
             </BottomSheet.Button>
             <BottomSheet.Button
-              styles={"rounded-r rounded-l-none " + domesticButtonStyle}
-              colorTheme={
-                travelInfo.travelType === "domestic"
-                  ? "secondary"
-                  : "secondaryReverse"
-              }
-              onClick={() => handleSwitchTravelType("domestic")}
+              styles={'rounded-r rounded-l-none ' + domesticButtonStyle}
+              colorTheme={travelInfo.travelType === 'domestic' ? 'secondary' : 'secondaryReverse'}
+              onClick={() => handleSwitchTravelType('domestic')}
             >
               국내
             </BottomSheet.Button>
@@ -155,9 +131,7 @@ export default function EditTravelInfoBottomSheet() {
         </div>
 
         <div className="flex flex-col text-left w-full px-4 my-3">
-          <BottomSheet.Label htmlFor="travelPeriod">
-            여행 기간
-          </BottomSheet.Label>
+          <BottomSheet.Label htmlFor="travelPeriod">여행 기간</BottomSheet.Label>
           <BottomSheet.Counter
             id="travelPeriod"
             measure="일"
@@ -180,17 +154,10 @@ export default function EditTravelInfoBottomSheet() {
         </div>
 
         <div className="flex w-full gap-4 px-4 my-3">
-          <BottomSheet.Button
-            colorTheme="invalidReverse"
-            onClick={handleSwitchCategoryBottomSheet}
-          >
+          <BottomSheet.Button colorTheme="invalidReverse" onClick={handleSwitchCategoryBottomSheet}>
             취소
           </BottomSheet.Button>
-          <BottomSheet.Button
-            type="button"
-            colorTheme="primary"
-            onClick={handleUpdataTravelInfo}
-          >
+          <BottomSheet.Button type="button" colorTheme="primary" onClick={handleUpdataTravelInfo}>
             수정
           </BottomSheet.Button>
         </div>
