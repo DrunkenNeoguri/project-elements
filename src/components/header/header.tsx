@@ -34,9 +34,8 @@ export default function Header(props: HeaderPropType) {
     : "";
 
   // condition check
-  const isCurrentPathElement = currentPath.indexOf("/element") !== -1;
-  const isCurrentPathSearch = currentPath.indexOf("/search") !== -1;
-
+  const isCurrentPathElement = currentPath.startsWith("/element");
+  const isCurrentPathSearch = currentPath.startsWith("/search");
   const handleMoveToPrevPage = () => {
     return isCurrentPathElement ? router.replace("/main") : router.back();
   };
