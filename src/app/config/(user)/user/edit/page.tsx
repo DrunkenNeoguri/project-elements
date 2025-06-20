@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import Form from "../../../../../components/form/form";
 import { ExternalContext } from "../../../../../providers/external-provider";
 import { useRouter } from "next/navigation";
@@ -14,7 +14,8 @@ export default function Edit() {
   const { externalList, handleExternalList } = useContext(ExternalContext);
   const router = useRouter();
 
-  const handleOnSubmit = async () => {
+  const handleOnSubmit = async (event: FormEvent) => {
+    event.preventDefault();
     const validityCheck = checkUsernameDataTypeCheck(formData);
 
     if (validityCheck) {
@@ -45,7 +46,7 @@ export default function Edit() {
         </span>
       </div>
       <Form
-        onSubmit={handleOnSubmit}
+        onSubmit={(event) => handleOnSubmit(event)}
         formData={formData}
         setFormData={setFormData}
         styles="px-4"
