@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { localStorageHandlers } from "../../../../utils/util-local-storage";
 
 export function useGetCurrentKeywordList() {
   const [searchKeywordList, setSearchKeywordList] = useState<Array<string>>([]);
@@ -54,11 +55,8 @@ export function useGetCurrentKeywordList() {
   };
 
   useEffect(() => {
-    const storageKeywordList = localStorage.getItem("currentKeywordList");
-
-    if (storageKeywordList != null) {
-      setSearchKeywordList(JSON.parse(storageKeywordList));
-    }
+    const keywordList = localStorageHandlers.getCurrentKeywordList();
+    setSearchKeywordList(keywordList ?? []);
   }, []);
 
   return {

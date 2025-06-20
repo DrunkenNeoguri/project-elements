@@ -9,11 +9,13 @@ import Link from "next/link";
 import AuthService from "../../services/auth-services";
 import Button from "../button/button";
 import { useRouter } from "next/navigation";
+import { localStorageHandlers } from "../../utils/util-local-storage";
 
 export default function SideBar({ onClick }: { onClick: () => void }) {
   const router = useRouter();
-  const userInfo = localStorage.getItem("userInfo");
-  const username = userInfo && JSON.parse(userInfo).username;
+
+  const userInfo = localStorageHandlers.getUserInfo();
+  const username = userInfo?.username;
 
   const handleLogOutAccount = async () => {
     document.body.style.overflow = "";
