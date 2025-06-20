@@ -53,7 +53,10 @@ export default function SearchResultSection() {
           <section>
             <img
               src="/images/img-search-result-empty.webp"
+              width={300}
+              height={200}
               alt="여행 리스트가 비어있음을 안내하는 이미지"
+              loading="lazy"
             />
             <p className="whitespace-pre-line">
               검색 결과, 해당하는 여행 계획이 없어요. 다른 단어로 다시
@@ -61,7 +64,7 @@ export default function SearchResultSection() {
             </p>
           </section>
         ) : (
-          list?.map((ticket) => {
+          list.map((ticket) => {
             return ticket.travelType === "domestic" ? (
               <TransportTicket key={ticket.id} {...ticket} />
             ) : (
