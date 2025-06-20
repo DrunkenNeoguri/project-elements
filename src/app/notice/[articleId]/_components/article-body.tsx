@@ -10,6 +10,19 @@ interface Props {
 export default function ArticleBody({ article, href }: Props) {
   return (
     <section className="flex flex-col gap-4">
+      <Markdown
+        remarkPlugins={[remarkGfm]}
+        components={{
+          a: ({ node, ...props }) => {
+            if (props.href?.startsWith("http")) {
+              return <a {...props} target="_blank" rel="noopener noreferrer" />;
+            }
+            return <a {...props} />;
+          },
+        }}
+      >
+        {article}
+      </Markdown>
       <Markdown remarkPlugins={[remarkGfm]}>{`${article}`}</Markdown>
       {href ? (
         <Link
