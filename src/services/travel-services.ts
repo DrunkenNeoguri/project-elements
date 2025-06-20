@@ -1,31 +1,18 @@
-import { collection, doc, getDocs, runTransaction } from "firebase/firestore";
-import { firestore } from "../utils/util-firebase";
-import { TravelBasicType } from "../types/travel.types";
-import { convertUnknownTypeErrorToStringMessage } from "../utils/util-convert";
-import {
-  basicTemplate,
-  domesticTemplate,
-  foreignTemplate,
-} from "../utils/util-template";
-import { UserInfoType } from "../types/user.types";
+import { collection, doc, getDocs, runTransaction } from 'firebase/firestore';
+import { firestore } from '../utils/util-firebase';
+import { TravelBasicType } from '../types/travel.types';
+import { convertUnknownTypeErrorToStringMessage } from '../utils/util-convert';
+import { basicTemplate, domesticTemplate, foreignTemplate } from '../utils/util-template';
+import { UserInfoType } from '../types/user.types';
 
 class TravelService {
   static async getUserTravelList(userUid: string, keyword?: string) {
     try {
       let travelList: TravelBasicType[] = [];
-      const docsState = await getDocs(
-        collection(await firestore(), `travels`, userUid, "docs")
-      );
+      const docsState = await getDocs(collection(await firestore(), `travels`, userUid, 'docs'));
 
-      docsState.forEach((doc) => {
-        const {
-          travelType,
-          title,
-          departureAt,
-          travelPeriod,
-          destination,
-          id,
-        } = doc.data();
+      docsState.forEach(doc => {
+        const { travelType, title, departureAt, travelPeriod, destination, id } = doc.data();
         travelList.push({
           travelType,
           title,
@@ -37,16 +24,12 @@ class TravelService {
       });
 
       if (keyword) {
-        travelList = travelList.filter((data) => {
-          return (
-            data.title.includes(keyword) || data.destination.includes(keyword)
-          );
+        travelList = travelList.filter(data => {
+          return data.title.includes(keyword) || data.destination.includes(keyword);
         });
 
         travelList.sort(
-          (a, b) =>
-            new Date(a.departureAt).getTime() -
-            new Date(b.departureAt).getTime()
+          (a, b) => new Date(a.departureAt).getTime() - new Date(b.departureAt).getTime(),
         );
       }
       return travelList;
@@ -58,33 +41,33 @@ class TravelService {
   static async postCreateNewTravel(
     userUid: string,
     useTemplate: boolean,
-    formData: TravelBasicType
+    formData: TravelBasicType,
   ) {
     try {
       const template = () => {
-        if (!useTemplate) return basicTemplate;
-        if (formData.travelType === "domestic") return domesticTemplate;
-        if (formData.travelType === "foreign") return foreignTemplate;
+        if (!useTemplate) {
+          return basicTemplate;
+        }
+        if (formData.travelType === 'domestic') {
+          return domesticTemplate;
+        }
+        if (formData.travelType === 'foreign') {
+          return foreignTemplate;
+        }
       };
 
-      const userInfo = localStorage.getItem("userInfo") ?? "";
+      const userInfo = localStorage.getItem('userInfo') ?? '';
       const parseUserInfo: UserInfoType = JSON.parse(userInfo);
 
-      await runTransaction(await firestore(), async (transaction) => {
+      await runTransaction(await firestore(), async transaction => {
         await transaction.set(
-          doc(
-            collection(await firestore(), `travels`, userUid, "docs"),
-            formData.id
-          ),
-          { ...formData }
+          doc(collection(await firestore(), `travels`, userUid, 'docs'), formData.id),
+          { ...formData },
         );
 
         await transaction.set(
-          doc(
-            collection(await firestore(), `elements`, userUid, "docs"),
-            formData.id
-          ),
-          { info: { ...formData }, elements: { ...template() } }
+          doc(collection(await firestore(), `elements`, userUid, 'docs'), formData.id),
+          { info: { ...formData }, elements: { ...template() } },
         );
 
         const setUpcomingTravel = () => {
@@ -113,15 +96,12 @@ class TravelService {
           upcomingTravel: setUpcomingTravel(),
         };
 
-        await transaction.set(
-          doc(await firestore(), `users`, userUid),
-          renewalUserData
-        );
+        await transaction.set(doc(await firestore(), `users`, userUid), renewalUserData);
 
-        await localStorage.setItem("userInfo", JSON.stringify(renewalUserData));
+        await localStorage.setItem('userInfo', JSON.stringify(renewalUserData));
       });
 
-      return "OK";
+      return 'OK';
     } catch (error) {
       return new Error(convertUnknownTypeErrorToStringMessage(error));
     }
@@ -129,19 +109,10 @@ class TravelService {
   static async renewalUpcomingTravelInUserData(userUid: string) {
     try {
       let travelList: TravelBasicType[] = [];
-      const docsState = await getDocs(
-        collection(await firestore(), `travels`, userUid, "docs")
-      );
+      const docsState = await getDocs(collection(await firestore(), `travels`, userUid, 'docs'));
 
-      docsState.forEach((doc) => {
-        const {
-          travelType,
-          title,
-          departureAt,
-          travelPeriod,
-          destination,
-          id,
-        } = doc.data();
+      docsState.forEach(doc => {
+        const { travelType, title, departureAt, travelPeriod, destination, id } = doc.data();
         travelList.push({
           travelType,
           title,
@@ -153,12 +124,11 @@ class TravelService {
       });
 
       travelList = travelList.filter(
-        (data) => new Date(data.departureAt).getTime() - Date.now() >= 0
+        data => new Date(data.departureAt).getTime() - Date.now() >= 0,
       );
 
       travelList.sort(
-        (a, b) =>
-          new Date(a.departureAt).getTime() - new Date(b.departureAt).getTime()
+        (a, b) => new Date(a.departureAt).getTime() - new Date(b.departureAt).getTime(),
       );
 
       return travelList[0];

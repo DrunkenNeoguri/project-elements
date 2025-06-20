@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import { EmblaCarouselType } from "embla-carousel";
+import { useCallback, useEffect, useState } from 'react';
+import { EmblaCarouselType } from 'embla-carousel';
 
 type UseDotStateType = {
   selectedIndex: number;
@@ -7,7 +7,7 @@ type UseDotStateType = {
 };
 
 export const useCarouselDotState = (
-  carouselAPI: EmblaCarouselType | undefined
+  carouselAPI: EmblaCarouselType | undefined,
 ): UseDotStateType => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
@@ -21,14 +21,13 @@ export const useCarouselDotState = (
   }, []);
 
   useEffect(() => {
-    if (!carouselAPI) return;
+    if (!carouselAPI) {
+      return;
+    }
 
     onInit(carouselAPI);
     onSelect(carouselAPI);
-    carouselAPI
-      .on("reInit", onInit)
-      .on("reInit", onSelect)
-      .on("select", onSelect);
+    carouselAPI.on('reInit', onInit).on('reInit', onSelect).on('select', onSelect);
   }, [carouselAPI, onInit, onSelect]);
 
   return {
