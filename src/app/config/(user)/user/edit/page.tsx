@@ -1,5 +1,5 @@
 "use client";
-import { FormEvent, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import Form from "../../../../../components/form/form";
 import { ExternalContext } from "../../../../../providers/external-provider";
 import { useRouter } from "next/navigation";
@@ -14,8 +14,7 @@ export default function Edit() {
   const { externalList, handleExternalList } = useContext(ExternalContext);
   const router = useRouter();
 
-  const handleOnSubmit = async (event: FormEvent) => {
-    event.preventDefault();
+  const handleOnSubmit = async () => {
     const validityCheck = checkUsernameDataTypeCheck(formData);
 
     if (validityCheck) {
@@ -46,7 +45,7 @@ export default function Edit() {
         </span>
       </div>
       <Form
-        onSubmit={(event) => handleOnSubmit(event)}
+        onSubmit={handleOnSubmit}
         formData={formData}
         setFormData={setFormData}
         styles="px-4"
@@ -63,7 +62,6 @@ export default function Edit() {
       <footer className="mt-auto mb-0 p-4 fixed bottom-0 max-w-[379px] w-full bg-white">
         <Form.Button
           type="submit"
-          onClick={handleOnSubmit}
           colorTheme={
             checkUsernameDataTypeCheck(formData) ? "primary" : "invalidReverse"
           }
