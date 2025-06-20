@@ -39,13 +39,13 @@ export default function SearchDefaultSection() {
                 key={keyword}
                 className="flex justify-between items-center w-full"
               >
-                <button
-                  type="button"
+                <Link
                   className="flex font-medium12 text-black gap-2 justify-center items-center"
+                  href={`/search?keyword=${encodeURIComponent(keyword)}`}
                 >
                   <ClockIcon />
                   <span>{keyword}</span>
-                </button>
+                </Link>
                 <button
                   type="button"
                   className="font-medium12 text-black"
