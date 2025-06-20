@@ -5,13 +5,13 @@ import {
   PropsWithChildren,
   SetStateAction,
   createContext,
-} from "react";
-import { CorrectIcon, IncorrectIcon } from "../../assets/icons/icons";
-import Button from "../button/button";
-import Label from "../label/label";
-import Counter from "../counter/counter";
-import ErrorText from "../error-text/error-text";
-import Input from "../input/input";
+} from 'react';
+import { CorrectIcon, IncorrectIcon } from '../../assets/icons/icons';
+import Button from '../button/button';
+import Label from '../label/label';
+import Counter from '../counter/counter';
+import ErrorText from '../error-text/error-text';
+import Input from '../input/input';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -21,9 +21,7 @@ type FormContextType = {
   handleFormData: (name: string, value: any) => void;
 };
 
-export const FormContext = createContext<FormContextType | undefined>(
-  undefined
-);
+export const FormContext = createContext<FormContextType | undefined>(undefined);
 
 // Form
 type FormPropType = FormHTMLAttributes<HTMLFormElement> &
@@ -48,10 +46,7 @@ function Form(props: FormPropType) {
 
   return (
     <FormContext.Provider value={{ formData, handleFormData }}>
-      <form
-        className={"flex flex-col w-full px-0 box-border " + styles}
-        onSubmit={handleSubmit}
-      >
+      <form className={'flex flex-col w-full px-0 box-border ' + styles} onSubmit={handleSubmit}>
         {children}
       </form>
     </FormContext.Provider>

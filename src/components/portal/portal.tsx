@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { createPortal } from "react-dom";
+import { ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 
 export type PortalPropType = {
   children: ReactNode;

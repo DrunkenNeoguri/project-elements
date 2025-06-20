@@ -1,10 +1,10 @@
-"use client";
-import { ReactNode, createContext, useEffect, useState } from "react";
-import { firebaseAuth } from "../utils/util-firebase";
-import { User, onAuthStateChanged } from "firebase/auth";
-import { usePathname, useRouter } from "next/navigation";
-import Backdrop from "../components/backdrop/backdrop";
-import { Bar } from "../components/loader/loader";
+'use client';
+import { ReactNode, createContext, useEffect, useState } from 'react';
+import { firebaseAuth } from '../utils/util-firebase';
+import { User, onAuthStateChanged } from 'firebase/auth';
+import { usePathname, useRouter } from 'next/navigation';
+import Backdrop from '../components/backdrop/backdrop';
+import { Bar } from '../components/loader/loader';
 
 type AuthContextType = User | null;
 
@@ -17,13 +17,13 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
   // ?CONCERN: 예외 경로만 별도로 처리할 수 있는 방안을 좀 더 깔끔하게 할 수 있는 방법이 있을지...
   useEffect(() => {
-    onAuthStateChanged(firebaseAuth, (user) => {
+    onAuthStateChanged(firebaseAuth, user => {
       if (user) {
         return setUser(user);
       } else {
         setUser(null);
-        router.push("/user/login");
-        return new Error("Authorization token is expired.");
+        router.push('/user/login');
+        return new Error('Authorization token is expired.');
       }
     });
   }, [router, pathname]);

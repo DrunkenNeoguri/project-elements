@@ -1,4 +1,4 @@
-import { AccountFormType } from "../../../../types/user.types";
+import { AccountFormType } from '../../../../types/user.types';
 import {
   commonBlankErrorMsg,
   emailInvalidErrorMsg,
@@ -8,13 +8,13 @@ import {
   passwordRegExp,
   usernameInvalidErrorMsg,
   usernameRegExp,
-} from "../../../../utils/util-constants";
+} from '../../../../utils/util-constants';
 
 export const changeEmailErrorMsg = (email?: string) => {
   if (!email) {
-    return "";
+    return '';
   }
-  if (email.trim() === "") {
+  if (email.trim() === '') {
     return commonBlankErrorMsg;
   }
   if (!emailRegExp.test(email)) {
@@ -26,9 +26,9 @@ export const changeEmailErrorMsg = (email?: string) => {
 
 export const changePasswordErrorMsg = (password?: string) => {
   if (!password) {
-    return "";
+    return '';
   }
-  if (password.trim() === "") {
+  if (password.trim() === '') {
     return commonBlankErrorMsg;
   }
   if (!passwordRegExp.test(password)) {
@@ -38,14 +38,11 @@ export const changePasswordErrorMsg = (password?: string) => {
   }
 };
 
-export const changeConfirmPasswordErrorMsg = (
-  password?: string,
-  confirmPassword?: string
-) => {
+export const changeConfirmPasswordErrorMsg = (password?: string, confirmPassword?: string) => {
   if (!confirmPassword) {
-    return "";
+    return '';
   }
-  if (confirmPassword.trim() === "") {
+  if (confirmPassword.trim() === '') {
     return commonBlankErrorMsg;
   }
   if (!passwordRegExp.test(confirmPassword)) {
@@ -59,9 +56,9 @@ export const changeConfirmPasswordErrorMsg = (
 
 export const changeUsernameErrorMsg = (username?: string) => {
   if (!username) {
-    return "";
+    return '';
   }
-  if (username.trim() === "") {
+  if (username.trim() === '') {
     return commonBlankErrorMsg;
   }
   if (!usernameRegExp.test(username)) {
@@ -71,15 +68,12 @@ export const changeUsernameErrorMsg = (username?: string) => {
 };
 
 export function checkSignUpDataTypeCheck(
-  formData: Record<string, string>
+  formData: Record<string, string>,
 ): formData is AccountFormType {
   if (
     changeEmailErrorMsg(formData.email) !== undefined ||
     changePasswordErrorMsg(formData.password) !== undefined ||
-    changeConfirmPasswordErrorMsg(
-      formData.password,
-      formData.confirmPassword
-    ) !== undefined ||
+    changeConfirmPasswordErrorMsg(formData.password, formData.confirmPassword) !== undefined ||
     changeUsernameErrorMsg(formData.username) !== undefined
   ) {
     return false;
@@ -89,10 +83,10 @@ export function checkSignUpDataTypeCheck(
 
   if (
     formKeys.length !== 4 ||
-    !formKeys.includes("email") ||
-    !formKeys.includes("password") ||
-    !formKeys.includes("confirmPassword") ||
-    !formKeys.includes("username")
+    !formKeys.includes('email') ||
+    !formKeys.includes('password') ||
+    !formKeys.includes('confirmPassword') ||
+    !formKeys.includes('username')
   ) {
     return false;
   }

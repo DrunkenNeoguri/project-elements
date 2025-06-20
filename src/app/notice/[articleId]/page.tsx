@@ -1,8 +1,8 @@
-import ArticleBody from "./_components/article-body";
-import ArticleTitle from "./_components/article-title";
-import OptionService from "../../../services/option-services";
-import { firebaseStorage } from "../../../utils/util-firebase";
-import { getDownloadURL, ref } from "firebase/storage";
+import ArticleBody from './_components/article-body';
+import ArticleTitle from './_components/article-title';
+import OptionService from '../../../services/option-services';
+import { firebaseStorage } from '../../../utils/util-firebase';
+import { getDownloadURL, ref } from 'firebase/storage';
 
 export async function generateStaticParams() {
   const articleState = await OptionService.getNoticeArticles();
@@ -27,9 +27,7 @@ export default async function NoticeArticle({
       return <></>;
     }
 
-    const url = await getDownloadURL(
-      ref(await firebaseStorage(), `notices/${articleId}.md`)
-    );
+    const url = await getDownloadURL(ref(await firebaseStorage(), `notices/${articleId}.md`));
     const response = await (await fetch(url)).text();
     const { href, ...rest } = noticeArticle;
 

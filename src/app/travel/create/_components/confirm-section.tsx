@@ -1,8 +1,8 @@
-"use client";
-import { Dispatch, SetStateAction, useContext } from "react";
-import Button from "../../../../components/button/button";
-import { TravelBasicType } from "../../../../types/travel.types";
-import { AuthContext } from "../../../../providers/auth-provider";
+'use client';
+import { Dispatch, SetStateAction, useContext } from 'react';
+import Button from '../../../../components/button/button';
+import { TravelBasicType } from '../../../../types/travel.types';
+import { AuthContext } from '../../../../providers/auth-provider';
 
 type PropType = {
   handlePrevStep: () => void;
@@ -19,9 +19,9 @@ export default function ConfirmSection({
 }: PropType) {
   const user = useContext(AuthContext);
   const handleChangeHeaderColor = () => {
-    return travelData?.travelType === "domestic"
-      ? "bg-secondary text-white"
-      : "bg-primaryLight text-black";
+    return travelData?.travelType === 'domestic'
+      ? 'bg-secondary text-white'
+      : 'bg-primaryLight text-black';
   };
 
   const handleMoveToNextStep = () => {
@@ -33,7 +33,7 @@ export default function ConfirmSection({
   };
 
   const handleMoveToPrevStep = () => {
-    setTravelData({ ...travelData, id: "" });
+    setTravelData({ ...travelData, id: '' });
     handlePrevStep();
   };
 
@@ -47,7 +47,7 @@ export default function ConfirmSection({
         <div className="flex flex-col rounded-r-2xl bg-white overflow-hidden w-60">
           <div
             className={
-              "font-medium16 flex items-center h-10 px-4 pt-1 pb-0 box-border " +
+              'font-medium16 flex items-center h-10 px-4 pt-1 pb-0 box-border ' +
               handleChangeHeaderColor()
             }
           >
@@ -58,57 +58,37 @@ export default function ConfirmSection({
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
                 <span className="font-light10 text-black">여행 이름</span>
-                <span className="font-medium14 text-black">
-                  {travelData.title}
-                </span>
+                <span className="font-medium14 text-black">{travelData.title}</span>
               </div>
 
               <div className="flex flex-col gap-1">
                 <span className="font-light10 text-black">출발 일자</span>
-                <span className="font-medium14 text-black">
-                  {travelData.departureAt}
-                </span>
+                <span className="font-medium14 text-black">{travelData.departureAt}</span>
               </div>
 
               <div className="flex flex-col gap-1">
                 <span className="font-light10 text-black">여행 기간</span>
-                <span className="font-medium14 text-black">
-                  {travelData.travelPeriod}일
-                </span>
+                <span className="font-medium14 text-black">{travelData.travelPeriod}일</span>
               </div>
 
               <div className="flex flex-col gap-1">
                 <span className="font-light10 text-black">여행지</span>
-                <span className="font-medium14 text-black">
-                  {travelData.destination}
-                </span>
+                <span className="font-medium14 text-black">{travelData.destination}</span>
               </div>
             </div>
 
             <div className="flex pb-0 pl-auto">
-              <img
-                src="/images/img-ticket-barcode.webp"
-                alt=""
-                className="w-[44px] h-[192px]"
-              />
+              <img src="/images/img-ticket-barcode.webp" alt="" className="w-[44px] h-[192px]" />
             </div>
           </div>
         </div>
       </div>
 
       <div className="flex flex-col gap-3 mt-auto mb-6 mx-0 w-full box-border">
-        <Button
-          type="button"
-          colorTheme="primaryReverse"
-          onClick={handleMoveToNextStep}
-        >
+        <Button type="button" colorTheme="primaryReverse" onClick={handleMoveToNextStep}>
           네, 맞아요!
         </Button>
-        <Button
-          type="button"
-          colorTheme="invalid"
-          onClick={handleMoveToPrevStep}
-        >
+        <Button type="button" colorTheme="invalid" onClick={handleMoveToPrevStep}>
           아니에요.
         </Button>
       </div>

@@ -1,13 +1,7 @@
-"use client";
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  createContext,
-  useState,
-} from "react";
-import { CategoryBasicType, ElementBasicType } from "../types/element.types";
-import { ElementStateType } from "../components/element/element";
+'use client';
+import { Dispatch, ReactNode, SetStateAction, createContext, useState } from 'react';
+import { CategoryBasicType, ElementBasicType } from '../types/element.types';
+import { ElementStateType } from '../components/element/element';
 
 type PartType =
   | ElementBasicType
@@ -35,9 +29,5 @@ export default function PartProvider({ children }: { children: ReactNode }) {
     setPart(currentPart);
   };
 
-  return (
-    <PartContext.Provider value={{ part, handleSetPart }}>
-      {children}
-    </PartContext.Provider>
-  );
+  return <PartContext.Provider value={{ part, handleSetPart }}>{children}</PartContext.Provider>;
 }

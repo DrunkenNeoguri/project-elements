@@ -1,15 +1,15 @@
-import { AccountFormType } from "../../../../types/user.types";
+import { AccountFormType } from '../../../../types/user.types';
 import {
   commonBlankErrorMsg,
   emailInvalidErrorMsg,
   emailRegExp,
-} from "../../../../utils/util-constants";
+} from '../../../../utils/util-constants';
 
 export const changeEmailErrorMsg = (email?: string) => {
   if (!email) {
-    return "";
+    return '';
   }
-  if (email.trim() === "") {
+  if (email.trim() === '') {
     return commonBlankErrorMsg;
   }
   if (!emailRegExp.test(email)) {
@@ -20,15 +20,15 @@ export const changeEmailErrorMsg = (email?: string) => {
 };
 
 export function checkForgetDataTypeCheck(
-  formData: Record<string, string>
-): formData is Pick<AccountFormType, "email"> {
+  formData: Record<string, string>,
+): formData is Pick<AccountFormType, 'email'> {
   if (changeEmailErrorMsg(formData.email) !== undefined) {
     return false;
   }
 
   const formKeys = Object.keys(formData);
 
-  if (formKeys.length !== 1 || !formKeys.includes("email")) {
+  if (formKeys.length !== 1 || !formKeys.includes('email')) {
     return false;
   }
 

@@ -1,7 +1,7 @@
-import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
-import { AuthContext } from "../../../../providers/auth-provider";
-import { ExternalContext } from "../../../../providers/external-provider";
+import { useRouter } from 'next/navigation';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../../../providers/auth-provider';
+import { ExternalContext } from '../../../../providers/external-provider';
 
 export default function useTemplateSection() {
   const [modalMsg, setModalMsg] = useState<string | undefined>();

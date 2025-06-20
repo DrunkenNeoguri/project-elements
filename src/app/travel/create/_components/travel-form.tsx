@@ -1,8 +1,8 @@
-"use client";
-import { Dispatch, SetStateAction } from "react";
-import Form from "../../../../components/form/form";
-import { TravelBasicType } from "../../../../types/travel.types";
-import Button from "../../../../components/button/button";
+'use client';
+import { Dispatch, SetStateAction } from 'react';
+import Form from '../../../../components/form/form';
+import { TravelBasicType } from '../../../../types/travel.types';
+import Button from '../../../../components/button/button';
 
 type PropType = {
   handlePrevStep: () => void;
@@ -19,9 +19,9 @@ export default function TravelForm({
 }: PropType) {
   const handleActiveNextButton = () => {
     if (
-      travelData.title.trim() !== "" &&
-      travelData.departureAt.trim() !== "" &&
-      travelData.destination.trim() !== "" &&
+      travelData.title.trim() !== '' &&
+      travelData.departureAt.trim() !== '' &&
+      travelData.destination.trim() !== '' &&
       travelData.travelPeriod > 0
     ) {
       return true;
@@ -39,17 +39,17 @@ export default function TravelForm({
   const handleMoveToSelectStep = () => {
     setTravelData({
       ...travelData,
-      title: "",
-      departureAt: "",
+      title: '',
+      departureAt: '',
       travelPeriod: 0,
-      destination: "",
+      destination: '',
     });
     handlePrevStep();
   };
 
   const handleIncraesePeriod = () => {
     if (travelData.travelPeriod >= 0) {
-      setTravelData((prev) => ({
+      setTravelData(prev => ({
         ...prev,
         travelPeriod: travelData.travelPeriod + 1,
       }));
@@ -58,7 +58,7 @@ export default function TravelForm({
 
   const handleDecraesePeriod = () => {
     if (travelData.travelPeriod > 0) {
-      setTravelData((prev) => ({
+      setTravelData(prev => ({
         ...prev,
         travelPeriod: travelData.travelPeriod - 1,
       }));
@@ -73,11 +73,7 @@ export default function TravelForm({
       <Form
         onSubmit={handleSubmit}
         formData={travelData as Record<string, string | number>}
-        setFormData={
-          setTravelData as Dispatch<
-            SetStateAction<Record<string, string | number>>
-          >
-        }
+        setFormData={setTravelData as Dispatch<SetStateAction<Record<string, string | number>>>}
         styles="h-full gap-6"
       >
         <div>
@@ -122,15 +118,11 @@ export default function TravelForm({
         <div className="flex flex-col gap-3 mt-auto mb-6 mx-0 w-full box-border">
           <Button
             type="submit"
-            colorTheme={handleActiveNextButton() ? "primaryReverse" : "invalid"}
+            colorTheme={handleActiveNextButton() ? 'primaryReverse' : 'invalid'}
           >
             다음 단계로
           </Button>
-          <Button
-            type="button"
-            colorTheme="invalid"
-            onClick={handleMoveToSelectStep}
-          >
+          <Button type="button" colorTheme="invalid" onClick={handleMoveToSelectStep}>
             돌아가기
           </Button>
         </div>

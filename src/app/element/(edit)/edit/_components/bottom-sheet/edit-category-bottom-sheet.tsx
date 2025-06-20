@@ -1,16 +1,9 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import BottomSheet from "../../../../../../components/bottom-sheet/bottom-sheet";
-import { ExternalContext } from "../../../../../../providers/external-provider";
-import { PartContext } from "../../../../../../providers/part-provider";
-import { CategoryBasicType } from "../../../../../../types/element.types";
-import { ElementsContext } from "../../../../../../providers/elements-provider";
+import { ChangeEvent, Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
+import BottomSheet from '../../../../../../components/bottom-sheet/bottom-sheet';
+import { ExternalContext } from '../../../../../../providers/external-provider';
+import { PartContext } from '../../../../../../providers/part-provider';
+import { CategoryBasicType } from '../../../../../../types/element.types';
+import { ElementsContext } from '../../../../../../providers/elements-provider';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -19,30 +12,28 @@ export default function EditCategoryBottomSheet() {
   const { part, handleSetPart } = useContext(PartContext);
   const { dispatch } = useContext(ElementsContext);
 
-  const [categoryData, setCategoryData] = useState<CategoryBasicType | null>(
-    null
-  );
+  const [categoryData, setCategoryData] = useState<CategoryBasicType | null>(null);
 
   const handleSwitchCategoryBottomSheet = () => {
-    if (externalList.has("element-create-category")) {
-      handleExternalList("element-create-category");
-    } else if (externalList.has("element-update-category")) {
-      handleExternalList("element-update-category");
-      handleExternalList("element-option-category");
+    if (externalList.has('element-create-category')) {
+      handleExternalList('element-create-category');
+    } else if (externalList.has('element-update-category')) {
+      handleExternalList('element-update-category');
+      handleExternalList('element-option-category');
     }
     handleSetPart(null);
     setCategoryData(null);
   };
 
   const handleSetCategory = () => {
-    if (externalList.has("element-create-category")) {
+    if (externalList.has('element-create-category')) {
       dispatch({
-        type: "createCategory",
+        type: 'createCategory',
         target: categoryData as CategoryBasicType,
       });
-    } else if (externalList.has("element-update-category")) {
+    } else if (externalList.has('element-update-category')) {
       dispatch({
-        type: "updateCategory",
+        type: 'updateCategory',
         target: categoryData as CategoryBasicType,
       });
     }
@@ -58,8 +49,8 @@ export default function EditCategoryBottomSheet() {
 
   useEffect(() => {
     if (
-      externalList.has("element-create-category") ||
-      externalList.has("element-update-category")
+      externalList.has('element-create-category') ||
+      externalList.has('element-update-category')
     ) {
       setCategoryData(part as CategoryBasicType);
     }
@@ -70,13 +61,11 @@ export default function EditCategoryBottomSheet() {
   }
 
   return (
-    (externalList.has("element-create-category") ||
-      externalList.has("element-update-category")) && (
+    (externalList.has('element-create-category') ||
+      externalList.has('element-update-category')) && (
       <BottomSheet
         bottomSheetData={categoryData as Record<string, any>}
-        setBottomSheetData={
-          setCategoryData as Dispatch<SetStateAction<Record<string, any>>>
-        }
+        setBottomSheetData={setCategoryData as Dispatch<SetStateAction<Record<string, any>>>}
         onClose={handleSwitchCategoryBottomSheet}
       >
         <h3 className="font-bold16 px-4">카테고리 추가</h3>
@@ -93,17 +82,10 @@ export default function EditCategoryBottomSheet() {
           <BottomSheet.Palette />
         </div>
         <div className="flex w-full gap-4 px-4 my-3">
-          <BottomSheet.Button
-            colorTheme="invalidReverse"
-            onClick={handleSwitchCategoryBottomSheet}
-          >
+          <BottomSheet.Button colorTheme="invalidReverse" onClick={handleSwitchCategoryBottomSheet}>
             취소
           </BottomSheet.Button>
-          <BottomSheet.Button
-            type="button"
-            colorTheme="primary"
-            onClick={handleSetCategory}
-          >
+          <BottomSheet.Button type="button" colorTheme="primary" onClick={handleSetCategory}>
             추가
           </BottomSheet.Button>
         </div>

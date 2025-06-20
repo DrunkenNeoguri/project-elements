@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
-import AuthProvider from "../../../../../providers/auth-provider";
-import Header from "../../../../../components/header/header";
+import { ReactNode } from 'react';
+import AuthProvider from '../../../../../providers/auth-provider';
+import Header from '../../../../../components/header/header';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (

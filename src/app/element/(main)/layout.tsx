@@ -1,20 +1,20 @@
-"use client";
-import { ReactNode, useContext } from "react";
-import { ExternalContext } from "../../../providers/external-provider";
-import AuthProvider from "../../../providers/auth-provider";
-import Header from "../../../components/header/header";
-import { EditIcon, ShareIcon } from "../../../assets/icons/icons";
-import ElementProvider from "../../../providers/elements-provider";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+'use client';
+import { ReactNode, useContext } from 'react';
+import { ExternalContext } from '../../../providers/external-provider';
+import AuthProvider from '../../../providers/auth-provider';
+import Header from '../../../components/header/header';
+import { EditIcon, ShareIcon } from '../../../assets/icons/icons';
+import ElementProvider from '../../../providers/elements-provider';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { handleExternalList } = useContext(ExternalContext);
   const searchParams = useSearchParams();
-  const elementId = searchParams?.get("id");
+  const elementId = searchParams?.get('id');
 
   const handleSwitchCategoryBottomSheet = () => {
-    handleExternalList("element-option-elements");
+    handleExternalList('element-option-elements');
   };
 
   return (

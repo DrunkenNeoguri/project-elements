@@ -1,16 +1,16 @@
-"use client";
-import { ReactNode, useContext } from "react";
-import Header from "../../../../components/header/header";
-import AuthProvider from "../../../../providers/auth-provider";
-import { ExternalContext } from "../../../../providers/external-provider";
-import { HamburgerIcon } from "../../../../assets/icons/icons";
-import ElementProvider from "../../../../providers/elements-provider";
+'use client';
+import { ReactNode, useContext } from 'react';
+import Header from '../../../../components/header/header';
+import AuthProvider from '../../../../providers/auth-provider';
+import { ExternalContext } from '../../../../providers/external-provider';
+import { HamburgerIcon } from '../../../../assets/icons/icons';
+import ElementProvider from '../../../../providers/elements-provider';
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { handleExternalList } = useContext(ExternalContext);
 
   const handleSwitchCategoryBottomSheet = () => {
-    handleExternalList("element-option-elements");
+    handleExternalList('element-option-elements');
   };
 
   return (

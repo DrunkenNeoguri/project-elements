@@ -1,10 +1,10 @@
-"use client";
-import Link from "next/link";
-import { ClockIcon, CloseIcon } from "../../../../assets/icons/icons";
-import { useGetCarouselBanner } from "../../../main/_hooks/use-get-carousel-banner";
-import { useEffect, useState } from "react";
-import { useGetCurrentKeywordList } from "../_hooks/use-get-current-keyword-list";
-import { Banner } from "../../../../types/option.types";
+'use client';
+import Link from 'next/link';
+import { ClockIcon, CloseIcon } from '../../../../assets/icons/icons';
+import { useGetCarouselBanner } from '../../../main/_hooks/use-get-carousel-banner';
+import { useEffect, useState } from 'react';
+import { useGetCurrentKeywordList } from '../_hooks/use-get-current-keyword-list';
+import { Banner } from '../../../../types/option.types';
 
 export default function SearchDefaultSection() {
   const { searchKeywordList, removeSearchKeyword, removeAllSearchKeyword } =
@@ -30,7 +30,7 @@ export default function SearchDefaultSection() {
           {hasSearchKeywordInList ? (
             <button
               type="button"
-              className={"font-medium12 text-invalid"}
+              className={'font-medium12 text-invalid'}
               onClick={removeAllSearchKeyword}
             >
               전체 삭제
@@ -39,12 +39,9 @@ export default function SearchDefaultSection() {
         </div>
 
         {hasSearchKeywordInList ? (
-          searchKeywordList.map((keyword) => {
+          searchKeywordList.map(keyword => {
             return (
-              <div
-                key={keyword}
-                className="flex justify-between items-center w-full"
-              >
+              <div key={keyword} className="flex justify-between items-center w-full">
                 <Link
                   className="flex font-medium12 text-black gap-2 justify-center items-center"
                   href={`/search?keyword=${encodeURIComponent(keyword)}`}
@@ -64,9 +61,7 @@ export default function SearchDefaultSection() {
           })
         ) : (
           <div className="flex justify-start items-start w-full h-[108px]">
-            <span className="font-medium12 text-invalid">
-              최근 검색어가 없습니다.
-            </span>
+            <span className="font-medium12 text-invalid">최근 검색어가 없습니다.</span>
           </div>
         )}
       </div>

@@ -1,26 +1,23 @@
-"use client";
-import { useRouter } from "next/navigation";
-import Button from "../../../../components/button/button";
-import { Dispatch, SetStateAction } from "react";
-import { TravelBasicType, TravelType } from "../../../../types/travel.types";
+'use client';
+import { useRouter } from 'next/navigation';
+import Button from '../../../../components/button/button';
+import { Dispatch, SetStateAction } from 'react';
+import { TravelBasicType, TravelType } from '../../../../types/travel.types';
 
 type PropType = {
   handleNextStep: () => void;
   setTravelData: Dispatch<SetStateAction<TravelBasicType>>;
 };
 
-export default function SelectSection({
-  handleNextStep,
-  setTravelData,
-}: PropType) {
+export default function SelectSection({ handleNextStep, setTravelData }: PropType) {
   const router = useRouter();
 
   const handleMoveToMain = () => {
-    return router.push("/main");
+    return router.push('/main');
   };
 
   const handleMoveToNextStep = (travelType: TravelType) => {
-    setTravelData((prev) => ({ ...prev, travelType }));
+    setTravelData(prev => ({ ...prev, travelType }));
     handleNextStep();
   };
 
@@ -34,14 +31,14 @@ export default function SelectSection({
         <Button
           type="button"
           colorTheme="primaryReverse"
-          onClick={() => handleMoveToNextStep("foreign")}
+          onClick={() => handleMoveToNextStep('foreign')}
         >
           해외 여행
         </Button>
         <Button
           type="button"
           colorTheme="secondaryReverse"
-          onClick={() => handleMoveToNextStep("domestic")}
+          onClick={() => handleMoveToNextStep('domestic')}
         >
           국내 여행
         </Button>

@@ -1,15 +1,13 @@
-"use client";
+'use client';
 
-import Autoplay from "embla-carousel-autoplay";
-import useEmblaCarousel from "embla-carousel-react";
-import { useCarouselDotState } from "../_hooks/use-carousel-dot-state";
-import { useGetCarouselBanner } from "../_hooks/use-get-carousel-banner";
-import Link from "next/link";
+import Autoplay from 'embla-carousel-autoplay';
+import useEmblaCarousel from 'embla-carousel-react';
+import { useCarouselDotState } from '../_hooks/use-carousel-dot-state';
+import { useGetCarouselBanner } from '../_hooks/use-get-carousel-banner';
+import Link from 'next/link';
 
 export default function CarouselBannerSection() {
-  const [carouselRef, carouselApi] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 5000 }),
-  ]);
+  const [carouselRef, carouselApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000 })]);
 
   const { selectedIndex, scrollSnaps } = useCarouselDotState(carouselApi);
   const { banners } = useGetCarouselBanner();
@@ -37,10 +35,8 @@ export default function CarouselBannerSection() {
             <span
               key={index}
               className={
-                "h-1 rounded-full transition-all ease-in-out duration-500" +
-                `${
-                  index === selectedIndex ? " w-4 bg-blue-500" : " w-1 bg-grey"
-                }`
+                'h-1 rounded-full transition-all ease-in-out duration-500' +
+                `${index === selectedIndex ? ' w-4 bg-blue-500' : ' w-1 bg-grey'}`
               }
             />
           );

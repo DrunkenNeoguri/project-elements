@@ -1,24 +1,22 @@
-import { Dispatch, SetStateAction, useContext } from "react";
-import { ExternalContext } from "../../../../../../providers/external-provider";
-import BottomSheet from "../../../../../../components/bottom-sheet/bottom-sheet";
+import { Dispatch, SetStateAction, useContext } from 'react';
+import { ExternalContext } from '../../../../../../providers/external-provider';
+import BottomSheet from '../../../../../../components/bottom-sheet/bottom-sheet';
 
 type SelectBottomSheetPropsType = {
   bottomSheetData: Record<string, string>;
   setBottomSheetData: Dispatch<SetStateAction<Record<string, string>>>;
 };
 
-export default function SelectStaffBottomSheet(
-  props: SelectBottomSheetPropsType
-) {
+export default function SelectStaffBottomSheet(props: SelectBottomSheetPropsType) {
   const { bottomSheetData, setBottomSheetData } = props;
   const { externalList, handleExternalList } = useContext(ExternalContext);
 
   const handleSwitchSelectBottomSheet = () => {
-    handleExternalList("element-create-selectStaff");
+    handleExternalList('element-create-selectStaff');
   };
 
   return (
-    externalList.has("element-create-selectStaff") && (
+    externalList.has('element-create-selectStaff') && (
       <BottomSheet
         bottomSheetData={bottomSheetData}
         setBottomSheetData={setBottomSheetData}

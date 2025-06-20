@@ -1,6 +1,6 @@
-import { CategoryBasicType } from "../../../../types/element.types";
-import { Dispatch, SetStateAction } from "react";
-import CategoryAccordion from "./category-accordion";
+import { CategoryBasicType } from '../../../../types/element.types';
+import { Dispatch, SetStateAction } from 'react';
+import CategoryAccordion from './category-accordion';
 
 type PropType = {
   elements: CategoryBasicType[];
@@ -20,7 +20,7 @@ export default function ElementsSection(props: PropType) {
         return (
           <div
             key={category.categoryId}
-            id={"category" + category.categoryOrder}
+            id={'category' + category.categoryOrder}
             className="flex flex-col gap-3 mb-6"
           >
             <CategoryAccordion category={category} setElements={setElements} />

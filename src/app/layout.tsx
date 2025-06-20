@@ -1,13 +1,9 @@
-import { Suspense } from "react";
-import { GmarketSansOFT } from "../fonts/fonts";
-import "./global.css";
-import ExternalProvider from "../providers/external-provider";
+import { Suspense } from 'react';
+import { GmarketSansOFT } from '../fonts/fonts';
+import './global.css';
+import ExternalProvider from '../providers/external-provider';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko" className={`${GmarketSansOFT.variable}`}>
       <head>

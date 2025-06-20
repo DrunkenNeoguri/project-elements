@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import {
   ChangeEvent,
   Dispatch,
@@ -7,7 +7,7 @@ import {
   SetStateAction,
   useContext,
   useState,
-} from "react";
+} from 'react';
 import {
   CreateCategoryIcon,
   CreateElementIcon,
@@ -15,14 +15,14 @@ import {
   SelectedIcon,
   ThreeDotsIcon,
   UnselectedIcon,
-} from "../../assets/icons/icons";
-import { ElementBasicType } from "../../types/element.types";
-import Input from "../input/input";
-import { ExternalContext } from "../../providers/external-provider";
-import { ElementsContext } from "../../providers/elements-provider";
-import { PartContext } from "../../providers/part-provider";
+} from '../../assets/icons/icons';
+import { ElementBasicType } from '../../types/element.types';
+import Input from '../input/input';
+import { ExternalContext } from '../../providers/external-provider';
+import { ElementsContext } from '../../providers/elements-provider';
+import { PartContext } from '../../providers/part-provider';
 
-export type ElementStateType = "base" | "check" | "create" | "modify" | "new";
+export type ElementStateType = 'base' | 'check' | 'create' | 'modify' | 'new';
 
 type ElementPropsType = ElementBasicType & {
   state: ElementStateType;
@@ -36,18 +36,14 @@ export default function Element(props: ElementPropsType) {
   const [compState, setCompState] = useState(state);
 
   switch (compState) {
-    case "check":
-      return (
-        <CheckElement {...props} handleCheckElement={handleCheckElement} />
-      );
-    case "modify":
-    case "create":
-      return (
-        <EditElement {...props} state={compState} setCompState={setCompState} />
-      );
-    case "base":
+    case 'check':
+      return <CheckElement {...props} handleCheckElement={handleCheckElement} />;
+    case 'modify':
+    case 'create':
+      return <EditElement {...props} state={compState} setCompState={setCompState} />;
+    case 'base':
       return <BaseElement {...props} setCompState={setCompState} />;
-    case "new":
+    case 'new':
       return <NewElement setCompState={setCompState} />;
     default:
       return;
@@ -58,26 +54,17 @@ export default function Element(props: ElementPropsType) {
 function CheckElement(
   props: ElementPropsType & {
     handleCheckElement?: (e: MouseEvent<HTMLButtonElement>) => void;
-  }
+  },
 ) {
-  const {
-    elementId,
-    elementName,
-    elementColorTheme,
-    isChecked,
-    handleCheckElement,
-  } = props;
-  const elementStyle = isChecked
-    ? "bg-paletteSubColor" + elementColorTheme
-    : "bg-grey";
+  const { elementId, elementName, elementColorTheme, isChecked, handleCheckElement } = props;
+  const elementStyle = isChecked ? 'bg-paletteSubColor' + elementColorTheme : 'bg-grey';
 
   return (
     <button
       id={elementId}
       type="button"
       className={
-        "flex items-center rounded w-full gap-2 p-2 m-0 outline-none border-none " +
-        elementStyle
+        'flex items-center rounded w-full gap-2 p-2 m-0 outline-none border-none ' + elementStyle
       }
       onClick={handleCheckElement}
     >
@@ -92,7 +79,7 @@ function CheckElement(
 function BaseElement(
   props: ElementPropsType & {
     setCompState: Dispatch<SetStateAction<ElementStateType>>;
-  }
+  },
 ) {
   const { elementName } = props;
   const { handleSetPart } = useContext(PartContext);
@@ -101,13 +88,11 @@ function BaseElement(
   const handleSwitchElementBottomSheet = () => {
     const { setCompState, ...rest } = props;
     handleSetPart({ ...rest, setState: setCompState });
-    handleExternalList("element-option-element");
+    handleExternalList('element-option-element');
   };
   return (
     <div
-      className={
-        "flex items-center rounded w-full gap-2 p-2 m-0 outline-none border-none bg-grey"
-      }
+      className={'flex items-center rounded w-full gap-2 p-2 m-0 outline-none border-none bg-grey'}
     >
       <span className="mt-[2px] ml-1">{elementName}</span>
 
@@ -129,7 +114,7 @@ function BaseElement(
 function EditElement(
   props: ElementPropsType & {
     setCompState: Dispatch<SetStateAction<ElementStateType>>;
-  }
+  },
 ) {
   const { state, setCompState, elementName, ...rest } = props;
 
@@ -145,39 +130,36 @@ function EditElement(
     e.preventDefault();
 
     switch (state) {
-      case "create": {
+      case 'create': {
         dispatch({
-          type: "createElement",
+          type: 'createElement',
           target: {
             elementName: value,
             ...rest,
           },
         });
-        setValue("");
-        setCompState("new");
+        setValue('');
+        setCompState('new');
         return handleSetPart(null);
       }
 
-      case "modify": {
+      case 'modify': {
         dispatch({
-          type: "updateElement",
+          type: 'updateElement',
           target: {
             elementName: value,
             ...rest,
           },
         });
-        setValue("");
-        setCompState("base");
+        setValue('');
+        setCompState('base');
         return handleSetPart(null);
       }
     }
   };
 
   return (
-    <form
-      className="flex bg-grey rounded-lg w-full gap-2 p-2 m-0"
-      onSubmit={onSubmit}
-    >
+    <form className="flex bg-grey rounded-lg w-full gap-2 p-2 m-0" onSubmit={onSubmit}>
       <Input
         style={{ marginTop: 0 }}
         styles="h-7 p-0 px-2 py-1 border-none"
@@ -189,7 +171,7 @@ function EditElement(
         type="submit"
         className="flex justify-center items-center w-7 h-7 rounded bg-primary text-white"
       >
-        {state === "create" ? <CreateElementIcon /> : <ModifyElementIcon />}
+        {state === 'create' ? <CreateElementIcon /> : <ModifyElementIcon />}
       </button>
     </form>
   );
@@ -201,7 +183,7 @@ function NewElement({
   setCompState: Dispatch<SetStateAction<ElementStateType>>;
 }) {
   const handleSwitchCompState = () => {
-    return setCompState("create");
+    return setCompState('create');
   };
 
   return (

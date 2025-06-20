@@ -1,4 +1,4 @@
-import ResetForm from "./_components/reset-form";
+import ResetForm from './_components/reset-form';
 
 export default function Reset() {
   return (

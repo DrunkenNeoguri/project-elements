@@ -1,16 +1,16 @@
-import { AccountFormType } from "../../../../types/user.types";
+import { AccountFormType } from '../../../../types/user.types';
 import {
   commonBlankErrorMsg,
   passwordIncorrectErrorMsg,
   passwordInvalidErrorMsg,
   passwordRegExp,
-} from "../../../../utils/util-constants";
+} from '../../../../utils/util-constants';
 
 export const changePasswordErrorMsg = (password?: string) => {
   if (!password) {
-    return "";
+    return '';
   }
-  if (password.trim() === "") {
+  if (password.trim() === '') {
     return commonBlankErrorMsg;
   }
   if (!passwordRegExp.test(password)) {
@@ -20,14 +20,11 @@ export const changePasswordErrorMsg = (password?: string) => {
   }
 };
 
-export const changeConfirmPasswordErrorMsg = (
-  password?: string,
-  confirmPassword?: string
-) => {
+export const changeConfirmPasswordErrorMsg = (password?: string, confirmPassword?: string) => {
   if (!confirmPassword) {
-    return "";
+    return '';
   }
-  if (confirmPassword.trim() === "") {
+  if (confirmPassword.trim() === '') {
     return commonBlankErrorMsg;
   }
   if (!passwordRegExp.test(confirmPassword)) {
@@ -40,14 +37,11 @@ export const changeConfirmPasswordErrorMsg = (
 };
 
 export function checkResetDataTypeCheck(
-  formData: Record<string, string>
-): formData is Pick<AccountFormType, "password" | "confirmPassword"> {
+  formData: Record<string, string>,
+): formData is Pick<AccountFormType, 'password' | 'confirmPassword'> {
   if (
     changePasswordErrorMsg(formData.password) !== undefined ||
-    changeConfirmPasswordErrorMsg(
-      formData.password,
-      formData.confirmPassword
-    ) !== undefined
+    changeConfirmPasswordErrorMsg(formData.password, formData.confirmPassword) !== undefined
   ) {
     return false;
   }
@@ -56,8 +50,8 @@ export function checkResetDataTypeCheck(
 
   if (
     formKeys.length !== 2 ||
-    !formKeys.includes("password") ||
-    !formKeys.includes("confirmPassword")
+    !formKeys.includes('password') ||
+    !formKeys.includes('confirmPassword')
   ) {
     return false;
   }
