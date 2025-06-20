@@ -54,6 +54,7 @@ export default function ChangeForm() {
           <Form.Input
             id="password"
             type="password"
+            autoComplete="new-password"
             minLength={8}
             maxLength={20}
             required
@@ -68,6 +69,7 @@ export default function ChangeForm() {
           <Form.Input
             id="confirmPassword"
             type="password"
+            autoComplete="new-password"
             minLength={8}
             maxLength={20}
             required
