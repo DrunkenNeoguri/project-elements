@@ -18,6 +18,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@sentry/browser": "^9.30.0",
+    "@sentry/nextjs": "^9.30.0",
     "@svgr/webpack": "^8.1.0",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.10.4",
