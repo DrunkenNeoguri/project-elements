@@ -38,7 +38,7 @@ class OptionService {
 
   static async getNoticeItemList() {
     try {
-      const noticeList = await this.getNoticesBase();
+      const noticeList = await OptionService.getNoticesBase();
       return noticeList ?? [];
     } catch (error) {
       throw new Error(
