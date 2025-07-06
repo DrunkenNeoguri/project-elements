@@ -22,7 +22,7 @@ import { convertUnknownTypeErrorToStringMessage } from '../utils/util-convert';
 import { AccountFormType, UserInfoType } from '../types/user.types';
 import TravelService from './travel-services';
 import { sendErrorToSentry } from '../utils/util-sentry';
-import { getParsedJsonData } from '../utils/util-safed-type';
+import { getLocalStorageItem } from '../utils/util-local-storage';
 
 // *MEMO: 문제 없이 200일 시, 예외를 제외하고 return "OK";
 class AuthService {
@@ -218,7 +218,7 @@ class AuthService {
         throw new Error('프로필을 수정할 수 없습니다.');
       }
 
-      const userData = getParsedJsonData<UserInfoType>('userInfo');
+      const userData = getLocalStorageItem<UserInfoType>('userInfo');
 
       await updateProfile(currentUser, {
         displayName: username,
