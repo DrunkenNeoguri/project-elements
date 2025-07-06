@@ -25,7 +25,7 @@ export function setLocalStorageItem<T>(key: string, value: T): boolean {
   } catch (error) {
     sendErrorToSentry({
       type: 'client',
-      context: 'getLocalStorageItem',
+      context: 'setLocalStorageItem',
       error: error as Error,
     });
 
@@ -40,7 +40,7 @@ export function removeLocalStorageItem(key: string): boolean {
   } catch (error) {
     sendErrorToSentry({
       type: 'client',
-      context: 'getLocalStorageItem',
+      context: 'removeLocalStorageItem',
       error: error as Error,
     });
 
