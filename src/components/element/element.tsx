@@ -129,6 +129,7 @@ function EditElement(
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
+    /* eslint-disable default-case */
     switch (state) {
       case 'create': {
         dispatch({
@@ -156,6 +157,7 @@ function EditElement(
         return handleSetPart(null);
       }
     }
+    /* eslint-enable default-case */
   };
 
   return (

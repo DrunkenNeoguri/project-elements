@@ -26,29 +26,33 @@ export default [
     rules: {
       semi: ['error', 'always'],
       camelcase: ['error', { properties: 'always' }],
-      '@typescript-eslint/ban-types': [
-        'error',
-        {
-          types: {
-            unknown: {
-              message: 'unknown 타입 사용 금지',
-            },
-            any: {
-              message: 'any 타입 사용 금지',
-            },
-          },
-        },
-      ],
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-unused-vars': 'error',
+      '@typescript-eslint/no-unsafe-member-access': 'error',
+      '@typescript-eslint/no-unsafe-assignment': 'error',
+      '@typescript-eslint/no-unsafe-argument': 'error',
+      '@typescript-eslint/no-unsafe-return': 'error',
       '@typescript-eslint/naming-convention': [
         'error',
         {
           selector: ['typeLike'],
           format: ['PascalCase'],
-          suffix: ['Type'],
+          // custom: {
+          //   regex: '^T$|Type$|Props$',
+          //   match: true,
+          // },
+        },
+        {
+          selector: 'interface',
+          format: ['PascalCase'],
         },
         {
           selector: 'function',
           format: ['camelCase', 'PascalCase'],
+        },
+        {
+          selector: 'class',
+          format: null,
         },
       ],
       'no-var': 'error',

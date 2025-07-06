@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Backdrop from '../components/backdrop/backdrop';
 import { Bar } from '../components/loader/loader';
 
-type AuthContextType = User | null;
+export type AuthContextType = User | null;
 
 export const AuthContext = createContext<AuthContextType>(null);
 

@@ -1,5 +1,5 @@
 'use client';
-import { useContext } from 'react';
+import { Fragment, useContext } from 'react';
 import { ThreeDotsIcon } from '../../assets/icons/icons';
 import { ExternalContext } from '../../providers/external-provider';
 import { CategoryBasicType } from '../../types/element.types';
@@ -73,5 +73,7 @@ export default function Category(props: CategoryPropType) {
           </div>
         </button>
       );
+    default:
+      return <Fragment />;
   }
 }

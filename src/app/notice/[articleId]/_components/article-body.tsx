@@ -13,7 +13,8 @@ export default function ArticleBody({ article, href }: Props) {
       <Markdown
         remarkPlugins={[remarkGfm]}
         components={{
-          a: ({ node, ...props }) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          a: ({ node: _node, ...props }) => {
             if (props.href?.startsWith('http')) {
               return <a {...props} target="_blank" rel="noopener noreferrer" />;
             }

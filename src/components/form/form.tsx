@@ -13,12 +13,10 @@ import Counter from '../counter/counter';
 import ErrorText from '../error-text/error-text';
 import Input from '../input/input';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 // Form Context API
 type FormContextType = {
-  formData: Record<string, any>;
-  handleFormData: (name: string, value: any) => void;
+  formData: Record<string, unknown>;
+  handleFormData: (name: string, value: unknown) => void;
 };
 
 export const FormContext = createContext<FormContextType | undefined>(undefined);
@@ -26,16 +24,16 @@ export const FormContext = createContext<FormContextType | undefined>(undefined)
 // Form
 type FormPropType = FormHTMLAttributes<HTMLFormElement> &
   PropsWithChildren & {
-    onSubmit: (formData: Record<string, any>) => void;
-    formData: Record<string, any>;
-    setFormData: Dispatch<SetStateAction<Record<string, any>>>;
+    onSubmit: (formData: Record<string, unknown>) => void;
+    formData: Record<string, unknown>;
+    setFormData: Dispatch<SetStateAction<Record<string, unknown>>>;
     styles?: string;
   };
 
 function Form(props: FormPropType) {
   const { children, onSubmit, formData, setFormData, styles } = props;
 
-  const handleFormData = (name: string, value: any) => {
+  const handleFormData = (name: string, value: unknown) => {
     setFormData({ ...formData, [name]: value });
   };
 
@@ -70,5 +68,3 @@ Form.ErrorText = ErrorText;
 Form.VaildIcon = ValidIcon;
 
 export default Form;
-
-/* eslint-enable @typescript-eslint/no-explicit-any */
