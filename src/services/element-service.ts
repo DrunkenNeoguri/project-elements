@@ -13,21 +13,10 @@ export default class ElementService {
         doc(collection(await firestore(), `elements`, userUid, 'docs'), id),
       );
 
-      if (elementsState instanceof Error) {
-        // TODO: 에러 메시지 추후 추가
-        sendErrorToSentry({
-          type: 'server',
-          context: 'ElementService.getElementsData',
-          error: elementsState,
-        });
-        return;
-      }
-
       return elementsState.data();
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'ElementService.getElementsData'),
-      );
+      sendErrorToSentry({ type: 'server', context: 'ElementService.getElementsData', error });
+      return;
     }
   }
 
