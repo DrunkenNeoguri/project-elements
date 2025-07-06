@@ -1,21 +1,25 @@
+import * as Sentry from '@sentry/nextjs';
+import { FirebaseError } from 'firebase/app';
+
 interface Props {
   type: 'server' | 'client';
   context: string;
-  error: Error;
+  error: unknown;
 }
 
 export function sendErrorToSentry({ type, context, error }: Props) {
-  const Sentry = require('@sentry/nextjs');
-  const { message, stack } = error;
+  if (error instanceof FirebaseError || error instanceof Error) {
+    const { message, stack } = error;
 
-  Sentry.captureException(error, {
-    tags: {
-      type,
-      context,
-    },
-    extra: {
-      reason: message,
-      stack,
-    },
-  });
+    Sentry.captureException(error, {
+      tags: {
+        type,
+        context,
+      },
+      extra: {
+        reason: message,
+        stack,
+      },
+    });
+  }
 }
