@@ -3,7 +3,8 @@ import { useContext, useEffect, useState } from 'react';
 import ElementService from '../../../../services/element-service';
 import { AuthContext } from '../../../../providers/auth-provider';
 import { TravelBasicType } from '../../../../types/travel.types';
-import { CategoryBasicType } from '../../../../types/element.types';
+import { CategoryBasicType, ElementsBasicType } from '../../../../types/element.types';
+import { sendErrorToSentry } from '../../../../utils/util-sentry';
 
 export default function useElementMain() {
   const [travelInfo, setTravelInfo] = useState<TravelBasicType>();
@@ -16,15 +17,22 @@ export default function useElementMain() {
     if (listId && user?.uid) {
       const getElementsData = async () => {
         try {
-          const dataState = await ElementService.getElementsData(user.uid, listId);
+          const dataState = (await ElementService.getElementsData(
+            user.uid,
+            listId,
+          )) as ElementsBasicType;
 
           if (dataState instanceof Error || !dataState) {
             return new Error('잘못된 데이터입니다.');
           }
-          setTravelInfo(dataState.info);
-          setElements(dataState.elements && Object.values(dataState.elements));
+          setTravelInfo(dataState.info as TravelBasicType);
+          setElements(Object.values(dataState.elements) as CategoryBasicType[]);
         } catch (error) {
-          console.log(error);
+          sendErrorToSentry({
+            type: 'client',
+            context: 'useElementMain.getElementsData',
+            error: error as Error,
+          });
         }
       };
       getElementsData();

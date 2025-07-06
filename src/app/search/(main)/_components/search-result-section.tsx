@@ -5,6 +5,7 @@ import { RoundDot } from '../../../../components/loader/loader';
 import BoardingPass from '../../../../components/ticket/boarding-pass';
 import TransportTicket from '../../../../components/ticket/transport-ticket';
 import useGetUserTravelList from '../../../../hooks/use-get-user-travel-list';
+import { sendErrorToSentry } from '../../../../utils/util-sentry';
 
 export default function SearchResultSection() {
   const { list, keyword, router } = useGetUserTravelList();
@@ -13,7 +14,11 @@ export default function SearchResultSection() {
     try {
       return router.replace('/search');
     } catch (error) {
-      // TODO: 차후에 Sentry 등 배치해서 에러 트래킹 수정 필요.
+      sendErrorToSentry({
+        type: 'client',
+        context: 'SearchResultSection.handleOnClick',
+        error: error as Error,
+      });
     }
   };
 

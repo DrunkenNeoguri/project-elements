@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import OptionService from '../../services/option-services';
 import NoticeItem from './_components/notice-item';
+import { sendErrorToSentry } from '../../utils/util-sentry';
 
 export default async function Notice() {
   try {
@@ -24,7 +25,11 @@ export default async function Notice() {
       </>
     );
   } catch (error) {
-    // TODO: 차후 해당 내용과 관련한 예외사항 컴포넌트트 반영 필요
+    sendErrorToSentry({
+      type: 'client',
+      context: 'Notice.getNoticeItemList',
+      error: error as Error,
+    });
     return <></>;
   }
 }

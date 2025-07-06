@@ -21,6 +21,8 @@ import { collection, doc, getDoc, getDocs, runTransaction, setDoc } from 'fireba
 import { convertUnknownTypeErrorToStringMessage } from '../utils/util-convert';
 import { AccountFormType, UserInfoType } from '../types/user.types';
 import TravelService from './travel-services';
+import { sendErrorToSentry } from '../utils/util-sentry';
+import { getParsedJsonData } from '../utils/util-safed-type';
 
 // *MEMO: 문제 없이 200일 시, 예외를 제외하고 return "OK";
 class AuthService {
@@ -32,7 +34,9 @@ class AuthService {
         rememberState ? browserLocalPersistence : browserSessionPersistence,
       );
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'AuthService.updateAccountPersistenceState'),
+      );
     }
   }
 
@@ -79,7 +83,9 @@ class AuthService {
       }
       return 'OK';
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postLoginProcess'),
+      );
     }
   }
 
@@ -110,7 +116,9 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postGoogleLoginProcess'),
+      );
     }
   }
 
@@ -142,7 +150,9 @@ class AuthService {
       await sendEmailVerification(userData);
       return 'OK';
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postSignUpProcess'),
+      );
     }
   }
 
@@ -153,7 +163,9 @@ class AuthService {
       await sendPasswordResetEmail(auth, formData.email);
       return 'OK';
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postForgetPasswordProcess'),
+      );
     }
   }
 
@@ -169,11 +181,14 @@ class AuthService {
           `유효하지 않은 접근입니다.\n비밀번호 찾기 페이지로 돌아가 절차를 다시 진행해주세요.`,
         );
       }
+
       await verifyPasswordResetCode(auth, actionCode);
       await confirmPasswordReset(auth, actionCode, formData.password);
       return 'OK';
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postResetPasswordProcess'),
+      );
     }
   }
 
@@ -182,14 +197,16 @@ class AuthService {
       const auth = firebaseAuth;
       const currentUser = auth.currentUser;
 
-      if (currentUser) {
-        await updatePassword(currentUser, newPassword);
-        return 'OK';
-      } else {
+      if (currentUser === null) {
         throw new Error('비밀번호를 변경할 수 없습니다.');
       }
+
+      await updatePassword(currentUser, newPassword);
+      return 'OK';
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'AuthService.updatePasswordProcess'),
+      );
     }
   }
 
@@ -197,28 +214,30 @@ class AuthService {
     try {
       const auth = firebaseAuth;
       const currentUser = auth.currentUser;
-      const userData = JSON.parse(localStorage.getItem('userInfo') as string) as UserInfoType;
-
-      if (currentUser) {
-        await updateProfile(currentUser, {
-          displayName: username,
-        });
-
-        const newUserProfile = {
-          ...userData,
-          username,
-        };
-
-        await setDoc(doc(await firestore(), `users`, currentUser.uid), newUserProfile);
-
-        localStorage.setItem('userInfo', JSON.stringify(newUserProfile));
-
-        return 'OK';
-      } else {
+      if (!currentUser) {
         throw new Error('프로필을 수정할 수 없습니다.');
       }
+
+      const userData = getParsedJsonData<UserInfoType>('userInfo');
+
+      await updateProfile(currentUser, {
+        displayName: username,
+      });
+
+      const newUserProfile = {
+        ...userData,
+        username,
+      };
+
+      await setDoc(doc(await firestore(), `users`, currentUser.uid), newUserProfile);
+
+      localStorage.setItem('userInfo', JSON.stringify(newUserProfile));
+
+      return 'OK';
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'AuthService.updateProfileProcess'),
+      );
     }
   }
 
@@ -249,7 +268,9 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'AuthService.updateAccountVerification'),
+      );
     }
   }
 
@@ -258,19 +279,30 @@ class AuthService {
       await signOut(firebaseAuth);
       return 'OK';
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postLogOutProcess'),
+      );
     }
   }
 
   static async postUserCheckProcessByLoginUser(formData: Pick<AccountFormType, 'password'>) {
     try {
       const auth = firebaseAuth;
+      const email = auth.currentUser?.email;
       auth.languageCode = 'ko';
 
-      await signInWithEmailAndPassword(auth, auth.currentUser?.email as string, formData.password);
+      if (!email) {
+        throw new Error('로그인된 사용자의 이메일 정보를 찾을 수 없습니다.');
+      }
 
+      await signInWithEmailAndPassword(auth, email, formData.password);
       return 'OK';
     } catch (error) {
+      sendErrorToSentry({
+        type: 'server',
+        context: 'AuthService.postUserCheckProcessByLoginUser',
+        error: error,
+      });
       return new Error('입력하신 계정의 비밀번호와 다릅니다. 다시 한 번 확인해주세요.');
     }
   }
@@ -279,34 +311,37 @@ class AuthService {
     try {
       const auth = firebaseAuth;
       const currentUser = auth.currentUser;
-      const currentUserUid = auth.currentUser?.uid as string;
 
-      if (currentUser) {
-        await runTransaction(await firestore(), async transaction => {
-          await deleteUser(currentUser);
-          await localStorage.removeItem('userInfo');
-
-          const database = await firestore();
-
-          (await getDocs(collection(database, 'travels', currentUserUid, 'docs'))).forEach(
-            async data => {
-              await transaction.delete(
-                doc(collection(await firestore(), 'travels', currentUserUid, 'docs'), data.id),
-              );
-            },
-          );
-
-          (await getDocs(collection(database, 'elements', currentUserUid, 'docs'))).forEach(
-            async data => {
-              await transaction.delete(
-                doc(collection(await firestore(), 'elements', currentUserUid, 'docs'), data.id),
-              );
-            },
-          );
-
-          await transaction.delete(doc(await firestore(), 'users', currentUserUid));
-        });
+      if (!currentUser) {
+        throw new Error('현재 로그인된 사용자가 없습니다.\n로그인 후, 다시 시도해주세요.');
       }
+
+      const currentUserUid = auth.currentUser.uid;
+
+      await runTransaction(await firestore(), async transaction => {
+        await deleteUser(currentUser);
+        await localStorage.removeItem('userInfo');
+
+        const database = await firestore();
+
+        (await getDocs(collection(database, 'travels', currentUserUid, 'docs'))).forEach(
+          async data => {
+            await transaction.delete(
+              doc(collection(await firestore(), 'travels', currentUserUid, 'docs'), data.id),
+            );
+          },
+        );
+
+        (await getDocs(collection(database, 'elements', currentUserUid, 'docs'))).forEach(
+          async data => {
+            await transaction.delete(
+              doc(collection(await firestore(), 'elements', currentUserUid, 'docs'), data.id),
+            );
+          },
+        );
+
+        await transaction.delete(doc(await firestore(), 'users', currentUserUid));
+      });
 
       if (opinion) {
         await setDoc(doc(await firestore(), `opinions`, currentUserUid), {
@@ -316,8 +351,9 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      console.log(error);
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postSignOutProcess'),
+      );
     }
   }
 }

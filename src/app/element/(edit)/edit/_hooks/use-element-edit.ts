@@ -3,6 +3,8 @@ import ElementService from '../../../../../services/element-service';
 import { useSearchParams } from 'next/navigation';
 import { AuthContext } from '../../../../../providers/auth-provider';
 import { ElementsContext } from '../../../../../providers/elements-provider';
+import { sendErrorToSentry } from '../../../../../utils/util-sentry';
+import { CategoryBasicType, ElementsBasicType } from '../../../../../types/element.types';
 
 export default function useElementEdit() {
   const { dispatch } = useContext(ElementsContext);
@@ -14,7 +16,10 @@ export default function useElementEdit() {
     if (listId && user?.uid) {
       const getElementsData = async () => {
         try {
-          const dataState = await ElementService.getElementsData(user.uid, listId);
+          const dataState = (await ElementService.getElementsData(
+            user.uid,
+            listId,
+          )) as ElementsBasicType;
 
           if (dataState instanceof Error || !dataState) {
             return new Error('잘못된 데이터입니다.');
@@ -24,11 +29,15 @@ export default function useElementEdit() {
             type: 'setData',
             target: {
               info: dataState.info,
-              elements: dataState.elements && Object.values(dataState.elements),
+              elements: Object.values(dataState.elements) as CategoryBasicType[],
             },
           });
         } catch (error) {
-          // *MEMO: 에러 메시지 출력 내용 만들 것
+          sendErrorToSentry({
+            type: 'client',
+            context: 'useElementEdit.getElementsData',
+            error: error as Error,
+          });
         }
       };
       getElementsData();

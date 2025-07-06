@@ -1,4 +1,5 @@
 import { withSentryConfig } from '@sentry/nextjs';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export', // Outputs a Single-Page Application (SPA).
@@ -21,6 +22,7 @@ export default withSentryConfig(nextConfig, {
   project: 'checkinbag',
 
   // Only print logs for uploading source maps in CI
+  // eslint-disable-next-line no-undef
   silent: !process.env.CI,
 
   // For all available options, see:

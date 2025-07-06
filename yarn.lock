@@ -5547,7 +5547,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^9.29.0":
+"eslint@npm:^9.0.0":
   version: 9.29.0
   resolution: "eslint@npm:9.29.0"
   dependencies:
@@ -8475,7 +8475,7 @@ __metadata:
     autoprefixer: "npm:^10.4.19"
     embla-carousel-autoplay: "npm:^8.5.1"
     embla-carousel-react: "npm:^8.5.1"
-    eslint: "npm:^9.29.0"
+    eslint: "npm:^9.0.0"
     eslint-config-prettier: "npm:^10.1.5"
     eslint-plugin-import: "npm:^2.31.0"
     eslint-plugin-prettier: "npm:^5.5.0"
