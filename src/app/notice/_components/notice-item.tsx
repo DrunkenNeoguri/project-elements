@@ -2,7 +2,7 @@ import Link from 'next/link';
 import NoticeClip from './notice-clip';
 import { Notice } from '../../../types/option.types';
 
-interface Props extends Notice {}
+type Props = Notice;
 
 export default function NoticeItem({ id, title, clipType, createdAt }: Props) {
   return (

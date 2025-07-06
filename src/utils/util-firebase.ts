@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { sendErrorToSentry } from './util-sentry';
 // import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
@@ -24,6 +25,11 @@ export async function firestore() {
     const { getFirestore } = await import('firebase/firestore');
     return getFirestore(firebase);
   } catch (error) {
+    sendErrorToSentry({
+      type: 'client',
+      context: 'util-firebase.firestore',
+      error: error as Error,
+    });
     throw new Error('Firestore Load Error: Firestore를 불러올 수 없습니다.');
   }
 }
@@ -33,6 +39,11 @@ export async function firebaseStorage() {
     const { getStorage } = await import('firebase/storage');
     return getStorage(firebase);
   } catch (error) {
+    sendErrorToSentry({
+      type: 'client',
+      context: 'util-firebase.firebaseStorage',
+      error: error as Error,
+    });
     throw new Error('Storage Load Error: Storage를 불러올 수 없습니다.');
   }
 }

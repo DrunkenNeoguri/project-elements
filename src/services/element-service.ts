@@ -2,6 +2,9 @@ import { collection, doc, getDoc, runTransaction } from 'firebase/firestore';
 import { firestore } from '../utils/util-firebase';
 import { convertUnknownTypeErrorToStringMessage } from '../utils/util-convert';
 import { ElementsBasicType } from '../types/element.types';
+import { sendErrorToSentry } from '../utils/util-sentry';
+import { UserInfoType } from '../types/user.types';
+import { getParsedJsonData } from '../utils/util-safed-type';
 
 export default class ElementService {
   static async getElementsData(userUid: string, id: string) {
@@ -10,21 +13,17 @@ export default class ElementService {
         doc(collection(await firestore(), `elements`, userUid, 'docs'), id),
       );
 
-      if (elementsState instanceof Error) {
-        // TODO: 에러 메시지 추후 추가
-        return;
-      }
-
-      return elementsState.data() as ElementsBasicType;
+      return elementsState.data();
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      sendErrorToSentry({ type: 'server', context: 'ElementService.getElementsData', error });
+      return;
     }
   }
 
   static async postElementsData(userUid: string, id: string, data: ElementsBasicType) {
     try {
       const userInfo = localStorage.getItem('userInfo') ?? '';
-      const parseUserInfo = JSON.parse(userInfo);
+      const parseUserInfo = getParsedJsonData<UserInfoType>(userInfo);
 
       await runTransaction(await firestore(), async transaction => {
         await transaction.set(
@@ -45,7 +44,9 @@ export default class ElementService {
 
       return 'OK';
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'ElementService.postElementsData'),
+      );
     }
   }
 
@@ -63,7 +64,9 @@ export default class ElementService {
 
       return 'OK';
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'ElementService.deleteElementsData'),
+      );
     }
   }
 }

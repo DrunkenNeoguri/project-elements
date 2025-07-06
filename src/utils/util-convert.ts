@@ -1,6 +1,13 @@
 import { FirebaseError } from 'firebase/app';
+import { sendErrorToSentry } from './util-sentry';
 
-export const convertUnknownTypeErrorToStringMessage = (error: unknown) => {
+export const convertUnknownTypeErrorToStringMessage = (error: unknown, context: string) => {
+  sendErrorToSentry({
+    type: 'server',
+    context,
+    error,
+  });
+
   if (error instanceof FirebaseError) {
     const errorCode: string = error.code;
     return firebaseErrorText[`${errorCode}`] ?? customErrorText['uncaught-error'];

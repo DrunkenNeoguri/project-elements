@@ -1,4 +1,5 @@
 import { UserInfoType } from '../types/user.types';
+import { sendErrorToSentry } from './util-sentry';
 
 export function getLocalStorageItem<T>(key: string, defaultValue: T | null = null): T | null {
   try {
@@ -8,6 +9,11 @@ export function getLocalStorageItem<T>(key: string, defaultValue: T | null = nul
     }
     return JSON.parse(item) as T;
   } catch (error) {
+    sendErrorToSentry({
+      type: 'client',
+      context: 'getLocalStorageItem',
+      error: error as Error,
+    });
     return defaultValue;
   }
 }
@@ -17,6 +23,12 @@ export function setLocalStorageItem<T>(key: string, value: T): boolean {
     localStorage.setItem(key, JSON.stringify(value));
     return true;
   } catch (error) {
+    sendErrorToSentry({
+      type: 'client',
+      context: 'setLocalStorageItem',
+      error: error as Error,
+    });
+
     return false;
   }
 }
@@ -26,6 +38,12 @@ export function removeLocalStorageItem(key: string): boolean {
     localStorage.removeItem(key);
     return true;
   } catch (error) {
+    sendErrorToSentry({
+      type: 'client',
+      context: 'removeLocalStorageItem',
+      error: error as Error,
+    });
+
     return false;
   }
 }

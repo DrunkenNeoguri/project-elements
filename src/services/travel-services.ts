@@ -4,6 +4,7 @@ import { TravelBasicType } from '../types/travel.types';
 import { convertUnknownTypeErrorToStringMessage } from '../utils/util-convert';
 import { basicTemplate, domesticTemplate, foreignTemplate } from '../utils/util-template';
 import { UserInfoType } from '../types/user.types';
+import { getParsedJsonData, getTypedDocData } from '../utils/util-safed-type';
 
 class TravelService {
   static async getUserTravelList(userUid: string, keyword?: string) {
@@ -12,15 +13,18 @@ class TravelService {
       const docsState = await getDocs(collection(await firestore(), `travels`, userUid, 'docs'));
 
       docsState.forEach(doc => {
-        const { travelType, title, departureAt, travelPeriod, destination, id } = doc.data();
-        travelList.push({
-          travelType,
-          title,
-          departureAt,
-          travelPeriod,
-          destination,
-          id,
-        });
+        const data = getTypedDocData<TravelBasicType>(doc);
+        if (data) {
+          const { travelType, title, departureAt, travelPeriod, destination, id } = data;
+          travelList.push({
+            travelType,
+            title,
+            departureAt,
+            travelPeriod,
+            destination,
+            id,
+          });
+        }
       });
 
       if (keyword) {
@@ -34,7 +38,9 @@ class TravelService {
       }
       return travelList;
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'TravelService.getUserTravelList'),
+      );
     }
   }
 
@@ -57,7 +63,7 @@ class TravelService {
       };
 
       const userInfo = localStorage.getItem('userInfo') ?? '';
-      const parseUserInfo: UserInfoType = JSON.parse(userInfo);
+      const parseUserInfo = getParsedJsonData<UserInfoType>(userInfo);
 
       await runTransaction(await firestore(), async transaction => {
         await transaction.set(
@@ -71,23 +77,25 @@ class TravelService {
         );
 
         const setUpcomingTravel = () => {
-          if (!parseUserInfo.upcomingTravel) {
-            return {
-              title: formData.title,
-              id: formData.id,
-              departureAt: formData.departureAt,
-            };
-          } else if (
-            new Date(parseUserInfo.upcomingTravel.departureAt).getTime() >
-            new Date(formData.departureAt).getTime()
-          ) {
-            return {
-              title: formData.title,
-              id: formData.id,
-              departureAt: formData.departureAt,
-            };
+          if (parseUserInfo) {
+            if (!parseUserInfo.upcomingTravel) {
+              return {
+                title: formData.title,
+                id: formData.id,
+                departureAt: formData.departureAt,
+              };
+            } else if (
+              new Date(parseUserInfo.upcomingTravel.departureAt).getTime() >
+              new Date(formData.departureAt).getTime()
+            ) {
+              return {
+                title: formData.title,
+                id: formData.id,
+                departureAt: formData.departureAt,
+              };
+            }
+            return { ...parseUserInfo.upcomingTravel };
           }
-          return { ...parseUserInfo.upcomingTravel };
         };
 
         const renewalUserData = {
@@ -103,7 +111,9 @@ class TravelService {
 
       return 'OK';
     } catch (error) {
-      return new Error(convertUnknownTypeErrorToStringMessage(error));
+      return new Error(
+        convertUnknownTypeErrorToStringMessage(error, 'TravelService.postCreateNewTravel'),
+      );
     }
   }
   static async renewalUpcomingTravelInUserData(userUid: string) {
@@ -112,15 +122,18 @@ class TravelService {
       const docsState = await getDocs(collection(await firestore(), `travels`, userUid, 'docs'));
 
       docsState.forEach(doc => {
-        const { travelType, title, departureAt, travelPeriod, destination, id } = doc.data();
-        travelList.push({
-          travelType,
-          title,
-          departureAt,
-          travelPeriod,
-          destination,
-          id,
-        });
+        const data = getTypedDocData<TravelBasicType>(doc);
+        if (data) {
+          const { travelType, title, departureAt, travelPeriod, destination, id } = data;
+          travelList.push({
+            travelType,
+            title,
+            departureAt,
+            travelPeriod,
+            destination,
+            id,
+          });
+        }
       });
 
       travelList = travelList.filter(
@@ -133,7 +146,12 @@ class TravelService {
 
       return travelList[0];
     } catch (error) {
-      throw new Error(convertUnknownTypeErrorToStringMessage(error));
+      throw new Error(
+        convertUnknownTypeErrorToStringMessage(
+          error,
+          'TravelService.renewalUpcomingTravelInUserData',
+        ),
+      );
     }
   }
 }

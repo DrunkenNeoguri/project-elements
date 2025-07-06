@@ -5,6 +5,7 @@ import { ElementsContext } from '../../../../../../providers/elements-provider';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ElementService from '../../../../../../services/element-service';
 import { AuthContext } from '../../../../../../providers/auth-provider';
+import { sendErrorToSentry } from '../../../../../../utils/util-sentry';
 
 export default function ElementsOptionBottomSheet() {
   const { externalList, handleExternalList } = useContext(ExternalContext);
@@ -30,7 +31,13 @@ export default function ElementsOptionBottomSheet() {
         return router.push(`/element?id=${listId}`);
       }
     } catch (error) {
-      // TODO: 차후 Sentry, 에러 메시지 toast / 현재는 현상 유지
+      // TODO: 에러 메시지 toast / 현재는 현상 유지
+      sendErrorToSentry({
+        type: 'client',
+        context: 'ElementsOptionBottomSheet.handleUpdateTravelData',
+        error: error as Error,
+      });
+
       return;
     }
   };

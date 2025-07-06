@@ -5,12 +5,12 @@ import { AuthContext } from './auth-provider';
 import { TravelBasicType } from '../types/travel.types';
 import ElementService from '../services/element-service';
 
-type ElementsReducerActionType = {
+export type ElementsReducerActionType = {
   type: string;
   target: ElementsBasicType | CategoryBasicType | ElementBasicType | TravelBasicType;
 };
 
-type ElementsContextType = {
+export type ElementsContextType = {
   state: ElementsBasicType;
   dispatch: Dispatch<ElementsReducerActionType>;
 };

@@ -1,7 +1,7 @@
 import { Notice } from '../../../../types/option.types';
 import NoticeClip from '../../_components/notice-clip';
 
-interface Props extends Notice {}
+type Props = Notice;
 
 export default function ArticleTitle({ title, clipType, createdAt }: Props) {
   return (
