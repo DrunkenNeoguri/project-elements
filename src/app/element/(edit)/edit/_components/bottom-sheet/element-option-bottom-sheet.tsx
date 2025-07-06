@@ -25,7 +25,6 @@ export default function ElementOptionBottomSheet() {
   };
 
   const handleSwitchDeleteElement = () => {
-    // eslint-disable-next-line no-unused-vars
     const { setState, ...rest } = part as ElementBasicType & {
       setState: Dispatch<SetStateAction<ElementStateType>>;
     };
