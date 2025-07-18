@@ -5,11 +5,11 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 export const supabase = createClient(supabaseUrl as string, supabaseAnonKey as string);
-export const supabaseAuth = await supabase.auth;
+export const supabaseAuth = supabase.auth;
 
-export async function supabaseDatabase(tableName: string) {
+export function supabaseDatabase(tableName: string) {
   try {
-    return await supabase.from(tableName);
+    return supabase.from(tableName);
   } catch (error) {
     sendErrorToSentry({
       type: 'client',
