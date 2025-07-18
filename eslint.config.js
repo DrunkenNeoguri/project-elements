@@ -25,7 +25,10 @@ export default [
     },
     rules: {
       semi: ['error', 'always'],
-      camelcase: ['error', { properties: 'always' }],
+      camelcase: [
+        'error',
+        { properties: 'always', allow: ['access_token', 'refresh_token', 'user_id'] },
+      ],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-unused-vars': 'error',
       '@typescript-eslint/no-unsafe-member-access': 'error',
