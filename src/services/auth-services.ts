@@ -1,6 +1,6 @@
 import { supabase, supabaseAuth, supabaseDatabase } from '../utils/util-supabase';
 import { convertUnknownTypeErrorToStringMessage } from '../utils/util-convert';
-import { AccountFormType, UserInfoType } from '../types/user.types';
+import { AccountFormType, SupabaseUserType, UserInfoType } from '../types/user.types';
 import TravelService from './travel-services';
 import { sendErrorToSentry } from '../utils/util-sentry';
 import { getLocalStorageItem } from '../utils/util-local-storage';
@@ -8,26 +8,6 @@ import { User, PostgrestSingleResponse, OAuthResponse } from '@supabase/supabase
 
 // *MEMO: 문제 없이 200일 시, 예외를 제외하고 return "OK";
 class AuthService {
-  static async updateAccountPersistenceState(rememberState: boolean) {
-    try {
-      // Supabase는 기본적으로 localStorage를 사용하며,
-      // 세션 유지는 session storage 옵션으로 제어 가능
-      // 하지만 직접적인 persistence 설정은 다르게 처리됩니다.
-
-      // 만약 remember state를 false로 하려면 세션을 명시적으로 관리해야 합니다.
-      if (!rememberState) {
-        // 세션 만료 시간을 짧게 설정하거나 별도 로직 필요
-        console.log('Session persistence set to session only');
-      }
-
-      return 'OK';
-    } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'AuthService.updateAccountPersistenceState'),
-      );
-    }
-  }
-
   static async postLoginProcess(formData: Pick<AccountFormType, 'email' | 'password'>) {
     try {
       const { data, error } = await supabaseAuth.signInWithPassword({
@@ -100,20 +80,16 @@ class AuthService {
 
   static async postGoogleLoginProcess() {
     try {
-      const { data, error }: OAuthResponse = await supabaseAuth.signInWithOAuth({
+      const { error }: OAuthResponse = await supabaseAuth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: `${window.location.origin}/user/login/success`,
         },
       });
 
       if (error) {
         throw error;
       }
-
-      // OAuth 로그인은 리다이렉트 방식이므로
-      // 실제 사용자 정보는 리다이렉트 후 처리해야 합니다.
-      // 이 함수는 리다이렉트 후 콜백에서 호출되어야 합니다.
 
       return 'OK';
     } catch (error) {
@@ -149,7 +125,7 @@ class AuthService {
           const currentUserData = {
             id: user.id,
             email: user.email,
-            username: user.user_metadata?.full_name || user.email,
+            username: user.user_metadata?.username as string,
             createdAt: new Date().toISOString(),
           };
 
@@ -348,7 +324,9 @@ class AuthService {
         throw error;
       }
 
-      if (!data?.user) {
+      const user = data?.user as SupabaseUserType;
+
+      if (!user) {
         return new Error(
           '존재하지 않는 계정입니다.\n로그인 화면에서 회원가입을 눌러 절차를 진행해주세요.',
         );
@@ -356,9 +334,9 @@ class AuthService {
 
       // 사용자 정보를 users 테이블에 저장
       const userData = {
-        id: data.user.id,
-        email: data.user.email,
-        username: data.user.user_metadata?.username || data.user.email,
+        id: user.id,
+        email: user.email,
+        username: user.user_metadata?.username as string,
         createdAt: new Date().toISOString(),
       };
 
@@ -486,7 +464,7 @@ class AuthService {
 
   // 인증 상태 변경 리스너 (새로 추가)
   static onAuthStateChanged(callback: (user: User | null) => void) {
-    return supabaseAuth.onAuthStateChange((event, session) => {
+    return supabaseAuth.onAuthStateChange((_event, session) => {
       callback(session?.user || null);
     });
   }
