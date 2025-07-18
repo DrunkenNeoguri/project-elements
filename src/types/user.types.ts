@@ -1,3 +1,11 @@
+import { User } from '@supabase/supabase-js';
+
+export type SupabaseUserType = User & {
+  user_metadata: {
+    username: string;
+  };
+};
+
 export type AccountFormType = {
   email: string;
   password: string;
@@ -6,6 +14,7 @@ export type AccountFormType = {
 };
 
 export type UserInfoType = {
+  id?: string;
   email: string;
   username: string;
   createdAt: number;
