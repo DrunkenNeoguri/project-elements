@@ -14,11 +14,11 @@ export default function useElementMain() {
   const listId = searchParams?.get('id');
 
   useEffect(() => {
-    if (listId && user?.uid) {
+    if (listId && user?.id) {
       const getElementsData = async () => {
         try {
           const dataState = (await ElementService.getElementsData(
-            user.uid,
+            user.id,
             listId,
           )) as ElementsBasicType;
 
@@ -46,7 +46,7 @@ export default function useElementMain() {
 
     const saveDraftToDatabase = () => {
       return setTimeout(async () => {
-        await ElementService.postElementsData(user.uid, travelInfo?.id, {
+        await ElementService.postElementsData(user.id, travelInfo?.id, {
           info: travelInfo,
           elements: elements,
         });

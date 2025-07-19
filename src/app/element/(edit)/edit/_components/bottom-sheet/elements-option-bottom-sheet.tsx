@@ -27,7 +27,7 @@ export default function ElementsOptionBottomSheet() {
   const handleUpdateTravelData = async () => {
     try {
       if (user) {
-        await ElementService.postElementsData(user?.uid, state.info.id, state);
+        await ElementService.postElementsData(user?.id, state.info.id, state);
         return router.push(`/element?id=${listId}`);
       }
     } catch (error) {
@@ -44,7 +44,7 @@ export default function ElementsOptionBottomSheet() {
 
   const handleDeleteTravelData = async () => {
     if (user) {
-      await ElementService.deleteElementsData(user?.uid, state.info.id);
+      await ElementService.deleteElementsData(user?.id, state.info.id);
       return router.push('/main');
     }
   };

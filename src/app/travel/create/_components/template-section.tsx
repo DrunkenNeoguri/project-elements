@@ -38,7 +38,7 @@ export default function TemplateSection({ handlePrevStep, travelData }: PropType
     }
 
     const createListState = await TravelService.postCreateNewTravel(
-      user?.uid,
+      user?.id,
       useTemplate,
       travelData,
     );

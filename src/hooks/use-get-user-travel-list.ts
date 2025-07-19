@@ -13,11 +13,11 @@ export default function useGetUserTravelList() {
   const keyword = searchParams?.get('keyword') ?? undefined;
 
   useEffect(() => {
-    if (!user || !user?.uid) {
+    if (!user || !user?.id) {
       return;
     }
     const getTravelList = async () => {
-      const listState = await TravelService.getUserTravelList(user.uid, keyword);
+      const listState = await TravelService.getUserTravelList(user.id, keyword);
       if (listState instanceof Error) {
         return;
       }

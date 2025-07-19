@@ -28,7 +28,7 @@ export default function ConfirmSection({
     if (!user) {
       return;
     }
-    setTravelData({ ...travelData, id: user.uid + Date.now() });
+    setTravelData({ ...travelData, id: user.id + Date.now() });
     handleNextStep();
   };
 

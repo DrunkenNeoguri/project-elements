@@ -179,7 +179,7 @@ export default function ElementProvider({ children }: { children: ReactNode }) {
 
     const saveDraftToDatabase = () => {
       return setTimeout(async () => {
-        await ElementService.postElementsData(user.uid, state.info.id, state);
+        await ElementService.postElementsData(user.id, state.info.id, state);
       }, 10000);
     };
     saveDraftToDatabase();

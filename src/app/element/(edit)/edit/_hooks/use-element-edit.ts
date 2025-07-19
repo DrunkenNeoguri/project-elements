@@ -17,7 +17,7 @@ export default function useElementEdit() {
       const getElementsData = async () => {
         try {
           const dataState = (await ElementService.getElementsData(
-            user.uid,
+            user.id,
             listId,
           )) as ElementsBasicType;
 

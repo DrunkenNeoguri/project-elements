@@ -39,7 +39,7 @@ export default function EditTravelInfoBottomSheet() {
         target: travelInfo as TravelBasicType,
       });
 
-      await ElementService.postElementsData(user.uid, state.info.id, {
+      await ElementService.postElementsData(user.id, state.info.id, {
         info: travelInfo,
         elements: state.elements,
       });
