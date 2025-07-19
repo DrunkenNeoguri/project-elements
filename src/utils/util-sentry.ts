@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/nextjs';
-import { FirebaseError } from 'firebase/app';
 
 interface Props {
   type: 'server' | 'client';
@@ -8,7 +7,7 @@ interface Props {
 }
 
 export function sendErrorToSentry({ type, context, error }: Props) {
-  if (error instanceof FirebaseError || error instanceof Error) {
+  if (error instanceof Error) {
     const { message, stack } = error;
 
     Sentry.captureException(error, {
