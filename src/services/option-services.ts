@@ -33,8 +33,9 @@ class OptionService {
 
   private static async getNoticesBase() {
     const noticesTable = await supabaseDatabase('notices');
-    const { data: noticesList, error: noticesError }: PostgrestResponse<Notice[]> =
-      await noticesTable.select('*').order('createdAt', { ascending: false });
+    const { data: noticesList, error: noticesError }: PostgrestResponse<Notice> = await noticesTable
+      .select('*')
+      .order('createdAt', { ascending: false });
 
     if (noticesError) {
       throw new Error(
