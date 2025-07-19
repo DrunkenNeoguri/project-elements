@@ -1,7 +1,7 @@
-import { DocumentData } from 'firebase/firestore';
+import { PostgrestResponse } from '@supabase/supabase-js';
 
-export function getTypedDocData<TDataType>(doc: DocumentData): TDataType | null {
-  const data: unknown = doc.data();
+export function getTypedDocData<TDataType>(doc: PostgrestResponse<TDataType>): TDataType | null {
+  const data: unknown = doc;
   if (data && typeof data === 'object') {
     return data as TDataType;
   }
