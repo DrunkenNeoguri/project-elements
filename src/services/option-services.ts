@@ -1,6 +1,6 @@
 import { convertUnknownTypeErrorToStringMessage } from '../utils/util-convert';
 import { Banner, Notice } from '../types/option.types';
-import { getTypedDocData } from '../utils/util-safed-type';
+import { getTypedObjectData } from '../utils/util-safed-type';
 import { supabaseDatabase } from '../utils/util-supabase';
 import { PostgrestResponse } from '@supabase/supabase-js';
 
@@ -85,7 +85,7 @@ class OptionService {
         );
       }
 
-      return getTypedDocData<Notice>(noticeData) ?? null;
+      return getTypedObjectData<Notice>(noticeData) ?? null;
     } catch (error) {
       throw new Error(
         convertUnknownTypeErrorToStringMessage(error, 'OptionService.getNoticeOneArticle'),

@@ -2,7 +2,7 @@ import { TravelBasicType } from '../types/travel.types';
 import { convertUnknownTypeErrorToStringMessage } from '../utils/util-convert';
 import { basicTemplate, domesticTemplate, foreignTemplate } from '../utils/util-template';
 import { UserInfoType } from '../types/user.types';
-import { getParsedJsonData, getTypedDocData } from '../utils/util-safed-type';
+import { getParsedJsonData, getTypedObjectData } from '../utils/util-safed-type';
 import { supabase, supabaseDatabase } from '../utils/util-supabase';
 
 // *MEMO: PostgreSQL을 쓰면서 테이블 구조를 전반적으로 많이 변경해야겠다는 생각이 듦.
@@ -29,7 +29,7 @@ class TravelService {
       }
 
       travelsData.forEach(doc => {
-        const data = getTypedDocData<TravelBasicType>(doc);
+        const data = getTypedObjectData<TravelBasicType>(doc);
         if (data) {
           const { travelType, title, departureAt, travelPeriod, destination, id } = data;
           travelList.push({
@@ -169,7 +169,6 @@ class TravelService {
     }
   }
 
-  //?CONCERN: postgreSQL인데 이거 하나만 뽑을 수 있는 게 있지 않을까?
   static async renewalUpcomingTravelInUserData(userUid: string) {
     try {
       const travelsTable = await supabaseDatabase('travels');
@@ -188,7 +187,7 @@ class TravelService {
       }
 
       const upcomingTravel = travelsData
-        .map(doc => getTypedDocData<TravelBasicType>(doc))
+        .map(doc => getTypedObjectData<TravelBasicType>(doc))
         .filter((data): data is TravelBasicType => !!data)
         .map(({ travelType, title, departureAt, travelPeriod, destination, id }) => ({
           travelType,

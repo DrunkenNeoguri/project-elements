@@ -1,8 +1,5 @@
-import { PostgrestResponse } from '@supabase/supabase-js';
-
-export function getTypedDocData<TDataType>(doc: PostgrestResponse<TDataType>): TDataType | null {
-  const data: unknown = doc;
-  if (data && typeof data === 'object') {
+export function getTypedObjectData<TDataType>(data: unknown): TDataType | null {
+  if (data && typeof data === 'object' && !Array.isArray(data)) {
     return data as TDataType;
   }
   return null;
