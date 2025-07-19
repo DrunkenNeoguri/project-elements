@@ -1,10 +1,10 @@
 'use client';
 import { ReactNode, createContext, useEffect, useState } from 'react';
-import { firebaseAuth } from '../utils/util-firebase';
-import { User, onAuthStateChanged } from 'firebase/auth';
 import { usePathname, useRouter } from 'next/navigation';
 import Backdrop from '../components/backdrop/backdrop';
 import { Bar } from '../components/loader/loader';
+import { supabaseAuth } from '../utils/util-supabase';
+import { User } from '@supabase/supabase-js';
 
 export type AuthContextType = User | null;
 
@@ -17,15 +17,26 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
   // ?CONCERN: 예외 경로만 별도로 처리할 수 있는 방안을 좀 더 깔끔하게 할 수 있는 방법이 있을지...
   useEffect(() => {
-    onAuthStateChanged(firebaseAuth, user => {
-      if (user) {
-        return setUser(user);
-      } else {
+    //* MEMO: 새로고침 등이 발생 시, 유저 정보가 있는지를 확인
+    const {
+      data: { subscription },
+    } = supabaseAuth.onAuthStateChange((event, session) => {
+      if (session && (event === 'TOKEN_REFRESHED' || event === 'SIGNED_IN')) {
+        setUser(session.user);
+      } else if (event === 'SIGNED_OUT') {
         setUser(null);
         router.push('/user/login');
-        return new Error('Authorization token is expired.');
       }
     });
+
+    //* MEMO: 앱 시작 시, 유저 정보가 있는지를 확인
+    supabaseAuth.getSession().then(({ data }) => {
+      setUser(data.session?.user ?? null);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [router, pathname]);
 
   return (
