@@ -26,9 +26,9 @@ export function supabaseStorage(dirName: string) {
   } catch (error) {
     sendErrorToSentry({
       type: 'client',
-      context: 'util-supabase.firebaseStorage',
+      context: 'util-supabase.supabaseStorage',
       error,
     });
-    throw new Error('Firebase Storage Load Error: Firebase Storage를 불러올 수 없습니다.');
+    throw new Error('Supabase Storage Load Error: Supabase Storage를 불러올 수 없습니다.');
   }
 }
