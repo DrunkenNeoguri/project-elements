@@ -158,7 +158,7 @@ class AuthService {
       }
 
       if (!data?.user) {
-        return new Error('계정 생성이 진행되지 않았습니다.\n잠시 후, 다시 시도해주세요.');
+        throw new Error('계정 생성이 진행되지 않았습니다.\n잠시 후, 다시 시도해주세요.');
       }
 
       // 사용자 정보를 별도 테이블에 저장
@@ -178,7 +178,7 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      return normalizeError(error, 'AuthService.postSignUpProcess');
+      throw normalizeError(error, 'AuthService.postSignUpProcess');
     }
   }
 

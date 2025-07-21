@@ -27,13 +27,14 @@ export default function LoginForm() {
     const validityCheck = checkLoginDataTypeCheck(loginData);
 
     if (validityCheck) {
-      await AuthService.updateAccountPersistenceState(rememberLogin);
-      const loginState = await AuthService.postLoginProcess(loginData);
-      if (loginState === 'OK') {
-        router.push('/main');
-      } else {
+      try {
+        const loginState = await AuthService.postLoginProcess(loginData);
+        if (loginState === 'OK') {
+          router.push('/main');
+        }
+      } catch (error) {
         handleExternalList('login');
-        setModalMsg(loginState.message);
+        setModalMsg((error as Error).message);
       }
     }
   };

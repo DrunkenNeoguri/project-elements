@@ -23,16 +23,16 @@ export default function SignUpForm() {
   } = useSignUpForm();
 
   const handleSubmit = async () => {
-    const validityCheck = checkSignUpDataTypeCheck(signUpData);
+    try {
+      const validityCheck = checkSignUpDataTypeCheck(signUpData);
 
-    if (validityCheck) {
-      const signUpState = await AuthService.postSignUpProcess(signUpData);
-      if (signUpState === 'OK') {
+      if (validityCheck) {
+        await AuthService.postSignUpProcess(signUpData);
         router.push(`/user/signup/completed?email=${signUpData.email}`);
-      } else {
-        handleExternalList('signup');
-        setModalMsg(signUpState.message);
       }
+    } catch (error) {
+      handleExternalList('signup');
+      setModalMsg((error as Error).message);
     }
   };
 
