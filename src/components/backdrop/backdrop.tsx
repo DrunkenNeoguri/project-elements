@@ -1,6 +1,6 @@
-import { ButtonHTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 
-export type BackdropPropType = ButtonHTMLAttributes<HTMLButtonElement> & {
+export type BackdropPropType = HTMLAttributes<HTMLDivElement> & {
   colorTheme?: 'backdrop' | 'loader';
   styles?: string;
 };
@@ -14,7 +14,8 @@ export default function Backdrop(props: BackdropPropType) {
   };
 
   return (
-    <button
+    <div
+      aria-hidden="true"
       className={
         'w-full max-w-[379px] h-[100vh] flex justify-center items-center fixed z-50 top-0 ' +
         backdropType[colorTheme] +
@@ -23,6 +24,6 @@ export default function Backdrop(props: BackdropPropType) {
       {...rest}
     >
       {children}
-    </button>
+    </div>
   );
 }
