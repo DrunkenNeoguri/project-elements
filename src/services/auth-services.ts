@@ -1,8 +1,7 @@
 import { supabase, supabaseAuth, supabaseDatabase } from '../utils/util-supabase';
-import { convertUnknownTypeErrorToStringMessage } from '../utils/util-convert';
+import { normalizeError } from '../utils/util-convert';
 import { AccountFormType, SupabaseUserType, UserInfoType } from '../types/user.types';
 import TravelService from './travel-services';
-import { sendErrorToSentry } from '../utils/util-sentry';
 import { getLocalStorageItem } from '../utils/util-local-storage';
 import { User, PostgrestSingleResponse, OAuthResponse } from '@supabase/supabase-js';
 
@@ -16,23 +15,21 @@ class AuthService {
       });
 
       if (error) {
-        throw error;
-      }
-
-      if (data?.user) {
-        // 이메일 인증 확인
-        if (!data.user.email_confirmed_at) {
-          // 이메일 인증 재발송
+        // supabase는 이메일 인증이 안되면 로그인이 애초에 불가능함.
+        if (error.code === 'email_not_confirmed') {
           await supabaseAuth.resend({
             type: 'signup',
             email: formData.email,
           });
 
-          return new Error(
+          throw Error(
             `아직 본인 인증이 완료되지 않아 확인을 위해 가입하신 이메일 주소로 본인 인증 메일을 보내드렸습니다.\n\n메일함에서 내용을 확인하셔서 본인 인증을 완료해주시기 바랍니다.`,
           );
         }
+        throw error;
+      }
 
+      if (data?.user) {
         // 사용자 데이터 가져오기
         const usersTable = await supabaseDatabase('users');
         const { data: userData, error: userError }: PostgrestSingleResponse<UserInfoType> =
@@ -72,9 +69,7 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postLoginProcess'),
-      );
+      throw normalizeError(error, 'AuthService.postLoginProcess');
     }
   }
 
@@ -93,9 +88,7 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postGoogleLoginProcess'),
-      );
+      throw normalizeError(error, 'AuthService.postGoogleLoginProcess');
     }
   }
 
@@ -126,7 +119,7 @@ class AuthService {
             id: user.id,
             email: user.email,
             username: user.user_metadata?.username as string,
-            createdAt: new Date().toISOString(),
+            created_at: new Date().toISOString(),
           };
 
           const usersTable = await supabaseDatabase('users');
@@ -144,9 +137,7 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'AuthService.handleGoogleLoginCallback'),
-      );
+      return normalizeError(error, 'AuthService.handleGoogleLoginCallback');
     }
   }
 
@@ -175,7 +166,7 @@ class AuthService {
         id: data.user.id,
         email: data.user.email,
         username: formData.username,
-        createdAt: new Date().toISOString(),
+        created_at: Date.now(),
       };
 
       const usersTable = await supabaseDatabase('users');
@@ -187,9 +178,7 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postSignUpProcess'),
-      );
+      return normalizeError(error, 'AuthService.postSignUpProcess');
     }
   }
 
@@ -205,9 +194,8 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postForgetPasswordProcess'),
-      );
+      convertUnknownTypeErrorToStringMessage(error, 'AuthService.postForgetPasswordProcess');
+      return error;
     }
   }
 
@@ -238,9 +226,7 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postResetPasswordProcess'),
-      );
+      return normalizeError(error, 'AuthService.postResetPasswordProcess');
     }
   }
 
@@ -256,9 +242,7 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'AuthService.updatePasswordProcess'),
-      );
+      return normalizeError(error, 'AuthService.updatePasswordProcess');
     }
   }
 
@@ -300,9 +284,7 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'AuthService.updateProfileProcess'),
-      );
+      return normalizeError(error, 'AuthService.updateProfileProcess');
     }
   }
 
@@ -337,7 +319,7 @@ class AuthService {
         id: user.id,
         email: user.email,
         username: user.user_metadata?.username as string,
-        createdAt: new Date().toISOString(),
+        created_at: new Date().toISOString(),
       };
 
       const usersTable = await supabaseDatabase('users');
@@ -349,9 +331,7 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'AuthService.updateAccountVerification'),
-      );
+      return normalizeError(error, 'AuthService.updateAccountVerification');
     }
   }
 
@@ -366,9 +346,7 @@ class AuthService {
       localStorage.removeItem('userInfo');
       return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postLogOutProcess'),
-      );
+      return normalizeError(error, 'AuthService.postLogOutProcess');
     }
   }
 
@@ -394,12 +372,10 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      sendErrorToSentry({
-        type: 'server',
-        context: 'AuthService.postUserCheckProcessByLoginUser',
-        error: error,
-      });
-      return new Error('입력하신 계정의 비밀번호와 다릅니다. 다시 한 번 확인해주세요.');
+      return normalizeError(
+        error ?? new Error('입력하신 계정의 비밀번호와 다릅니다. 다시 한 번 확인해주세요.'),
+        'AuthService.postUserCheckProcessByLoginUser',
+      );
     }
   }
 
@@ -430,7 +406,7 @@ class AuthService {
         const { error: opinionError } = await opinionsTable.insert({
           id: currentUserUid,
           opinion,
-          createdAt: new Date().toISOString(),
+          created_at: new Date().toISOString(),
         });
 
         if (opinionError) {
@@ -443,9 +419,7 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'AuthService.postSignOutProcess'),
-      );
+      return normalizeError(error, 'AuthService.postSignOutProcess');
     }
   }
 
