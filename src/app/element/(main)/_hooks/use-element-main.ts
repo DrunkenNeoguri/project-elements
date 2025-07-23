@@ -37,7 +37,7 @@ export default function useElementMain() {
       };
       getElementsData();
     }
-  }, [listId, user?.uid]);
+  }, [listId, user?.id]);
 
   useEffect(() => {
     if (!user || !elements || !travelInfo) {

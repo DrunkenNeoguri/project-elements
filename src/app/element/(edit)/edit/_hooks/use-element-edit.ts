@@ -13,7 +13,7 @@ export default function useElementEdit() {
   const listId = searchParams?.get('id');
 
   useEffect(() => {
-    if (listId && user?.uid) {
+    if (listId && user?.id) {
       const getElementsData = async () => {
         try {
           const dataState = (await ElementService.getElementsData(
@@ -42,5 +42,5 @@ export default function useElementEdit() {
       };
       getElementsData();
     }
-  }, [listId, user?.uid, dispatch]);
+  }, [listId, user?.id, dispatch]);
 }

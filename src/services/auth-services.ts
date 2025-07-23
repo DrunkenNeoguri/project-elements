@@ -390,11 +390,11 @@ class AuthService {
         throw new Error('현재 로그인된 사용자가 없습니다.\n로그인 후, 다시 시도해주세요.');
       }
 
-      const currentUserUid = user.id;
+      const currentUserId = user.id;
 
       // 트랜잭션 시작 (Supabase는 RPC 함수로 트랜잭션 처리)
       const { error: deleteError } = await supabase.rpc('delete_user_data', {
-        user_id: currentUserUid,
+        user_id: currentUserId,
       });
 
       if (deleteError) {
@@ -405,7 +405,7 @@ class AuthService {
       if (opinion) {
         const opinionsTable = await supabaseDatabase('opinions');
         const { error: opinionError } = await opinionsTable.insert({
-          id: currentUserUid,
+          id: currentUserId,
           opinion,
           createdAt: new Date().toISOString(),
         });

@@ -16,7 +16,7 @@ export default function TemplateSection({ handlePrevStep, travelData }: PropType
     useTemplateSection();
 
   const handleMoveToMakeList = async (useTemplate: boolean) => {
-    if (!user?.uid) {
+    if (!user?.id) {
       handleExternalList('travelCreate');
       return setModalMsg(
         `유저 정보를 확인할 수 없습니다.\n재로그인 후, 다시 여행 정보를 생성해주세요.`,

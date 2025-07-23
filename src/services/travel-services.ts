@@ -8,14 +8,14 @@ import { supabase, supabaseDatabase } from '../utils/util-supabase';
 // *MEMO: PostgreSQL을 쓰면서 테이블 구조를 전반적으로 많이 변경해야겠다는 생각이 듦.
 
 class TravelService {
-  static async getUserTravelList(userUid: string, keyword?: string) {
+  static async getUserTravelList(userId: string, keyword?: string) {
     try {
       let travelList: TravelBasicType[] = [];
       const travelsTable = await supabaseDatabase('travels');
       //!CHECK: 이 구조가 적합한지 마이그레이션 이후 재확인!
       const { data: travelsData, error: travelError } = await travelsTable
         .select('*')
-        .eq('userUid', userUid)
+        .eq('userId', userId)
         .order('departureAt', { ascending: true });
 
       if (travelError) {
@@ -49,7 +49,7 @@ class TravelService {
   }
 
   static async postCreateNewTravel(
-    userUid: string,
+    userId: string,
     useTemplate: boolean,
     formData: TravelBasicType,
   ) {
@@ -70,7 +70,7 @@ class TravelService {
       const parseUserInfo = getParsedJsonData<UserInfoType>(userInfo);
 
       const { error: transactionError } = await supabase.rpc('create_new_travel', {
-        userUid,
+        userId,
         travelId: formData.id,
         travelData: {
           ...formData,
@@ -95,7 +95,7 @@ class TravelService {
 
       const { error: travelError } = await travelsTable.insert({
         ...formData,
-        userUid,
+        userId,
       });
 
       const { error: elementsError } = await elementsTable.insert({
@@ -131,7 +131,7 @@ class TravelService {
         upcomingTravel: setUpcomingTravel(),
       };
 
-      const { error: userError } = await usersTable.update(renewalUserData).eq('userUid', userUid);
+      const { error: userError } = await usersTable.update(renewalUserData).eq('userId', userId);
 
       if (travelError || elementsError || userError) {
         throw normalizeError(
