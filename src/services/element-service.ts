@@ -5,7 +5,9 @@ import { getParsedJsonData } from '../utils/util-safed-type';
 import { supabase, supabaseDatabase } from '../utils/util-supabase';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 import { normalizeError } from '../utils/util-convert';
+import snakecaseKeys from 'snakecase-keys';
 
+//?CONCERN: RDB (supabase database - postgreSQL)로 변경하면서 구조를 어떻게 바꿀지 고민해봐야 함...
 export default class ElementService {
   static async getElementsData(userId: string, id: string) {
     try {
@@ -50,12 +52,16 @@ export default class ElementService {
       const travelsTable = await supabaseDatabase('travels');
       const usersTable = await supabaseDatabase('users');
 
-      const { error: elementsError } = await elementsTable.insert({ id, userId, ...data });
-      const { error: travelsError } = await travelsTable.insert({
-        userId,
-        ...data.info,
-        id,
-      });
+      const { error: elementsError } = await elementsTable.insert(
+        snakecaseKeys({ id, userId, ...data }),
+      );
+      const { error: travelsError } = await travelsTable.insert(
+        snakecaseKeys({
+          userId,
+          ...data.info,
+          id,
+        }),
+      );
       const { error: userError } = await usersTable.update({
         ...parseUserInfo,
         recentTravel: { title: data.info.title, id: data.info.id },

@@ -4,6 +4,8 @@ import { basicTemplate, domesticTemplate, foreignTemplate } from '../utils/util-
 import { UserInfoType } from '../types/user.types';
 import { getParsedJsonData, getTypedObjectData } from '../utils/util-safed-type';
 import { supabase, supabaseDatabase } from '../utils/util-supabase';
+import snakecaseKeys from 'snakecase-keys';
+import camelcaseKeys from 'camelcase-keys';
 
 // *MEMO: PostgreSQL을 쓰면서 테이블 구조를 전반적으로 많이 변경해야겠다는 생각이 듦.
 
@@ -23,7 +25,8 @@ class TravelService {
       }
 
       travelsData.forEach(doc => {
-        const data = getTypedObjectData<TravelBasicType>(doc);
+        const data = getTypedObjectData<TravelBasicType>(camelcaseKeys(doc));
+
         if (data) {
           const { travelType, title, departureAt, travelPeriod, destination, id } = data;
           travelList.push({
@@ -69,39 +72,48 @@ class TravelService {
       const userInfo = localStorage.getItem('userInfo') ?? '';
       const parseUserInfo = getParsedJsonData<UserInfoType>(userInfo);
 
-      const { error: transactionError } = await supabase.rpc('create_new_travel', {
-        userId,
-        travelId: formData.id,
-        travelData: {
-          ...formData,
-          elements: { info: { ...formData }, elements: { ...template() } },
-        },
-        userData: {
-          ...parseUserInfo,
-          recentTravel: { title: formData.title, id: formData.id },
-          upcomingTravel: {
-            title: formData.title,
-            id: formData.id,
-            departureAt: formData.departureAt, // Ensure the date is in the correct format
+      const { error: transactionError } = await supabase.rpc(
+        'create_new_travel',
+        snakecaseKeys({
+          userId,
+          travelId: formData.id,
+          travelData: {
+            ...formData,
+            elements: { info: { ...formData }, elements: { ...template() } },
           },
-        },
-      });
+          userData: {
+            ...parseUserInfo,
+            recentTravel: { title: formData.title, id: formData.id },
+            upcomingTravel: {
+              title: formData.title,
+              id: formData.id,
+              departureAt: formData.departureAt, // Ensure the date is in the correct format
+            },
+          },
+        }),
+      );
 
       if (transactionError) {
         throw normalizeError(transactionError, 'TravelService.postCreateNewTravel');
       }
 
       const usersTable = await supabaseDatabase('users');
+      const travelsTable = await supabaseDatabase('travels');
+      const elementsTable = await supabaseDatabase('elements');
 
-      const { error: travelError } = await travelsTable.insert({
-        ...formData,
-        userId,
-      });
+      const { error: travelError } = await travelsTable.insert(
+        snakecaseKeys({
+          ...formData,
+          userId,
+        }),
+      );
 
-      const { error: elementsError } = await elementsTable.insert({
-        info: { ...formData },
-        elements: { ...template() },
-      });
+      const { error: elementsError } = await elementsTable.insert(
+        snakecaseKeys({
+          info: { ...formData },
+          elements: { ...template() },
+        }),
+      );
 
       const setUpcomingTravel = () => {
         if (parseUserInfo) {
@@ -131,7 +143,9 @@ class TravelService {
         upcomingTravel: setUpcomingTravel(),
       };
 
-      const { error: userError } = await usersTable.update(renewalUserData).eq('userId', userId);
+      const { error: userError } = await usersTable
+        .update(snakecaseKeys(renewalUserData))
+        .eq('user_id', userId);
 
       if (travelError || elementsError || userError) {
         throw normalizeError(
@@ -150,14 +164,14 @@ class TravelService {
       const { data: travelsData, error: travelsError } = await travelsTable
         .select('*')
         .eq('id', userId)
-        .order('departureAt', { ascending: true });
+        .order('departure_at', { ascending: true });
 
       if (travelsError) {
         throw normalizeError(travelsError, 'TravelService.renewalUpcomingTravelInUserData');
       }
 
       const upcomingTravel = travelsData
-        .map(doc => getTypedObjectData<TravelBasicType>(doc))
+        .map(data => getTypedObjectData<TravelBasicType>(camelcaseKeys(data)))
         .filter((data): data is TravelBasicType => !!data)
         .map(({ travelType, title, departureAt, travelPeriod, destination, id }) => ({
           travelType,

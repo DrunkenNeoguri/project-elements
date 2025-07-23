@@ -3,6 +3,7 @@ import { Banner, Notice } from '../types/option.types';
 import { getTypedObjectData } from '../utils/util-safed-type';
 import { supabaseDatabase } from '../utils/util-supabase';
 import { PostgrestResponse } from '@supabase/supabase-js';
+import camelcaseKeys from 'camelcase-keys';
 
 // *MEMO: 문제 없이 200일 시, 예외를 제외하고 return "OK";
 class OptionService {
@@ -13,16 +14,11 @@ class OptionService {
         .select('*')
         .order('order', { ascending: true });
 
-      //* MEMO: 에러는 나중에 다시 수정합시다.
       if (bannerError) {
-        convertUnknownTypeErrorToStringMessage(
-          bannerError,
-          'OptionService.getMainCarouselBannerList',
-        );
-        return bannerError;
+        throw normalizeError(bannerError, 'OptionService.getMainCarouselBannerList');
       }
 
-      return bannerList;
+      return bannerList.map(banner => camelcaseKeys(banner));
     } catch (error) {
       throw normalizeError(error, 'OptionService.getMainCarouselBannerList');
     }
@@ -35,17 +31,17 @@ class OptionService {
       .order('createdAt', { ascending: false });
 
     if (noticesError) {
-      convertUnknownTypeErrorToStringMessage(noticesError, 'OptionService.getNoticesBase');
-      return noticesError;
+      throw normalizeError(noticesError, 'OptionService.getNoticesBase');
     }
 
-    return noticesList;
+    return noticesList.map(notice => camelcaseKeys(notice));
   }
 
+  // ?CONCERN:아래의 getNoticeItemList와 getNoticeArticles는 중복 코드라 차후 다시 코드 확인 필요.
   static async getNoticeItemList() {
     try {
       const noticeList = await OptionService.getNoticesBase();
-      return noticeList ?? [];
+      return noticeList.map(notice => camelcaseKeys(notice)) ?? [];
     } catch (error) {
       throw normalizeError(error, 'OptionService.getNoticeItemList');
     }
@@ -57,7 +53,7 @@ class OptionService {
       if (!noticeList || noticeList.length === 0) {
         return [];
       }
-      return noticeList ?? [];
+      return noticeList.map(notice => camelcaseKeys(notice)) ?? [];
     } catch (error) {
       throw normalizeError(error, 'OptionService.getNoticeArticles');
     }
@@ -75,7 +71,7 @@ class OptionService {
         throw normalizeError(noticeError, 'OptionService.getNoticeOneArticle');
       }
 
-      return getTypedObjectData<Notice>(noticeData) ?? null;
+      return getTypedObjectData<Notice>(camelcaseKeys(noticeData)) ?? null;
     } catch (error) {
       throw normalizeError(error, 'OptionService.getNoticeOneArticle');
     }

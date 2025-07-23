@@ -4,6 +4,8 @@ import { AccountFormType, SupabaseUserType, UserInfoType } from '../types/user.t
 import TravelService from './travel-services';
 import { getLocalStorageItem } from '../utils/util-local-storage';
 import { User, PostgrestSingleResponse, OAuthResponse } from '@supabase/supabase-js';
+import snakecaseKeys from 'snakecase-keys';
+import camelcaseKeys from 'camelcase-keys';
 
 // *MEMO: 문제 없이 200일 시, 예외를 제외하고 return "OK";
 class AuthService {
@@ -45,7 +47,7 @@ class AuthService {
 
         if (upcomingTravel != null) {
           const renewalUserData = {
-            ...userData,
+            ...camelcaseKeys({ userData }),
             upcomingTravel: {
               title: upcomingTravel.title,
               id: upcomingTravel.id,
@@ -55,7 +57,7 @@ class AuthService {
 
           // 사용자 데이터 업데이트
           const usersTable = await supabaseDatabase('users');
-          const { error: updateError } = await usersTable.upsert(renewalUserData);
+          const { error: updateError } = await usersTable.upsert(snakecaseKeys(renewalUserData));
 
           if (updateError) {
             throw updateError;
@@ -123,7 +125,7 @@ class AuthService {
           };
 
           const usersTable = await supabaseDatabase('users');
-          const { error: insertError } = await usersTable.insert(currentUserData);
+          const { error: insertError } = await usersTable.insert(snakecaseKeys(currentUserData));
 
           if (insertError) {
             throw insertError;
@@ -171,7 +173,7 @@ class AuthService {
       };
 
       const usersTable = await supabaseDatabase('users');
-      const { error: insertError } = await usersTable.insert(userData);
+      const { error: insertError } = await usersTable.insert(snakecaseKeys(userData));
 
       if (insertError) {
         throw insertError;
@@ -275,7 +277,9 @@ class AuthService {
       };
 
       const usersTable = await supabaseDatabase('users');
-      const { error: updateError } = await usersTable.update({ username }).eq('id', user.id);
+      const { error: updateError } = await usersTable
+        .update(snakecaseKeys({ username }))
+        .eq('id', user.id);
 
       if (updateError) {
         throw updateError;
@@ -324,7 +328,7 @@ class AuthService {
       };
 
       const usersTable = await supabaseDatabase('users');
-      const { error: insertError } = await usersTable.upsert(userData);
+      const { error: insertError } = await usersTable.upsert(snakecaseKeys(userData));
 
       if (insertError) {
         throw insertError;
@@ -404,11 +408,13 @@ class AuthService {
       // 의견 저장 (선택사항)
       if (opinion) {
         const opinionsTable = await supabaseDatabase('opinions');
-        const { error: opinionError } = await opinionsTable.insert({
-          id: currentUserId,
-          opinion,
-          createdAt: new Date().toISOString(),
-        });
+        const { error: opinionError } = await opinionsTable.insert(
+          snakecaseKeys({
+            id: currentUserId,
+            opinion,
+            createdAt: new Date().toISOString(),
+          }),
+        );
 
         if (opinionError) {
           console.error('Opinion save error:', opinionError);
