@@ -18,18 +18,20 @@ export default function ResetForm() {
     router,
     externalList,
     handleExternalList,
+    accessToken,
+    refreshToken,
   } = useResetForm();
 
   const handleSubmit = async () => {
     const validityCheck = checkResetDataTypeCheck(resetData);
 
     if (validityCheck) {
-      const resetState = await AuthService.postResetPasswordProcess('actionCode', resetData);
-      if (resetState === 'OK') {
-        return router.push('/user/reset/completed');
-      } else {
-        handleExternalList('reset');
-        return setModalMsg(resetState.message);
+      try {
+        await AuthService.postResetPasswordProcess(accessToken, refreshToken, resetData);
+        return router.push('/main');
+      } catch (error) {
+        handleExternalList('resetPassword');
+        setModalMsg((error as Error).message);
       }
     }
   };
