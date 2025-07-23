@@ -17,14 +17,14 @@ export type UserInfoType = {
   id?: string;
   email: string;
   username: string;
-  created_at: number;
-  recent_travel?: {
+  createdAt: number;
+  recentTravel?: {
     title: string;
     id: string;
   };
-  upcoming_travel?: {
+  upcomingTravel?: {
     title: string;
     id: string;
-    departure_at: string;
+    departureAt: string;
   };
 };

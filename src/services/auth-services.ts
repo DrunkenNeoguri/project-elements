@@ -46,10 +46,10 @@ class AuthService {
         if (upcomingTravel != null) {
           const renewalUserData = {
             ...userData,
-            upcoming_travel: {
+            upcomingTravel: {
               title: upcomingTravel.title,
               id: upcomingTravel.id,
-              departure_at: upcomingTravel.departure_at,
+              departureAt: upcomingTravel.departureAt,
             },
           };
 
@@ -119,7 +119,7 @@ class AuthService {
             id: user.id,
             email: user.email,
             username: user.user_metadata?.username as string,
-            created_at: new Date().toISOString(),
+            createdAt: new Date().toISOString(),
           };
 
           const usersTable = await supabaseDatabase('users');
@@ -167,7 +167,7 @@ class AuthService {
         id: data.user.id,
         email: data.user.email,
         username: formData.username,
-        created_at: Date.now(),
+        createdAt: Date.now(),
       };
 
       const usersTable = await supabaseDatabase('users');
@@ -320,7 +320,7 @@ class AuthService {
         id: user.id,
         email: user.email,
         username: user.user_metadata?.username as string,
-        created_at: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
       };
 
       const usersTable = await supabaseDatabase('users');
@@ -407,7 +407,7 @@ class AuthService {
         const { error: opinionError } = await opinionsTable.insert({
           id: currentUserUid,
           opinion,
-          created_at: new Date().toISOString(),
+          createdAt: new Date().toISOString(),
         });
 
         if (opinionError) {

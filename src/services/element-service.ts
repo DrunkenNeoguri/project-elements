@@ -58,7 +58,7 @@ export default class ElementService {
       });
       const { error: userError } = await usersTable.update({
         ...parseUserInfo,
-        recent_travel: { title: data.info.title, id: data.info.id },
+        recentTravel: { title: data.info.title, id: data.info.id },
       });
 
       if (elementsError || travelsError || userError) {

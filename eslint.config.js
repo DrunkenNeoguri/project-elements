@@ -29,15 +29,7 @@ export default [
         'error',
         {
           properties: 'always',
-          allow: [
-            'access_token',
-            'refresh_token',
-            'user_id',
-            'created_at',
-            'departure_at',
-            'recent_travel',
-            'upcoming_travel',
-          ],
+          allow: ['access_token', 'refresh_token', 'user_id'],
         },
       ],
       '@typescript-eslint/no-explicit-any': 'error',

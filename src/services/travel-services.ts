@@ -25,11 +25,11 @@ class TravelService {
       travelsData.forEach(doc => {
         const data = getTypedObjectData<TravelBasicType>(doc);
         if (data) {
-          const { travelType, title, departure_at, travelPeriod, destination, id } = data;
+          const { travelType, title, departureAt, travelPeriod, destination, id } = data;
           travelList.push({
             travelType,
             title,
-            departure_at,
+            departureAt,
             travelPeriod,
             destination,
             id,
@@ -78,11 +78,11 @@ class TravelService {
         },
         userData: {
           ...parseUserInfo,
-          recent_travel: { title: formData.title, id: formData.id },
-          upcoming_travel: {
+          recentTravel: { title: formData.title, id: formData.id },
+          upcomingTravel: {
             title: formData.title,
             id: formData.id,
-            departure_at: formData.departure_at, // Ensure the date is in the correct format
+            departureAt: formData.departureAt, // Ensure the date is in the correct format
           },
         },
       });
@@ -105,30 +105,30 @@ class TravelService {
 
       const setUpcomingTravel = () => {
         if (parseUserInfo) {
-          if (!parseUserInfo.upcoming_travel) {
+          if (!parseUserInfo.upcomingTravel) {
             return {
               title: formData.title,
               id: formData.id,
-              departure_at: formData.departure_at,
+              departureAt: formData.departureAt,
             };
           } else if (
-            new Date(parseUserInfo.upcoming_travel.departure_at).getTime() >
-            new Date(formData.departure_at).getTime()
+            new Date(parseUserInfo.upcomingTravel.departureAt).getTime() >
+            new Date(formData.departureAt).getTime()
           ) {
             return {
               title: formData.title,
               id: formData.id,
-              departure_at: formData.departure_at,
+              departureAt: formData.departureAt,
             };
           }
-          return { ...parseUserInfo.upcoming_travel };
+          return { ...parseUserInfo.upcomingTravel };
         }
       };
 
       const renewalUserData = {
         ...parseUserInfo,
-        recent_travel: { title: formData.title, id: formData.id },
-        upcoming_travel: setUpcomingTravel(),
+        recentTravel: { title: formData.title, id: formData.id },
+        upcomingTravel: setUpcomingTravel(),
       };
 
       const { error: userError } = await usersTable.update(renewalUserData).eq('userUid', userUid);
@@ -150,7 +150,7 @@ class TravelService {
       const { data: travelsData, error: travelsError } = await travelsTable
         .select('*')
         .eq('id', userId)
-        .order('departure_at', { ascending: true });
+        .order('departureAt', { ascending: true });
 
       if (travelsError) {
         throw normalizeError(travelsError, 'TravelService.renewalUpcomingTravelInUserData');
@@ -159,15 +159,15 @@ class TravelService {
       const upcomingTravel = travelsData
         .map(doc => getTypedObjectData<TravelBasicType>(doc))
         .filter((data): data is TravelBasicType => !!data)
-        .map(({ travelType, title, departure_at, travelPeriod, destination, id }) => ({
+        .map(({ travelType, title, departureAt, travelPeriod, destination, id }) => ({
           travelType,
           title,
-          departure_at,
+          departureAt,
           travelPeriod,
           destination,
           id,
         }))
-        .find(data => new Date(data.departure_at).getTime() - Date.now() >= 0);
+        .find(data => new Date(data.departureAt).getTime() - Date.now() >= 0);
 
       return upcomingTravel;
     } catch (error) {

@@ -2,7 +2,7 @@ export type TravelBasicType = {
   id: string;
   travelType: TravelType;
   title: string;
-  departure_at: string;
+  departureAt: string;
   travelPeriod: number;
   destination: string;
 };
