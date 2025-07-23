@@ -7,14 +7,12 @@ export default function LoginOauthBox() {
   const { router, handleExternalList, setModalMsg } = useLoginOauth();
 
   const handleLoginWithGoogle = async () => {
-    const googleLoginState = await AuthService.postGoogleLoginProcess();
-    if (googleLoginState === 'OK') {
+    try {
+      await AuthService.postGoogleLoginProcess();
       router.push('/main');
-    } else {
-      if (googleLoginState.message !== '') {
-        handleExternalList('login');
-        setModalMsg(googleLoginState.message);
-      }
+    } catch (error) {
+      handleExternalList('login');
+      setModalMsg((error as Error).message);
     }
   };
 

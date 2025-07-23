@@ -28,10 +28,8 @@ export default function LoginForm() {
 
     if (validityCheck) {
       try {
-        const loginState = await AuthService.postLoginProcess(loginData);
-        if (loginState === 'OK') {
-          router.push('/main');
-        }
+        await AuthService.postLoginProcess(loginData);
+        return router.push('/main');
       } catch (error) {
         handleExternalList('login');
         setModalMsg((error as Error).message);
