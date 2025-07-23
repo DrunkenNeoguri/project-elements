@@ -27,7 +27,18 @@ export default [
       semi: ['error', 'always'],
       camelcase: [
         'error',
-        { properties: 'always', allow: ['access_token', 'refresh_token', 'user_id'] },
+        {
+          properties: 'always',
+          allow: [
+            'access_token',
+            'refresh_token',
+            'user_id',
+            'created_at',
+            'departure_at',
+            'recent_travel',
+            'upcoming_travel',
+          ],
+        },
       ],
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-unused-vars': 'error',
