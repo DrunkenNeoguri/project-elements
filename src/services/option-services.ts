@@ -1,4 +1,4 @@
-import { convertUnknownTypeErrorToStringMessage } from '../utils/util-convert';
+import { normalizeError } from '../utils/util-convert';
 import { Banner, Notice } from '../types/option.types';
 import { getTypedObjectData } from '../utils/util-safed-type';
 import { supabaseDatabase } from '../utils/util-supabase';
@@ -15,19 +15,16 @@ class OptionService {
 
       //* MEMO: 에러는 나중에 다시 수정합시다.
       if (bannerError) {
-        throw new Error(
-          convertUnknownTypeErrorToStringMessage(
-            bannerError,
-            'OptionService.getMainCarouselBannerList',
-          ),
+        convertUnknownTypeErrorToStringMessage(
+          bannerError,
+          'OptionService.getMainCarouselBannerList',
         );
+        return bannerError;
       }
 
       return bannerList;
     } catch (error) {
-      throw new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'OptionService.getMainCarouselBannerList'),
-      );
+      throw normalizeError(error, 'OptionService.getMainCarouselBannerList');
     }
   }
 
@@ -38,9 +35,8 @@ class OptionService {
       .order('createdAt', { ascending: false });
 
     if (noticesError) {
-      throw new Error(
-        convertUnknownTypeErrorToStringMessage(noticesError, 'OptionService.getNoticesBase'),
-      );
+      convertUnknownTypeErrorToStringMessage(noticesError, 'OptionService.getNoticesBase');
+      return noticesError;
     }
 
     return noticesList;
@@ -51,9 +47,7 @@ class OptionService {
       const noticeList = await OptionService.getNoticesBase();
       return noticeList ?? [];
     } catch (error) {
-      throw new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'OptionService.getNoticeItemList'),
-      );
+      throw normalizeError(error, 'OptionService.getNoticeItemList');
     }
   }
 
@@ -65,9 +59,7 @@ class OptionService {
       }
       return noticeList ?? [];
     } catch (error) {
-      throw new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'OptionService.getNoticeArticles'),
-      );
+      throw normalizeError(error, 'OptionService.getNoticeArticles');
     }
   }
 
@@ -80,16 +72,12 @@ class OptionService {
         .single();
 
       if (noticeError) {
-        throw new Error(
-          convertUnknownTypeErrorToStringMessage(noticeError, 'OptionService.getNoticeOneArticle'),
-        );
+        throw normalizeError(noticeError, 'OptionService.getNoticeOneArticle');
       }
 
       return getTypedObjectData<Notice>(noticeData) ?? null;
     } catch (error) {
-      throw new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'OptionService.getNoticeOneArticle'),
-      );
+      throw normalizeError(error, 'OptionService.getNoticeOneArticle');
     }
   }
 }

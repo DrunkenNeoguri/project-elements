@@ -46,10 +46,10 @@ class AuthService {
         if (upcomingTravel != null) {
           const renewalUserData = {
             ...userData,
-            upcomingTravel: {
+            upcoming_travel: {
               title: upcomingTravel.title,
               id: upcomingTravel.id,
-              departureAt: upcomingTravel.departureAt,
+              departure_at: upcomingTravel.departure_at,
             },
           };
 
@@ -147,6 +147,7 @@ class AuthService {
         email: formData.email,
         password: formData.password,
         options: {
+          emailRedirectTo: 'http://localhost:3000/user/verified',
           data: {
             username: formData.username,
           },
@@ -194,7 +195,7 @@ class AuthService {
 
       return 'OK';
     } catch (error) {
-      convertUnknownTypeErrorToStringMessage(error, 'AuthService.postForgetPasswordProcess');
+      normalizeError(error, 'AuthService.postForgetPasswordProcess');
       return error;
     }
   }

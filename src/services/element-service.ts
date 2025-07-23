@@ -1,10 +1,10 @@
-import { convertUnknownTypeErrorToStringMessage } from '../utils/util-convert';
 import { ElementsBasicType } from '../types/element.types';
 import { sendErrorToSentry } from '../utils/util-sentry';
 import { UserInfoType } from '../types/user.types';
 import { getParsedJsonData } from '../utils/util-safed-type';
 import { supabase, supabaseDatabase } from '../utils/util-supabase';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
+import { normalizeError } from '../utils/util-convert';
 
 export default class ElementService {
   static async getElementsData(userUid: string, id: string) {
@@ -58,7 +58,7 @@ export default class ElementService {
       });
       const { error: userError } = await usersTable.update({
         ...parseUserInfo,
-        recentTravel: { title: data.info.title, id: data.info.id },
+        recent_travel: { title: data.info.title, id: data.info.id },
       });
 
       if (elementsError || travelsError || userError) {
@@ -67,9 +67,7 @@ export default class ElementService {
 
       return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'ElementService.postElementsData'),
-      );
+      throw normalizeError(error, 'ElementService.postElementsData');
     }
   }
 
@@ -102,9 +100,7 @@ export default class ElementService {
 
       return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'ElementService.deleteElementsData'),
-      );
+      throw normalizeError(error, 'ElementService.deleteElementsData');
     }
   }
 }

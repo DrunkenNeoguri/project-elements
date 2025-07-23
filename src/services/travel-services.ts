@@ -1,5 +1,5 @@
 import { TravelBasicType } from '../types/travel.types';
-import { convertUnknownTypeErrorToStringMessage } from '../utils/util-convert';
+import { normalizeError } from '../utils/util-convert';
 import { basicTemplate, domesticTemplate, foreignTemplate } from '../utils/util-template';
 import { UserInfoType } from '../types/user.types';
 import { getParsedJsonData, getTypedObjectData } from '../utils/util-safed-type';
@@ -19,23 +19,17 @@ class TravelService {
         .order('departureAt', { ascending: true });
 
       if (travelError) {
-        throw new Error(
-          convertUnknownTypeErrorToStringMessage(travelError, 'TravelService.getUserTravelList'),
-        );
-      }
-
-      if (!travelsData || travelsData.length === 0) {
-        return [];
+        throw normalizeError(travelError, 'TravelService.getUserTravelList');
       }
 
       travelsData.forEach(doc => {
         const data = getTypedObjectData<TravelBasicType>(doc);
         if (data) {
-          const { travelType, title, departureAt, travelPeriod, destination, id } = data;
+          const { travelType, title, departure_at, travelPeriod, destination, id } = data;
           travelList.push({
             travelType,
             title,
-            departureAt,
+            departure_at,
             travelPeriod,
             destination,
             id,
@@ -50,9 +44,7 @@ class TravelService {
       }
       return travelList;
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'TravelService.getUserTravelList'),
-      );
+      throw normalizeError(error, 'TravelService.getUserTravelList');
     }
   }
 
@@ -86,28 +78,19 @@ class TravelService {
         },
         userData: {
           ...parseUserInfo,
-          recentTravel: { title: formData.title, id: formData.id },
-          upcomingTravel: {
+          recent_travel: { title: formData.title, id: formData.id },
+          upcoming_travel: {
             title: formData.title,
             id: formData.id,
-            departureAt: formData.departureAt,
+            departure_at: formData.departure_at, // Ensure the date is in the correct format
           },
         },
       });
 
       if (transactionError) {
-        throw new Error(
-          convertUnknownTypeErrorToStringMessage(
-            transactionError,
-            'TravelService.postCreateNewTravel',
-          ),
-        );
+        throw normalizeError(transactionError, 'TravelService.postCreateNewTravel');
       }
 
-      // (고민)
-
-      const travelsTable = await supabaseDatabase('travels');
-      const elementsTable = await supabaseDatabase('elements');
       const usersTable = await supabaseDatabase('users');
 
       const { error: travelError } = await travelsTable.insert({
@@ -122,91 +105,73 @@ class TravelService {
 
       const setUpcomingTravel = () => {
         if (parseUserInfo) {
-          if (!parseUserInfo.upcomingTravel) {
+          if (!parseUserInfo.upcoming_travel) {
             return {
               title: formData.title,
               id: formData.id,
-              departureAt: formData.departureAt,
+              departure_at: formData.departure_at,
             };
           } else if (
-            new Date(parseUserInfo.upcomingTravel.departureAt).getTime() >
-            new Date(formData.departureAt).getTime()
+            new Date(parseUserInfo.upcoming_travel.departure_at).getTime() >
+            new Date(formData.departure_at).getTime()
           ) {
             return {
               title: formData.title,
               id: formData.id,
-              departureAt: formData.departureAt,
+              departure_at: formData.departure_at,
             };
           }
-          return { ...parseUserInfo.upcomingTravel };
+          return { ...parseUserInfo.upcoming_travel };
         }
       };
 
       const renewalUserData = {
         ...parseUserInfo,
-        recentTravel: { title: formData.title, id: formData.id },
-        upcomingTravel: setUpcomingTravel(),
+        recent_travel: { title: formData.title, id: formData.id },
+        upcoming_travel: setUpcomingTravel(),
       };
 
       const { error: userError } = await usersTable.update(renewalUserData).eq('userUid', userUid);
 
       if (travelError || elementsError || userError) {
-        throw new Error(
-          convertUnknownTypeErrorToStringMessage(
-            travelError || elementsError || userError,
-            'TravelService.postCreateNewTravel',
-          ),
+        throw normalizeError(
+          travelError || elementsError || userError,
+          'TravelService.postCreateNewTravel',
         );
       }
-
-      await localStorage.setItem('userInfo', JSON.stringify(renewalUserData));
-
-      return 'OK';
     } catch (error) {
-      return new Error(
-        convertUnknownTypeErrorToStringMessage(error, 'TravelService.postCreateNewTravel'),
-      );
+      throw normalizeError(error, 'TravelService.postCreateNewTravel');
     }
   }
 
-  static async renewalUpcomingTravelInUserData(userUid: string) {
+  static async renewalUpcomingTravelInUserData(userId: string) {
     try {
       const travelsTable = await supabaseDatabase('travels');
       const { data: travelsData, error: travelsError } = await travelsTable
         .select('*')
-        .eq('userUid', userUid)
-        .order('departureAt', { ascending: true });
+        .eq('id', userId)
+        .order('departure_at', { ascending: true });
 
       if (travelsError) {
-        throw new Error(
-          convertUnknownTypeErrorToStringMessage(
-            travelsError,
-            'TravelService.renewalUpcomingTravelInUserData',
-          ),
-        );
+        throw normalizeError(travelsError, 'TravelService.renewalUpcomingTravelInUserData');
       }
 
       const upcomingTravel = travelsData
         .map(doc => getTypedObjectData<TravelBasicType>(doc))
         .filter((data): data is TravelBasicType => !!data)
-        .map(({ travelType, title, departureAt, travelPeriod, destination, id }) => ({
+        .map(({ travelType, title, departure_at, travelPeriod, destination, id }) => ({
           travelType,
           title,
-          departureAt,
+          departure_at,
           travelPeriod,
           destination,
           id,
         }))
-        .find(data => new Date(data.departureAt).getTime() - Date.now() >= 0);
+        .find(data => new Date(data.departure_at).getTime() - Date.now() >= 0);
 
       return upcomingTravel;
     } catch (error) {
-      throw new Error(
-        convertUnknownTypeErrorToStringMessage(
-          error,
-          'TravelService.renewalUpcomingTravelInUserData',
-        ),
-      );
+      throw normalizeError(error, 'TravelService.renewalUpcomingTravelInUserData');
     }
   }
 }
