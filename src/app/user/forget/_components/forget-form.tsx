@@ -20,12 +20,12 @@ export default function ForgetForm() {
     const validityCheck = checkForgetDataTypeCheck(forgetData);
 
     if (validityCheck) {
-      const forgetState = await AuthService.postForgetPasswordProcess(forgetData);
-      if (forgetState === 'OK') {
+      try {
+        await AuthService.postForgetPasswordProcess(forgetData);
         return router.push('/user/forget/send');
-      } else {
+      } catch (error) {
         handleExternalList('forget');
-        return setModalMsg(forgetState.message);
+        setModalMsg((error as Error).message);
       }
     }
   };
