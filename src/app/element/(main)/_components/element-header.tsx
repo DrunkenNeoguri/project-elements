@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { TravelBasicType } from '../../../../types/travel.types';
 
 export default function ElementHeader({ travelInfo }: { travelInfo: TravelBasicType }) {
@@ -7,15 +8,13 @@ export default function ElementHeader({ travelInfo }: { travelInfo: TravelBasicT
     // ?CONCERN: util로 뺄까...?
     const [departureYear, departureMonth, departureDay] = departureAt.split('-');
 
-    const lastDate = new Date(departureAt);
-    lastDate.setDate(lastDate.getDate() + (travelPeriod - 1));
+    const lastDate = dayjs(departureAt).add(travelPeriod - 1, 'day');
 
     const [arrivalYear, arrivalMonth, arrivalDay] = [
-      lastDate.getFullYear(),
-      String(lastDate.getMonth() + 1).padStart(2, '0'),
-      String(lastDate.getDate()).padStart(2, '0'),
+      lastDate.year(),
+      String(lastDate.month() + 1).padStart(2, '0'), // month()는 0부터 시작
+      String(lastDate.date()).padStart(2, '0'),
     ];
-
     return `${departureYear}. ${departureMonth}. ${departureDay}. ~ ${arrivalYear}. ${arrivalMonth}. ${arrivalDay}. `;
   };
 
