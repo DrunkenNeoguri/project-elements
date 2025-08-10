@@ -6,6 +6,7 @@ import { getLocalStorageItem } from '../utils/util-local-storage';
 import { User, PostgrestSingleResponse, OAuthResponse } from '@supabase/supabase-js';
 import snakecaseKeys from 'snakecase-keys';
 import camelcaseKeys from 'camelcase-keys';
+import dayjs from 'dayjs';
 
 // *MEMO: 문제 없이 200일 시, 예외를 제외하고 return "OK";
 class AuthService {
@@ -121,7 +122,7 @@ class AuthService {
             id: user.id,
             email: user.email,
             username: user.user_metadata?.username as string,
-            createdAt: new Date().toISOString(),
+            createdAt: dayjs().toISOString(),
           };
 
           const usersTable = await supabaseDatabase('users');
@@ -169,7 +170,7 @@ class AuthService {
         id: data.user.id,
         email: data.user.email,
         username: formData.username,
-        createdAt: Date.now(),
+        createdAt: dayjs().toISOString(),
       };
 
       const usersTable = await supabaseDatabase('users');
@@ -324,7 +325,7 @@ class AuthService {
         id: user.id,
         email: user.email,
         username: user.user_metadata?.username as string,
-        createdAt: new Date().toISOString(),
+        createdAt: dayjs().toISOString(),
       };
 
       const usersTable = await supabaseDatabase('users');
@@ -412,7 +413,7 @@ class AuthService {
           snakecaseKeys({
             id: currentUserId,
             opinion,
-            createdAt: new Date().toISOString(),
+            createdAt: dayjs().toISOString(),
           }),
         );
 

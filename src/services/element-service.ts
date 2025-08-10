@@ -6,6 +6,7 @@ import { supabase, supabaseDatabase } from '../utils/util-supabase';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 import { normalizeError } from '../utils/util-convert';
 import snakecaseKeys from 'snakecase-keys';
+import dayjs from 'dayjs';
 
 //?CONCERN: RDB (supabase database - postgreSQL)로 변경하면서 구조를 어떻게 바꿀지 고민해봐야 함...
 export default class ElementService {
@@ -36,8 +37,8 @@ export default class ElementService {
           ...data,
           info: {
             ...data.info,
-            createdAt: Date.now(),
-            updatedAt: Date.now(),
+            createdAt: dayjs().toISOString(),
+            updatedAt: dayjs().toISOString(),
           },
         },
       });

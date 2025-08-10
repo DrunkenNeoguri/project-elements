@@ -6,6 +6,7 @@ import { getParsedJsonData, getTypedObjectData } from '../utils/util-safed-type'
 import { supabase, supabaseDatabase } from '../utils/util-supabase';
 import snakecaseKeys from 'snakecase-keys';
 import camelcaseKeys from 'camelcase-keys';
+import dayjs from 'dayjs';
 
 // *MEMO: PostgreSQL을 쓰면서 테이블 구조를 전반적으로 많이 변경해야겠다는 생각이 듦.
 
@@ -124,8 +125,7 @@ class TravelService {
               departureAt: formData.departureAt,
             };
           } else if (
-            new Date(parseUserInfo.upcomingTravel.departureAt).getTime() >
-            new Date(formData.departureAt).getTime()
+            dayjs(parseUserInfo.upcomingTravel.departureAt).isAfter(dayjs(formData.departureAt))
           ) {
             return {
               title: formData.title,
@@ -181,7 +181,7 @@ class TravelService {
           destination,
           id,
         }))
-        .find(data => new Date(data.departureAt).getTime() - Date.now() >= 0);
+        .find(data => dayjs(data.departureAt).diff(dayjs()) >= 0);
 
       return upcomingTravel;
     } catch (error) {
