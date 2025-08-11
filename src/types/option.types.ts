@@ -1,7 +1,7 @@
-export type Banner = { href: string; imageUrl: string; order: number };
+export type Banner = { href: string; imageUrl: string; order: number; bannerId: string };
 
 export type Notice = {
-  id: string;
+  noticeId: string;
   title: string;
   clipType: NoticeClipType;
   createdAt: string;

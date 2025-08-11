@@ -14,17 +14,10 @@ export type AccountFormType = {
 };
 
 export type UserInfoType = {
-  id?: string;
+  userId: string;
   email: string;
   username: string;
   createdAt: number;
-  recentTravel?: {
-    title: string;
-    id: string;
-  };
-  upcomingTravel?: {
-    title: string;
-    id: string;
-    departureAt: string;
-  };
+  recentTravelId: string;
+  upcomingTravelId?: string;
 };
